@@ -1,0 +1,34 @@
+site_name: Robot Faces
+site_description: 'Resources for teaching drawing of robot faces with microcontrollers and MicroPython to robotics students.  All content licensed Creative Commons ShareAlike Attribution Noncommercial'
+site_author: 'Dan McCreary'
+repo_name: 'GitHub Repo'
+repo_url: 'https://github.com/dmccreary/robot-faces'
+
+# CoderDojo Microsite Standards from here down
+edit_uri: 'blob/master/docs'
+theme:
+  # should be name: material
+  name: material
+  logo: img/coderdojo-logo.png
+  palette:
+    primary: '#642580'
+    accent: '#41BAC1'
+  custom_dir: 'theme'
+  include_sidebar: true
+plugins:
+  - search
+  # - mermaid2 - takes too long to build - use a screen image for now
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - pymdownx.highlight:
+      linenums: true
+
+extra:
+  analytics:
+    provider: google
+    # https://analytics.google.com/analytics/web/#/a1420179p349994530/admin/streams/table/4433129821
+    property: G-DS16K4YVRR
+
