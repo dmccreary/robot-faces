@@ -6,11 +6,18 @@ repo_url: 'https://github.com/dmccreary/robot-faces'
 
 nav:
   - Home: index.md
+  - Getting Started: getting-started.md
   - Lessons:
     - Introduction: lessons/index.md
     - Drawing Commands: lessons/drawing-commands.md
     - Eye Scanner: lessons/eye-scanner.md
     - Interactions: lessons/interactions.md
+    - lessons/basic-face-layouts.md
+    - lessons/blit-commands.md
+    - lessons/multiple-threads.md
+    - lessons/screen-coodinates.md
+  - parts-lists.md
+  - about.md
   - Contact: contact.md
   - Glossary: glossary.md
 # CoderDojo Microsite Standards from here down
@@ -18,7 +25,7 @@ edit_uri: 'blob/master/docs'
 theme:
   # should be name: material
   name: material
-  logo: img/coderdojo-logo.png
+  logo: img/coderdojo-logo.jpg
   palette:
     primary: '#642580'
     accent: '#41BAC1'

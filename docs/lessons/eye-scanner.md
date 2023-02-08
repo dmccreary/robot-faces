@@ -1,6 +1,6 @@
 # Eye Scanner
 
-
+![](../img/eye-scanner.gif)
 
 ```py
 from machine import Pin

@@ -1,5 +1,5 @@
 # Interactions
 
-## Eye Pupal Movement
+## Eye Pupil Movement
 
 ## Blinking
