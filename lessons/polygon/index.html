@@ -17,7 +17,7 @@
     
     
       
-        <title>Interactions - Robot Faces</title>
+        <title>Drawing Polygons - Robot Faces</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#interactions" class="md-skip">
+        <a href="#drawing-polygons" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Interactions
+              Drawing Polygons
             
           </span>
         </div>
@@ -246,14 +246,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       
       
@@ -316,59 +314,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Interactions
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../interactions/" class="md-nav__link">
         Interactions
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#eye-pupil-movement" class="md-nav__link">
-    Eye Pupil Movement
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blinking" class="md-nav__link">
-    Blinking
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -523,15 +473,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#eye-pupil-movement" class="md-nav__link">
-    Eye Pupil Movement
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blinking" class="md-nav__link">
-    Blinking
+  <a href="#references" class="md-nav__link">
+    References
   </a>
   
 </li>
@@ -548,15 +491,63 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/dmccreary/robot-faces/blob/master/docs/lessons/interactions.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/dmccreary/robot-faces/blob/master/docs/lessons/polygon.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="interactions">Interactions</h1>
-<h2 id="eye-pupil-movement">Eye Pupil Movement</h2>
-<h2 id="blinking">Blinking</h2>
+<h1 id="drawing-polygons">Drawing Polygons</h1>
+<p>Since v1.19.1-724 MicroPython includes a flexible way to draw any polygon of any
+number of points either in outline or filled mode.</p>
+<p>To use it you must pass it an <a href="https://docs.micropython.org/en/latest/library/array.html#module-array">array</a> of points.  The syntax for short array initialization is
+as follows:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>my_array = array(&#39;h&#39;, [30,10, 100,20, 50,60])
+</code></pre></div>
+</td></tr></table>
+<p>The letter "h" signals that each element will be a short integer.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+<span class="kn">from</span> <span class="nn">array</span> <span class="kn">import</span> <span class="n">array</span>
+<span class="kn">import</span> <span class="nn">ssd1306</span>
+
+<span class="n">clock</span><span class="o">=</span><span class="n">Pin</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#SCL</span>
+<span class="n">data</span><span class="o">=</span><span class="n">Pin</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#SDA</span>
+<span class="n">RES</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">DC</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">CS</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="n">spi</span><span class="o">=</span><span class="n">machine</span><span class="o">.</span><span class="n">SPI</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sck</span><span class="o">=</span><span class="n">clock</span><span class="p">,</span> <span class="n">mosi</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">oled</span> <span class="o">=</span> <span class="n">ssd1306</span><span class="o">.</span><span class="n">SSD1306_SPI</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">spi</span><span class="p">,</span> <span class="n">DC</span><span class="p">,</span> <span class="n">RES</span><span class="p">,</span> <span class="n">CS</span><span class="p">)</span>
+
+<span class="n">oled</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># draw three points in a triangle to be filled</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span><span class="mi">60</span><span class="p">])</span>
+<span class="c1"># at poing (0,0) draw a polygon with on bits and filled</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
+<h2 id="references">References</h2>
+<p><a href="https://docs.micropython.org/en/latest/library/framebuf.html">MicroPython Framebuf Documentation</a>
+<a href="https://docs.micropython.org/en/latest/library/array.html#module-array">MicroPython Array</a></p>
 
               
             </article>
@@ -566,41 +557,6 @@
       </main>
       
         <footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="../eye-scanner/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Eye Scanner" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Eye Scanner
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../basic-face-layouts/" class="md-footer__link md-footer__link--next" aria-label="Next: Basic Face Layouts" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Basic Face Layouts
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
