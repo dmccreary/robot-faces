@@ -15,7 +15,9 @@ nav:
     - lessons/basic-face-layouts.md
     - lessons/blit-commands.md
     - lessons/multiple-threads.md
-    - lessons/screen-coodinates.md
+    - lessons/screen-coordinates.md
+    - lessons/eyebrows.md
+    - lessons/polygon.md
   - parts-lists.md
   - about.md
   - Contact: contact.md
