@@ -1,6 +1,6 @@
 # Drawing Ellipses
 
-Since version 1.19.1 of the MicroPython runtime was released in February 2023 we have support for the Framebuf [Ellipse](https://docs.micropython.org/en/latest/library/framebuf.html?highlight=ellipse#framebuf.FrameBuffer.ellipse) operator.  This
+Since version 1.19.1-724 of the MicroPython runtime was released in February 2023 we have support for the framebuf [Ellipse](https://docs.micropython.org/en/latest/library/framebuf.html?highlight=ellipse#framebuf.FrameBuffer.ellipse) function.  This
 function allows us to draw circles and ellipses that are both filled and un-filled.
 
 We can also draw into one or more quadrants so we can do 1/4, 1/2, or 3/4 filled ellipses.
@@ -52,3 +52,6 @@ Here is a complete list of the 16 possible values of the code:
 | 14 | all but upper right are on|
 | 15 | all four quadrants are drawn|
 
+## References
+
+[MicroPython Framebuf Documentation](https://docs.micropython.org/en/latest/library/framebuf.html)

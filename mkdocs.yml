@@ -9,15 +9,17 @@ nav:
   - Getting Started: getting-started.md
   - Lessons:
     - Introduction: lessons/index.md
-    - Drawing Commands: lessons/drawing-commands.md
+    - Screen Coordinates: lessons/screen-coordinates.md
+    - Basic Drawing Commands: lessons/drawing-commands.md
+    - Ellipse: lessons/ellipse.md
+    - Polygon: lessons/polygon.md
+    - Basic Face Layouts: lessons/basic-face-layouts.md
     - Eye Scanner: lessons/eye-scanner.md
     - Interactions: lessons/interactions.md
-    - lessons/basic-face-layouts.md
     - lessons/blit-commands.md
     - lessons/multiple-threads.md
-    - lessons/screen-coordinates.md
     - lessons/eyebrows.md
-    - lessons/polygon.md
+
   - parts-lists.md
   - about.md
   - Contact: contact.md
