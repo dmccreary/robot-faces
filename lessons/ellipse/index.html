@@ -17,7 +17,7 @@
     
     
       
-        <title>Blit commands - Robot Faces</title>
+        <title>Drawing Ellipses - Robot Faces</title>
       
     
     
@@ -76,6 +76,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#drawing-ellipses" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -104,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Blit commands
+              Drawing Ellipses
             
           </span>
         </div>
@@ -241,14 +246,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       
       
@@ -339,19 +342,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../blit-commands/" class="md-nav__link">
         Blit commands
       </a>
-      
     </li>
   
 
@@ -496,6 +491,30 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ellipse-parameters" class="md-nav__link">
+    Ellipse Parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quadrant-fill-codes" class="md-nav__link">
+    Quadrant Fill Codes
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -507,15 +526,104 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/dmccreary/robot-faces/blob/master/docs/lessons/blit-commands.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/dmccreary/robot-faces/blob/master/docs/lessons/ellipse.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>Blit commands</h1>
-
-
+<h1 id="drawing-ellipses">Drawing Ellipses</h1>
+<p>Since version 1.19.1 of the MicroPython runtime was released in February 2023 we have support for the Framebuf <a href="https://docs.micropython.org/en/latest/library/framebuf.html?highlight=ellipse#framebuf.FrameBuffer.ellipse">Ellipse</a> operator.  This
+function allows us to draw circles and ellipses that are both filled and un-filled.</p>
+<p>We can also draw into one or more quadrants so we can do 1/4, 1/2, or 3/4 filled ellipses.</p>
+<h2 id="ellipse-parameters">Ellipse Parameters</h2>
+<p><img alt="Ellipse Parameters" src="../../img/ellipse-parameters.png" /></p>
+<p><code>display.ellipse(x, y, HORZ_RADIUS, VERT_RADIUS, COLOR, FILL_FLAG, QUAD_CODE)</code></p>
+<p>Draw an ellipse at the given location. Radii <code>HORZ_RADIUS</code> and <code>VERT_RADIUS</code> define the geometry.</p>
+<p>If <code>HORZ_RADIUS</code> equal the <code>VERT_RADIUS</code> a circle is drawn. The <code>COLOR</code> parameter defines the color.  0 for OFF and 1 for ON.</p>
+<p>The optional <code>FILL_FLAG</code> parameter can be set to True to fill the ellipse. Otherwise, just a single pixel outline is drawn.</p>
+<h2 id="quadrant-fill-codes">Quadrant Fill Codes</h2>
+<p><img alt="Ellipse Quadrants" src="../../img/ellipse-quadrants.png" /></p>
+<p>The optional <code>QUAD_CODE</code> parameter enables drawing to be restricted to certain quadrants of the ellipse.</p>
+<p>You can add the following numbers to figure out the quadrant code:</p>
+<ul>
+<li>1 - upper right</li>
+<li>2 - upper left</li>
+<li>4 - lower left</li>
+<li>8 - lower right</li>
+</ul>
+<p>For example for the lower half of the ellipse on you add 4 + 8 = 12.</p>
+<p>Here is a complete list of the 16 possible values of the code:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>all off</td>
+</tr>
+<tr>
+<td>1</td>
+<td>upper right on</td>
+</tr>
+<tr>
+<td>2</td>
+<td>upper left on</td>
+</tr>
+<tr>
+<td>3</td>
+<td>top half on</td>
+</tr>
+<tr>
+<td>4</td>
+<td>lower left on</td>
+</tr>
+<tr>
+<td>5</td>
+<td>lower left and upper right on</td>
+</tr>
+<tr>
+<td>6</td>
+<td>left side on</td>
+</tr>
+<tr>
+<td>7</td>
+<td>lower right off</td>
+</tr>
+<tr>
+<td>9</td>
+<td>right side on</td>
+</tr>
+<tr>
+<td>10</td>
+<td>upper left and lower right are on</td>
+</tr>
+<tr>
+<td>11</td>
+<td>all but lower left are on</td>
+</tr>
+<tr>
+<td>12</td>
+<td>lower half on</td>
+</tr>
+<tr>
+<td>13</td>
+<td>all but upper left are on</td>
+</tr>
+<tr>
+<td>14</td>
+<td>all but upper right are on</td>
+</tr>
+<tr>
+<td>15</td>
+<td>all four quadrants are drawn</td>
+</tr>
+</tbody>
+</table>
 
               
             </article>
@@ -525,41 +633,6 @@
       </main>
       
         <footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="../basic-face-layouts/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Basic Face Layouts" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Basic Face Layouts
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../multiple-threads/" class="md-footer__link md-footer__link--next" aria-label="Next: Multiple Threads" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Multiple Threads
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
