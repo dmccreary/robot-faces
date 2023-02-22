@@ -605,7 +605,7 @@ as follows:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>my_array = array(&#39;h&#39;, [30,10, 100,20, 50,60])
 </code></pre></div>
 </td></tr></table>
-<p>The letter "h" signals that each element will be a short integer.</p>
+<p>The letter "h" signals that each element will be a <a href="https://docs.micropython.org/en/latest/library/struct.html">short integer</a> which is normally two bytes.  A signed two-byte value can be any integer in a range from -32,768 to 32,767.  Since the screen is only a maximum of 128 we could use an unsigned byte with the "B" array notation, but we will use "h" for portability to larger displays.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -638,7 +638,7 @@ as follows:</p>
 <span class="n">oled</span> <span class="o">=</span> <span class="n">ssd1306</span><span class="o">.</span><span class="n">SSD1306_SPI</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">spi</span><span class="p">,</span> <span class="n">DC</span><span class="p">,</span> <span class="n">RES</span><span class="p">,</span> <span class="n">CS</span><span class="p">)</span>
 
 <span class="n">oled</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="c1"># draw three points in a triangle to be filled</span>
+<span class="c1"># draw three points in a triangle to be filled using signed two-byte integers (h)</span>
 <span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span><span class="mi">60</span><span class="p">])</span>
 <span class="c1"># at poing (0,0) draw a polygon with on bits and filled</span>
 <span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -840,6 +840,15 @@ as follows:</p>
 <span class="n">oled</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 </td></tr></table>
+<div class="admonition challenge">
+<p class="admonition-title">Challenge</p>
+<ol>
+<li>Create a drawing with a rocket flying over a house</li>
+<li>Add your own shapes</li>
+<li>When would you use rect() and ellipse() instead of poly?</li>
+<li>Modify the triangle drawing to move the points with an animation</li>
+</ol>
+</div>
 <h2 id="references">References</h2>
 <p><a href="https://docs.micropython.org/en/latest/library/framebuf.html">MicroPython Framebuf Documentation</a>
 <a href="https://docs.micropython.org/en/latest/library/array.html#module-array">MicroPython Array</a></p>
