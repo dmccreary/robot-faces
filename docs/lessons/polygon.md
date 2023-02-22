@@ -12,7 +12,7 @@ as follows:
 my_array = array('h', [30,10, 100,20, 50,60])
 ```
 
-The letter "h" signals that each element will be a short integer.
+The letter "h" signals that each element will be a [short integer](https://docs.micropython.org/en/latest/library/struct.html) which is normally two bytes.  A signed two-byte value can be any integer in a range from -32,768 to 32,767.  Since the screen is only a maximum of 128 we could use an unsigned byte with the "B" array notation, but we will use "h" for portability to larger displays.
 
 ```py
 from machine import Pin
@@ -29,7 +29,7 @@ spi=machine.SPI(0, sck=clock, mosi=data)
 oled = ssd1306.SSD1306_SPI(128, 64, spi, DC, RES, CS)
 
 oled.fill(0)
-# draw three points in a triangle to be filled
+# draw three points in a triangle to be filled using signed two-byte integers (h)
 my_array = array('h', [30,10, 100,20, 50,60])
 # at poing (0,0) draw a polygon with on bits and filled
 oled.poly(0,0, my_array, 1, 1)
@@ -142,6 +142,12 @@ oled.poly(0,0, my_array, ON, FILL)
 oled.show()
 
 ```
+
+!!! Challenge
+    1. Create a drawing with a rocket flying over a house
+    2. Add your own shapes
+    3. When would you use rect() and ellipse() instead of poly?
+    4. Modify the triangle drawing to move the points with an animation
 
 ## References
 
