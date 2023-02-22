@@ -338,6 +338,20 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#preamble-for-drawing" class="md-nav__link">
+    Preamble for Drawing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fill" class="md-nav__link">
+    Fill
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#rectangles" class="md-nav__link">
     Rectangles
   </a>
@@ -349,11 +363,45 @@
     Lines
   </a>
   
+    <nav class="md-nav" aria-label="Lines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#horizontal-line" class="md-nav__link">
+    Horizontal Line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vertical-line" class="md-nav__link">
+    Vertical Line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-line" class="md-nav__link">
+    General Line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rectangle" class="md-nav__link">
+    Rectangle
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#circles" class="md-nav__link">
-    Circles
+  <a href="#circles-and-ellipse" class="md-nav__link">
+    Circles and Ellipse
   </a>
   
 </li>
@@ -579,6 +627,20 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#preamble-for-drawing" class="md-nav__link">
+    Preamble for Drawing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fill" class="md-nav__link">
+    Fill
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#rectangles" class="md-nav__link">
     Rectangles
   </a>
@@ -590,11 +652,45 @@
     Lines
   </a>
   
+    <nav class="md-nav" aria-label="Lines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#horizontal-line" class="md-nav__link">
+    Horizontal Line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vertical-line" class="md-nav__link">
+    Vertical Line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-line" class="md-nav__link">
+    General Line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rectangle" class="md-nav__link">
+    Rectangle
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#circles" class="md-nav__link">
-    Circles
+  <a href="#circles-and-ellipse" class="md-nav__link">
+    Circles and Ellipse
   </a>
   
 </li>
@@ -625,10 +721,88 @@
 
 
 <h1 id="drawing-commands">Drawing Commands</h1>
+<p>All of our drawing commands come from the MicroPython <a href="https://docs.micropython.org/en/latest/library/framebuf.html">FrameBuf</a> drawing primitives.  These are simple drawing operations that are designed to work on microcontrollers with limited memory.</p>
+<p>Because these commands are all functions associated with the framebuffer class, they are called <strong>methods</strong> in the documentation.</p>
+<p>A typical drawing sequence has the following steps:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># clear the entire display</span>
+<span class="n">display</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Draw white (1) text starting at x=0 and y = 10 </span>
+<span class="n">display</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># draw a horizontal like starting at x=0 and y=20 that is 128 pixels long</span>
+<span class="n">display</span><span class="o">.</span><span class="n">hline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># this triggers the copy of the entire frame buffer in memory to the display</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
+<h2 id="preamble-for-drawing">Preamble for Drawing</h2>
+<p>All our programs will have approximately the same preamble or setup that appears before our drawing.  Here
+is a sample of this preamble:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+<span class="kn">import</span> <span class="nn">ssd1306</span>
+
+<span class="n">WIDTH</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">HEIGHT</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="n">clock</span><span class="o">=</span><span class="n">Pin</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#SCL</span>
+<span class="n">data</span><span class="o">=</span><span class="n">Pin</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#SDA</span>
+<span class="n">RES</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">DC</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">CS</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="n">spi</span><span class="o">=</span><span class="n">machine</span><span class="o">.</span><span class="n">SPI</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sck</span><span class="o">=</span><span class="n">clock</span><span class="p">,</span> <span class="n">mosi</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">ssd1306</span><span class="o">.</span><span class="n">SSD1306_SPI</span><span class="p">(</span><span class="n">WIDTH</span><span class="p">,</span> <span class="n">HEIGHT</span><span class="p">,</span> <span class="n">spi</span><span class="p">,</span> <span class="n">DC</span><span class="p">,</span> <span class="n">RES</span><span class="p">,</span> <span class="n">CS</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>You may have to modify the pin numbers if you are not using our standard layout.</p>
+<h2 id="fill">Fill</h2>
+<p><code>display.fill(color)</code></p>
+<p>A color of 0 will be a blank screen.  A fill of 1 will be a white screen.
+We typically erase an old screen at the top of an animation loop with <code>fill(0)</code></p>
 <h2 id="rectangles">Rectangles</h2>
+<p><code>rect(x, y, width, color)</code></p>
 <h2 id="lines">Lines</h2>
-<h2 id="circles">Circles</h2>
+<h3 id="horizontal-line">Horizontal Line</h3>
+<p>Draw a horizontal line starting a the point (x,y) of width pixels.</p>
+<p><code>display.hline(x, y, width, color)</code></p>
+<h3 id="vertical-line">Vertical Line</h3>
+<p>Draw a vertical line starting a the point (x,y) of height pixels.</p>
+<p><code>display.vline(x, y, height, color)</code></p>
+<h3 id="general-line">General Line</h3>
+<p>Draw a line from a set of coordinates using the given color and a thickness of 1 pixel. 
+The line method draws the line up to a second set of coordinates</p>
+<p><code>display.line(x1, y1, x2, y2, color)</code></p>
+<h3 id="rectangle">Rectangle</h3>
+<p><code>rect(x, y, w, h, c[, f])</code></p>
+<h2 id="circles-and-ellipse">Circles and Ellipse</h2>
+<p><code>display.ellipse(x, y, HORZ_RADIUS, VERT_RADIUS, COLOR, FILL_FLAG, QUAD_CODE)</code></p>
 <h2 id="polygons">Polygons</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">## draw a filled in triangle</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
 
               
             </article>
