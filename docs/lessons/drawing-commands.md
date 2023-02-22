@@ -81,6 +81,8 @@ The line method draws the line up to a second set of coordinates
 
 ```display.ellipse(x, y, HORZ_RADIUS, VERT_RADIUS, COLOR, FILL_FLAG, QUAD_CODE)```
 
+There is a detailed lesson [here](./ellipse.md)
+
 ## Polygons
 
 ```py
@@ -88,3 +90,19 @@ The line method draws the line up to a second set of coordinates
 my_array = array('B', [10,0, 20,10, 0,10])
 oled.poly(0,0, my_array, ON, FILL)
 ```
+
+There is a detailed lesson [here](./polygon.md)
+
+## Scroll
+
+```display.scroll(xstep, ystep)```
+
+Shift the contents of the FrameBuffer by the given vector. This may leave a footprint of the previous colors in the FrameBuffer.
+
+## BLIT
+
+```blit(fbuf, x, y, key=- 1, palette=None)```
+
+Draw another FrameBuffer on top of the current one at the given coordinates. If key is specified then it should be a color integer and the corresponding color will be considered transparent: all pixels with that color value will not be drawn. (If the palette is specified then the key is compared to the value from palette, not to the value directly from fbuf.)
+
+The palette argument enables blitting between FrameBuffers with differing formats. Typical usage is to render a monochrome or grayscale glyph/icon to a color display. The palette is a FrameBuffer instance whose format is that of the current FrameBuffer. The palette height is one pixel and its pixel width is the number of colors in the source FrameBuffer. The palette for an N-bit source needs 2**N pixels; the palette for a monochrome source would have 2 pixels representing background and foreground colors. The application assigns a color to each pixel in the palette. The color of the current pixel will be that of that palette pixel whose x position is the color of the corresponding source pixel.
