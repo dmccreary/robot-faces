@@ -413,6 +413,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#scroll" class="md-nav__link">
+    Scroll
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blit" class="md-nav__link">
+    BLIT
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -702,6 +716,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#scroll" class="md-nav__link">
+    Scroll
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blit" class="md-nav__link">
+    BLIT
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -795,6 +823,7 @@ The line method draws the line up to a second set of coordinates</p>
 <p><code>rect(x, y, w, h, c[, f])</code></p>
 <h2 id="circles-and-ellipse">Circles and Ellipse</h2>
 <p><code>display.ellipse(x, y, HORZ_RADIUS, VERT_RADIUS, COLOR, FILL_FLAG, QUAD_CODE)</code></p>
+<p>There is a detailed lesson <a href="../ellipse/">here</a></p>
 <h2 id="polygons">Polygons</h2>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -803,6 +832,14 @@ The line method draws the line up to a second set of coordinates</p>
 <span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
+<p>There is a detailed lesson <a href="../polygon/">here</a></p>
+<h2 id="scroll">Scroll</h2>
+<p><code>display.scroll(xstep, ystep)</code></p>
+<p>Shift the contents of the FrameBuffer by the given vector. This may leave a footprint of the previous colors in the FrameBuffer.</p>
+<h2 id="blit">BLIT</h2>
+<p><code>blit(fbuf, x, y, key=- 1, palette=None)</code></p>
+<p>Draw another FrameBuffer on top of the current one at the given coordinates. If key is specified then it should be a color integer and the corresponding color will be considered transparent: all pixels with that color value will not be drawn. (If the palette is specified then the key is compared to the value from palette, not to the value directly from fbuf.)</p>
+<p>The palette argument enables blitting between FrameBuffers with differing formats. Typical usage is to render a monochrome or grayscale glyph/icon to a color display. The palette is a FrameBuffer instance whose format is that of the current FrameBuffer. The palette height is one pixel and its pixel width is the number of colors in the source FrameBuffer. The palette for an N-bit source needs 2**N pixels; the palette for a monochrome source would have 2 pixels representing background and foreground colors. The application assigns a color to each pixel in the palette. The color of the current pixel will be that of that palette pixel whose x position is the color of the corresponding source pixel.</p>
 
               
             </article>
