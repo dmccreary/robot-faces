@@ -14,16 +14,29 @@ The minimal drawing kit contains:
 
 ## Step 2: Installing Software
 
+![](img/thonny-interpreter.png)
+
 We use the "Thonny" editor to program our faces.  To use it you will need to:
 
 1. Download and install [Thonny](http://thonny.org)
-2. Initialize the runtime by downloading the 
-3. Pressing the Stop/Reset
+2. Initialize the runtime by using the Thonny Tools -> Options -> Interpreter and select the Raspberry Pi Pico option
+3. Press the Install Runtime button
+4. Press the Stop/Reset and you should see the prompt:
+
+```txt
+>>> 
+─────────────────────────────────────────────────────────────────────────────────
+MicroPython v1.19.1-854-g35524a6fd on 2023-02-07; Raspberry Pi Pico with RP2040
+Type "help()" for more information.
+>>> 
+```
 
 ## Drawing Your Fist Face
 
 You can now copy our "simple-face.py" program into your microcontroller into your Thonny program and
 press the green "Run" button.  You will see the following on your display:
+
+![Robot Face](./img/robot-face-01.jpg)
 
 
 
