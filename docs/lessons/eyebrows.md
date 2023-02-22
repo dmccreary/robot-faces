@@ -2,7 +2,7 @@
 
 In this lesson, we will add eyebrows to our basic face layout.  We will use the framebuf [poly](https://docs.micropython.org/en/latest/library/framebuf.html?highlight=ellipse#framebuf.FrameBuffer.poly) that is available in 1.19
 
-![](./img/face-with-eyebrows.jpg)
+![Face With Eyebrows](../img/face-with-eyebrows.jpg)
 
 ```py
 '''
