@@ -366,6 +366,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#sample-polygons" class="md-nav__link">
+    Sample Polygons
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#references" class="md-nav__link">
     References
   </a>
@@ -558,6 +565,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#sample-polygons" class="md-nav__link">
+    Sample Polygons
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#references" class="md-nav__link">
     References
   </a>
@@ -583,6 +597,7 @@
 
 
 <h1 id="drawing-polygons">Drawing Polygons</h1>
+<p><img alt="" src="../../img/polygons.jpg" /></p>
 <p>Since v1.19.1-724 MicroPython includes a flexible way to draw any polygon of any
 number of points either in outline or filled mode.</p>
 <p>To use it you must pass it an <a href="https://docs.micropython.org/en/latest/library/array.html#module-array">array</a> of points.  The syntax for short array initialization is
@@ -627,6 +642,201 @@ as follows:</p>
 <span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span><span class="mi">60</span><span class="p">])</span>
 <span class="c1"># at poing (0,0) draw a polygon with on bits and filled</span>
 <span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
+<p>This will generate the following image:</p>
+<p><img alt="Triangle" src="../../img/triangle.jpg" /></p>
+<h2 id="sample-polygons">Sample Polygons</h2>
+<p>Here is an example program</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+<span class="kn">from</span> <span class="nn">utime</span> <span class="kn">import</span> <span class="n">sleep</span><span class="p">,</span> <span class="n">ticks_us</span>
+<span class="kn">from</span> <span class="nn">array</span> <span class="kn">import</span> <span class="n">array</span>
+<span class="kn">import</span> <span class="nn">framebuf</span>
+<span class="kn">import</span> <span class="nn">ssd1306</span>
+
+<span class="n">WIDTH</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">HEIGHT</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="c1"># draw readability variables</span>
+<span class="n">ON</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># white</span>
+<span class="n">OFF</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># black</span>
+<span class="n">NO_FILL</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># just the border is drawn</span>
+<span class="n">FILL</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># all pixels within the polygon are drawn</span>
+
+<span class="n">clock</span><span class="o">=</span><span class="n">Pin</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#SCL</span>
+<span class="n">data</span><span class="o">=</span><span class="n">Pin</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#SDA</span>
+<span class="n">RES</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">DC</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">CS</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="n">spi</span><span class="o">=</span><span class="n">machine</span><span class="o">.</span><span class="n">SPI</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sck</span><span class="o">=</span><span class="n">clock</span><span class="p">,</span> <span class="n">mosi</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">oled</span> <span class="o">=</span> <span class="n">ssd1306</span><span class="o">.</span><span class="n">SSD1306_SPI</span><span class="p">(</span><span class="n">WIDTH</span><span class="p">,</span> <span class="n">HEIGHT</span><span class="p">,</span> <span class="n">spi</span><span class="p">,</span> <span class="n">DC</span><span class="p">,</span> <span class="n">RES</span><span class="p">,</span> <span class="n">CS</span><span class="p">)</span>
+
+<span class="n">oled</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="c1"># basic filled triangle</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+
+<span class="c1"># basic outline triangle</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">NO_FILL</span><span class="p">)</span>
+
+
+<span class="c1"># basic outline pentagon</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">NO_FILL</span><span class="p">)</span>
+
+
+<span class="c1"># basic outline hexagon</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">105</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">NO_FILL</span><span class="p">)</span>
+
+
+<span class="c1"># octagon</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">05</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">25</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">NO_FILL</span><span class="p">)</span>
+
+<span class="c1"># filled five point star</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span><span class="mi">27</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span><span class="mi">27</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+
+
+<span class="c1"># outlined five point star</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span><span class="mi">27</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span><span class="mi">27</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">NO_FILL</span><span class="p">)</span>
+
+<span class="c1"># filled hexagon star</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span><span class="mi">25</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+
+
+<span class="c1"># outlined hexagon star</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">105</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span><span class="mi">25</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">NO_FILL</span><span class="p">)</span>
+
+<span class="c1"># filled rocket</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span><span class="mi">53</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">60</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+
+<span class="c1"># solid rocket</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span><span class="mi">54</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span><span class="mi">60</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">NO_FILL</span><span class="p">)</span>
+
+
+<span class="c1"># house outline</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span><span class="mi">50</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">NO_FILL</span><span class="p">)</span>
+
+<span class="c1"># house fill</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">101</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span><span class="mi">50</span><span class="p">])</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">my_array</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+
 <span class="n">oled</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 </td></tr></table>
