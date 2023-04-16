@@ -4,7 +4,7 @@
 
 ## Lesson Overview
 
-In this
+In this a lesson about how to use the ```poly()``` function to do drawing on with MicroPython.  The ```poly()``` function is implemented as part of the Framebuf function in MicroPython.  This means that it will run on any display that uses frame buffers.  We think you will find ```poly()``` a very powerful and flexibile way to draw features on a face such as a nose or eyebrows.
 
 ## Drawing with the Polygon Function
 
