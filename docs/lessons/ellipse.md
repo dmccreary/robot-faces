@@ -5,6 +5,42 @@ function allows us to draw circles and ellipses that are both filled and un-fill
 
 We can also draw into one or more quadrants so we can do 1/4, 1/2, or 3/4 filled ellipses.
 
+# Sample Program Code
+
+```py
+# Test of the micropython ellipse function
+# display.ellipse(x, y, HORZ_RADIUS, VERT_RADIUS, COLOR, FILL_FLAG, QUAD_CODE)
+
+from machine import Pin
+from utime import sleep
+import framebuf
+import ssd1306
+
+WIDTH = 128
+HEIGHT = 64
+
+clock=Pin(2) #SCL
+data=Pin(3) #SDA
+RES = machine.Pin(4)
+DC = machine.Pin(5)
+CS = machine.Pin(6)
+
+spi=machine.SPI(0, sck=clock, mosi=data)
+oled = ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, DC, RES, CS)
+
+# center the ellipse in the middle of the display
+x = int(WIDTH / 2)
+y = int(HEIGHT / 2)
+
+HORZ_RADIUS = 30 # 30 over for the left and 30 to the right 
+VERT_RADIUS = 20 # 20 up and 20 down
+COLOR = 1 # 0 or 1
+
+# draw an ellipse wihout the fill
+oled.ellipse(x, y, HORZ_RADIUS, VERT_RADIUS, COLOR)
+oled.show()
+```
+
 ## Ellipse Parameters
 
 ![Ellipse Parameters](../img/ellipse-parameters.png)

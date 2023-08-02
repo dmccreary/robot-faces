@@ -5,8 +5,8 @@ import framebuf
 import ssd1306
 
 # these are the pins in the lower-left corner (USB on top)
-BUTTON_PIN_A = 14
-BUTTON_PIN_B = 15
+BUTTON_PIN_A = 20
+BUTTON_PIN_B = 21
 
 eye_position = 0 # the count of times the button has been pressed.  A is +1, B is -1
 last_time = 0 # the last time we pressed the button
