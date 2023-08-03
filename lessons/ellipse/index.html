@@ -327,54 +327,9 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Ellipse
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         Ellipse
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#ellipse-parameters" class="md-nav__link">
-    Ellipse Parameters
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quadrant-fill-codes" class="md-nav__link">
-    Quadrant Fill Codes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    References
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -565,35 +520,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#ellipse-parameters" class="md-nav__link">
-    Ellipse Parameters
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quadrant-fill-codes" class="md-nav__link">
-    Quadrant Fill Codes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    References
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -614,6 +540,70 @@
 <p>Since version 1.19.1-724 of the MicroPython runtime was released in February 2023 we have support for the framebuf <a href="https://docs.micropython.org/en/latest/library/framebuf.html?highlight=ellipse#framebuf.FrameBuffer.ellipse">Ellipse</a> function.  This
 function allows us to draw circles and ellipses that are both filled and un-filled.</p>
 <p>We can also draw into one or more quadrants so we can do 1/4, 1/2, or 3/4 filled ellipses.</p>
+<h1 id="sample-program-code">Sample Program Code</h1>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Test of the micropython ellipse function</span>
+<span class="c1"># display.ellipse(x, y, HORZ_RADIUS, VERT_RADIUS, COLOR, FILL_FLAG, QUAD_CODE)</span>
+
+<span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+<span class="kn">from</span> <span class="nn">utime</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">import</span> <span class="nn">framebuf</span>
+<span class="kn">import</span> <span class="nn">ssd1306</span>
+
+<span class="n">WIDTH</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">HEIGHT</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="n">clock</span><span class="o">=</span><span class="n">Pin</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#SCL</span>
+<span class="n">data</span><span class="o">=</span><span class="n">Pin</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#SDA</span>
+<span class="n">RES</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">DC</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">CS</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="n">spi</span><span class="o">=</span><span class="n">machine</span><span class="o">.</span><span class="n">SPI</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sck</span><span class="o">=</span><span class="n">clock</span><span class="p">,</span> <span class="n">mosi</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">oled</span> <span class="o">=</span> <span class="n">ssd1306</span><span class="o">.</span><span class="n">SSD1306_SPI</span><span class="p">(</span><span class="n">WIDTH</span><span class="p">,</span> <span class="n">HEIGHT</span><span class="p">,</span> <span class="n">spi</span><span class="p">,</span> <span class="n">DC</span><span class="p">,</span> <span class="n">RES</span><span class="p">,</span> <span class="n">CS</span><span class="p">)</span>
+
+<span class="c1"># center the ellipse in the middle of the display</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">WIDTH</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">HEIGHT</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">HORZ_RADIUS</span> <span class="o">=</span> <span class="mi">30</span> <span class="c1"># 30 over for the left and 30 to the right </span>
+<span class="n">VERT_RADIUS</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># 20 up and 20 down</span>
+<span class="n">COLOR</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 0 or 1</span>
+
+<span class="c1"># draw an ellipse wihout the fill</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">HORZ_RADIUS</span><span class="p">,</span> <span class="n">VERT_RADIUS</span><span class="p">,</span> <span class="n">COLOR</span><span class="p">)</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
 <h2 id="ellipse-parameters">Ellipse Parameters</h2>
 <p><img alt="Ellipse Parameters" src="../../img/ellipse-parameters.png" /></p>
 <p><code>display.ellipse(x, y, HORZ_RADIUS, VERT_RADIUS, COLOR, FILL_FLAG, QUAD_CODE)</code></p>

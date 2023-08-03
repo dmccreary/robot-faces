@@ -380,22 +380,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#eyes" class="md-nav__link">
-    Eyes
+  <a href="#drawing-constants" class="md-nav__link">
+    Drawing Constants
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#mouth" class="md-nav__link">
-    Mouth
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#eyebrows" class="md-nav__link">
-    Eyebrows
+  <a href="#the-face-outline" class="md-nav__link">
+    The Face Outline
   </a>
   
 </li>
@@ -572,22 +565,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#eyes" class="md-nav__link">
-    Eyes
+  <a href="#drawing-constants" class="md-nav__link">
+    Drawing Constants
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#mouth" class="md-nav__link">
-    Mouth
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#eyebrows" class="md-nav__link">
-    Eyebrows
+  <a href="#the-face-outline" class="md-nav__link">
+    The Face Outline
   </a>
   
 </li>
@@ -612,9 +598,119 @@
 
 <h1 id="basic-face-layouts">Basic Face Layouts</h1>
 <p><img alt="" src="../../img/robot-face-01.jpg" /></p>
+<h2 id="drawing-constants">Drawing Constants</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">HALF_WIDTH</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">WIDTH</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">QUARTER_WIDTH</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">WIDTH</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">HALF_HEIGHT</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">HEIGHT</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">QUARTER_HEIGHT</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">HEIGHT</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="n">WHITE</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 1 is for pixel on</span>
+<span class="n">BLACK</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 0 is for pixel off</span>
+
+<span class="n">NO_FILL</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 0 is for only drawing the outline</span>
+<span class="n">FILL</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 1 for filling all the pixels in an ellipse</span>
+
+<span class="n">BOTTOM_HALF</span> <span class="o">=</span> <span class="mi">12</span> <span class="c1"># this is for drawing the lower half of an ellipse</span>
+</code></pre></div>
+</td></tr></table>
+<h2 id="the-face-outline">The Face Outline</h2>
+<p>Let's start out by drawing an outline of the face as a wide white ellipse on a black background.<br />
+You don't <strong>really</strong> need to do this part because people can assume the entire screen is the face.
+We are mostly doing it to get you familiar with drawing with the <em>ellispe()</em> function.</p>
+<h1 id="if-our-screen-is-128-pixels-wide-make-the-face-be-100-wide">if our screen is 128 pixels wide, make the face be 100 wide</h1>
+<p>FACE_WIDTH = 100 # 50 over for the left and 50 to the right</p>
+<h1 id="if-our-screen-is-64-pixels-high-make-our-face-be-60-high">if our screen is 64 pixels high, make our face be 60 high</h1>
+<p>FACE_HEIGHT = 60 # 20 up and 20 down</p>
+<p>Remember that the six main parameters of the ellipse function are:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">display</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">hight</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">fill</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>Here is a sample face outline:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">oled</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">HALF_WIDTH</span><span class="p">,</span> <span class="n">HALF_HEIGHT</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">FACE_WIDTH</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">FACE_HEIGHT</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="n">WHITE</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>Here are the parameters in detail:</p>
+<ol>
+<li><strong>Center of Face</strong> - the x,y of the ellipse are HALF_WIDTH, HALF_HEIGHT so it is drawn in the center of the display</li>
+<li><strong>Width and Height of the Face</strong> - this is the interger values of half the FACE_WIDTH and half the FACE_HEIGHT</li>
+<li><strong>Draw with White</strong> - this is the WHITE parameter</li>
+<li><strong>Fill not Outline</strong> - this is the FILL parameter</li>
+</ol>
 <h2 id="eyes">Eyes</h2>
+<p>Our eyes can start out by just being two circles.  They need to be drawn about 1/3 to 1/2 of the way down the face.  This is called the "eye height" and is measured from the top of the display.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">EYE_SIZE</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># eyes - black on a white face</span>
+<span class="c1"># eye on the left side of the display</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">QUARTER_WIDTH</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="n">QUARTER_HEIGHT</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="n">EYE_SIZE</span><span class="p">,</span> <span class="n">EYE_SIZE</span><span class="p">,</span> <span class="n">BLACK</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+<span class="c1"># eye on the right side of the display</span>
+<span class="n">oled</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">QUARTER_WIDTH</span><span class="o">*</span><span class="mi">3</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">QUARTER_HEIGHT</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="n">EYE_SIZE</span><span class="p">,</span> <span class="n">EYE_SIZE</span><span class="p">,</span> <span class="n">BLACK</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>Note that here, when I draw the eyes at 1/4 and 3/4 of the width, they seemed too far apart.  So I
+added 10 to the left eye and subtracted 10 from the right eye.</p>
+<p>I also didn't quite like the eyes at 1/4 of the height so I add 10 to each of the eyes distance from the top.</p>
 <h2 id="mouth">Mouth</h2>
+<p>To draw a black mouth on a white face we will use the ellipse drawing option to only draw the bottom half of the ellipse.  To
+do this we just add one more parameter which has a value of 12.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">oled</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">HALF_WIDTH</span><span class="p">,</span> <span class="n">HALF_HEIGHT</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">BLACK</span><span class="p">,</span> <span class="n">FILL</span><span class="p">,</span> <span class="n">BOTTOM_HALF</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>In this case, I moved the vertical distance down 10 from the center of the display. I made the mouth be 60 pixels wided (twice the horizontal radius of 30), and I made the height of the mouth be 20 (twice the vertical radius).</p>
+<h2 id="full-face-function">Full Face Function</h2>
+<p>Here is a full Python function that draws all four components of a face on your robot:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">draw_face</span><span class="p">():</span>
+    <span class="c1"># clear the display to make all pixels black</span>
+    <span class="n">oled</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># draw the face outline</span>
+    <span class="n">oled</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">HALF_WIDTH</span><span class="p">,</span> <span class="n">HALF_HEIGHT</span><span class="p">,</span> <span class="n">FACE_WIDTH</span><span class="p">,</span> <span class="n">FACE_HEIGHT</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+
+    <span class="c1"># eyes - black ellipses on a white face</span>
+    <span class="n">oled</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">QUARTER_WIDTH</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="n">QUARTER_HEIGHT</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="n">EYE_SIZE</span><span class="p">,</span> <span class="n">EYE_SIZE</span><span class="p">,</span> <span class="n">BLACK</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+    <span class="n">oled</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">QUARTER_WIDTH</span><span class="o">*</span><span class="mi">3</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">QUARTER_HEIGHT</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="n">EYE_SIZE</span><span class="p">,</span> <span class="n">EYE_SIZE</span><span class="p">,</span> <span class="n">BLACK</span><span class="p">,</span> <span class="n">FILL</span><span class="p">)</span>
+
+    <span class="c1"># mouth - black on a white face</span>
+    <span class="n">oled</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">HALF_WIDTH</span><span class="p">,</span> <span class="n">HALF_HEIGHT</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">BLACK</span><span class="p">,</span> <span class="n">FILL</span><span class="p">,</span> <span class="n">BOTTOM_HALF</span><span class="p">)</span>
+    <span class="n">oled</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
+<p>Try to adjust the parameters as you see fit.  See how they change the layout.</p>
 <h2 id="eyebrows">Eyebrows</h2>
+<p>Drawing eyebrows are a little more complicated since they can't easily be drawn by simple shapes like
+a rectangle, circle or ellipse.  But they are very important for signaling different emotions like surprise
+or anger.</p>
+<p>As an exercise, do a web search for faces with different emotions and note the shape of the eyebrows.</p>
+<h2 id="using-the-polygon-functiont-to-draw-eyebrows">Using the Polygon Functiont to draw eyebrows.</h2>
+<p>To draw a decent eyebrow we will use the powerful and slightly more complicated polygon function.  Firs</p>
 
               
             </article>
