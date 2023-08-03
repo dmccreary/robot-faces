@@ -1,10 +1,3 @@
-# Adding Eyebrows to a Face
-
-In this lesson, we will add eyebrows to our basic face layout.  We will use the framebuf [poly](https://docs.micropython.org/en/latest/library/framebuf.html?highlight=ellipse#framebuf.FrameBuffer.poly) that is available in 1.19 and higher
-
-![Face With Eyebrows](../img/face-with-eyebrows.jpg)
-
-```py
 '''
 Test of the MicroPython framebuf poly drawing function
 
@@ -59,33 +52,39 @@ phm = 18 # puple horizontal movement
 eye_dist_from_top = 25
 eyeWidth = 27
 eyeWidth_half = int(eyeWidth/2)
-eyeHeight = 7
+eyeHeight = 6
 mouth_vpos = 40
 mouth_width = 40
 pupil_width = 5
 
-left_eyebrow  = array('h', [-eyeWidth_half,-1,      15,-5, eyeWidth_half+10,1,  15,-2])
-right_eyebrow = array('h', [-eyeWidth_half-10, 1,  -15,-5, eyeWidth_half,0,    -15,-2])
 
-def draw_eye(x):
+def draw_eye(x, p):
     oled.ellipse(x, eye_dist_from_top, eyeWidth, eyeHeight, ON, FILL)
     # draw a black pupil on the white eye
-    oled.ellipse(x, eye_dist_from_top, pupil_width, pupil_width, OFF, FILL)
+    oled.ellipse(x+p, eye_dist_from_top, pupil_width, pupil_width, OFF, FILL)
 
 
-def draw_face(eye_direction):
+# parameter is eyebrow raise
+def draw_face(p):
     
     # draw_face_grid()
     start = ticks_us()
     # left eye
-    draw_eye(QUARTER_WIDTH)
+    draw_eye(QUARTER_WIDTH, 0)
     
-    # eyebrow
-    oled.poly(QUARTER_WIDTH,eye_dist_from_top-10, left_eyebrow, ON, FILL)
+    
+    # left eyebrow
+    # left point -eyeWidth_half,-1
+    left_eyebrow  = array('h', [-eyeWidth_half,-1,      15,-5-p,     eyeWidth_half+10,1,   15+p,-2])
+    oled.poly(QUARTER_WIDTH, eye_dist_from_top-10, left_eyebrow, ON, FILL)
     
     # right eye
-    draw_eye(QUARTER_WIDTH*3)
-    oled.poly(QUARTER_WIDTH*3,eye_dist_from_top-10, right_eyebrow, ON, FILL)
+    draw_eye(QUARTER_WIDTH*3, 0)
+    
+    # right eyebrow
+    # left point -eyeWidth_half-10, 1
+    right_eyebrow = array('h', [-eyeWidth_half-10, 1,    -15,-5-p,    eyeWidth_half,0,    -15-p,-2])
+    oled.poly(QUARTER_WIDTH*3, eye_dist_from_top-10, right_eyebrow, ON, FILL)
     
     # draw mouth
     # draw bottom half by doing a bitwise and of 8 and 4
@@ -95,9 +94,12 @@ def draw_face(eye_direction):
     # oled.text(str(drawTime), 0, bottom_row_text_vpos)
     oled.show()
     
-# outline box
+while True:
+    # create a parameter and make it range from 0 to 9
+    for p in range(-3,5):
+        oled.fill(0)
+        oled.rect(0,0, WIDTH, HEIGHT, 1)
+        draw_face(p)
+        sleep(.2)
 
-oled.fill(0)
-oled.rect(0,0, WIDTH, HEIGHT, 1)
-draw_face(0)
-```
+
