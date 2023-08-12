@@ -16,10 +16,10 @@ nav:
     - Basic Face Layouts: lessons/basic-face-layouts.md
     - Eye Scanner: lessons/eye-scanner.md
     - Interactions: lessons/interactions.md
-    - lessons/blit-commands.md
-    - lessons/multiple-threads.md
-    - lessons/eyebrows.md
-
+    - Eyebrows: lessons/eyebrows.md
+    - Emotion Types: emotion-types.md
+    # - lessons/blit-commands.md
+    # - lessons/multiple-threads.md
   - parts-lists.md
   - about.md
   - Contact: contact.md
