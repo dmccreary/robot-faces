@@ -1,4 +1,4 @@
-from rotary import Rotary
+from rotary_irq_rp2 import RotaryIRQ
 import utime as time
 from machine import Pin
 
@@ -23,39 +23,36 @@ CS = machine.Pin(6)
 spi=machine.SPI(0, sck=clock, mosi=data)
 oled = ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, DC, RES, CS)
    
-# GPIO Pins 16 and 17 are for the encoder pins. 22 is the button press switch.
-rotary = Rotary(14, 15, 13)
-rotary_val = 10
+PIN_NUM_CLK = 14
+PIN_NUM_DATA = 15
+# defauls are for pull up input pins and bounded ranges
+# note there is a bug in the ellipse() function that hangs if a radius is 0
+r = RotaryIRQ(pin_num_clk=PIN_NUM_CLK,
+              pin_num_dt=PIN_NUM_DATA,
+              min_val=1,
+              max_val=45)
 
-def rotary_changed(change):
-    global rotary_val
-    if change == Rotary.ROT_CW:
-        rotary_val += 1
-        print('+ ', rotary_val)
-    elif change == Rotary.ROT_CCW:
-        rotary_val -= 1
-        print('- ', rotary_val)
-    elif change == Rotary.SW_PRESS:
-        print('PRESS')
-    elif change == Rotary.SW_RELEASE:
-        print('RELEASE')
-    if rotary_val < 1:
-        rotary_val = 1
-    if rotary_val > 49:
-        rotary_val = 49
-
-rotary.add_handler(rotary_changed)
+val_old = HALF_WIDTH
 
 def update_display(counter, rotary_val):
     oled.fill(0)
-    oled.text('Rotary Lab', 0, 0)
-    oled.text(str(rotary_val), 0, 10)
+    
+    if rotary_val > 32:
+        color = 0
+    else:
+        color = 1
     oled.ellipse(HALF_WIDTH, HALF_HEIGHT, int(rotary_val*2), rotary_val, 1, 1)
-    oled.text(str(counter), 0, 54)
+    oled.text('Rotary Lab', 0, 0, color)
+    oled.text(str(rotary_val), 0, 10, color)
+    oled.text(str(counter), 0, 54, color)
     oled.show()
 
 counter = 0
 while True:
+    rotary_val = r.value()
+    if val_old != rotary_val:
+        val_old = rotary_val
+        print('result =', rotary_val)
     update_display(counter, rotary_val)
     led.toggle()
     sleep(.1)
