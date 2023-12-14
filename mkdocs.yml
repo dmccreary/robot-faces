@@ -33,11 +33,11 @@ theme:
   palette:
     primary: '#642580'
     accent: '#41BAC1'
-  custom_dir: 'theme'
   include_sidebar: true
+  features:
+    - content.code.copy
 plugins:
   - search
-  # - mermaid2 - takes too long to build - use a screen image for now
 markdown_extensions:
   - admonition
   - pymdownx.details
