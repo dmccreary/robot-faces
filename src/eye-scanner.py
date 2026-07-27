@@ -22,9 +22,9 @@ FILL = 1
 
 clock=Pin(2) #SCL
 data=Pin(3) #SDA
-RES = machine.Pin(4)
-DC = machine.Pin(5)
-CS = machine.Pin(6)
+RES = machine.Pin(13)
+DC = machine.Pin(14)
+CS = machine.Pin(15)
 
 spi=machine.SPI(0, sck=clock, mosi=data)
 oled = ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, DC, RES, CS)
