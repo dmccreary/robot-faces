@@ -1,7 +1,7 @@
 ---
 title: Course Description for Course Robot Faces
 description: A detailed course description for Robot Faces including overview, topics covered and learning objectives in the format of the 2001 Bloom Taxonomy
-quality_score: 97
+quality_score: 98
 ---
 
 # Course Description
@@ -57,6 +57,14 @@ eyes as their primary emotional interface.
 - The psychology and research behind robot facial expression design: Paul Ekman's universal
   emotions, minimal-feature robotic face research, and how commercial social robots design
   expressive eyes
+- The history of low-cost, screen-based robot faces, including four pioneering commercial robots
+  — Anki's Cozmo (2016) and Vector (2018), Emotix's Miko (2017), and Blue Frog Robotics' Buddy
+  (announced 2015) — and what their designs and business outcomes teach about scoping a robot
+  face project
+- The version history of MicroPython's `framebuf` drawing support, tracing when `blit()` gained
+  cross-format palette support (v1.17, 2021), when `ellipse()` and `poly()` were merged into
+  MicroPython's development branch (August 2022) and later shipped in the first official stable
+  release to include them (v1.20.0, April 2023), and a later bug fix (v1.24.1, 2024)
 - Designing a core emotion set: neutral, happy, sad, angry, afraid, surprised, tired, stern, and
   disgust, plus recognizing common variations (e.g., confused, sleepy, excited)
 - Animating expressions: blinking, eye/pupil movement (gaze), timing loops, and interpolating
@@ -96,6 +104,12 @@ After completing this course, students will be able to:
   a Raspberry Pi Pico.
 - Recall Paul Ekman's set of universal human emotions and the additional expressions (tired,
   stern) commonly added to robot face designs.
+- Recall the company, approximate release year, and price of each of the four pioneering
+  screen-faced robots studied in this course (Anki Cozmo, Anki Vector, Emotix Miko, and Blue Frog
+  Robotics Buddy).
+- Recall the MicroPython version (v1.20.0) in which `ellipse()` and `poly()` first became part of
+  an official stable release, and the version (v1.17) in which `blit()` first supported
+  cross-format palettes.
 
 ### Understand
 
@@ -108,8 +122,10 @@ communication.*
   (eyes, eyebrows, mouth) is enough for people to correctly identify an emotion.
 - Describe the difference between a 1-bit monochrome frame buffer and an RGB565 color frame
   buffer, and why this affects both memory use and drawing speed.
-- Compare how two or more commercial social robots (e.g., Cozmo, Vector, Miko) use screen-based
-  eyes to express emotion.
+- Compare how two or more commercial social robots (e.g., Cozmo, Vector, Miko, Buddy) use
+  screen-based eyes to express emotion.
+- Explain why MicroPython's `ellipse()` and `poly()` functions were unavailable to hobbyists until
+  2023, and how earlier projects had to approximate curved and angled shapes without them.
 
 ### Apply
 
@@ -148,6 +164,8 @@ to an overall structure or purpose.*
   from the clarity of an expression on a low-resolution display.
 - Assess the trade-off between drawing complexity/frame rate and expressiveness on a
   resource-constrained microcontroller, and justify a design decision based on that trade-off.
+- Evaluate whether a face design remains clearly readable at typical classroom viewing distance
+  and under normal classroom lighting, on both the monochrome and color displays.
 
 ### Create
 

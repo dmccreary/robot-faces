@@ -1,0 +1,294 @@
+ConceptID,ConceptLabel,Dependencies,TaxonomyID
+1,Raspberry Pi Pico,2,HWFND
+2,RP2040 Microcontroller,3,HWFND
+3,Microcontroller,,HWFND
+4,Cytron Maker Pi RP2040,1,HWFND
+5,Solderless Breadboard,,HWFND
+6,Jumper Wires,,HWFND
+7,Momentary Push Button,,HWFND
+8,Potentiometer,,HWFND
+9,Rotary Encoder,,HWFND
+10,SPI Interface,,HWFND
+11,I2C Interface,,HWFND
+12,SPI Clock Line,10,HWFND
+13,SPI Data Line,10,HWFND
+14,Chip Select Pin,10,HWFND
+15,Data Command Pin,10,HWFND
+16,Display Reset Pin,10,HWFND
+17,128x64 Monochrome OLED,10,HWFND
+18,SSD1306 Display Driver,17|12|13|14|11,HWFND
+19,240x240 Color Round Display,10,HWFND
+20,GC9A01 Display Driver,19|12|13|14|16,HWFND
+21,Pull-Up Resistor,7,HWFND
+22,Low-Cost Robotics Kit,1|17|19,HWFND
+23,Breadboard Wiring Diagram,5|6|1,HWFND
+24,Display Power Requirements,17|19,HWFND
+25,Display Mounting Considerations,17|19,HWFND
+26,Screen-Based Robot Face,,HIST
+27,Social Robot,26,HIST
+28,Anki Cozmo,26|27,HIST
+29,Anki Vector,28,HIST
+30,Emotix Miko,26|27,HIST
+31,Blue Frog Robotics Buddy,26|27,HIST
+32,Cozmo Emotion Engine,28,HIST
+33,Vector Companion App,29,HIST
+34,Miko Educational Robot Design,30,HIST
+35,Buddy Mobile Robot Base,31,HIST
+36,Robot Startup Funding,28,HIST
+37,Robot Product Discontinuation,29|36,HIST
+38,Crowdfunding Campaign,31,HIST
+39,Robot Commercial Outcome,28|29|30|31,HIST
+40,Robot Face Design Scoping,35|39,HIST
+41,Companion Robot Category,30|31,HIST
+42,Mass-Market Robot Toy,28,HIST
+43,Robot Voice Interaction,29,HIST
+44,Robot Business Case Study,36|37|38|39,HIST
+45,Hardware Cost Trade-Off,22|39,HIST
+46,Anki Company History,28|29|37,HIST
+47,Consumer Robotics Market,42|41,HIST
+48,Robot Personality Branding,32|33,HIST
+49,Screen As Face Metaphor,26|32,HIST
+50,Educational Robotics Market,34|47,HIST
+51,MicroPython,1,MPYFN
+52,Thonny IDE,51,MPYFN
+53,MicroPython REPL,51|52,MPYFN
+54,Variable,51,MPYFN
+55,Constant,54,MPYFN
+56,Data Type,54,MPYFN
+57,Integer Data Type,56,MPYFN
+58,Boolean Data Type,56,MPYFN
+59,Function Definition,54|64,MPYFN
+60,Function Parameter,59,MPYFN
+61,Function Return Value,59,MPYFN
+62,For Loop,54,MPYFN
+63,While Loop,54,MPYFN
+64,Conditional Statement,58|71,MPYFN
+65,Import Statement,66,MPYFN
+66,Module,51,MPYFN
+67,List Data Structure,56|54,MPYFN
+68,Tuple Data Structure,67,MPYFN
+69,Dictionary Data Structure,67,MPYFN
+70,Comment Syntax,,MPYFN
+71,Indentation Rules,,MPYFN
+72,Bitwise Operator,57,MPYFN
+73,Bit Shifting,72,MPYFN
+74,FrameBuf Module,65|66,MPYFN
+75,String Formatting,56,MPYFN
+76,Default Parameter Value,60,MPYFN
+77,Multiple Return Values,61|68,MPYFN
+78,Global Versus Local Scope,59|54,MPYFN
+79,Docstring Convention,59|70,MPYFN
+80,Screen Coordinate System,84,DISPC
+81,Origin At Upper-Left,80,DISPC
+82,X Axis Direction,80,DISPC
+83,Y Axis Direction,80,DISPC
+84,Pixel,,DISPC
+85,Frame Buffer,84|74,DISPC
+86,Display Resolution,84|17|19,DISPC
+87,Monochrome Color Model,84|17,DISPC
+88,Display Buffer Memory,85,DISPC
+89,Screen Refresh Cycle,85,DISPC
+90,Aspect Ratio,86,DISPC
+91,Circular Display Geometry,19|80,DISPC
+92,Coordinate Plane Quadrant,80|81|82|83,DISPC
+93,Bounding Box,80|86,DISPC
+94,Display Initialization,18|20|53,DISPC
+95,Show Method,85|94,DISPC
+96,Frame Buffer Size Calculation,85|86|97,DISPC
+97,Bit Depth,87,DISPC
+98,Byte Alignment In Buffer,85|97,DISPC
+99,Fill Method,85|110,PRIM
+100,Horizontal Line Method,85|110,PRIM
+101,Vertical Line Method,85|110,PRIM
+102,Line Method,100|101,PRIM
+103,Rectangle Method,100|101,PRIM
+104,Filled Rectangle Method,103|99,PRIM
+105,Scroll Method,85,PRIM
+106,Blit Method,85|113,PRIM
+107,Transparent Color Key,106,PRIM
+108,Blit Palette Mapping,106|87,PRIM
+109,Pixel Method,85|84,PRIM
+110,Drawing Color Value,87,PRIM
+111,Drawing Constants,110|55,PRIM
+112,Sprite,113,PRIM
+113,Bitmap,84|114,PRIM
+114,Unsigned Byte Array,67,PRIM
+115,Text Method,85|110,PRIM
+116,Draw Order Layering,99|103,PRIM
+117,Overdraw,116,PRIM
+118,Clipping At Screen Edge,86|109,PRIM
+119,Draw Call Order Optimization,116,PRIM
+120,Ellipse Method,99|103|110,SHAPE
+121,Quadrant Fill Code,120,SHAPE
+122,Ellipse Radius Parameter,120,SHAPE
+123,Filled Versus Outlined Shape,120|104,SHAPE
+124,Poly Method,102|110,SHAPE
+125,Point Array,114|124,SHAPE
+126,Polygon Vertex,125,SHAPE
+127,Closed Polygon Path,126,SHAPE
+128,Convex Polygon,127,SHAPE
+129,Concave Polygon,127,SHAPE
+130,Approximating Curves With Lines,102|120,SHAPE
+131,Circle As Special Ellipse,120|122,SHAPE
+132,Triangle Eyebrow Shape,124|126,SHAPE
+133,Rounded Rectangle Approximation,103|120,SHAPE
+134,Anti-Aliasing Limitation,87|120,SHAPE
+135,FrameBuf Version Timeline,74,FBVER
+136,Blit Cross-Format Support V1.17,106|108|135,FBVER
+137,Framebuf Method Set Before V1.20,135|99|103|105|106,FBVER
+138,Ellipse Poly Dev Branch Merge,120|124|137,FBVER
+139,Nightly Build Firmware,138,FBVER
+140,MicroPython V1.20.0 Release,138|139,FBVER
+141,Ellipse Bug Fix V1.24.1,140|122,FBVER
+142,Pre-2023 Curve Workaround,130|137,FBVER
+143,MicroPython Release Versioning,135,FBVER
+144,MicroPython Firmware Update,143|140,FBVER
+145,Open Source Contribution Model,138|146,FBVER
+146,MicroPython GitHub Repository,135,FBVER
+147,Face Outline,120|124|80,ANAT
+148,Eye Placement,147|92,ANAT
+149,Eye Size Parameter,148|122,ANAT
+150,Eye Spacing,148,ANAT
+151,Pupil,149|120,ANAT
+152,Pupil Size Parameter,151|122,ANAT
+153,Eyebrow Shape,147|132,ANAT
+154,Eyebrow Angle Parameter,153,ANAT
+155,Mouth Shape,147|120|124,ANAT
+156,Mouth Curvature Parameter,155|121,ANAT
+157,Bottom-Half Mouth Curve,156|121,ANAT
+158,Nose Representation,147|124,ANAT
+159,Facial Symmetry,148|153|155,ANAT
+160,Facial Proportion,147|90,ANAT
+161,Draw Face Function,147|148|151|153|155|59,ANAT
+162,Parameterized Face Design,161|60,ANAT
+163,Face Layout Grid,147|92,ANAT
+164,Feature Independence,162|147,ANAT
+165,Eyelid Representation,121|148,ANAT
+166,Cheek Representation,147|120,ANAT
+167,Face State Data Structure,162|69,ANAT
+168,Default Face Parameters,162|76,ANAT
+169,Feature Scaling For Screen Size,162|86,ANAT
+170,Ekman Universal Emotions,,EMOT
+171,Basic Emotion Theory,170,EMOT
+172,Facial Action Coding,170,EMOT
+173,Minimal Feature Robot Research,172|26,EMOT
+174,Emotion Recognition Accuracy,173,EMOT
+175,Neutral Expression,161|170,EMOT
+176,Happy Expression,175|153|155,EMOT
+177,Sad Expression,175|153|155,EMOT
+178,Angry Expression,175|153|155,EMOT
+179,Afraid Expression,175|148|155,EMOT
+180,Surprised Expression,175|148|153,EMOT
+181,Disgusted Expression,175|155,EMOT
+182,Contempt Expression,175|155,EMOT
+183,Tired Expression,175|165,EMOT
+184,Stern Expression,175|153,EMOT
+185,Sleepy Expression,183|165,EMOT
+186,Confused Expression,175|153,EMOT
+187,Excited Expression,175|180,EMOT
+188,Expression Intensity,176|178,EMOT
+189,Expression Ambiguity,186|188,EMOT
+190,Eyebrow Emotion Signaling,176|177|178|180,EMOT
+191,Mouth Emotion Signaling,176|177|181,EMOT
+192,Eye Emotion Signaling,179|151,EMOT
+193,Cross-Cultural Recognition,171|174,EMOT
+194,Human-Robot Interaction,27|173,EMOT
+195,Emotional Design Rubric,188|189,EMOT
+196,Viewing Distance Readability,86|188,EMOT
+197,Classroom Lighting Consideration,87|196,EMOT
+198,Valence Arousal Model,171,EMOT
+199,Uncanny Valley Effect,200|27,EMOT
+200,Anthropomorphism,27|174,EMOT
+201,Affective Computing,174|194,EMOT
+202,Multimodal Emotion Cues,190|191|192,EMOT
+203,Animation Loop,161|63,ANIM
+204,Frame Rate,89|203,ANIM
+205,Blinking Animation,203|165,ANIM
+206,Eye Scanner Animation,203|151,ANIM
+207,Pupil Movement Gaze,203|151,ANIM
+208,Timing Loop,203,ANIM
+209,Sleep Function Timing,208,ANIM
+210,Expression Interpolation,203|188,ANIM
+211,Easing Function,210,ANIM
+212,Idle Animation,205|207,ANIM
+213,Animation State Timer,208|209,ANIM
+214,Ticks Function Timing,209,ANIM
+215,Ticks Diff Calculation,214,ANIM
+216,Draw Time Benchmarking,215|106,ANIM
+217,Frame Buffer Redraw Rate,204|216,ANIM
+218,Flicker Reduction,217,ANIM
+219,Double Buffering,218|85,ANIM
+220,Animation Keyframe,210|213,ANIM
+221,Randomized Blink Timing,205|209,ANIM
+222,Smooth Transition Design,210|211,ANIM
+223,State-Based Animation Trigger,212|234,ANIM
+224,Non-Blocking Delay Pattern,209|213,ANIM
+225,Cooperative Multitasking,224|240,ANIM
+226,Digital Input Reading,7,INTER
+227,Analog Input Reading,8,INTER
+228,Analog-To-Digital Conversion,227,INTER
+229,Button Debounce,226|248,INTER
+230,Button Interrupt Handler,226|238,INTER
+231,Potentiometer Value Mapping,228|60,INTER
+232,Rotary Encoder Position Tracking,9|249,INTER
+233,Encoder Direction Detection,232,INTER
+234,Mode State Machine,242|246,INTER
+235,Multi-Mode Menu,234|236,INTER
+236,Expression Selection Menu,175|234,INTER
+237,Live Parameter Tuning,231|162|233,INTER
+238,Event-Driven Programming,64,INTER
+239,Polling Input Loop,226|208,INTER
+240,Dual-Core Processing,3,INTER
+241,Core Task Assignment,240,INTER
+242,Global State Variable,78,INTER
+243,Input Debouncing Delay,229|208,INTER
+244,User Interface Feedback,236|205,INTER
+245,Control Mapping Design,231|237,INTER
+246,State Transition Diagram,64,INTER
+247,Default Idle State,234|212,INTER
+248,Debounce Time Constant,226,INTER
+249,Encoder Quadrature Signal,9,INTER
+250,RGB565 Color Model,87|97,COLOR
+251,Color565 Function,250|60,COLOR
+252,Red Green Blue Channels,250,COLOR
+253,Color Bit Depth,250|97,COLOR
+254,Color Palette,250|108,COLOR
+255,Named Color Constants,251|55,COLOR
+256,Color Wheel Function,251|268,COLOR
+257,Color Cycling Animation,256|203,COLOR
+258,Round Display Layout,91|20,COLOR
+259,Color Versus Mono Trade-Off,250|87,COLOR
+260,Display Driver Porting,18|20|94,COLOR
+261,Cross-Display Code Compatibility,260|162,COLOR
+262,Color Contrast Design,250|196,COLOR
+263,Color Emotion Association,250|195,COLOR
+264,Display Performance Comparison,216|20,COLOR
+265,Memory Use Comparison,88|250,COLOR
+266,SPI Bus Speed,10|264,COLOR
+267,Color Display Init Sequence,20|94,COLOR
+268,Color Theory Basics,252,COLOR
+269,Warm Versus Cool Color,268,COLOR
+270,Hue Saturation Brightness,268,COLOR
+271,Computational Thinking,,CTCAP
+272,Abstraction,271|162,CTCAP
+273,Decomposition,271|147,CTCAP
+274,Modularity,271|161,CTCAP
+275,Pattern Recognition,271|188,CTCAP
+276,Algorithm Design,271|203,CTCAP
+277,Code Reuse,271|106,CTCAP
+278,Design Critique,195,CTCAP
+279,Design Trade-Off Analysis,259|45,CTCAP
+280,Expressiveness Versus Complexity,279|216,CTCAP
+281,Software Display Emulator,94|53,CTCAP
+282,Turtle Graphics Prototype,281|124,CTCAP
+283,Iterative Design Process,278|272,CTCAP
+284,Peer Design Review,278,CTCAP
+285,Rubric-Based Assessment,195|284,CTCAP
+286,Constraint-Driven Design,45|280,CTCAP
+287,Minimum Viable Feature Set,273|286,CTCAP
+288,Capstone Project,161|203|234|251|278|287,CTCAP
+289,Capstone Demonstration,288,CTCAP
+290,Original Robot Personality,288|195,CTCAP
+291,Project Documentation,288|79,CTCAP
+292,Design Justification,288|278,CTCAP
+293,Expression Set Planning,288|202,CTCAP

@@ -7,8 +7,27 @@ repo_url: 'https://github.com/dmccreary/robot-faces'
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
+  - Chapters:
+    - List of Chapters: chapters/index.md
+    - 1. Hardware & Electronics Foundations: chapters/01-hardware-electronics-foundations/index.md
+    - 2. A History of Screen-Based Robot Faces: chapters/02-history-of-robot-faces/index.md
+    - "3. MicroPython Fundamentals I: Syntax, Data & Loops": chapters/03-micropython-fundamentals-1/index.md
+    - "4. MicroPython Fundamentals II: Functions & the FrameBuf Module": chapters/04-micropython-fundamentals-2/index.md
+    - 5. Display & Coordinate Systems: chapters/05-display-coordinate-systems/index.md
+    - 6. Basic Drawing Primitives: chapters/06-basic-drawing-primitives/index.md
+    - 7. Ellipse & Polygon Drawing: chapters/07-ellipse-polygon-drawing/index.md
+    - 8. A History of MicroPython's FrameBuf Drawing Support: chapters/08-framebuf-version-history/index.md
+    - 9. Facial Anatomy & Layout Design: chapters/09-facial-anatomy-layout-design/index.md
+    - 10. Emotion Theory & the Core Expression Set: chapters/10-emotion-theory-core-expressions/index.md
+    - 11. Expression Design, Readability & Human-Robot Interaction: chapters/11-expression-design-readability-hri/index.md
+    - "12. Animating Expressions: Timing & Motion": chapters/12-animating-expressions/index.md
+    - "13. Interactive Controls: Inputs & Concurrency": chapters/13-interactive-controls-inputs/index.md
+    - 14. Building an Expression Menu & Live Controls: chapters/14-expression-menu-live-controls/index.md
+    - 15. Porting Faces to a Color Display: chapters/15-porting-faces-color-display/index.md
+    - 16. Computational Thinking & Capstone Design: chapters/16-computational-thinking-capstone/index.md
   - Lessons:
     - Introduction: lessons/index.md
+    - History of Robot Faces: lessons/history-of-robot-faces.md
     - Screen Coordinates: lessons/screen-coordinates.md
     - Basic Drawing Commands: lessons/drawing-commands.md
     - Ellipse: lessons/ellipse.md
@@ -24,8 +43,13 @@ nav:
   - about.md
   - Course Description: course-description.md
   - Learning Graph:
+    - Introduction: learning-graph/index.md
     - Starting Concept List: learning-graph/starting-concept-list.md
     - Course Description Assessment: learning-graph/course-description-assessment.md
+    - Concept List: learning-graph/concept-list.md
+    - Quality Metrics: learning-graph/quality-metrics.md
+    - Concept Taxonomy: learning-graph/concept-taxonomy.md
+    - Taxonomy Distribution: learning-graph/taxonomy-distribution.md
   - Contact: contact.md
   - Glossary: glossary.md
 # CoderDojo Microsite Standards from here down
