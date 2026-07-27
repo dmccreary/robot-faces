@@ -2,7 +2,7 @@
 title: Hardware & Electronics Foundations
 description: An introduction to the microcontrollers, breadboards, input controls, communication buses, and displays used to build a low-cost robot face.
 generated_by: claude skill chapter-content-generator
-date: 2026-07-27 07:02:01
+date: 2026-07-27 10:43:24
 version: 0.09
 ---
 
@@ -50,6 +50,19 @@ This chapter assumes only the prerequisites listed in the [course description](.
 
 ## Welcome to Robot Faces
 
+!!! mascot-welcome "Hi! I'm Pixel."
+    ![Pixel waves hello](../../img/mascot/welcome.png){ class="mascot-admonition-img" }
+    Welcome to Robot Faces! I'm **Pixel**, a round-face robot whose entire body is a circular screen — the same kind of display you're about to learn to program. I'll pop up in the margins throughout this book, but never just for decoration. I have exactly six jobs, and you can tell which one I'm doing by my pose:
+
+    1. **Welcome you** at the start of every chapter — that's what I'm doing right now.
+    2. **Help you think** through a key concept when an idea is worth pausing on.
+    3. **Give you a tip** — a practical trick a robot builder would know.
+    4. **Warn you gently** about a mistake that's easy to make and costly to fix.
+    5. **Encourage you** when the material gets genuinely tricky.
+    6. **Celebrate with you** when you finish a big section or a whole chapter.
+
+    That's it. If I'm not doing one of those six things, I'm not in the chapter. Every pixel tells a story — let's go build some faces!
+
 Welcome to Robot Faces. Over the chapters ahead, you will write MicroPython programs that turn a small screen into a character with a personality — eyes that blink, eyebrows that arch in surprise, and a mouth that curls into a smile or flattens into a frown. You will work with two low-cost displays: a 128x64 monochrome OLED about the size of a postage stamp, and a 240x240 color round display shaped like a smartwatch face. Both run on the same $4 microcontroller, so the drawing skills you learn on one display carry over almost unchanged to the other.
 
 Before any of that drawing code can run, though, the physical hardware has to be connected and working. This chapter is a tour of every component in a robot-face kit: the microcontroller that runs your programs, the breadboard and wires that hold the circuit together, the buttons and dials students use to control a face, and the wiring that lets a tiny chip talk to a display. Nothing here involves programming yet — that begins in Chapter 3. Your job in this chapter is to learn what each part does and how it connects to the others, so that when the code arrives, you already understand the hardware underneath it.
@@ -57,6 +70,10 @@ Before any of that drawing code can run, though, the physical hardware has to be
 ## The Brains of the Operation: Microcontrollers
 
 Every robot face in this book needs something to run its program, store the shapes it draws, and send pixels to a screen. That job belongs to a **microcontroller**: a complete, small computer built onto a single chip, combining a processor, memory, and input/output pins that connect to the outside world. Unlike the processor inside a laptop, a microcontroller has no operating system managing windows or web browsers. It runs one program continuously and is designed to control physical devices such as motors, sensors, and displays.
+
+!!! mascot-thinking "One Chip, One Job"
+    ![Pixel thinks it through](../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    Here's the idea to hold onto: a microcontroller isn't a tiny laptop — it's built to do one job, over and over, forever. That's exactly what a robot face needs: a chip that never stops redrawing your expressions.
 
 The specific microcontroller chip used throughout this book is the **RP2040**, designed by Raspberry Pi Ltd. The RP2040 contains two processor cores, so it can run two independent tasks — such as animating a face while reading a button — at nearly the same time. It also includes 264 kilobytes of built-in memory, enough to hold the frame buffers for both target displays, along with hardware support for SPI and I2C communication and dozens of general-purpose input/output (GPIO) pins for connecting buttons, sensors, and screens.
 
@@ -98,6 +115,10 @@ Later chapters use physical controls to let a user switch between a robot's expr
 A **momentary push button** is a simple switch that closes a circuit only while it is physically held down, and opens again the instant it is released — unlike a toggle switch, which stays in whatever position it was last moved to. Wired to a GPIO pin, a momentary push button lets a program detect a single press, such as "advance to the next expression."
 
 Push buttons create a wiring problem: when the button is not pressed, the GPIO pin it connects to is left electrically **floating**, meaning it is connected to nothing solid, and a floating pin can read as a random, flickering mix of HIGH and LOW. A **pull-up resistor** solves this by connecting the pin to the board's 3.3-volt supply through a resistor, commonly rated at 10 kilo-ohms, so the pin reads a steady HIGH when the button is open and only drops to LOW when the button is pressed and connects the pin directly to ground. The RP2040 includes built-in pull-up resistors that a MicroPython program can enable in software, so many circuits in this book need no external resistor at all.
+
+!!! mascot-encourage "Floating Pins Trip Up Everyone at First"
+    ![Pixel cheers you on](../../img/mascot/encouraging.png){ class="mascot-admonition-img" }
+    If "a pin can float and read randomly" sounds strange, you're in good company — every robot builder finds this counterintuitive the first time. Play with the simulator below until the flicker makes sense, and it will click.
 
 A **potentiometer** is a variable resistor with a rotating knob or sliding lever. As the knob turns, it divides the board's voltage into a smaller output voltage that changes smoothly between 0 and 3.3 volts. Read through one of the RP2040's analog input pins, a potentiometer gives a program a continuous value — ideal for letting a student smoothly adjust something like the width of a smile.
 
@@ -160,6 +181,10 @@ The Pico does not draw pixels on a display directly — it sends a stream of com
 The **SPI (Serial Peripheral Interface)** is a high-speed communication bus that uses separate wires for clock and data, plus one dedicated wire per connected device. SPI is the faster of the two buses covered in this book, and both target displays communicate over it, which is why the wiring diagrams throughout this book center on SPI connections.
 
 The **I2C (Inter-Integrated Circuit) interface** is a slower, two-wire alternative bus that shares a single data wire and a single clock wire among every connected device, distinguishing devices by a unique numeric address instead of a dedicated wire. Because I2C needs only two signal wires no matter how many devices share the bus, it is popular for sensors, and many OLED breakout boards — including some versions of the 128x64 display used in this book — can be wired for either SPI or I2C mode depending on how their driver chip is configured.
+
+!!! mascot-thinking "Same Idea, Different Wiring"
+    ![Pixel thinks it through](../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    SPI and I2C are both just agreed-upon patterns for wiring a conversation between chips — nothing about them is magic. Once you see one bus as "more wires, faster" and the other as "fewer wires, shared," you'll recognize both in any hardware you meet later.
 
 Because wire count is the clearest practical difference between the two buses, the interactive diagram below lets you switch between an SPI wiring view and an I2C wiring view and click each wire to see what it carries.
 
@@ -254,7 +279,8 @@ A display is the most fragile and often the most expensive part of a robot-face 
 
 Both displays in this book expect **3.3 volts** for power, the same voltage the Pico's GPIO pins and internal logic use — never the 5 volts available on the Pico's VBUS pin. Applying 5 volts directly to a 3.3-volt-only display can permanently damage its driver chip, so every wiring diagram in this book connects a display's power wire to the Pico's 3V3 output pin, not VBUS. This requirement is what the concept **Display Power Requirements** refers to throughout the rest of the book.
 
-!!! warning "Check the voltage before you power on"
+!!! mascot-warning "Check the Voltage Before You Power On"
+    ![Pixel warns you](../../img/mascot/warning.png){ class="mascot-admonition-img" }
     Before connecting power to any display for the first time, trace the red wire back to its source pin and confirm it reads 3V3, not VBUS or VSYS. A single mis-wired power connection is the most common way to destroy a display permanently, and displays are the most expensive part of the kit to replace.
 
 Because both displays are thin, glass-fronted modules with a delicate ribbon or pin connection to their circuit board, how a display is physically mounted matters almost as much as how it is wired. Keep the following **display mounting considerations** in mind as you build an enclosure for a robot face:
@@ -339,6 +365,10 @@ You now know every physical component used in this book's robot-face projects, f
 - The SSD1306 driver runs the 128x64 monochrome OLED, and the GC9A01 driver runs the 240x240 color round display; both speak SPI using the same five-wire pattern.
 - Displays must be powered at 3.3 volts, never 5 volts, and mounted by their board edges rather than their screens.
 - A complete robot-face kit built from these parts costs well under $30, which is what makes a one-kit-per-student classroom realistic.
+
+!!! mascot-celebration "You Just Met Your Whole Toolkit!"
+    ![Pixel celebrates](../../img/mascot/celebration.png){ class="mascot-admonition-img" }
+    Every wire, chip, and display in this book just introduced itself to you — that's the entire hardware foundation, done. Chapter 2 takes a quick look at where screen-based robot faces came from before Chapter 3 puts this hardware to work in code.
 
 ??? question "Self-Check: Which wire is which? — Click to reveal"
     On the SPI wiring diagram, the wire that tells the display driver whether an incoming byte is a command or pixel data is the Data Command (DC) pin — on this book's OLED wiring, that is Pico pin GP5.

@@ -50,6 +50,10 @@ nav:
     - Quality Metrics: learning-graph/quality-metrics.md
     - Concept Taxonomy: learning-graph/concept-taxonomy.md
     - Taxonomy Distribution: learning-graph/taxonomy-distribution.md
+    - Mascot Test: learning-graph/mascot-test.md
+  - Stories:
+    - Overview: stories/index.md
+    - "Bright Eyes, Closed Doors: Cozmo and Vector": stories/anki-cozmo-vector/index.md
   - Contact: contact.md
   - Glossary: glossary.md
 # CoderDojo Microsite Standards from here down
@@ -66,8 +70,11 @@ theme:
     - content.code.copy
 plugins:
   - search
+extra_css:
+  - css/mascot.css
 markdown_extensions:
   - admonition
+  - md_in_html
   - pymdownx.details
   - pymdownx.superfences
   - attr_list
@@ -79,4 +86,3 @@ extra:
     provider: google
     # https://analytics.google.com/analytics/web/#/a1420179p349994530/admin/streams/table/4433129821
     property: G-FPTNK1XNJR
-
