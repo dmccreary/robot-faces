@@ -22,6 +22,10 @@ nav:
     # - lessons/multiple-threads.md
   - parts-lists.md
   - about.md
+  - Course Description: course-description.md
+  - Learning Graph:
+    - Starting Concept List: learning-graph/starting-concept-list.md
+    - Course Description Assessment: learning-graph/course-description-assessment.md
   - Contact: contact.md
   - Glossary: glossary.md
 # CoderDojo Microsite Standards from here down
