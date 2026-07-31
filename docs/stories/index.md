@@ -12,7 +12,7 @@ larger question: what makes educational technology last?
 
 - **[Bright Eyes, Closed Doors](anki-cozmo-vector/index.md)**
 
-    <!-- ![Cozmo and Vector case study](./anki-cozmo-vector/cover.png) -->
+    ![Cozmo and Vector case study](./anki-cozmo-vector/cover.png)
 
     Anki's Cozmo and Vector made small robots feel astonishingly alive. Their
     expressive eyes, animation, and approachable coding tools inspired

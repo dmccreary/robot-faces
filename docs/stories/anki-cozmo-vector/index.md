@@ -10,7 +10,7 @@ social:
 
 # Bright Eyes, Closed Doors
 
-<!-- ![](./cover.png) -->
+![](./cover.png)
 <details>
 <summary>Cover Image Prompt</summary>
 (This is the Cover Image. Do not include this label in the image.)
@@ -64,7 +64,7 @@ around it is surprisingly fragile.
 
 ## Panel 1: The Little Robot Wakes
 
-<!-- ![](./panel-01.png) -->
+![](./panel-01.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 01. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in a polished late-2010s
@@ -90,7 +90,7 @@ and started seeing a character.
 
 ## Panel 2: Animation Becomes Personality
 
-<!-- ![](./panel-02.png) -->
+![](./panel-02.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 02. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same polished late-2010s
@@ -117,7 +117,7 @@ simple shapes, good timing, and careful observation of human emotion.
 
 ## Panel 3: A Door Opens—Partway
 
-<!-- ![](./panel-03.png) -->
+![](./panel-03.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 03. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same polished late-2010s
@@ -144,7 +144,7 @@ ownership of the firmware, app, hardware design, or long-term roadmap.
 
 ## Panel 4: Ms. Rivera Plans a Unit
 
-<!-- ![](./panel-04.png) -->
+![](./panel-04.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 04. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same polished late-2010s
@@ -170,7 +170,7 @@ still works when thirty students arrive at once.
 
 ## Panel 5: The More Independent Sibling
 
-<!-- ![](./panel-05.png) -->
+![](./panel-05.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 05. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same polished late-2010s
@@ -197,7 +197,7 @@ animation, and a social interface into a machine that fit in one hand.
 
 ## Panel 6: Makers Meet the Boundary
 
-<!-- ![](./panel-06.png) -->
+![](./panel-06.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 06. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same polished late-2010s
@@ -224,7 +224,7 @@ when an app aged, a service changed, or a company stopped answering.
 
 ## Panel 7: Rechargeable, but Not Renewable
 
-<!-- ![](./panel-07.png) -->
+![](./panel-07.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 07. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same polished late-2010s
@@ -252,7 +252,7 @@ from every student.
 
 ## Panel 8: Demo Day Becomes Troubleshooting Day
 
-<!-- ![](./panel-08.png) -->
+![](./panel-08.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 08. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same polished late-2010s
@@ -278,7 +278,7 @@ offline tools that a school could preserve for the next semester.
 
 ## Panel 9: The Mountain of Money
 
-<!-- ![](./panel-09.png) -->
+![](./panel-09.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 09. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same polished late-2010s
@@ -304,7 +304,7 @@ margin and continuing revenue to support the people and services behind it.
 
 ## Panel 10: The Lights Go Out
 
-<!-- ![](./panel-10.png) -->
+![](./panel-10.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 10. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same polished late-2010s
@@ -331,7 +331,7 @@ could not guarantee its continuation.
 
 ## Panel 11: The Community Keeps a Spark
 
-<!-- ![](./panel-11.png) -->
+![](./panel-11.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 11. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same polished late-2010s
@@ -359,7 +359,7 @@ original design.
 
 ## Panel 12: The Classroom Builds for Tomorrow
 
-<!-- ![](./panel-12.png) -->
+![](./panel-12.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 12. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same polished late-2010s
