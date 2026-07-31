@@ -41,6 +41,10 @@ display = ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, DC, RES, CS)
 
 You may have to modify the pin numbers if you are not using our standard layout.
 
+Combine this preamble with the drawing sequence above and here's what lights up on the display:
+
+![Sample output of the drawing sequence](sample-output.png)
+
 ## Fill
 
 ```display.fill(color)```
@@ -81,7 +85,7 @@ The line method draws the line up to a second set of coordinates
 
 ```display.ellipse(x, y, HORZ_RADIUS, VERT_RADIUS, COLOR, FILL_FLAG, QUAD_CODE)```
 
-There is a detailed lesson [here](./ellipse.md)
+There is a detailed lesson [here](../ellipse/index.md)
 
 ## Polygons
 
@@ -91,7 +95,7 @@ my_array = array('B', [10,0, 20,10, 0,10])
 oled.poly(0,0, my_array, ON, FILL)
 ```
 
-There is a detailed lesson [here](./polygon.md)
+There is a detailed lesson [here](../polygon/index.md)
 
 ## Scroll
 

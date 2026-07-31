@@ -27,7 +27,7 @@ The course description uses the 2001 Bloom taxonomy to order learning objectives
 We use generative AI to convert the course description into a [Concept List](./concept-list.md).
 Each concept is in the form of a short Title Case label with most labels under 32 characters long.
 The Robot Faces concept list contains 293 concepts, including individual nodes for each of the
-four pioneering commercial robots covered in the [History of Robot Faces](../lessons/history-of-robot-faces.md)
+four pioneering commercial robots covered in the [History of Robot Faces](../lessons/history-of-robot-faces/index.md)
 lesson (Anki Cozmo, Anki Vector, Emotix Miko, and Blue Frog Robotics Buddy) and for the granular
 milestones in MicroPython's `framebuf` version history (`blit()` palette support in v1.17, the
 `ellipse()` and `poly()` methods, their August 2022 development-branch merge, and their arrival in

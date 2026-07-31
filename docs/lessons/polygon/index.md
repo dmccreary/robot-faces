@@ -1,6 +1,6 @@
 # Drawing Polygons
 
-![](../img/polygons.jpg)
+![](../../img/polygons.jpg)
 
 ## Lesson Overview
 
@@ -45,7 +45,7 @@ oled.show()
 
 This will generate the following image:
 
-![Triangle](../img/triangle.jpg)
+![Triangle](../../img/triangle.jpg)
 
 ## Sample Polygons
 
@@ -149,6 +149,10 @@ oled.poly(0,0, my_array, ON, FILL)
 oled.show()
 
 ```
+
+Here is the output this program generates:
+
+![Sample output of the polygon shapes program](shapes-output.png)
 
 !!! Challenge
     1. Create a drawing with a rocket flying over a house

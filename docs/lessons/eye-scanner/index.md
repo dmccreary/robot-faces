@@ -1,6 +1,6 @@
 # Eye Scanner
 
-![](../img/eye-scanner.gif)
+![](../../img/eye-scanner.gif)
 
 ```py
 from machine import Pin
@@ -67,3 +67,9 @@ while True:
         draw_face(i)
         sleep(delay)
 ```
+
+## Sample Output
+
+One frame of the eye-scan animation looks like this:
+
+![One frame of the eye-scan animation](sample-output.png)

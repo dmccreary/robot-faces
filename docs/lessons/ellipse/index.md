@@ -43,7 +43,7 @@ oled.show()
 
 ## Ellipse Parameters
 
-![Ellipse Parameters](../img/ellipse-parameters.png)
+![Ellipse Parameters](../../img/ellipse-parameters.png)
 
 ```display.ellipse(x, y, HORZ_RADIUS, VERT_RADIUS, COLOR, FILL_FLAG, QUAD_CODE)```
 
@@ -55,7 +55,7 @@ The optional ```FILL_FLAG``` parameter can be set to True to fill the ellipse. O
 
 ## Quadrant Fill Codes
 
-![Ellipse Quadrants](../img/ellipse-quadrants.png)
+![Ellipse Quadrants](../../img/ellipse-quadrants.png)
 
 The optional ```QUAD_CODE``` parameter enables drawing to be restricted to certain quadrants of the ellipse.
 

@@ -16,7 +16,7 @@ The feeling of tied or sleepy can also be shown on a robots face.
 
 Here are photos of these seven emotions on people:
 
-![Paul Ekman](./../people-faces.png)
+![Paul Ekman](../../img/people-faces.png)
 
 ## Inside Out Emotions
 

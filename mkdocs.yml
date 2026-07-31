@@ -27,18 +27,18 @@ nav:
     - 16. Computational Thinking & Capstone Design: chapters/16-computational-thinking-capstone/index.md
   - Lessons:
     - Introduction: lessons/index.md
-    - History of Robot Faces: lessons/history-of-robot-faces.md
-    - Screen Coordinates: lessons/screen-coordinates.md
-    - Basic Drawing Commands: lessons/drawing-commands.md
-    - Ellipse: lessons/ellipse.md
-    - Polygon: lessons/polygon.md
-    - Basic Face Layouts: lessons/basic-face-layouts.md
-    - Eye Scanner: lessons/eye-scanner.md
-    - Interactions: lessons/interactions.md
-    - Eyebrows: lessons/eyebrows.md
-    - Emotion Types: emotion-types.md
-    # - lessons/blit-commands.md
-    # - lessons/multiple-threads.md
+    - History of Robot Faces: lessons/history-of-robot-faces/index.md
+    - Screen Coordinates: lessons/screen-coordinates/index.md
+    - Basic Drawing Commands: lessons/drawing-commands/index.md
+    - Ellipse: lessons/ellipse/index.md
+    - Polygon: lessons/polygon/index.md
+    - Basic Face Layouts: lessons/basic-face-layouts/index.md
+    - Eye Scanner: lessons/eye-scanner/index.md
+    - Interactions: lessons/interactions/index.md
+    - Eyebrows: lessons/eyebrows/index.md
+    - Emotion Types: lessons/emotion-types/index.md
+    # - lessons/blit-commands/index.md
+    # - lessons/multiple-threads/index.md
   - parts-lists.md
   - about.md
   - Course Description: course-description.md

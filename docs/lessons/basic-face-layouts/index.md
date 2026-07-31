@@ -1,6 +1,6 @@
 # Basic Face Layouts
 
-![](../img/robot-face-01.jpg)
+![](../../img/robot-face-01.jpg)
 
 ## Drawing Constants
 
@@ -98,6 +98,10 @@ def draw_face():
     oled.ellipse(HALF_WIDTH, HALF_HEIGHT+10, 30, 10, BLACK, FILL, BOTTOM_HALF)
     oled.show()
 ```
+
+Here's the face that function draws:
+
+![Sample output of draw_face()](sample-output.png)
 
 Try to adjust the parameters as you see fit.  See how they change the layout.
 

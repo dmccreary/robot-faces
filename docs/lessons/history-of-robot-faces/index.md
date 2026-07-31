@@ -7,7 +7,7 @@ shaped the low-cost approach this book teaches.
 
 ## Anki Cozmo (2016)
 
-![Cozmo-style eyes](../img/eye-scanner.gif)
+![Cozmo-style eyes](../../img/eye-scanner.gif)
 
 Cozmo was released by Anki, a San Francisco robotics and AI startup, on October 16, 2016, for
 $180. Its face was a small blue-on-black display designed to look like a miniature CRT monitor,
@@ -69,7 +69,7 @@ drawing support arrived, based on the MicroPython project's own release tags and
 | 2022-01-16 | v1.18 | FrameBuffer still supports only `fill`, `pixel`, `hline`, `vline`, `line`, `rect`, `fill_rect`, `text`, `scroll`, and `blit` — no `ellipse()` or `poly()` yet |
 | 2022-06-16 / 2022-06-17 | v1.19 / v1.19.1 | Same drawing method set as v1.18; v1.19.1 was a same-week patch release and still has no `ellipse()` or `poly()` |
 | 2022-08-19 | Unstable/development branch | Peter Hinch's `ellipse()` method and Matt Booth's `poly()` method are merged into the main MicroPython branch, along with a matching `fill` argument added to `rect()` for consistency |
-| Late 2022 - early 2023 | Nightly/unstable builds | Development firmware builds already include `ellipse()` and `poly()` months before an official release ships them — this project's own [Getting Started](../getting-started.md) guide shows a Raspberry Pi Pico booting a build labeled `v1.19.1-854-g35524a6fd` and dated `2023-02-07`, meaning 854 commits past the v1.19.1 tag, which is how these lessons were originally written and tested |
+| Late 2022 - early 2023 | Nightly/unstable builds | Development firmware builds already include `ellipse()` and `poly()` months before an official release ships them — this project's own [Getting Started](../../getting-started.md) guide shows a Raspberry Pi Pico booting a build labeled `v1.19.1-854-g35524a6fd` and dated `2023-02-07`, meaning 854 commits past the v1.19.1 tag, which is how these lessons were originally written and tested |
 | 2023-04-26 | **v1.20.0** | **First official, stable MicroPython release** to include `ellipse()` and `poly()` as documented, supported FrameBuffer methods |
 | 2024-11-29 | v1.24.1 | Bug fix: `FrameBuffer.ellipse()` no longer hangs in an infinite loop when both radii are 0; it now draws a single center pixel instead |
 
@@ -90,4 +90,4 @@ drawing support arrived, based on the MicroPython project's own release tags and
 7. [Buddy: your first companion robot powered by emotional AI — Blue Frog Robotics](https://m.bluefrogrobotics.com/buddy-en/)
 8. [MicroPython GitHub repository — release tags v1.17 through v1.24.1](https://github.com/micropython/micropython/releases)
 9. [modframebuf.c commit history — MicroPython GitHub](https://github.com/micropython/micropython/blob/master/extmod/modframebuf.c)
-10. Emotive Response to a Hybrid-Face Robot and Translation to Consumer Social Robots, Maitreyee Wairagkar et al., 2020 (see [references.md](../references.md))
+10. Emotive Response to a Hybrid-Face Robot and Translation to Consumer Social Robots, Maitreyee Wairagkar et al., 2020 (see [references.md](../../references.md))
