@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="schema" content="https://dmccreary.github.io/intelligent-textbooks/ns/microsim/v1">
+    <title>Robot Price and Funding Comparison Chart using Chart.js</title>
+    <style>
+        body {
+            margin: 0px; padding: 8px; font-family: Arial, Helvetica, sans-serif;
+            background: white; color: #212121; color-scheme: light;
+        }
+
+        /* Toggle on the left, outcome legend on the right. Both wrap to their
+           own line when the container drops below about 600px wide. */
+        #topbar {
+            display: flex; flex-wrap: wrap; gap: 10px;
+            align-items: center; justify-content: space-between; margin-bottom: 6px;
+        }
+        #toggle button {
+            font-family: inherit; font-size: 14px; padding: 6px 14px;
+            border: 1px solid silver; background: white; cursor: pointer;
+        }
+        #toggle button:first-child { border-radius: 6px 0 0 6px; }
+        #toggle button:last-child  { border-radius: 0 6px 6px 0; border-left: none; }
+        #toggle button:hover { background: aliceblue; }
+        #toggle button.active { background: #37474F; color: white; border-color: #37474F; }
+
+        #legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; }
+        .legend-item {
+            display: flex; align-items: center; gap: 5px;
+            padding: 2px 6px; border-radius: 4px; border: 1px solid transparent;
+        }
+        .legend-item.active { border-color: #263238; background: #FFF9C4; font-weight: bold; }
+        .swatch { width: 13px; height: 13px; border-radius: 3px; display: inline-block; }
+
+        #chart-wrap { height: 330px; }
+        #caption { font-size: 12px; color: #546E7A; margin-top: 6px; min-height: 30px; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="robot-funding-price-outcome-chart.js"></script>
+</head>
+<body>
+    <main>
+        <div id="topbar">
+            <div id="toggle">
+                <button data-view="price" class="active">Price</button>
+                <button data-view="funding">Funding</button>
+            </div>
+            <div id="legend"></div>
+        </div>
+        <div id="chart-wrap"><canvas id="chart"></canvas></div>
+        <div id="caption"></div>
+    </main>
+    <br/>
+    <a href=".">Back to Lesson Plan</a>
+</body>
+</html>

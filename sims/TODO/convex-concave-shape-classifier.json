@@ -1,0 +1,15 @@
+{
+  "sim_id": "convex-concave-shape-classifier",
+  "diagram_name": "Convex vs Concave Shape Classifier",
+  "chapter_number": 7,
+  "chapter_title": "Ellipse & Polygon Drawing",
+  "chapter_dir": "07-ellipse-polygon-drawing",
+  "chapter_rel_dir": "chapters/07-ellipse-polygon-drawing",
+  "library": "p5.js",
+  "bloom_level": "Analyze (L4)",
+  "bloom_verb": "differentiate, examine",
+  "learning_objective": "Differentiate convex polygons from concave polygons by examining a series of shapes and classifying each based on whether any vertex dents inward toward the shape's interior.",
+  "completion_status": "specified",
+  "extracted_date": "2026-07-31",
+  "specification": "Type: microsim\n**sim-id:** convex-concave-shape-classifier<br/>\n**Library:** p5.js<br/>\n**Status:** Specified\n\nBloom Taxonomy Level: Analyze (L4)\nBloom Taxonomy Verb: differentiate, examine\n\nLearning objective: Differentiate convex polygons from concave polygons by examining a series of shapes and classifying each based on whether any vertex dents inward toward the shape's interior.\n\nCanvas layout:\n- Left 70% (responsive, roughly 420x320 at default width): one polygon shape displayed at a time on a simulated frame buffer grid\n- Right 30%: two classification buttons, a running score readout, and a feedback/explanation panel\n\nVisual elements:\n- One polygon at a time, drawn as a filled or outlined shape on the grid\n- After a guess is submitted, the vertex responsible for concavity (if the shape is concave) highlights in coral\n- A running score readout: \"Correct: N / M shapes seen\"\n- A short feedback message confirming or correcting the learner's classification, with a one-sentence explanation\n\nInteractive controls:\n- Button: \"Convex\"\n- Button: \"Concave\"\n- Button: \"Next Shape\" (enabled only after a guess has been submitted)\n- Button: \"Show Explanation\" (reveals which vertex, if any, causes the dent)\n\nDefault parameters: first shape in the set displayed (a simple triangle), no guess submitted yet, score at 0/0\n\nBehavior: clicking \"Convex\" or \"Concave\" immediately locks in a guess, shows correct/incorrect feedback, highlights the concave vertex in coral if one exists, and updates the running score; \"Next Shape\" advances through a fixed set of eight shapes (triangle, square, five-point star, arrow, L-shape, pentagon, chevron, hexagon) covering both convex and concave examples.\n\nInstructional Rationale: An Analyze-level objective requires examining a shape's structure to identify a specific defining pattern — an inward-pointing vertex — which a classify-then-reveal pattern with immediate, specific feedback supports better than a passive gallery, since the learner must commit to a judgment before seeing the answer.\n\nResponsive design: control panel and feedback text move below the shape display on viewports narrower than 600 pixels; the shape display scales to fill its container's width.\n\nImplementation: p5.js for shape rendering; each of the eight shapes is stored as its own point array, with a pre-computed flag and, for concave shapes, the index of the offending vertex used to drive the coral highlight."
+}

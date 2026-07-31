@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="schema" content="https://dmccreary.github.io/intelligent-textbooks/ns/microsim/v1">
+    <title>Draw Call Benchmark Chart using Chart.js</title>
+    <style>
+        body {
+            margin: 0px; padding: 8px; font-family: Arial, Helvetica, sans-serif;
+            background: white; color: #212121; color-scheme: light;
+        }
+
+        /* View toggle on the left, budget checkbox and color key on the right.
+           Everything wraps onto its own line below about 600px wide. */
+        #topbar {
+            display: flex; flex-wrap: wrap; gap: 8px 14px;
+            align-items: center; justify-content: space-between; margin-bottom: 6px;
+        }
+
+        #toggle button {
+            font-family: inherit; font-size: 14px; padding: 6px 14px;
+            border: 1px solid silver; background: white; cursor: pointer;
+        }
+        #toggle button:first-child { border-radius: 6px 0 0 6px; }
+        #toggle button:last-child  { border-radius: 0 6px 6px 0; border-left: none; }
+        #toggle button:hover { background: aliceblue; }
+        #toggle button.active { background: #37474F; color: white; border-color: #37474F; }
+
+        #options { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; font-size: 13px; }
+        #options label { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+
+        .key-item { display: flex; align-items: center; gap: 5px; }
+        .swatch { width: 13px; height: 13px; border-radius: 3px; display: inline-block; }
+
+        #chart-wrap { height: 320px; }
+
+        #explanation {
+            font-size: 13px; line-height: 1.45; color: #37474F;
+            margin-top: 8px; min-height: 60px;
+            border-left: 4px solid #B0BEC5; padding: 4px 10px;
+        }
+        #explanation strong { color: #212121; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="draw-call-benchmark-chart.js"></script>
+</head>
+<body>
+    <main>
+        <div id="topbar">
+            <div id="toggle">
+                <button data-view="microseconds" class="active">Microseconds</button>
+                <button data-view="fps">Frames per second</button>
+            </div>
+            <div id="options">
+                <label><input type="checkbox" id="budget-check"> Show the 20 FPS budget</label>
+                <span class="key-item"><span class="swatch" style="background:#00897B"></span>Primitives</span>
+                <span class="key-item"><span class="swatch" style="background:#FF7043"></span>Blitted sprites</span>
+            </div>
+        </div>
+        <div id="chart-wrap"><canvas id="chart"></canvas></div>
+        <div id="explanation"></div>
+    </main>
+    <br/>
+    <a href=".">Back to Lesson Plan</a>
+</body>
+</html>

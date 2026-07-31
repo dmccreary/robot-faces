@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="schema" content="https://dmccreary.github.io/intelligent-textbooks/ns/microsim/v1">
+    <title>FrameBuf Version Timeline using vis-timeline</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-timeline@7.7.3/styles/vis-timeline-graph2d.min.css">
+    <style>
+        body {
+            margin: 0px; padding: 8px; font-family: Arial, Helvetica, sans-serif;
+            background: white; color: #212121; color-scheme: light;
+        }
+
+        /* --- control rows --- */
+        .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 6px; }
+        .row button {
+            font-family: inherit; font-size: 14px; padding: 5px 10px;
+            border: 1px solid silver; border-radius: 6px; background: white; cursor: pointer;
+        }
+        .row button:hover { background: aliceblue; }
+        .row .hint { font-size: 13px; color: #546E7A; }
+        #stable-toggle {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 14px; padding: 5px 10px; border: 1px solid silver;
+            border-radius: 6px; background: white; cursor: pointer;
+        }
+        #stable-toggle:hover { background: aliceblue; }
+        #stable-toggle input { cursor: pointer; }
+
+        /* --- legend --- */
+        #legend { font-size: 13px; color: #37474F; }
+        #legend span { margin-right: 12px; white-space: nowrap; }
+        #legend i {
+            display: inline-block; width: 12px; height: 12px; border-radius: 3px;
+            margin-right: 4px; vertical-align: -1px;
+        }
+        i.k-baseline { background: #78909C; }
+        i.k-stable   { background: #00BFA5; }
+        i.k-dev      { background: #FFB300; }
+
+        /* --- timeline container --- */
+        #timeline { padding-left: 40px; padding-right: 40px; overflow: hidden; }
+        .vis-timeline { overflow: visible !important; border: 1px solid silver; }
+        .vis-panel.vis-center { overflow: visible !important; }
+        .vis-item .vis-item-overflow { overflow: visible !important; }
+        .vis-item .vis-item-content { white-space: nowrap !important; padding: 4px 8px !important; }
+        /* Point items grow to fit their label. Range items must NOT, or a long
+           label would stretch the bar past the dates it actually covers. */
+        .vis-item.vis-box { min-width: fit-content !important; }
+
+        /* --- one color per milestone type --- */
+        .vis-item.baseline { background-color: #78909C; border-color: #546E7A; color: white; }
+        .vis-item.stable   { background-color: #00BFA5; border-color: #00897B; color: white; }
+        .vis-item.dev      { background-color: #FFB300; border-color: #FF8F00; color: #3E2723; }
+        /* Keep the type color when an item is selected; vis-timeline would
+           otherwise paint the whole box yellow and hide the label. */
+        .vis-item.vis-selected { box-shadow: 0 0 0 3px #7E57C2; }
+        .vis-item.baseline.vis-selected { background-color: #78909C; border-color: #37474F; }
+        .vis-item.stable.vis-selected   { background-color: #00BFA5; border-color: #00695C; }
+        .vis-item.dev.vis-selected      { background-color: #FFB300; border-color: #E65100; }
+
+        .vis-tooltip {
+            background: #2c3e50 !important; color: white !important;
+            padding: 10px 15px !important; border-radius: 8px !important;
+            font-size: 13px !important; max-width: 300px !important; line-height: 1.4 !important;
+            word-wrap: break-word !important; white-space: normal !important;
+        }
+
+        /* --- detail panel --- */
+        .details {
+            margin-top: 8px; min-height: 150px; padding: 8px 12px;
+            border: 1px solid silver; border-left: 8px solid silver; border-radius: 6px;
+            background: aliceblue; font-size: 14px; line-height: 1.4;
+        }
+        .details.baseline { border-left-color: #78909C; }
+        .details.stable   { border-left-color: #00BFA5; }
+        .details.dev      { border-left-color: #FFB300; }
+        .details h3 { margin: 0 0 4px 0; font-size: 16px; }
+        .details p { margin: 4px 0; }
+        .details .kind { color: #546E7A; font-size: 13px; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vis-timeline@7.7.3/standalone/umd/vis-timeline-graph2d.min.js"></script>
+    <script src="framebuf-version-timeline-explorer.js"></script>
+</head>
+<body>
+    <main>
+        <div class="row">
+            <label id="stable-toggle">
+                <input type="checkbox" id="stable-only"> Show only stable releases
+            </label>
+            <span id="legend">
+                <span><i class="k-baseline"></i>Method availability</span>
+                <span><i class="k-stable"></i>Stable release</span>
+                <span><i class="k-dev"></i>Development branch</span>
+            </span>
+        </div>
+        <div class="row" id="nav">
+            <button id="pan-left" title="Pan left">&#9664;</button>
+            <button id="pan-right" title="Pan right">&#9654;</button>
+            <button id="zoom-in" title="Zoom in">+</button>
+            <button id="zoom-out" title="Zoom out">&minus;</button>
+            <button id="fit-all">Fit All</button>
+            <span class="hint">Drag to pan. Hover an event for a preview, click it for the full story.</span>
+        </div>
+        <div id="timeline"></div>
+        <div class="details" id="details"></div>
+    </main>
+    <br/>
+    <a href=".">Back to Lesson Plan</a>
+</body>
+</html>

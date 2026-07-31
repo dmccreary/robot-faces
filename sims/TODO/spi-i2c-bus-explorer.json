@@ -1,0 +1,15 @@
+{
+  "sim_id": "spi-i2c-bus-explorer",
+  "diagram_name": "SPI vs I2C Bus Explorer",
+  "chapter_number": 1,
+  "chapter_title": "Hardware & Electronics Foundations",
+  "chapter_dir": "01-hardware-electronics-foundations",
+  "chapter_rel_dir": "chapters/01-hardware-electronics-foundations",
+  "library": "p5.js",
+  "bloom_level": "Analyze (L4)",
+  "bloom_verb": "differentiate, compare",
+  "learning_objective": "Differentiate SPI and I2C wiring by comparing wire count, addressing scheme, and typical speed, and identify which bus a given wiring diagram uses.",
+  "completion_status": "specified",
+  "extracted_date": "2026-07-31",
+  "specification": "Type: diagram\n**sim-id:** spi-i2c-bus-explorer<br/>\n**Library:** p5.js<br/>\n**Status:** Specified\n\nBloom Taxonomy Level: Analyze (L4)\nBloom Taxonomy Verb: differentiate, compare\n\nLearning objective: Differentiate SPI and I2C wiring by comparing wire count, addressing scheme, and typical speed, and identify which bus a given wiring diagram uses.\n\nCanvas layout:\n- Top: two toggle buttons, \"Show SPI\" and \"Show I2C\" (one active at a time)\n- Center (about 500x300, responsive): a Pico rectangle on the left wired to one or two device rectangles on the right with labeled, colored wires\n- Bottom: an infobox panel showing definitions when a wire or pin is clicked\n\nVisual elements (SPI view): one Pico box wired to one display box with five labeled wires — SCK (clock, yellow), MOSI/SDA (data, orange), CS (chip select, red), DC (data/command, blue), RES (reset, purple) — plus gray 3.3V and GND wires; caption \"One CS wire needed per device\"\n\nVisual elements (I2C view): one Pico box wired to two device boxes sharing SDA (orange) and SCL (yellow), plus 3.3V and GND; each device box shows an address label such as \"0x3C\" or \"0x68\"; caption \"Same two wires serve every device; addresses tell them apart\"\n\nInteractive controls:\n- Toggle redraws the diagram for the selected bus\n- Clicking any wire or pin opens an infobox with a one-sentence definition (for example, \"CS\" shows \"Chip Select: tells one specific device to listen; each device on an SPI bus needs its own CS wire.\")\n- Hovering highlights the wire and shows a short-name tooltip\n\nDefault parameters: initial view SPI; no wire selected, infobox prompts \"Click any wire to learn what it does\"\n\nBehavior: switching buses updates a counter reading \"Wires used: 5\" (SPI) or \"Wires used: 2\" (I2C), excluding power and ground. A clicked wire's infobox stays open until another wire is clicked or the view toggles.\n\nInstructional Rationale: A clickable comparison diagram fits the Analyze-level objective because the student must examine two wiring patterns side by side and identify the structural difference — a dedicated wire per device versus shared wires with addressing — rather than recall a definition.\n\nResponsive design: reflows to a single column below 600 pixels wide; the wire diagram scales proportionally on window resize.\n\nImplementation: p5.js canvas for the wiring diagram and click/hover detection; a state object holding the current view mode and selected wire."
+}

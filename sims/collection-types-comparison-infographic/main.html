@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="schema" content="https://dmccreary.github.io/intelligent-textbooks/ns/microsim/v1">
+    <title>List vs Tuple vs Dictionary Comparison using HTML/CSS/JS</title>
+    <style>
+        body {
+            margin: 0px; padding: 8px; font-family: Arial, Helvetica, sans-serif;
+            background: white; color: #212121; color-scheme: light;
+        }
+
+        /* ---- three columns, one per collection type ---- */
+        #columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+        .col {
+            border: 2px solid silver; border-radius: 8px; overflow: hidden;
+            background: white; display: flex; flex-direction: column;
+        }
+        .col-header {
+            cursor: pointer; text-align: center; color: white;
+            padding: 6px 4px 8px 4px; user-select: none;
+        }
+        .col-header:hover { filter: brightness(1.08); }
+        .symbol { font-size: 34px; font-weight: bold; line-height: 1.1; font-family: monospace; }
+        .type-name { font-size: 17px; font-weight: bold; }
+        .expand-hint { font-size: 11px; opacity: 0.9; }
+
+        .col[data-type="list"]  { border-color: #00BFA5; }
+        .col[data-type="list"]  .col-header { background: #00BFA5; }
+        .col[data-type="tuple"] { border-color: #FF7043; }
+        .col[data-type="tuple"] .col-header { background: #FF7043; }
+        .col[data-type="dict"]  { border-color: #7E57C2; }
+        .col[data-type="dict"]  .col-header { background: #7E57C2; }
+
+        .fact { font-size: 13px; padding: 5px 8px; border-bottom: 1px solid #ECEFF1; }
+        .fact .k { color: #546E7A; }
+        .fact .v { font-weight: bold; }
+        .code {
+            font-family: monospace; font-size: 12px; background: #F5F7F8;
+            padding: 6px 8px; margin: 0; white-space: pre-wrap; word-break: break-word;
+            flex-grow: 1;
+        }
+        .why {
+            display: none; font-size: 13px; line-height: 1.4;
+            padding: 7px 8px; background: #FFFDE7; border-top: 1px dashed #CFD8DC;
+        }
+        .col.open .why { display: block; }
+
+        /* Scenario feedback rings, kept independent of the column colors. */
+        .col.correct { box-shadow: 0 0 0 4px #2E7D32; background: #E8F5E9; }
+        .col.wrong   { box-shadow: 0 0 0 4px #C62828; background: #FFEBEE; }
+        .col.correct .fact, .col.wrong .fact { background: transparent; }
+
+        /* ---- scenario panel ---- */
+        #scenario {
+            margin-top: 10px; border: 1px solid silver; border-radius: 8px;
+            padding: 8px 10px; background: aliceblue;
+        }
+        #scenario h3 { margin: 0 0 4px 0; font-size: 15px; }
+        #scenario-text { font-size: 14px; margin: 0 0 8px 0; min-height: 38px; }
+        #answers { display: flex; flex-wrap: wrap; gap: 8px; }
+        #answers button, #next {
+            font-family: inherit; font-size: 14px; padding: 6px 14px;
+            border: 1px solid silver; border-radius: 6px; background: white; cursor: pointer;
+        }
+        #answers button:hover:enabled, #next:hover { background: #E0F2F1; }
+        #answers button:disabled { opacity: 0.55; cursor: default; }
+        #next { margin-left: auto; }
+        #feedback { font-size: 13px; line-height: 1.4; margin-top: 7px; min-height: 36px; }
+        #feedback.correct { color: #2E7D32; }
+        #feedback.wrong { color: #C62828; }
+
+        /* ---- narrow containers stack to one column ---- */
+        @media (max-width: 700px) {
+            #columns { grid-template-columns: 1fr; }
+        }
+    </style>
+    <script src="collection-types-comparison-infographic.js"></script>
+</head>
+<body>
+    <main>
+        <div id="columns">
+
+            <div class="col" data-type="list">
+                <div class="col-header">
+                    <div class="symbol">[ ]</div>
+                    <div class="type-name">List</div>
+                    <div class="expand-hint">Click for why you would choose this one</div>
+                </div>
+                <div class="fact"><span class="k">Changeable?</span> <span class="v">Yes, changeable</span></div>
+                <div class="fact"><span class="k">Access by</span> <span class="v">Position</span></div>
+                <pre class="code">expressions = ["happy", "sad",
+               "angry", "surprised"]
+print(expressions[0])</pre>
+                <div class="why">Choose a list when the data will change while the program runs. You can add, remove, or edit items, and the order stays fixed so you can step through them.</div>
+            </div>
+
+            <div class="col" data-type="tuple">
+                <div class="col-header">
+                    <div class="symbol">( )</div>
+                    <div class="type-name">Tuple</div>
+                    <div class="expand-hint">Click for why you would choose this one</div>
+                </div>
+                <div class="fact"><span class="k">Changeable?</span> <span class="v">No, not changeable</span></div>
+                <div class="fact"><span class="k">Access by</span> <span class="v">Position</span></div>
+                <pre class="code">eye_color = (0, 191, 165)
+print(eye_color[0])</pre>
+                <div class="why">Choose a tuple when a value must stay exactly as written. Because a tuple cannot be edited, MicroPython stops any later code from changing it by accident.</div>
+            </div>
+
+            <div class="col" data-type="dict">
+                <div class="col-header">
+                    <div class="symbol">{ }</div>
+                    <div class="type-name">Dictionary</div>
+                    <div class="expand-hint">Click for why you would choose this one</div>
+                </div>
+                <div class="fact"><span class="k">Changeable?</span> <span class="v">Yes, changeable</span></div>
+                <div class="fact"><span class="k">Access by</span> <span class="v">Key name</span></div>
+                <pre class="code">happy_face = {"eye_size": 14,
+              "mouth_curve": 20}
+print(happy_face["mouth_curve"])</pre>
+                <div class="why">Choose a dictionary when each value deserves a name. You look values up by key instead of counting positions, which keeps named settings readable.</div>
+            </div>
+
+        </div>
+
+        <div id="scenario">
+            <h3>Try a Scenario</h3>
+            <p id="scenario-text"></p>
+            <div id="answers">
+                <button data-answer="list">List</button>
+                <button data-answer="tuple">Tuple</button>
+                <button data-answer="dict">Dictionary</button>
+                <button id="next">Next Scenario</button>
+            </div>
+            <div id="feedback"></div>
+        </div>
+    </main>
+    <br/>
+    <a href=".">Back to Lesson Plan</a>
+</body>
+</html>
