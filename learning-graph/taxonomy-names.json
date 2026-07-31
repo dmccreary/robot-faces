@@ -1,0 +1,15 @@
+{
+  "HWFND": "Hardware & Electronics Foundations",
+  "HIST": "History Of Screen-Based Robot Faces",
+  "MPYFN": "MicroPython Programming Fundamentals",
+  "DISPC": "Display & Coordinate Systems",
+  "PRIM": "Basic Drawing Primitives",
+  "SHAPE": "Ellipse & Polygon Drawing",
+  "FBVER": "MicroPython FrameBuf Version History",
+  "ANAT": "Facial Anatomy & Layout",
+  "EMOT": "Emotion Psychology & Expression Design",
+  "ANIM": "Animation & Timing",
+  "INTER": "Interactive Controls & State Machines",
+  "COLOR": "Color Display & RGB565 Porting",
+  "CTCAP": "Computational Thinking & Capstone Design"
+}

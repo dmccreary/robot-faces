@@ -1,0 +1,2199 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A history of four commercial robots — Cozmo, Vector, Miko, and Buddy — that bet on animated screen faces, and what their business outcomes teach about scoping a robot face project.">
+      
+      
+        <meta name="author" content="Dan McCreary">
+      
+      
+      
+        <link rel="prev" href="../01-hardware-electronics-foundations/">
+      
+      
+        <link rel="next" href="../03-micropython-fundamentals-1/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>A History of Screen-Based Robot Faces - Robot Faces</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/mascot.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-FPTNK1XNJR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-FPTNK1XNJR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-FPTNK1XNJR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#642580" data-md-color-accent="#41BAC1">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a-history-of-screen-based-robot-faces" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robot Faces" class="md-header__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Faces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              A History of Screen-Based Robot Faces
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robot Faces" class="md-nav__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    Robot Faces
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Chapters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of Chapters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-hardware-electronics-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Hardware & Electronics Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-history-matters-before-you-design-a-face" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why History Matters Before You Design a Face
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-counts-as-a-screen-based-robot-face" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Counts as a Screen-Based Robot Face?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What Counts as a Screen-Based Robot Face?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-screen-based-robot-face-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Screen-Based Robot Face Timeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anki-and-cozmo-a-screen-face-becomes-a-hit-toy-2016" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anki and Cozmo: A Screen Face Becomes a Hit Toy (2016)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vector-ankis-ambitious-follow-up-and-its-shutdown-2018-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector: Anki's Ambitious Follow-Up — and Its Shutdown (2018-2019)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#miko-an-educational-robot-built-to-last" class="md-nav__link">
+    <span class="md-ellipsis">
+      Miko: An Educational Robot Built to Last
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#buddy-the-long-road-from-crowdfunding-to-shipping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Buddy: The Long Road From Crowdfunding to Shipping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#four-robots-four-business-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Four Robots, Four Business Outcomes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Four Robots, Four Business Outcomes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-robot-price-and-funding-comparison-chart" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Robot Price and Funding Comparison Chart
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagram-four-robots-four-bets-on-a-screen-face" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Four Robots, Four Bets on a Screen Face
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-means-for-scoping-your-own-robot-face-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      What This Means for Scoping Your Own Robot Face Project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-micropython-fundamentals-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-micropython-fundamentals-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-display-coordinate-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-basic-drawing-primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-ellipse-polygon-drawing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Ellipse & Polygon Drawing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-framebuf-version-history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-facial-anatomy-layout-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-emotion-theory-core-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Emotion Theory & the Core Expression Set
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-expression-design-readability-hri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-animating-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Animating Expressions: Timing & Motion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-interactive-controls-inputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-expression-menu-live-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-porting-faces-color-display/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Porting Faces to a Color Display
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-computational-thinking-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lessons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Lessons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    History of Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/screen-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/drawing-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Drawing Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/ellipse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ellipse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/polygon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polygon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/basic-face-layouts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Face Layouts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eye-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eyebrows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eyebrows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion-types.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emotion Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../parts-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Faces Parts List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About The Robot Faces Book
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Learning Graph
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Learning Graph
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/starting-concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Starting Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/course-description-assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quality-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/taxonomy-distribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy Distribution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/mascot-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mascot Test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Stories
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Stories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-history-matters-before-you-design-a-face" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why History Matters Before You Design a Face
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-counts-as-a-screen-based-robot-face" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Counts as a Screen-Based Robot Face?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What Counts as a Screen-Based Robot Face?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-screen-based-robot-face-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Screen-Based Robot Face Timeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anki-and-cozmo-a-screen-face-becomes-a-hit-toy-2016" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anki and Cozmo: A Screen Face Becomes a Hit Toy (2016)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vector-ankis-ambitious-follow-up-and-its-shutdown-2018-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector: Anki's Ambitious Follow-Up — and Its Shutdown (2018-2019)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#miko-an-educational-robot-built-to-last" class="md-nav__link">
+    <span class="md-ellipsis">
+      Miko: An Educational Robot Built to Last
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#buddy-the-long-road-from-crowdfunding-to-shipping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Buddy: The Long Road From Crowdfunding to Shipping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#four-robots-four-business-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Four Robots, Four Business Outcomes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Four Robots, Four Business Outcomes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-robot-price-and-funding-comparison-chart" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Robot Price and Funding Comparison Chart
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagram-four-robots-four-bets-on-a-screen-face" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Four Robots, Four Bets on a Screen Face
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-means-for-scoping-your-own-robot-face-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      What This Means for Scoping Your Own Robot Face Project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="a-history-of-screen-based-robot-faces">A History of Screen-Based Robot Faces</h1>
+<h2 id="summary">Summary</h2>
+<p>This chapter steps back from hardware and code to look at why this project exists: four real commercial robots — Anki's Cozmo and Vector, Emotix's Miko, and Blue Frog Robotics' Buddy — all bet that a screen-based face with animated eyes was enough to make a robot feel alive. Students examine each robot's design, funding, and business outcome (including two Anki shutdowns) to understand both the appeal and the risk of building expressive robots. After completing this chapter, students will be able to name each robot's company and approximate release year, and explain what their outcomes suggest about scoping a low-cost, display-only robot face project.</p>
+<h2 id="concepts-covered">Concepts Covered</h2>
+<p>This chapter covers the following 25 concepts from the learning graph:</p>
+<ol>
+<li>Screen-Based Robot Face</li>
+<li>Social Robot</li>
+<li>Anki Cozmo</li>
+<li>Anki Vector</li>
+<li>Emotix Miko</li>
+<li>Blue Frog Robotics Buddy</li>
+<li>Cozmo Emotion Engine</li>
+<li>Vector Companion App</li>
+<li>Miko Educational Robot Design</li>
+<li>Buddy Mobile Robot Base</li>
+<li>Robot Startup Funding</li>
+<li>Robot Product Discontinuation</li>
+<li>Crowdfunding Campaign</li>
+<li>Robot Commercial Outcome</li>
+<li>Robot Face Design Scoping</li>
+<li>Companion Robot Category</li>
+<li>Mass-Market Robot Toy</li>
+<li>Robot Voice Interaction</li>
+<li>Robot Business Case Study</li>
+<li>Hardware Cost Trade-Off</li>
+<li>Anki Company History</li>
+<li>Consumer Robotics Market</li>
+<li>Robot Personality Branding</li>
+<li>Screen As Face Metaphor</li>
+<li>Educational Robotics Market</li>
+</ol>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This chapter builds on concepts from:</p>
+<ul>
+<li><a href="../01-hardware-electronics-foundations/">Chapter 1: Hardware &amp; Electronics Foundations</a></li>
+</ul>
+<hr />
+<h2 id="why-history-matters-before-you-design-a-face">Why History Matters Before You Design a Face</h2>
+<div class="admonition mascot-welcome">
+<p class="admonition-title">Before We Draw a Single Eyebrow...</p>
+<p><img alt="Pixel waves hello" class="mascot-admonition-img" src="../../img/mascot/welcome.png" />
+Chapter 1 got your hardware wired up and ready to go. Before Chapter 3 hands you a <code>draw_face()</code> function, let's look at four real companies that bet real money on the exact idea this course teaches — a screen for a face — and see what happened when that idea met the real world.</p>
+</div>
+<p>In Chapter 1, you learned to wire a microcontroller to a small screen, a hardware decision that sits underneath every robot in this chapter too. Companies spend years and millions of dollars deciding exactly which screen, which chip, and which face design will make a robot feel alive to the person standing in front of it. Their decisions were bigger and more expensive than yours will be, but the underlying design problem is identical.</p>
+<p>This chapter looks at four robots that made that bet at commercial scale: Anki's Cozmo and Vector, Emotix's Miko, and Blue Frog Robotics' Buddy. Two of them were discontinued, one pivoted through a dramatic shutdown and revival, and one is still selling robots to schools and families today. Studying why is a fast, low-cost way to learn what actually matters when you scope your own robot face project.</p>
+<p>Before diving into any single robot, it helps to know exactly why this history is worth your time:</p>
+<ul>
+<li>It shows which face-design choices — a screen alone versus a screen paired with an elaborate moving body — actually made it to store shelves.</li>
+<li>It shows how a company's funding and crowdfunding story can hint at whether a hardware startup will survive long enough to support its product.</li>
+<li>It proves that even a large budget does not guarantee a robot ships, sells well, or stays supported for long.</li>
+<li>It hands you shared vocabulary — social robot, companion robot, screen-as-face metaphor — that the rest of this book uses without re-explaining.</li>
+</ul>
+<h2 id="what-counts-as-a-screen-based-robot-face">What Counts as a Screen-Based Robot Face?</h2>
+<p>A <strong>screen-based robot face</strong> is a design pattern in which some or all of a robot's facial expression appears as pixels on an electronic display, rather than being built from separate moving parts like motorized eyelids or mechanical eyebrows. Every robot in this book, and every robot in this chapter, uses this pattern: the "face" is software, redrawn many times a second, instead of a fixed physical shape.</p>
+<p>That pattern only makes sense in the context of a broader category of machine. A <strong>social robot</strong> is a robot designed primarily to interact with people for emotional or relational purposes, rather than to complete a purely mechanical task such as vacuuming a floor or welding a car frame. Within that broader category sits the <strong>companion robot category</strong>: social robots specifically intended for an ongoing, personal relationship in a home or classroom, as opposed to a one-time task or a public-space greeter. All four robots in this chapter are companion robots first, and screen-based robot faces are how each one earns its "companion" label.</p>
+<p>Designers who choose this pattern are leaning on what this book calls the <strong>screen-as-face metaphor</strong>: the deliberate choice to treat a rectangular or round display as a stand-in for a face, trusting that people will read two eyes and a mouth on a screen the same way they read a face on a person. This metaphor is not automatic or guaranteed — it works because of decades of psychology research on which facial features people actually notice, which later chapters in this book explore in depth.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">Same Idea, Bigger Budget</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Every robot in this chapter is doing exactly what you will do on your OLED and color displays: drawing eyes instead of building them out of gears and hinges. The difference is scale and budget, not the underlying idea — you are learning with <code>ellipse()</code> calls what these companies paid engineering teams to build with custom animation software.</p>
+</div>
+<p>These four robots also did not appear by accident. Interest in home robotics grew steadily through the 2010s, part of a larger <strong>consumer robotics market</strong> that includes everything from robot vacuums to smart speakers, and investors were eager to fund the next home robot that might become as familiar as those earlier hits. The timeline below lays out how the four robots in this chapter relate to each other in time, and lets you click any milestone to learn more about it.</p>
+<h4 id="diagram-screen-based-robot-face-timeline">Diagram: Screen-Based Robot Face Timeline</h4>
+<iframe src="../../sims/robot-face-timeline-explorer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Screen-Based Robot Face Timeline</summary>
+<p>Type: timeline
+<strong>sim-id:</strong> robot-face-timeline-explorer<br/>
+<strong>Library:</strong> vis-timeline<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Understand (L2)
+Bloom Taxonomy Verb: summarize, interpret</p>
+<p>Learning objective: Interpret the sequence of milestones across four commercial screen-faced robots and summarize how one company's outcome (Anki's shutdown) relates in time to the releases of the other robots.</p>
+<p>Time period: 2010-2023</p>
+<p>Orientation: Horizontal, left to right</p>
+<p>Events:
+- 2010: Anki is founded by a group of Carnegie Mellon robotics graduates
+- 2015: Blue Frog Robotics announces Buddy and launches its Indiegogo crowdfunding campaign
+- 2016: Anki releases Cozmo
+- 2017: Emotix releases Miko in India
+- 2018: Anki releases Vector
+- 2019: Anki shuts down its operations
+- 2019-2020: Vector's assets are acquired, and the robot is relaunched by a new company
+- 2021: Blue Frog Robotics undergoes financial restructuring while continuing Buddy's development
+- 2020s: Miko continues releasing new models for the educational robotics market</p>
+<p>Visual style: horizontal timeline with color-coded event dots grouped by company</p>
+<p>Detail level per event: each event shows a one-sentence description on hover, and a two-to-three-sentence expanded description with the event's significance on click</p>
+<p>Color coding: teal for Anki (Cozmo and Vector), coral for Emotix Miko, purple for Blue Frog Robotics Buddy</p>
+<p>Interactive features:
+- Hover over any event dot to preview its one-sentence description in a tooltip
+- Click an event dot to open a detail panel below the timeline with the full description and a "why it matters" note
+- Filter buttons let a learner show only one company's events at a time, or select "Show All"
+- Learner can zoom and pan the timeline horizontally with a scroll or drag gesture</p>
+<p>Instructional Rationale: The Understand-level objective calls for interpreting relationships in a sequence rather than recalling isolated dates, so the filter-by-company and click-to-expand interactions let a learner isolate one company's story or compare all four side by side, building the sequence understanding the rest of the chapter depends on.</p>
+<p>Responsive design: timeline compresses to a scrollable horizontal strip on narrow screens, with the detail panel stacking below rather than beside the timeline.</p>
+<p>Implementation: vis-timeline JavaScript library for the timeline rendering; a JSON array of event objects (date, company, title, short description, long description) drives both the timeline and the detail panel.</p>
+</details>
+<h2 id="anki-and-cozmo-a-screen-face-becomes-a-hit-toy-2016">Anki and Cozmo: A Screen Face Becomes a Hit Toy (2016)</h2>
+<p><strong>Anki company history</strong> starts in 2010, when a group of robotics graduate students from Carnegie Mellon University founded the company to bring consumer-friendly AI and robotics out of the research lab. Anki's first product was a set of AI-driven toy race cars; the company later shifted its focus toward home companion robots. Getting there required <strong>robot startup funding</strong> — money raised from investors and used to cover years of engineering, manufacturing, and marketing before a hardware product earns any profit. Anki raised well over $200 million across its lifetime, a figure that will matter again later in this chapter.</p>
+<p><strong>Anki Cozmo</strong> is the small, palm-sized robot that resulted from that funding, released in 2016 at a price of roughly $180. Cozmo moved on tank-style treads, used a small lift arm to interact with plastic play cubes, and displayed a pair of simple, expressive eyes on a compact OLED-style screen — a screen-based robot face in its purest, earliest commercial form.</p>
+<p>Cozmo packed a surprising amount of behavior into that small package:</p>
+<ul>
+<li>Tank-tread mobility paired with a front-mounted lift arm for picking up and stacking cubes</li>
+<li>A built-in camera used to recognize faces, cubes, and its own charging dock</li>
+<li>Animated monochrome-style eyes that shifted with each interaction, from wide-eyed surprise to a narrow, satisfied squint</li>
+<li>Short chirps and beeps standing in for speech, reinforcing the eyes rather than replacing them</li>
+</ul>
+<p>Anki gave the software driving those eyes its own name: the <strong>Cozmo Emotion Engine</strong>. This was Anki's marketing term for the animation system that translated Cozmo's internal state — things like how recently it had been played with, or whether a game had just been won or lost — into a matching facial expression and sound. In other words, the Cozmo Emotion Engine is a commercial, large-team version of the <code>draw_face()</code> function you will write later in this book: one system, mapping internal variables to a rendered expression.</p>
+<p>Anki marketed Cozmo as a <strong>mass-market robot toy</strong>: a robot sold through mainstream toy and electronics retailers to a broad consumer audience, priced to compete with premium toys rather than specialty robotics kits. That mass-market positioning depended heavily on <strong>robot personality branding</strong> — the deliberate practice of giving a robot product a consistent name, backstory, and pattern of expressive behavior so that owners form an emotional attachment to it. Cozmo's growing "personality," its distinctive sounds, and its expressive eyes were central to how Anki advertised the toy, not an afterthought layered on at the end.</p>
+<h2 id="vector-ankis-ambitious-follow-up-and-its-shutdown-2018-2019">Vector: Anki's Ambitious Follow-Up — and Its Shutdown (2018-2019)</h2>
+<p><strong>Anki Vector</strong> was Cozmo's more ambitious successor, released in 2018 at a price of roughly $250. Vector kept a screen-based face but dropped Cozmo's tank treads and lift-arm play pattern in favor of a smaller, more stationary presence that stayed "awake" on a desk or shelf, using its camera and microphones to notice and react to people nearby without needing to be summoned first.</p>
+<p>That always-on presence depended on new interaction channels beyond the screen itself. <strong>Robot voice interaction</strong> — a robot's ability to recognize a spoken wake word and respond to simple spoken commands — let Vector answer questions and take requests after hearing "Hey Vector," much like a smart speaker with a face attached. Setting Vector up, viewing its camera feed remotely, and adjusting its settings all happened through the <strong>Vector companion app</strong>, a smartphone application that paired with the robot over Wi-Fi. Pairing a physical robot with an app for setup and remote control became a standard pattern across this entire generation of companion robots.</p>
+<p>Reaching the market with Vector meant drawing further on Anki's pool of robot startup funding, which had grown to more than $200 million across the company's history by that point. Despite that funding, real retail presence, and a genuinely loved toy in Cozmo, Anki abruptly shut down its operations in April 2019, laying off nearly its entire staff within days. This is a clear example of <strong>robot product discontinuation</strong>: the point in a hardware product's life cycle when a manufacturer stops producing, selling, or supporting a device, sometimes leaving existing units still physically functional but cut off from cloud services, software updates, and repairs.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">A Company Can Run Out of Runway</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+More than $200 million raised, real retail shelf space, and a genuinely beloved toy — and Anki still shut down within a few years. Funding buys time to build something great; it does not guarantee the business behind it survives long enough to keep selling it.</p>
+</div>
+<p>Vector's story did not end completely at the 2019 shutdown. A separate company later acquired Vector's technology and remaining inventory, and relaunched the robot for existing and new owners, restoring some of its cloud-connected features along the way. That revival kept Vector alive in a smaller, less certain form — a reminder that a <strong>robot commercial outcome</strong> is not always a simple "succeeded" or "failed," but can be a longer, messier story than a launch announcement suggests.</p>
+<h2 id="miko-an-educational-robot-built-to-last">Miko: An Educational Robot Built to Last</h2>
+<p><strong>Emotix Miko</strong> is a tabletop companion robot from the Indian robotics company Emotix, released in 2017 at a price of roughly $300. Like Cozmo and Vector, Miko presents a round, colorful animated face on a display, but Miko's rolling base, camera, and microphones exist to support one clear purpose: helping a child learn.</p>
+<p>That purpose shaped every part of <strong>Miko educational robot design</strong>. Instead of Cozmo's cube-based play or Vector's general-purpose assistant behavior, Miko ships with curated stories, quizzes, and simple coding lessons, plus parental controls that limit its content and internet access to material a parent or teacher has approved. Miko's screen face smiles and encourages a child through an activity the way a patient tutor would, turning correct answers and finished lessons into small animated celebrations. Choosing a simpler wheeled base and leaning harder on curated software, instead of open-ended room navigation, was itself a deliberate choice about where to spend a limited engineering budget.</p>
+<p>Miko competes in the <strong>educational robotics market</strong>: robots, kits, and coding platforms built specifically for schools, homeschool programs, and after-school clubs, where buyers value measurable learning outcomes and safe, curated content as much as raw technical capability. That market rewards a different kind of staying power than the mass-market toy market Cozmo competed in — schools and parents often expect years of continued support, not just an exciting launch. Unlike Cozmo and Vector, Miko has continued to release new models, making it the one robot in this chapter whose business has kept going largely uninterrupted.</p>
+<div class="admonition mascot-tip">
+<p class="admonition-title">Simpler Can Survive Longer</p>
+<p><img alt="Pixel gives a tip" class="mascot-admonition-img" src="../../img/mascot/tip.png" />
+Notice the pattern already forming: Miko kept its moving parts simple and leaned on its screen and its content instead. When you scope your own capstone face later in this book, ask the same question — which features earn their cost, and which ones just look impressive?</p>
+</div>
+<h2 id="buddy-the-long-road-from-crowdfunding-to-shipping">Buddy: The Long Road From Crowdfunding to Shipping</h2>
+<p><strong>Blue Frog Robotics Buddy</strong> is a home companion robot announced in 2015 by the French company Blue Frog Robotics, promising security monitoring, entertainment, and companionship in a single machine with an animated, cartoon-style pair of eyes rendered on a tablet-style screen.</p>
+<p>To fund development, Blue Frog Robotics turned to a <strong>crowdfunding campaign</strong>: a funding method in which a company presells a not-yet-finished product directly to the public through a platform such as Kickstarter or Indiegogo, using pledged money and pre-order commitments instead of, or alongside, traditional venture investors. Buddy's 2015 Indiegogo campaign raised more than $600,000 from backers who were excited by its promise, well beyond the campaign's original funding goal.</p>
+<p>What made Buddy's engineering challenge unusually large was its <strong>Buddy mobile robot base</strong>: a full wheeled platform designed to let the robot navigate autonomously from room to room around a home, rather than stay put on a desk or tabletop the way Cozmo, Vector, and Miko do. Reliable indoor navigation, obstacle avoidance, and mapping are hard robotics problems on their own, even before adding an expressive face on top, and that ambition contributed heavily to years of delay past Buddy's original promised ship date. Blue Frog Robotics later underwent a period of serious financial restructuring before continuing Buddy's development under changed circumstances.</p>
+<p>Now that all four robots have been introduced, the table below reinforces their key facts side by side.</p>
+<table>
+<thead>
+<tr>
+<th>Robot</th>
+<th>Company</th>
+<th>Approx. Release Year</th>
+<th>Approx. Price</th>
+<th>Face Design</th>
+<th>Mobility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cozmo</td>
+<td>Anki</td>
+<td>2016</td>
+<td>~$180</td>
+<td>Monochrome-style animated eyes on a small screen</td>
+<td>Tank treads with a lift arm</td>
+</tr>
+<tr>
+<td>Vector</td>
+<td>Anki</td>
+<td>2018</td>
+<td>~$250</td>
+<td>Full-color animated face, voice-activated</td>
+<td>Mostly stationary, camera-aware</td>
+</tr>
+<tr>
+<td>Miko</td>
+<td>Emotix</td>
+<td>2017</td>
+<td>~$300</td>
+<td>Round color animated face</td>
+<td>Simple wheeled base, tabletop-oriented</td>
+</tr>
+<tr>
+<td>Buddy</td>
+<td>Blue Frog Robotics</td>
+<td>announced 2015, shipped years later</td>
+<td>~$500+ (crowdfunding pledge)</td>
+<td>Cartoon-style eyes on a tablet-style screen</td>
+<td>Full wheeled base for room-to-room navigation</td>
+</tr>
+</tbody>
+</table>
+<h2 id="four-robots-four-business-outcomes">Four Robots, Four Business Outcomes</h2>
+<p>Together, these four robots form a compact <strong>robot business case study</strong>: a set of real companies that made similar bets on the same core idea — a screen-based face — and reached very different <strong>robot commercial outcomes</strong>. Comparing them side by side surfaces patterns that are hard to see from any single robot's story alone.</p>
+<p>The table below reinforces the funding story and eventual outcome for each robot, already described in the sections above.</p>
+<table>
+<thead>
+<tr>
+<th>Robot (Company)</th>
+<th>Funding Story</th>
+<th>Commercial Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cozmo (Anki)</td>
+<td>Backed by Anki's overall venture funding, more than $200 million across the company's lifetime</td>
+<td>Sold well through major retailers; discontinued when Anki shut down in 2019</td>
+</tr>
+<tr>
+<td>Vector (Anki)</td>
+<td>Drew on the same Anki funding pool as Cozmo</td>
+<td>Discontinued in 2019; assets acquired and the robot later revived by a new company</td>
+</tr>
+<tr>
+<td>Miko (Emotix)</td>
+<td>Multiple private funding rounds, reportedly tens of millions of dollars total</td>
+<td>Still in active production, with newer models sold into the educational robotics market</td>
+</tr>
+<tr>
+<td>Buddy (Blue Frog Robotics)</td>
+<td>2015 Indiegogo crowdfunding campaign raised over $600,000, plus later private investment</td>
+<td>Years of delay past its original ship date; company underwent financial restructuring</td>
+</tr>
+</tbody>
+</table>
+<p>Reading price and funding numbers side by side raises an obvious question worth testing directly: did spending more money predict which robot survived? The interactive chart below lets you compare price and funding across all four robots and check that hypothesis for yourself.</p>
+<h4 id="diagram-robot-price-and-funding-comparison-chart">Diagram: Robot Price and Funding Comparison Chart</h4>
+<iframe src="../../sims/robot-funding-price-outcome-chart/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Robot Price and Funding Comparison Chart</summary>
+<p>Type: chart
+<strong>sim-id:</strong> robot-funding-price-outcome-chart<br/>
+<strong>Library:</strong> Chart.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Analyze (L4)
+Bloom Taxonomy Verb: compare, examine</p>
+<p>Learning objective: Compare the approximate consumer price and approximate total funding raised across the four robots, and examine whether either figure predicted a robot's commercial outcome.</p>
+<p>Chart type: Grouped bar chart with a toggle between two data views, "Price" and "Funding"</p>
+<p>Purpose: Show that a high price or a large funding total did not guarantee commercial survival, reinforcing the chapter's comparison of business outcomes</p>
+<p>X-axis: Robot (Cozmo, Vector, Miko, Buddy)
+Y-axis: Price view shows approximate launch price in US dollars; Funding view shows approximate total funding raised, in millions of US dollars; the toggle swaps both the axis label and the bar values</p>
+<p>Data series (Price view, approximate, rounded, for teaching purposes only):
+- Cozmo: about $180
+- Vector: about $250
+- Miko: about $300
+- Buddy: original crowdfunding pledge price around $500, with a higher final retail price after years of delay</p>
+<p>Data series (Funding view, approximate, rounded, for teaching purposes only):
+- Cozmo/Vector (Anki, combined company total): more than $200 million across the company's lifetime
+- Miko (Emotix): tens of millions of dollars across multiple funding rounds
+- Buddy (Blue Frog Robotics): roughly $600,000 from its 2015 Indiegogo campaign, plus later private investment rounds</p>
+<p>Bar color coding by outcome: green for still in active production, orange for discontinued then revived by a new company, red for discontinued, gray for severely delayed or restructured</p>
+<p>Title: "Price and Funding Told Only Part of the Story"
+Legend: outcome color key, positioned top-right</p>
+<p>Interactive controls:
+- Toggle button switches between "Price" and "Funding" views and redraws the bars with a smooth transition
+- Hovering any bar shows an exact tooltip value plus a one-sentence outcome note (for example, hovering the Vector funding bar shows "Anki raised over $200M across its history but shut down in 2019.")
+- Clicking a bar highlights that robot's row in the outcome legend</p>
+<p>Key insights to highlight: an annotation on the Vector/Anki bar reads "Highest funding, still discontinued," and an annotation on the Miko bar reads "Modest funding, still shipping"</p>
+<p>Instructional Rationale: The Analyze-level objective requires examining numeric data for a pattern, or the absence of one, so a toggle-able bar chart with hover tooltips lets a learner test their own hypothesis — does more money mean more success — against the actual approximate figures, rather than being told the conclusion directly.</p>
+<p>Responsive design: chart canvas and toggle control stack vertically below 600 pixels wide; bar labels rotate to remain readable at narrow widths.</p>
+<p>Implementation: Chart.js bar chart with a custom toggle control switching the underlying dataset and axis labels; a small annotation layer draws the two highlighted callout labels.</p>
+</details>
+<p>Money alone does not explain these outcomes, so it helps to compare the robots' actual design decisions instead. The interactive infographic below breaks down each robot's mobility, interaction style, and target buyer so you can see which choices lined up with which outcome.</p>
+<h4 id="diagram-four-robots-four-bets-on-a-screen-face">Diagram: Four Robots, Four Bets on a Screen Face</h4>
+<iframe src="../../sims/robot-design-approach-infographic/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Four Robots, Four Bets on a Screen Face</summary>
+<p>Type: infographic
+<strong>sim-id:</strong> robot-design-approach-infographic<br/>
+<strong>Library:</strong> HTML/CSS/JS<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Analyze (L4)
+Bloom Taxonomy Verb: differentiate, contrast</p>
+<p>Learning objective: Differentiate the four robots' design approaches — face style, mobility, target buyer, and primary interaction mode — and contrast which choices coincided with which business outcome.</p>
+<p>Purpose and main message: Show that "screen-based face" was the one idea all four robots shared, while every other design decision (mobility, camera use, target audience, price tier) varied, and that those other decisions explain most of the difference in outcomes</p>
+<p>Layout: four large cards arranged in a horizontal row, stacking vertically on narrow screens, one per robot, each showing a simplified icon-style illustration of that robot's face and body silhouette</p>
+<p>Data to display per card, revealed on click and collapsed by default:
+- Cozmo: tank-tread mobility, tracked-vehicle body, monochrome-style animated eyes, camera-based cube and face recognition, target buyer general consumer/toy market, outcome discontinued with Anki's 2019 shutdown
+- Vector: stationary/limited mobility, voice-activated always-on presence, cloud-connected AI, color animated face, target buyer tech-enthusiast consumer, outcome discontinued in 2019 and later revived by a new company
+- Miko: simple wheeled rotation rather than full room navigation, round color animated face, curated educational content and voice interaction, target buyer parents of school-age children, outcome still in active production with newer models
+- Buddy: full wheeled mobile base designed for room-to-room navigation, tablet-style animated face, home-monitoring and companionship features, target buyer households wanting a general home companion, outcome severely delayed for years with a financial restructuring</p>
+<p>Interactive elements:
+- Click any card to expand it, revealing the data fields above in a short infobox
+- A "Compare Mobility" toggle highlights just the mobility feature across all four cards at once, from tank treads to a full navigation base
+- A "Compare Outcome" toggle recolors each card's border by outcome (green, orange, red, gray), matching the chart's color key above
+- Hovering a card's face illustration shows a one-line caption naming that robot's specific screen-as-face design detail (for example, Buddy's caption: "Cartoon eyes on a tablet-style face, mounted on a room-navigating base")</p>
+<p>Color coding or visual hierarchy: each card uses a distinct accent color by company (teal for the Anki robots, coral for Miko, purple for Buddy); outcome color only appears when the "Compare Outcome" toggle is active, to avoid mixing two color systems at once</p>
+<p>Responsive behavior: four cards in a row above 900 pixels wide, a two-by-two grid between 600 and 900 pixels, a single-column stack below 600 pixels; expanded infobox content reflows beneath its card at every width</p>
+<p>Instructional Rationale: The Analyze-level objective requires breaking each robot down into comparable design dimensions and contrasting them, so toggled comparison views for mobility and then outcome let a learner examine one dimension at a time across all four robots instead of absorbing four unrelated descriptions.</p>
+<p>Implementation: HTML/CSS grid for the card layout, vanilla JavaScript for click-to-expand behavior and toggle-driven recoloring; no external charting library needed.</p>
+</details>
+<h2 id="what-this-means-for-scoping-your-own-robot-face-project">What This Means for Scoping Your Own Robot Face Project</h2>
+<p>Every decision covered in this chapter, from Cozmo's lift arm to Buddy's navigating base, involved a <strong>hardware cost trade-off</strong>: a design choice to spend a limited budget of money, engineering time, and risk on one feature instead of another, knowing that almost any added capability increases dollar cost, complexity, or both. Buddy's ambitious mobile base is the clearest example — full room navigation is expensive and hard to get right, and that single decision likely did more to delay the robot than its screen-based face ever did.</p>
+<p>This is exactly the kind of decision-making that <strong>robot face design scoping</strong> describes: the deliberate process of choosing which features a project needs and which it can leave out, calibrated to the time, budget, and skill actually available. The four robots in this chapter each scoped their project differently, and their outcomes were not random. Miko, the robot with the simplest mobile base and the most tightly scoped feature set, is also the one still shipping new models today.</p>
+<div class="admonition mascot-encourage">
+<p class="admonition-title">You Don't Need $200 Million to Get This Right</p>
+<p><img alt="Pixel cheers you on" class="mascot-admonition-img" src="../../img/mascot/encouraging.png" />
+If a company with hundreds of employees and hundreds of millions of dollars could still struggle to ship a robot, it might feel intimidating to start your own. Here's the flip side: your project doesn't need a navigating chassis, a cloud service, or a companion app to succeed — it needs one well-scoped screen and a face that clearly says something. That is well within reach with the hardware from Chapter 1.</p>
+</div>
+<p>Three lessons from this chapter are worth carrying into every project in the rest of this book. First, a screen-based face communicates emotion effectively on its own, without needing elaborate mobility layered on top of it — Miko and your own classroom project both prove that a stationary or simply mobile base is enough. Second, funding and crowdfunding numbers are exciting to read about, but they are not proof that a product will ship on time or stay supported; treat big-money headlines the way you would treat any other hype, and scope your own project to what you can actually finish. Third, personality branding like Cozmo's chirps or Miko's encouraging animations is powerful precisely because it is a software cost, not a hardware cost — it is something you, too, can add to a $30 kit with nothing more than careful animation code.</p>
+<h2 id="chapter-summary">Chapter Summary</h2>
+<p>Four companies bet that a screen could stand in for a face, and their outcomes teach a clear lesson about scoping a robot face project responsibly.</p>
+<ul>
+<li>A screen-based robot face renders expression as pixels on a display, and social robots use that pattern to build emotional connection rather than perform mechanical tasks.</li>
+<li>Anki's Cozmo (2016) proved a screen-based face could become a hit mass-market toy, driven by its Cozmo Emotion Engine mapping internal state to expression.</li>
+<li>Anki's Vector (2018) added voice interaction and a companion app, but Anki shut down in 2019 despite more than $200 million in total funding; Vector was later revived by a new company.</li>
+<li>Emotix's Miko (2017) paired a simpler wheeled base with curated educational content, and remains in active production in the educational robotics market today.</li>
+<li>Blue Frog Robotics' Buddy, announced in 2015 and funded through a $600,000-plus Indiegogo crowdfunding campaign, was delayed for years by the difficulty of its full room-navigating mobile base.</li>
+<li>Comparing all four shows that price and funding did not predict commercial outcome — thoughtful hardware cost trade-offs and tight design scoping mattered more.</li>
+<li>A well-scoped, display-only robot face, like the ones you will build in this book, can communicate emotion effectively without the expense and risk that slowed down several of these commercial robots.</li>
+</ul>
+<div class="admonition mascot-celebration">
+<p class="admonition-title">History Down — Now Let's Build</p>
+<p><img alt="Pixel celebrates" class="mascot-admonition-img" src="../../img/mascot/celebration.png" />
+You just compared four real companies, four funding stories, and four very different outcomes — all built on the same core idea you are about to code yourself. Chapter 3 puts that idea into your hands and starts turning your wired-up display into a working face.</p>
+</div>
+<details class="question">
+<summary>Self-Check: Which robot kept shipping? — Click to reveal</summary>
+<p>Emotix's Miko is the robot from this chapter that has remained in active production, releasing newer models into the educational robotics market, while Cozmo and Vector were discontinued when Anki shut down in 2019 and Buddy was delayed for years past its original crowdfunded ship date.</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

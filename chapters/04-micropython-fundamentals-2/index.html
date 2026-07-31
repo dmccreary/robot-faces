@@ -1,0 +1,2451 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Resources for teaching drawing of robot faces with microcontrollers and MicroPython to robotics students.  All content licensed Creative Commons ShareAlike Attribution Noncommercial">
+      
+      
+        <meta name="author" content="Dan McCreary">
+      
+      
+      
+        <link rel="prev" href="../03-micropython-fundamentals-1/">
+      
+      
+        <link rel="next" href="../05-display-coordinate-systems/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>4. MicroPython Fundamentals II: Functions & the FrameBuf Module - Robot Faces</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/mascot.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-FPTNK1XNJR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-FPTNK1XNJR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-FPTNK1XNJR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#642580" data-md-color-accent="#41BAC1">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#micropython-fundamentals-ii-functions-the-framebuf-module" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robot Faces" class="md-header__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Faces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robot Faces" class="md-nav__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    Robot Faces
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Chapters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of Chapters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-hardware-electronics-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Hardware & Electronics Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-micropython-fundamentals-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-storing-data-to-making-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Storing Data to Making Decisions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-decisions-conditional-statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making Decisions: Conditional Statements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-packaging-code-you-can-reuse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions: Packaging Code You Can Reuse
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-parameter-values-sensible-defaults-optional-overrides" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default Parameter Values: Sensible Defaults, Optional Overrides
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-return-values-handing-back-more-than-one-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple Return Values: Handing Back More Than One Answer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multiple Return Values: Handing Back More Than One Answer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-predict-the-return-value-tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Predict the Return Value Tracer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#global-versus-local-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Global Versus Local Scope
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Global Versus Local Scope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-global-vs-local-scope-call-stack-explorer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Global vs Local Scope Call Stack Explorer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docstring-convention-documenting-what-a-function-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docstring Convention: Documenting What a Function Does
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thinking-in-bits-bitwise-operators-and-bit-shifting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thinking in Bits: Bitwise Operators and Bit Shifting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Thinking in Bits: Bitwise Operators and Bit Shifting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-bitwise-operator-and-shift-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Bitwise Operator and Shift Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string-formatting-building-readable-debug-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      String Formatting: Building Readable Debug Output
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-first-look-at-the-framebuf-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      A First Look at the FrameBuf Module
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-display-coordinate-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-basic-drawing-primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-ellipse-polygon-drawing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Ellipse & Polygon Drawing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-framebuf-version-history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-facial-anatomy-layout-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-emotion-theory-core-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Emotion Theory & the Core Expression Set
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-expression-design-readability-hri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-animating-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Animating Expressions: Timing & Motion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-interactive-controls-inputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-expression-menu-live-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-porting-faces-color-display/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Porting Faces to a Color Display
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-computational-thinking-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lessons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Lessons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    History of Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/screen-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/drawing-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Drawing Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/ellipse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ellipse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/polygon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polygon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/basic-face-layouts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Face Layouts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eye-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eyebrows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eyebrows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion-types.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emotion Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../parts-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Faces Parts List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About The Robot Faces Book
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Learning Graph
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Learning Graph
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/starting-concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Starting Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/course-description-assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quality-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/taxonomy-distribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy Distribution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/mascot-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mascot Test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Stories
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Stories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-storing-data-to-making-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Storing Data to Making Decisions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-decisions-conditional-statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making Decisions: Conditional Statements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-packaging-code-you-can-reuse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions: Packaging Code You Can Reuse
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-parameter-values-sensible-defaults-optional-overrides" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default Parameter Values: Sensible Defaults, Optional Overrides
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-return-values-handing-back-more-than-one-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple Return Values: Handing Back More Than One Answer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multiple Return Values: Handing Back More Than One Answer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-predict-the-return-value-tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Predict the Return Value Tracer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#global-versus-local-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Global Versus Local Scope
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Global Versus Local Scope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-global-vs-local-scope-call-stack-explorer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Global vs Local Scope Call Stack Explorer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docstring-convention-documenting-what-a-function-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docstring Convention: Documenting What a Function Does
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thinking-in-bits-bitwise-operators-and-bit-shifting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thinking in Bits: Bitwise Operators and Bit Shifting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Thinking in Bits: Bitwise Operators and Bit Shifting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-bitwise-operator-and-shift-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Bitwise Operator and Shift Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string-formatting-building-readable-debug-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      String Formatting: Building Readable Debug Output
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-first-look-at-the-framebuf-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      A First Look at the FrameBuf Module
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<hr />
+<p>title: MicroPython Fundamentals II: Functions &amp; the FrameBuf Module
+description: An introduction to conditional logic, function definitions with parameters and return values, bitwise operators, string formatting, and a first conceptual look at the FrameBuf module.
+generated_by: claude skill chapter-content-generator
+date: 2026-07-27 14:12:02
+version: 0.09</p>
+<hr />
+<h1 id="micropython-fundamentals-ii-functions-the-framebuf-module">MicroPython Fundamentals II: Functions &amp; the FrameBuf Module</h1>
+<h2 id="summary">Summary</h2>
+<p>Building on Part I, this chapter introduces conditional statements, function definitions with parameters and return values, bitwise operators and bit shifting, and string formatting — then closes with a first look at the FrameBuf module that every display-drawing chapter from here on depends on. After completing this chapter, students will be able to write a parameterized MicroPython function and explain what the FrameBuf module is for.</p>
+<h2 id="concepts-covered">Concepts Covered</h2>
+<p>This chapter covers the following 12 concepts from the learning graph:</p>
+<ol>
+<li>Function Definition</li>
+<li>Function Parameter</li>
+<li>Function Return Value</li>
+<li>Conditional Statement</li>
+<li>Bitwise Operator</li>
+<li>Bit Shifting</li>
+<li>FrameBuf Module</li>
+<li>String Formatting</li>
+<li>Default Parameter Value</li>
+<li>Multiple Return Values</li>
+<li>Global Versus Local Scope</li>
+<li>Docstring Convention</li>
+</ol>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This chapter builds on concepts from:</p>
+<ul>
+<li><a href="../03-micropython-fundamentals-1/">Chapter 3: MicroPython Fundamentals I: Syntax, Data &amp; Loops</a></li>
+</ul>
+<hr />
+<h2 id="from-storing-data-to-making-decisions">From Storing Data to Making Decisions</h2>
+<div class="admonition mascot-welcome">
+<p class="admonition-title">Ready for the Fun Part</p>
+<p><img alt="Pixel waves hello" class="mascot-admonition-img" src="../../img/mascot/welcome.png" />
+Chapter 3 gave you variables, loops, and collections — the raw materials of a program. This chapter turns those materials into reusable tools: code that makes decisions and functions you can call again and again. By the end, you'll understand the exact building block <code>draw_face()</code> is made from.</p>
+</div>
+<p>Chapter 3 ended with <code>happy_face</code>, a dictionary bundling <code>eye_size</code>, <code>eyebrow_angle</code>, and <code>mouth_curve</code> into one named expression. That dictionary is data, sitting quietly until something acts on it. This chapter teaches the two skills that turn data like that into behavior: <strong>conditional statements</strong>, which let a program choose between different actions, and <strong>function definitions</strong>, which package a block of code under one reusable name.</p>
+<p>Everything in this chapter points toward a single destination: a function called <code>draw_face()</code>, introduced properly starting in Chapter 9, that reads a set of parameters and redraws an entire expression from them. You will not write that function yet. Instead, you will build every skill it depends on — decisions, parameters, return values, and a conceptual look at the frame buffer a face gets drawn into — on smaller, simpler examples first.</p>
+<h2 id="making-decisions-conditional-statements">Making Decisions: Conditional Statements</h2>
+<p>Every program you wrote in Chapter 3 ran the exact same lines every time, from top to bottom, with no branching. Real robot-face code needs to behave differently depending on circumstances — dimming the display when a battery runs low, or choosing a different expression depending on how recently a button was pressed. A <strong>conditional statement</strong> is a block of code that runs only when a specified condition evaluates to <code>True</code>, using the boolean data type you met in Chapter 3.</p>
+<p>MicroPython spells a conditional statement with the keywords <code>if</code>, <code>elif</code> (short for "else if"), and <code>else</code>. Only one branch of an <code>if</code>/<code>elif</code>/<code>else</code> chain ever runs: MicroPython checks each condition from top to bottom and executes the first branch whose condition is <code>True</code>, skipping every branch after it.</p>
+<p>Here's a bridge before the code: this example checks a robot's battery level and prints a different message depending on which range that level falls into.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">battery_level</span> <span class="o">=</span> <span class="mi">45</span>
+
+<span class="k">if</span> <span class="n">battery_level</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Battery low - dim the display&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">battery_level</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Battery normal - full brightness&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Battery full - show a charging animation&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Running that code prints <code>Battery normal - full brightness</code>, because <code>45</code> fails the first condition (<code>45 &lt; 20</code> is <code>False</code>) but passes the second (<code>45 &lt; 60</code> is <code>True</code>). The <code>else</code> branch is a catch-all: it runs only when every earlier condition was <code>False</code>, and it never needs a condition of its own.</p>
+<p>Conditional statements are built from <strong>comparison operators</strong>, which compare two values and produce a boolean result — exactly the kind of value Chapter 3's boolean data type was designed to hold. The table below is worth skimming once as a reference rather than memorizing right away.</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Meaning</th>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>==</code></td>
+<td>Equal to</td>
+<td><code>battery_level == 100</code></td>
+<td><code>True</code> if exactly 100</td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td>Not equal to</td>
+<td><code>battery_level != 0</code></td>
+<td><code>True</code> if not zero</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>Less than</td>
+<td><code>battery_level &lt; 20</code></td>
+<td><code>True</code> if under 20</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>Greater than</td>
+<td><code>battery_level &gt; 80</code></td>
+<td><code>True</code> if over 80</td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>Less than or equal to</td>
+<td><code>battery_level &lt;= 20</code></td>
+<td><code>True</code> if 20 or under</td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>Greater than or equal to</td>
+<td><code>battery_level &gt;= 80</code></td>
+<td><code>True</code> if 80 or over</td>
+</tr>
+</tbody>
+</table>
+<p>You can also combine multiple conditions with <code>and</code> and <code>or</code> — <code>battery_level &gt; 20 and battery_level &lt; 60</code> is <code>True</code> only when both sides are <code>True</code>. Later chapters lean on this pattern constantly, so it is worth trying a few combinations in Thonny's REPL now.</p>
+<h2 id="functions-packaging-code-you-can-reuse">Functions: Packaging Code You Can Reuse</h2>
+<p>Copying and pasting the battery-level conditional above every place a program needs it would be tedious and error-prone — change the low-battery threshold in one copy, forget the other three, and now your robot behaves inconsistently. A <strong>function definition</strong> solves this by giving a block of code a name, so it can be written once and reused anywhere.</p>
+<p>A function definition starts with the <code>def</code> keyword, followed by a name, a pair of parentheses, and a colon; every line in the function's body is indented one level, exactly the way a loop's body is indented. Writing a function definition does not run its code — MicroPython only runs the body when the function is later <em>called</em> by writing its name followed by parentheses.</p>
+<p>A bridge before the code: this function packages the battery-message logic from the previous section under the name <code>describe_battery</code>, so it can be called instead of retyped.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">describe_battery</span><span class="p">(</span><span class="n">level</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Battery low - dim the display&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Battery normal - full brightness&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Battery full - show a charging animation&quot;</span><span class="p">)</span>
+
+<span class="n">describe_battery</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">describe_battery</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>The word <code>level</code> inside the parentheses is a <strong>function parameter</strong>: a named placeholder that receives whatever value is passed in when the function is called. Calling <code>describe_battery(45)</code> sends <code>45</code> into the function as <code>level</code>, and calling it again with <code>90</code> reuses the exact same code with a different value — the whole point of writing a function in the first place.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">One Function, Every Battery Level</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Notice what just happened: one function definition now handles every possible battery level, instead of three copies of the same conditional scattered through your program. This is exactly the trick <code>draw_face()</code> will use later — one function, many expressions, driven entirely by the values passed in as parameters.</p>
+</div>
+<p>Printing a message from inside a function is useful, but it only ever displays text — it hands nothing back to the code that called it. A <strong>function return value</strong> is a value a function sends back to its caller using the <code>return</code> keyword, so the result can be stored in a variable, printed, or passed into another function.</p>
+<p>Here's the bridge: this version of the battery function returns a short status word instead of printing a full sentence, letting the caller decide what to do with it.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">battery_status</span><span class="p">(</span><span class="n">level</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;low&quot;</span>
+    <span class="k">elif</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;normal&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;full&quot;</span>
+
+<span class="n">status</span> <span class="o">=</span> <span class="n">battery_status</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Current battery status:&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p><code>return</code> immediately exits the function and hands the matching string back to whoever called it — here, that value is captured in the variable <code>status</code> and printed afterward. Unlike <code>print()</code>, which only displays a value on the screen, <code>return</code> makes a value available for further use elsewhere in the program, which is why almost every useful function you write from now on will end with a <code>return</code> statement.</p>
+<h2 id="default-parameter-values-sensible-defaults-optional-overrides">Default Parameter Values: Sensible Defaults, Optional Overrides</h2>
+<p>Not every parameter needs a value supplied at every call. A <strong>default parameter value</strong> is a fallback value assigned in the function definition itself, used automatically whenever the caller leaves that argument out.</p>
+<p>A bridge before the code: this function sets a display's brightness, using <code>80</code> as a sensible default so most calls can omit the argument entirely.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_brightness</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">80</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Setting display brightness to&quot;</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+
+<span class="n">set_brightness</span><span class="p">()</span>
+<span class="n">set_brightness</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>The first call, <code>set_brightness()</code>, supplies no argument at all, so MicroPython falls back to the default and prints <code>Setting display brightness to 80</code>. The second call, <code>set_brightness(50)</code>, overrides that default and prints <code>50</code> instead. Default parameter values let a function support a common case with a short, simple call while still allowing a caller to be specific when needed — a pattern later chapters use constantly for expression functions where most parameters usually stay the same.</p>
+<h2 id="multiple-return-values-handing-back-more-than-one-answer">Multiple Return Values: Handing Back More Than One Answer</h2>
+<p>Some calculations naturally produce more than one useful result at once — a pixel coordinate, for instance, needs both an X position and a Y position. MicroPython lets a single <code>return</code> statement send back <strong>multiple return values</strong> separated by commas, which the language automatically bundles into a tuple, the same unchangeable collection type introduced in Chapter 3.</p>
+<p>Here's the bridge: this function calculates the center point of a rectangular screen and returns both coordinates at once.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">screen_center</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">width</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span> <span class="o">=</span> <span class="n">screen_center</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Center point:&quot;</span><span class="p">,</span> <span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>That code prints <code>Center point: 64 32</code> — <code>screen_center</code> returns the tuple <code>(64, 32)</code>, and writing two variable names on the left of the equals sign unpacks it, assigning <code>64</code> to <code>center_x</code> and <code>32</code> to <code>center_y</code> in one line. This exact pattern — a function returning an (x, y) pair — reappears constantly once drawing chapters begin computing pixel positions for eyes and pupils.</p>
+<p>Now that functions, parameters, defaults, and multiple return values have all been introduced, tracing what a function actually returns — before running it — is a skill worth practicing deliberately.</p>
+<h4 id="diagram-predict-the-return-value-tracer">Diagram: Predict the Return Value Tracer</h4>
+<iframe src="../../sims/predict-return-value-tracer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Predict the Return Value Tracer</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> predict-return-value-tracer<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Apply (L3)
+Bloom Taxonomy Verb: execute, demonstrate</p>
+<p>Learning objective: Execute a short MicroPython function definition mentally, given specific argument values, and demonstrate correct prediction of its return value, including cases using a default parameter value or multiple return values.</p>
+<p>Canvas layout:
+- Left 55%: a short function definition (selectable from four pre-written examples) with a call site shown below it
+- Right 45%: a "Predict" input area, a call-arguments readout, and a "Reveal" result panel</p>
+<p>Visual elements:
+- Code listing showing the function definition and one call, with the call's argument values highlighted
+- A "Predict the return value" text input box
+- A result panel, hidden until the learner submits a prediction, showing the actual returned value(s) and a short explanation of how the function reached that result
+- A running score readout ("3 of 4 correct") once more than one example has been tried</p>
+<p>Interactive controls:
+- Dropdown: "Example" with four choices — (1) <code>battery_status(level)</code> with plain if/elif/else, (2) <code>set_brightness(level=80)</code> called with no argument, exercising the default parameter value, (3) <code>screen_center(width, height)</code> returning two values, (4) <code>set_brightness(level=80)</code> called with an explicit override value
+- Text input for the learner's predicted return value
+- "Check Prediction" button reveals the actual result and explanation
+- "Next Example" button advances to the next of the four examples
+- "Reset" button returns to example 1</p>
+<p>Default parameters: Example 1 selected, prediction field empty, result panel hidden</p>
+<p>Data Visibility Requirements:
+  Stage 1: Show the function definition and the exact call being made, with argument values visible
+  Stage 2: Learner types a prediction and clicks Check Prediction
+  Stage 3: Reveal panel shows the actual return value(s), and for the multiple-return-value example, shows the returned tuple before and after unpacking into two variable names
+  Stage 4: Score readout updates and the learner can advance to the next example</p>
+<p>Interaction: Step-through with Predict/Check/Next controls, not automatic animation</p>
+<p>Instructional Rationale: The Apply-level objective (execute, demonstrate) requires the learner to actively trace a function call to its result before seeing the answer confirmed, which a predict-then-reveal pattern supports directly. Including a default-parameter example and a multiple-return-value example in the same rotation lets one interaction reinforce three related concepts instead of testing them in isolation.</p>
+<p>Responsive design: code listing and prediction panel stack vertically below 600 pixels wide; the dropdown remains fully visible at every width.</p>
+<p>Implementation: p5.js for layout and rendering; a small lookup table maps each of the four examples to its correct return value and explanation string, checked against the learner's typed prediction with simple string comparison.</p>
+</details>
+<h2 id="global-versus-local-scope">Global Versus Local Scope</h2>
+<p>Variables created inside a function behave differently from variables created outside one, and that difference causes one of the most common bugs a new programmer writes. <strong>Global versus local scope</strong> describes where in a program a variable's name is visible and usable: a variable created inside a function is <strong>local</strong>, existing only while that function runs and invisible everywhere else, while a variable created outside every function is <strong>global</strong>, visible throughout the entire program.</p>
+<p>The trap appears the moment a function tries to <em>change</em> a global variable using a plain assignment. Here's a bridge before the code: this example defines <code>eye_size</code> as a global variable, then tries to grow it from inside a function.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">eye_size</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">def</span> <span class="nf">grow_eyes</span><span class="p">():</span>
+    <span class="n">eye_size</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside function:&quot;</span><span class="p">,</span> <span class="n">eye_size</span><span class="p">)</span>
+
+<span class="n">grow_eyes</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Outside function:&quot;</span><span class="p">,</span> <span class="n">eye_size</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>This prints <code>Inside function: 20</code> followed by <code>Outside function: 10</code> — the global <code>eye_size</code> never actually changed. The line <code>eye_size = 20</code> inside the function did not modify the global variable at all; it silently created a brand-new <em>local</em> variable that happens to share the same name, and that local copy disappeared the moment <code>grow_eyes()</code> finished running.</p>
+<div class="admonition mascot-warning">
+<p class="admonition-title">The Global Variable That Wasn't</p>
+<p><img alt="Pixel warns you" class="mascot-admonition-img" src="../../img/mascot/warning.png" />
+This is one of the sneakiest bugs in beginning Python: assigning to a name inside a function always creates a new local variable, even if a global variable with the same name already exists. MicroPython never warns you — it just quietly uses the local copy, and your global stays untouched.</p>
+</div>
+<p>Fixing this requires telling MicroPython, explicitly, that an assignment inside a function should modify the global variable instead of creating a local one. The <code>global</code> keyword does exactly that, declared on its own line before the variable is used.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">eye_size</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">def</span> <span class="nf">grow_eyes</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">eye_size</span>
+    <span class="n">eye_size</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="n">grow_eyes</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Outside function:&quot;</span><span class="p">,</span> <span class="n">eye_size</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>With <code>global eye_size</code> declared first, the assignment inside <code>grow_eyes()</code> now modifies the same variable defined outside the function, and this version correctly prints <code>20</code>. As a general habit, most functions in this book pass values in as parameters and hand results back with <code>return</code> instead of reaching out to modify a global variable — it keeps a function's behavior easier to predict, since everything it depends on is visible right there in its parameter list.</p>
+<p>The table below summarizes the difference now that both cases have been demonstrated in code.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Local Variable</th>
+<th>Global Variable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Created</td>
+<td>Inside a function body</td>
+<td>Outside every function</td>
+</tr>
+<tr>
+<td>Visible from</td>
+<td>Only inside that function</td>
+<td>Anywhere in the program</td>
+</tr>
+<tr>
+<td>Lifetime</td>
+<td>Exists only while the function runs</td>
+<td>Exists for the whole program run</td>
+</tr>
+<tr>
+<td>Modifying from inside a function</td>
+<td>Plain assignment works normally</td>
+<td>Requires a <code>global</code> declaration first</td>
+</tr>
+</tbody>
+</table>
+<p>Watching a function's local variables appear and disappear, separately from a program's global variables, makes this rule far easier to remember than reading about it alone.</p>
+<h4 id="diagram-global-vs-local-scope-call-stack-explorer">Diagram: Global vs Local Scope Call Stack Explorer</h4>
+<iframe src="../../sims/scope-call-stack-explorer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Global vs Local Scope Call Stack Explorer</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> scope-call-stack-explorer<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Analyze (L4)
+Bloom Taxonomy Verb: differentiate, examine</p>
+<p>Learning objective: Differentiate global variables from local variables by examining, step by step, which variable a given assignment inside a function actually modifies, including the case where a local variable shadows a global one of the same name.</p>
+<p>Canvas layout:
+- Left 60%: the <code>grow_eyes()</code> code example (toggle between the buggy version without <code>global</code> and the fixed version with <code>global eye_size</code>) with the current executing line highlighted
+- Right 40%: two stacked boxes — a "Global Scope" box at the top listing global variables and their current values, and a "Local Scope: grow_eyes()" box below it that appears only while the function is executing</p>
+<p>Visual elements:
+- Global Scope box, always visible, showing <code>eye_size = 10</code> before the call
+- Local Scope box that animates into view when <code>grow_eyes()</code> is called and animates out when it returns
+- In the buggy version, the Local Scope box shows its own <code>eye_size = 20</code>, with a visual connector confirming it is a separate variable from the global one
+- In the fixed version, no separate local <code>eye_size</code> appears; instead an arrow points from the local scope directly into the Global Scope box's <code>eye_size</code>, which updates to 20 in place</p>
+<p>Interactive controls:
+- Toggle: "Version: Without global / With global"
+- "Step" button advances execution one line at a time
+- "Reset" button returns to the first line, global scope showing only <code>eye_size = 10</code></p>
+<p>Default parameters: "Without global" version selected, step 0, Global Scope showing <code>eye_size = 10</code>, Local Scope box hidden</p>
+<p>Data Visibility Requirements:
+  Stage 1: Show only the Global Scope box with eye_size = 10, function not yet called
+  Stage 2: grow_eyes() is called; Local Scope box appears, initially empty
+  Stage 3: the assignment line executes; in the buggy version a local eye_size = 20 appears in the Local Scope box while the Global Scope box's eye_size stays 10; in the fixed version the Global Scope box's eye_size updates directly to 20
+  Stage 4: the function returns; Local Scope box disappears; final print statement shows the Global Scope box's current eye_size value</p>
+<p>Instructional Rationale: The Analyze-level objective requires examining exactly which variable an assignment affects and differentiating a shadowed local variable from the global it appears to modify, so a two-box scope visualization with step-by-step execution makes the otherwise invisible mechanism of variable shadowing directly observable.</p>
+<p>Responsive design: Global Scope and Local Scope boxes stack vertically below 600 pixels wide, appearing beneath the code listing rather than beside it.</p>
+<p>Implementation: p5.js for the code listing, scope boxes, and step-by-step highlighting; a small state object tracks which scope currently owns each variable name and drives the box animations.</p>
+</details>
+<h2 id="docstring-convention-documenting-what-a-function-does">Docstring Convention: Documenting What a Function Does</h2>
+<p>A function's name and parameters hint at what it does, but they rarely explain everything a future reader — including you, weeks later — needs to know. The <strong>docstring convention</strong> is the standard Python practice of writing a short, triple-quoted string as the very first line inside a function's body, describing what the function does, what its parameters mean, and what it returns.</p>
+<p>Here's a bridge before the code: this version of <code>battery_status</code> adds a one-line docstring describing its purpose, directly beneath the <code>def</code> line.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">battery_status</span><span class="p">(</span><span class="n">level</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return &#39;low&#39;, &#39;normal&#39;, or &#39;full&#39; based on the battery level (0-100).&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;low&quot;</span>
+    <span class="k">elif</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;normal&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;full&quot;</span>
+</code></pre></div></td></tr></table></div>
+<p>A docstring is just a string literal — MicroPython does not execute it as a command — but placing it directly after the <code>def</code> line lets tools and other programmers find it instantly. This book uses short, one-line docstrings throughout; longer functions in professional Python code often use several lines describing each parameter in detail, but a single clear sentence is enough for most of the functions you will write in this course.</p>
+<h2 id="thinking-in-bits-bitwise-operators-and-bit-shifting">Thinking in Bits: Bitwise Operators and Bit Shifting</h2>
+<p>Every value stored in a Pico's memory is ultimately a sequence of individual bits, each one either a <code>0</code> or a <code>1</code>, and MicroPython gives you tools to work with those bits directly instead of treating a number only as a whole. A <strong>bitwise operator</strong> compares or combines two numbers one bit position at a time, rather than treating each number as a single value the way <code>+</code> or <code>*</code> do.</p>
+<p>The three bitwise operators you will meet most often are <code>&amp;</code> (AND), <code>|</code> (OR), and <code>^</code> (XOR). AND keeps a <code>1</code> only where both numbers have a <code>1</code> in that position; OR keeps a <code>1</code> where either number has a <code>1</code>; XOR keeps a <code>1</code> only where the two numbers <em>disagree</em>. Here's a bridge before the code: this example applies all three operators to the same pair of four-bit numbers so you can compare their results directly.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">a</span> <span class="o">=</span> <span class="mb">0b1100</span>  <span class="c1"># binary for 12</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mb">0b1010</span>  <span class="c1"># binary for 10</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span>   <span class="c1"># AND: 0b1000 -&gt; 8</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span>   <span class="c1"># OR:  0b1110 -&gt; 14</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">)</span>   <span class="c1"># XOR: 0b0110 -&gt; 6</span>
+</code></pre></div></td></tr></table></div>
+<p>The <code>0b</code> prefix tells MicroPython that the digits after it are binary, not decimal — writing numbers this way makes each bit position visible, which is much harder to see in ordinary decimal notation. The table below summarizes what each operator keeps, reinforcing the pattern the code above just demonstrated.</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Name</th>
+<th>Keeps a 1 when...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&amp;</code></td>
+<td>AND</td>
+<td>Both bits are 1</td>
+</tr>
+<tr>
+<td><code>\|</code></td>
+<td>OR</td>
+<td>At least one bit is 1</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>XOR</td>
+<td>The two bits are different</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bit shifting</strong> moves every bit in a number a fixed number of positions to the left or right, using the <code>&lt;&lt;</code> and <code>&gt;&gt;</code> operators. Shifting left by one position doubles a number, the same as multiplying by 2; shifting right by one position halves it, the same as dividing by 2 and dropping any remainder.</p>
+<p>Here's the bridge for this next example: it shifts the same starting value both directions and prints the result of each.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">value</span> <span class="o">=</span> <span class="mb">0b00000101</span>   <span class="c1"># 5</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">value</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">)</span>     <span class="c1"># shift left 2 places -&gt; 0b00010100 -&gt; 20</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span>     <span class="c1"># shift right 1 place  -&gt; 0b00000010 -&gt; 2</span>
+</code></pre></div></td></tr></table></div>
+<p>Shifting left by 2 is the same as multiplying by 2 twice (5 × 2 × 2 = 20), and shifting right by 1 is the same as dividing by 2 once and discarding the remainder (5 ÷ 2 = 2.5, rounded down to 2).</p>
+<div class="admonition mascot-tip">
+<p class="admonition-title">You'll See This Trick Again in Chapter 15</p>
+<p><img alt="Pixel gives a tip" class="mascot-admonition-img" src="../../img/mascot/tip.png" />
+Bitwise operators and shifting might feel abstract right now, but hold onto this example — Chapter 15's <code>color565()</code> function packs a red, a green, and a blue value into one single number by shifting each color into its own slot and combining them with <code>|</code>. You already know every operator that trick needs.</p>
+</div>
+<p>Watching individual bits slide left and right is far easier to follow than reading binary numbers on a page, so this next diagram lets you experiment directly with both kinds of operators.</p>
+<h4 id="diagram-bitwise-operator-and-shift-visualizer">Diagram: Bitwise Operator and Shift Visualizer</h4>
+<iframe src="../../sims/bitwise-shift-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Bitwise Operator and Shift Visualizer</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> bitwise-shift-visualizer<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Apply (L3)
+Bloom Taxonomy Verb: calculate, demonstrate</p>
+<p>Learning objective: Calculate the result of applying AND, OR, XOR, left-shift, or right-shift to an 8-bit value, and demonstrate how each bit position changes by adjusting operand values directly.</p>
+<p>Canvas layout:
+- Top: eight individual bit toggles (0 or 1) for an operand labeled "A", and, when a two-operand operator is selected, a second row of eight toggles for operand "B"
+- Middle: an operator selector and a shift-amount stepper (for shift operators only)
+- Bottom: a result row of eight bits, plus the decimal value of A, B (if shown), and the result</p>
+<p>Visual elements:
+- Each bit rendered as a clickable square showing 0 or 1, with A in teal and B in coral
+- For <code>&amp;</code>, <code>|</code>, and <code>^</code>: a per-column highlight showing which two input bits combined to produce each result bit
+- For <code>&lt;&lt;</code> and <code>&gt;&gt;</code>: an animation showing bits physically sliding left or right by the selected shift amount, with new zero-bits appearing on the vacated side
+- Decimal value readouts beneath each bit row, updating live</p>
+<p>Interactive controls:
+- Operator selector: AND, OR, XOR, Left Shift, Right Shift
+- Eight clickable toggles for operand A (and operand B when relevant)
+- Shift-amount stepper, 0 to 7, shown only for the two shift operators
+- "Reset" button restores A = 0b00000101, B = 0b00000011, operator AND</p>
+<p>Default parameters: A = 0b00000101 (5), B = 0b00000011 (3), operator AND</p>
+<p>Data Visibility Requirements:
+  Stage 1: Show operand A and operand B as toggleable bits with their decimal values
+  Stage 2: Show the selected operator applied column by column (AND/OR/XOR) or as a slide (shift), with the result bits updating live
+  Stage 3: Show the result row's decimal value, recalculated immediately after any toggle, operator change, or shift-amount change</p>
+<p>Interaction: Direct manipulation — every toggle, operator change, and shift-amount change immediately recalculates and redraws the result row</p>
+<p>Instructional Rationale: An Apply-level objective (calculate, demonstrate) is best served by direct parameter manipulation rather than a passive animation, since the learner must adjust real bit values and immediately see the calculated consequence to build an accurate mental model of each operator.</p>
+<p>Responsive design: bit toggle rows shrink their square size on narrow screens while remaining individually tappable; the operator selector and stepper stack above the bit rows below 500 pixels wide.</p>
+<p>Implementation: p5.js for the bit-toggle grid and shift animation; results computed directly in JavaScript using its native bitwise operators, mirroring MicroPython's behavior exactly for 8-bit values.</p>
+</details>
+<h2 id="string-formatting-building-readable-debug-output">String Formatting: Building Readable Debug Output</h2>
+<p>Printing several variables together, like <code>print("Eye size:", eye_size, "Battery:", battery)</code>, works but produces output that is easy to misread once a program prints many values in a debugging session. <strong>String formatting</strong> builds a single, precisely worded string by inserting variable values directly into specific positions inside a string literal.</p>
+<p>MicroPython's preferred style is the f-string: a string literal prefixed with the letter <code>f</code>, where any expression inside curly braces <code>{ }</code> is evaluated and inserted directly into the text. Here's a bridge before the code: this example builds one clean debug line from two variables instead of printing them as separate comma-separated arguments.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">eye_size</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">battery</span> <span class="o">=</span> <span class="mi">82</span>
+
+<span class="n">debug_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Eye size: </span><span class="si">{</span><span class="n">eye_size</span><span class="si">}</span><span class="s2">px, Battery: </span><span class="si">{</span><span class="n">battery</span><span class="si">}</span><span class="s2">%&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">debug_message</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>That code prints <code>Eye size: 14px, Battery: 82%</code> — MicroPython replaces each <code>{eye_size}</code> and <code>{battery}</code> with the variable's current value at the moment the f-string is built, and everything else in the string appears exactly as written. An older alternative, the <code>.format()</code> method, achieves the same result with placeholder curly braces filled in by arguments passed to <code>.format()</code>; f-strings are generally shorter and easier to read, so this book uses them throughout.</p>
+<p>You can also control how a number is displayed inside an f-string by adding a format specifier after a colon, such as <code>{value:.1f}</code> to show exactly one digit after a decimal point — a small trick that becomes useful once later chapters start printing timing measurements.</p>
+<h2 id="a-first-look-at-the-framebuf-module">A First Look at the FrameBuf Module</h2>
+<p>Every conditional statement, function, and bitwise operator introduced so far has worked with plain numbers and text — nothing has touched a display yet. That changes, conceptually, right now. The <strong>FrameBuf module</strong> is MicroPython's built-in tool for working with a <strong>frame buffer</strong>: an in-memory rectangle of pixels that a program draws into before that image is ever sent to a real screen.</p>
+<p>Think of a frame buffer as a scratchpad the size of the display, held entirely in the Pico's memory. A program draws shapes into that scratchpad — an eye here, an eyebrow there — completely invisible to anyone looking at the actual screen, and only once every shape is finished does the program copy the whole scratchpad to the display in one step. Drawing this way avoids the flicker and half-finished shapes a viewer would see if every single pixel change were sent to the screen the instant it happened.</p>
+<p>Importing the module follows the same pattern as <code>time</code> and <code>machine</code> from Chapter 3.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">framebuf</span>
+
+<span class="n">buffer</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">//</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">fb</span> <span class="o">=</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">FrameBuffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">MONO_HLSB</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>This code creates a tiny 8-by-8-pixel frame buffer, far smaller than either display in this book, purely to show the module's basic shape. <code>bytearray(8 * 8 // 8)</code> reserves exactly enough raw memory to hold 64 one-bit pixels, and <code>framebuf.FrameBuffer(...)</code> wraps that memory with width, height, and pixel-format information so MicroPython knows how to interpret it. The resulting object, <code>fb</code>, is the drawing surface itself — but this chapter stops here on purpose.</p>
+<div class="admonition mascot-encourage">
+<p class="admonition-title">You Don't Need Coordinates Yet</p>
+<p><img alt="Pixel cheers you on" class="mascot-admonition-img" src="../../img/mascot/encouraging.png" />
+If that <code>FrameBuffer(...)</code> line looks mysterious, that's completely expected — you're not meant to fully understand it yet. Chapter 5 introduces the coordinate system a frame buffer uses, and Chapters 6 and 7 hand you the actual drawing methods. For now, just hold onto the big idea: a frame buffer is memory shaped like a screen.</p>
+</div>
+<p>A few facts about the FrameBuf module are worth remembering even before you draw a single pixel with it:</p>
+<ul>
+<li>A frame buffer lives entirely in memory — nothing appears on a physical display until that memory is explicitly sent to one.</li>
+<li>The same <code>framebuf</code> module works with both target displays in this book, despite their very different pixel formats.</li>
+<li>Drawing methods like <code>fill()</code>, <code>pixel()</code>, <code>ellipse()</code>, and <code>poly()</code> all operate on a frame buffer object, not on the display directly — Chapters 6 and 7 introduce them one at a time.</li>
+<li>A pixel format constant, such as <code>MONO_HLSB</code> above, tells the frame buffer how many bits each pixel uses and how those bits are packed — a detail that becomes important once the color display's RGB565 format arrives in Chapter 15.</li>
+</ul>
+<h2 id="chapter-summary">Chapter Summary</h2>
+<p>You now know how to make a MicroPython program branch, reuse logic through functions, work with raw bits, and picture what a frame buffer is — everything <code>draw_face()</code> will be built from later in this book.</p>
+<ul>
+<li>Conditional statements (<code>if</code>/<code>elif</code>/<code>else</code>) let a program run different code depending on whether a boolean condition is <code>True</code>, using comparison operators like <code>&lt;</code>, <code>&gt;</code>, and <code>==</code>.</li>
+<li>A function definition (<code>def</code>) packages a block of code under a reusable name; function parameters receive values passed in at the call site, and <code>return</code> hands a result back to the caller.</li>
+<li>A default parameter value lets a function support a common case with a short call, while still letting a caller override it when needed.</li>
+<li>A function can return multiple values at once, automatically bundled into a tuple and unpacked with multiple variable names.</li>
+<li>Local variables created inside a function are invisible outside it and disappear when the function returns; modifying a global variable from inside a function requires an explicit <code>global</code> declaration, or the assignment silently creates a shadowing local variable instead.</li>
+<li>A docstring, a triple-quoted string as a function's first line, documents what the function does for future readers.</li>
+<li>Bitwise operators (<code>&amp;</code>, <code>|</code>, <code>^</code>) and bit shifting (<code>&lt;&lt;</code>, <code>&gt;&gt;</code>) work directly on a number's individual bits — the exact toolkit Chapter 15's RGB565 color packing will rely on.</li>
+<li>F-strings build clean, readable debug output by inserting variable values directly into a string using <code>{ }</code> placeholders.</li>
+<li>The FrameBuf module provides a frame buffer: an in-memory rectangle of pixels a program draws into before sending the finished image to a real display, with the coordinate system and drawing methods themselves still ahead in Chapters 5 through 7.</li>
+</ul>
+<div class="admonition mascot-celebration">
+<p class="admonition-title">You're Ready to Build Real Functions</p>
+<p><img alt="Pixel celebrates" class="mascot-admonition-img" src="../../img/mascot/celebration.png" />
+Conditionals, functions, scope, bits, and a first peek at the frame buffer — that's a huge amount of ground covered, and every piece of it points straight at <code>draw_face()</code>. Chapter 5 hands you the coordinate system a frame buffer actually uses, and the drawing begins for real.</p>
+</div>
+<details class="question">
+<summary>Self-Check: Why didn't the global variable change? — Click to reveal</summary>
+<p>Assigning to <code>eye_size</code> inside <code>grow_eyes()</code> without a <code>global eye_size</code> declaration creates a brand-new local variable that only exists while the function runs, leaving the global <code>eye_size</code> completely untouched. Adding <code>global eye_size</code> as the first line of the function tells MicroPython to modify the existing global variable instead of shadowing it with a local one.</p>
+</details>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

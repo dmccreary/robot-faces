@@ -1,0 +1,10 @@
+{
+  "title": "Robot Faces: Drawing Expressive Displays for STEM Robots",
+  "description": "A learning graph of 293 concepts for a high-school-level course teaching students to program expressive robot faces in MicroPython on a 128x64 monochrome OLED display and a 240x240 color round display, spanning hardware wiring, FrameBuf drawing primitives, facial anatomy and layout, emotion psychology, the history of screen-based commercial robots, animation, interactive controls, color-display porting, and a capstone project.",
+  "creator": "Dan McCreary",
+  "date": "2026-07-27",
+  "version": "1.0",
+  "format": "Learning Graph JSON v1.0",
+  "schema": "https://raw.githubusercontent.com/dmccreary/learning-graphs/refs/heads/main/src/schema/learning-graph-schema.json",
+  "license": "CC BY-NC-SA 4.0 DEED"
+}

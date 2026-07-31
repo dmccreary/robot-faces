@@ -1,0 +1,15 @@
+{
+  "HWFND": { "range": [1, 25], "keywords": [] },
+  "HIST": { "range": [26, 50], "keywords": [] },
+  "MPYFN": { "range": [51, 79], "keywords": [] },
+  "DISPC": { "range": [80, 98], "keywords": [] },
+  "PRIM": { "range": [99, 119], "keywords": [] },
+  "SHAPE": { "range": [120, 134], "keywords": [] },
+  "FBVER": { "range": [135, 146], "keywords": [] },
+  "ANAT": { "range": [147, 169], "keywords": [] },
+  "EMOT": { "range": [170, 202], "keywords": [] },
+  "ANIM": { "range": [203, 225], "keywords": [] },
+  "INTER": { "range": [226, 249], "keywords": [] },
+  "COLOR": { "range": [250, 270], "keywords": [] },
+  "CTCAP": { "range": [271, 293], "keywords": [] }
+}

@@ -1,0 +1,2349 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="How to judge whether a robot's expression actually works — reading eyebrow, eye, and mouth signals, intensity and ambiguity, the valence-arousal model, viewing-distance and lighting readability, anthropomorphism, the uncanny valley, and a practical rubric for critiquing any face design.">
+      
+      
+        <meta name="author" content="Dan McCreary">
+      
+      
+      
+        <link rel="prev" href="../10-emotion-theory-core-expressions/">
+      
+      
+        <link rel="next" href="../12-animating-expressions/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Expression Design, Readability & Human-Robot Interaction - Robot Faces</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/mascot.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-FPTNK1XNJR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-FPTNK1XNJR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-FPTNK1XNJR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#642580" data-md-color-accent="#41BAC1">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#expression-design-readability-human-robot-interaction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robot Faces" class="md-header__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Faces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Expression Design, Readability & Human-Robot Interaction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robot Faces" class="md-nav__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    Robot Faces
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Chapters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of Chapters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-hardware-electronics-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Hardware & Electronics Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-micropython-fundamentals-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-micropython-fundamentals-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-display-coordinate-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-basic-drawing-primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-ellipse-polygon-drawing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Ellipse & Polygon Drawing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-framebuf-version-history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-facial-anatomy-layout-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-emotion-theory-core-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Emotion Theory & the Core Expression Set
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-can-it-draw-an-emotion-to-does-it-actually-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      From "Can It Draw an Emotion?" to "Does It Actually Work?"
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-feature-that-talks-the-loudest-eyebrow-emotion-signaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Feature That Talks the Loudest: Eyebrow Emotion Signaling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-close-second-not-a-distant-one-mouth-emotion-signaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Close Second, Not a Distant One: Mouth Emotion Signaling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows-not-just-openings-eye-emotion-signaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows, Not Just Openings: Eye Emotion Signaling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-a-light-switch-expression-intensity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Not a Light Switch: Expression Intensity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-one-face-could-mean-two-feelings-expression-ambiguity" class="md-nav__link">
+    <span class="md-ellipsis">
+      When One Face Could Mean Two Feelings: Expression Ambiguity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-second-way-to-map-a-feeling-valence-arousal-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Second Way to Map a Feeling: Valence Arousal Model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A Second Way to Map a Feeling: Valence Arousal Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-valence-arousal-quadrant-plotter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Valence-Arousal Quadrant Plotter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagram-ambiguous-expression-confusability-sorter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Ambiguous Expression Confusability Sorter
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sound-motion-and-voice-this-book-leaves-out-multimodal-emotion-cues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sound, Motion, and Voice This Book Leaves Out: Multimodal Emotion Cues
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-very-different-screens-two-very-different-rooms-viewing-distance-readability-and-classroom-lighting-consideration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Two Very Different Screens, Two Very Different Rooms: Viewing Distance Readability and Classroom Lighting Consideration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-expression-that-traveled-best-cross-cultural-recognition" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Expression That Traveled Best: Cross-Cultural Recognition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-a-screen-ever-feels-like-someone-anthropomorphism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why a Screen Ever Feels Like "Someone": Anthropomorphism
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-dip-your-simple-face-skips-uncanny-valley-effect" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Dip Your Simple Face Skips: Uncanny Valley Effect
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-field-this-whole-course-lives-inside-affective-computing" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Field This Whole Course Lives Inside: Affective Computing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#people-and-machines-studied-together-human-robot-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      People and Machines, Studied Together: Human-Robot Interaction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#judging-your-own-work-like-a-designer-would-emotional-design-rubric" class="md-nav__link">
+    <span class="md-ellipsis">
+      Judging Your Own Work Like a Designer Would: Emotional Design Rubric
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Judging Your Own Work Like a Designer Would: Emotional Design Rubric">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-rubric-rater-score-this-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Rubric Rater — Score This Expression
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-animating-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Animating Expressions: Timing & Motion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-interactive-controls-inputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-expression-menu-live-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-porting-faces-color-display/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Porting Faces to a Color Display
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-computational-thinking-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lessons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Lessons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    History of Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/screen-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/drawing-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Drawing Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/ellipse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ellipse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/polygon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polygon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/basic-face-layouts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Face Layouts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eye-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eyebrows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eyebrows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion-types.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emotion Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../parts-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Faces Parts List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About The Robot Faces Book
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Learning Graph
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Learning Graph
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/starting-concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Starting Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/course-description-assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quality-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/taxonomy-distribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy Distribution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/mascot-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mascot Test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Stories
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Stories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-can-it-draw-an-emotion-to-does-it-actually-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      From "Can It Draw an Emotion?" to "Does It Actually Work?"
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-feature-that-talks-the-loudest-eyebrow-emotion-signaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Feature That Talks the Loudest: Eyebrow Emotion Signaling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-close-second-not-a-distant-one-mouth-emotion-signaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Close Second, Not a Distant One: Mouth Emotion Signaling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows-not-just-openings-eye-emotion-signaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows, Not Just Openings: Eye Emotion Signaling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-a-light-switch-expression-intensity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Not a Light Switch: Expression Intensity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-one-face-could-mean-two-feelings-expression-ambiguity" class="md-nav__link">
+    <span class="md-ellipsis">
+      When One Face Could Mean Two Feelings: Expression Ambiguity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-second-way-to-map-a-feeling-valence-arousal-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Second Way to Map a Feeling: Valence Arousal Model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A Second Way to Map a Feeling: Valence Arousal Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-valence-arousal-quadrant-plotter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Valence-Arousal Quadrant Plotter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagram-ambiguous-expression-confusability-sorter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Ambiguous Expression Confusability Sorter
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sound-motion-and-voice-this-book-leaves-out-multimodal-emotion-cues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sound, Motion, and Voice This Book Leaves Out: Multimodal Emotion Cues
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-very-different-screens-two-very-different-rooms-viewing-distance-readability-and-classroom-lighting-consideration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Two Very Different Screens, Two Very Different Rooms: Viewing Distance Readability and Classroom Lighting Consideration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-expression-that-traveled-best-cross-cultural-recognition" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Expression That Traveled Best: Cross-Cultural Recognition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-a-screen-ever-feels-like-someone-anthropomorphism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why a Screen Ever Feels Like "Someone": Anthropomorphism
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-dip-your-simple-face-skips-uncanny-valley-effect" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Dip Your Simple Face Skips: Uncanny Valley Effect
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-field-this-whole-course-lives-inside-affective-computing" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Field This Whole Course Lives Inside: Affective Computing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#people-and-machines-studied-together-human-robot-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      People and Machines, Studied Together: Human-Robot Interaction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#judging-your-own-work-like-a-designer-would-emotional-design-rubric" class="md-nav__link">
+    <span class="md-ellipsis">
+      Judging Your Own Work Like a Designer Would: Emotional Design Rubric
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Judging Your Own Work Like a Designer Would: Emotional Design Rubric">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-rubric-rater-score-this-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Rubric Rater — Score This Expression
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="expression-design-readability-human-robot-interaction">Expression Design, Readability &amp; Human-Robot Interaction</h1>
+<h2 id="summary">Summary</h2>
+<p>This chapter covers the design concerns that separate a clear robot face from a confusing one: expression intensity and ambiguity, how each facial feature signals emotion on its own, readability at classroom viewing distance and under normal lighting, cross-cultural recognition, and the human-robot-interaction ideas of anthropomorphism, the uncanny valley, and affective computing. After completing this chapter, students will be able to critique a robot face design against a rubric and justify design changes that improve its emotional clarity.</p>
+<h2 id="concepts-covered">Concepts Covered</h2>
+<p>This chapter covers the following 15 concepts from the learning graph:</p>
+<ol>
+<li>Expression Intensity</li>
+<li>Expression Ambiguity</li>
+<li>Eyebrow Emotion Signaling</li>
+<li>Mouth Emotion Signaling</li>
+<li>Eye Emotion Signaling</li>
+<li>Cross-Cultural Recognition</li>
+<li>Human-Robot Interaction</li>
+<li>Emotional Design Rubric</li>
+<li>Viewing Distance Readability</li>
+<li>Classroom Lighting Consideration</li>
+<li>Valence Arousal Model</li>
+<li>Uncanny Valley Effect</li>
+<li>Anthropomorphism</li>
+<li>Affective Computing</li>
+<li>Multimodal Emotion Cues</li>
+</ol>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This chapter builds on concepts from:</p>
+<ul>
+<li><a href="../02-history-of-robot-faces/">Chapter 2: A History of Screen-Based Robot Faces</a></li>
+<li><a href="../05-display-coordinate-systems/">Chapter 5: Display &amp; Coordinate Systems</a></li>
+<li><a href="../09-facial-anatomy-layout-design/">Chapter 9: Facial Anatomy &amp; Layout Design</a></li>
+<li><a href="../10-emotion-theory-core-expressions/">Chapter 10: Emotion Theory &amp; the Core Expression Set</a></li>
+</ul>
+<hr />
+<h2 id="from-can-it-draw-an-emotion-to-does-it-actually-work">From "Can It Draw an Emotion?" to "Does It Actually Work?"</h2>
+<div class="admonition mascot-welcome">
+<p class="admonition-title">Time to Put On Your Critic Hat</p>
+<p><img alt="Pixel waves hello" class="mascot-admonition-img" src="../../img/mascot/welcome.png" />
+Chapters 9 and 10 taught you how to build an expression — a parameterized face and a thirteen-recipe expression set. This chapter asks the harder question that comes right after: how do you know, for certain, that a face you built actually reads the way you meant it to?</p>
+</div>
+<p>Building a smile is a coding problem. Judging whether that smile is actually clear, honest, and readable from across a room is a design problem, and design problems need criteria, not just correct syntax. Everything in this chapter is aimed at giving you those criteria: how individual features signal emotion on their own, how intensity and ambiguity work, why some expressions get confused with each other, and what practical constraints — distance, lighting, culture — a face has to survive outside a laptop screen. By the end, you will have a rubric you can point at your own face design, or a classmate's, and back up your opinion with specifics.</p>
+<h2 id="the-feature-that-talks-the-loudest-eyebrow-emotion-signaling">The Feature That Talks the Loudest: Eyebrow Emotion Signaling</h2>
+<p>Cover a robot's mouth and eyes with your hand and look only at its eyebrows — chances are you can still guess the emotion. <strong>Eyebrow Emotion Signaling</strong> is the emotional information carried by eyebrow position and angle alone, independent of whatever the eyes and mouth are doing. It turns out to be surprisingly powerful on its own.</p>
+<p>Several studies on both real faces and simple animated ones have found that eyebrows are often the single strongest individual signal of emotion a face has — in some studies, a stronger signal than the mouth, which most people assume is the "main" emotional feature. A sharp downward angle toward the center reads as anger or concentration almost instantly; a raised outer edge reads as surprise or alarm just as fast. Chapter 9's single <code>eyebrow_angle</code> parameter is doing more emotional work per number than almost anything else in the <code>face_state</code> dictionary. If your robot's hardware budget only allows one feature to move smoothly, this research is a good reason to spend that budget on the eyebrows.</p>
+<h2 id="a-close-second-not-a-distant-one-mouth-emotion-signaling">A Close Second, Not a Distant One: Mouth Emotion Signaling</h2>
+<p><strong>Mouth Emotion Signaling</strong> is the emotional information a mouth's shape and curvature carry by itself, using nothing but Chapter 9's <code>mouth_curvature</code> parameter and the open/closed distinction Chapter 10 added for expressions like surprised and excited. Where eyebrows are quick to signal <em>which</em> emotion, a mouth is especially good at signaling <em>how positive or negative</em> that emotion is — an upward curve almost universally reads as pleasant, a downward curve as unpleasant, with very little training needed to read either one correctly.</p>
+<p>Mouths are not perfect on their own, though. An open, rounded mouth alone cannot easily distinguish afraid from surprised or even excited — the shape overlaps across all three, and it takes the eyebrows and eyes joining in to pull those expressions apart. A mouth is a strong, fast valence signal and a weaker, less specific identity signal when it is working completely alone.</p>
+<h2 id="windows-not-just-openings-eye-emotion-signaling">Windows, Not Just Openings: Eye Emotion Signaling</h2>
+<p><strong>Eye Emotion Signaling</strong> is the emotional information carried by eye size, openness, and eyelid coverage, separate from what the pupils are doing — pupil position mostly signals gaze direction, a topic Chapter 12 covers, not emotion by itself. Widened eyes signal high energy and alertness — surprise, fear, and excitement all widen the eyes; narrowed eyes and lowered eyelids signal the opposite — calm, tiredness, sleepiness, or a narrowed, intense stare in anger.</p>
+<p>On their own, eyes are the most ambiguous of the three features for identifying exactly which emotion is present — wide eyes alone could mean afraid, surprised, or excited, and a viewer genuinely cannot tell which without help from the eyebrows or mouth. What eyes are excellent at, working alone, is signaling <em>how aroused or calm</em> a face is, a distinction the valence-arousal model later in this chapter makes precise.</p>
+<p>Put the three features side by side and a pattern emerges worth remembering as you design:</p>
+<ul>
+<li>Eyebrows are the fastest, most specific single signal of <em>which</em> emotion is present.</li>
+<li>Mouths are a strong, fast signal of valence — positive or negative — but weaker at specifying which emotion exactly.</li>
+<li>Eyes are the most ambiguous feature alone for identity, but the clearest single signal of arousal — how energetic or calm a face reads.</li>
+</ul>
+<p>No single feature is disposable — Chapter 10's thirteen-expression set relies on all three working together — but knowing each feature's individual strength tells you exactly where to look first when an expression on your own robot is not reading clearly.</p>
+<h2 id="not-a-light-switch-expression-intensity">Not a Light Switch: Expression Intensity</h2>
+<p>Chapter 9 built <code>eyebrow_angle</code> and <code>mouth_curvature</code> as plain numbers, not as an on/off switch, and this is exactly where that choice pays off. <strong>Expression Intensity</strong> is the idea that the same named expression can be subtle or extreme depending on how far its parameters are pushed from neutral — "happy" is not one fixed face, it is a whole range of faces sharing the same direction of change.</p>
+<p>A bridge sentence before the code: these two dictionaries are both recognizably "happy," built from the exact same two parameters, differing only in how far each value is pushed from Chapter 9's neutral defaults.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">happy_subtle_state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;mouth_curvature&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">happy_intense_state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">&quot;mouth_curvature&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Both dictionaries produce a smiling face. <code>happy_subtle_state</code> reads as quietly pleased — appropriate for a robot acknowledging a correct answer during a quiet classroom activity. <code>happy_intense_state</code> reads as delighted, even a little giddy — appropriate for a robot celebrating a big win, but overkill, even slightly strange, for a small everyday moment. Choosing an intensity is a real design decision, not an afterthought, and it belongs in your rubric right alongside choosing which expression to use at all.</p>
+<h2 id="when-one-face-could-mean-two-feelings-expression-ambiguity">When One Face Could Mean Two Feelings: Expression Ambiguity</h2>
+<p><strong>Expression Ambiguity</strong> happens when a parameter combination reads as more than one plausible emotion, or as no clear emotion at all — a face stuck between two named expressions instead of clearly landing on one. Chapter 10 already flagged this problem directly: its Emotion Recognition Accuracy discussion noted that afraid, surprised, and disgusted get confused with each other far more often than happy or sad do, because their underlying eyebrow, eye, and mouth combinations genuinely overlap.</p>
+<p>Afraid and surprised are the clearest example. Both raise the eyebrows, both widen the eyes, and both often open the mouth — three features moving the same direction for two different named emotions. What usually separates them is subtle: surprised pushes every value further toward its extreme, and afraid's mouth often pulls slightly rather than opening symmetrically. On a small, low-resolution display, that difference can vanish entirely, leaving viewers to guess.</p>
+<h2 id="a-second-way-to-map-a-feeling-valence-arousal-model">A Second Way to Map a Feeling: Valence Arousal Model</h2>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">Two Numbers Instead of Seven Names</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Ekman's approach from Chapter 10 sorts emotion into named boxes — happy, sad, afraid, and so on. Here's a completely different way to describe the exact same feelings: instead of a name, give every emotion just two numbers.</p>
+</div>
+<p>The <strong>Valence Arousal Model</strong> describes emotion along two continuous dimensions instead of Ekman's discrete named categories: valence, how positive or negative a feeling is, and arousal, how energetic or calm it is. Plot any emotion on a simple grid — valence on the horizontal axis, arousal on the vertical axis — and it lands somewhere in one of four quadrants: pleasant-and-energetic, pleasant-and-calm, unpleasant-and-energetic, or unpleasant-and-calm.</p>
+<p>This model is not a replacement for Ekman's categories — it is a complementary framework, useful for a reason Ekman's naming alone cannot give you: it explains <em>why</em> certain expressions get confused. Afraid and surprised sit in almost the same spot on a valence-arousal grid — both high arousal, both close to neutral or mildly negative in valence — which is exactly why their eyebrow-and-eye combinations overlap so much. Two emotions that occupy nearly the same coordinates on this grid are always going to be harder to tell apart on a simple face than two emotions sitting in opposite quadrants.</p>
+<p>Here is a rough map of where several of Chapter 10's expressions sit on this grid:</p>
+<table>
+<thead>
+<tr>
+<th>Quadrant</th>
+<th>Valence</th>
+<th>Arousal</th>
+<th>Example Expressions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pleasant, energetic</td>
+<td>Positive</td>
+<td>High</td>
+<td>Excited, Surprised (mildly positive readings)</td>
+</tr>
+<tr>
+<td>Pleasant, calm</td>
+<td>Positive</td>
+<td>Low</td>
+<td>Happy (mild), Neutral leaning positive</td>
+</tr>
+<tr>
+<td>Unpleasant, energetic</td>
+<td>Negative</td>
+<td>High</td>
+<td>Afraid, Angry, Disgusted</td>
+</tr>
+<tr>
+<td>Unpleasant, calm</td>
+<td>Negative</td>
+<td>Low</td>
+<td>Sad, Tired, Sleepy</td>
+</tr>
+</tbody>
+</table>
+<p>Notice how afraid and angry both land in the same "unpleasant, energetic" quadrant, alongside disgusted — three different Ekman categories, sharing one region of this simpler two-number map. That overlap is not a coincidence; it is the valence-arousal model making visible exactly the kind of confusability Chapter 10's recognition-accuracy research already measured.</p>
+<p>Placing your own expressions on this same grid, instead of just reading about where they land, is the fastest way to feel why some pairs are so much easier to confuse than others.</p>
+<h4 id="diagram-valence-arousal-quadrant-plotter">Diagram: Valence-Arousal Quadrant Plotter</h4>
+<iframe src="../../sims/valence-arousal-quadrant-plotter/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Valence-Arousal Quadrant Plotter</summary>
+<p>Type: diagram
+<strong>sim-id:</strong> valence-arousal-quadrant-plotter<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Apply (L3)
+Bloom Taxonomy Verb: classify, apply, demonstrate</p>
+<p>Learning objective: Apply the valence-arousal model by placing a point on a two-axis valence/arousal grid and classifying which quadrant it falls into, demonstrating why expressions that land near each other on the grid — such as afraid and surprised, both high-arousal — are more likely to be visually confused.</p>
+<p>Canvas layout:
+- Left 65% (responsive, roughly 420x420 at default width): a square grid with valence on the horizontal axis (labeled "Unpleasant" to "Pleasant") and arousal on the vertical axis (labeled "Calm" to "Energetic"), divided into four lightly shaded quadrants
+- Right 35%: a mode toggle, an infobox showing the selected or hovered point's coordinates and quadrant name, and a "Reset My Points" button</p>
+<p>Visual elements:
+- Four labeled quadrants: "Pleasant/Energetic," "Pleasant/Calm," "Unpleasant/Energetic," "Unpleasant/Calm"
+- Thirteen small preset markers, one per Chapter 10 expression, placed at approximate valence/arousal coordinates and labeled with the expression name on hover
+- User-placed markers shown in a distinct color from the preset expression markers
+- An infobox listing the active point's numeric valence and arousal values, its quadrant name, and the names of any preset expressions within a defined distance ("nearby, and therefore easy to confuse with this point")</p>
+<p>Interactive controls:
+- Click anywhere on the grid to drop a new labeled point at that valence/arousal coordinate
+- Hover any preset expression marker to preview its name and one-line placement justification without adding a new point
+- Toggle: "Show all 13 expressions" (default on)
+- "Reset My Points" button clears only user-placed markers, leaving the 13 preset expressions visible</p>
+<p>Default parameters: all 13 preset expression markers visible, no user-placed point yet, toggle on</p>
+<p>Behavior: clicking the grid immediately places a marker and updates the infobox with the quadrant name and a list of nearby preset expressions computed from grid distance; hovering an existing marker shows the same information as a lightweight preview without placing a new point; toggling expression visibility off isolates the grid for a blank practice attempt.</p>
+<p>Instructional Rationale: An Apply-level objective requiring the learner to use a newly introduced two-axis framework on concrete cases is best served by direct point-placement with immediate quadrant classification, rather than a pre-filled static grid, so the learner practices applying the model instead of only viewing an already-completed example.</p>
+<p>Responsive design: mode toggle and infobox move below the canvas on viewports narrower than 600 pixels; the grid scales to fill its container's width while remaining square.</p>
+<p>Implementation: p5.js for grid rendering and click handling; the 13 preset expression coordinates are stored as a local array matching Chapter 10's named expression set; "nearby" is computed as Euclidean distance on the valence/arousal grid below a fixed threshold.</p>
+</details>
+<p>Reading about the afraid/surprised overlap is one thing — now try spotting a genuinely ambiguous face yourself and naming exactly which features are doing the confusing.</p>
+<h4 id="diagram-ambiguous-expression-confusability-sorter">Diagram: Ambiguous Expression Confusability Sorter</h4>
+<iframe src="../../sims/ambiguous-expression-confusability-sorter/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Ambiguous Expression Confusability Sorter</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> ambiguous-expression-confusability-sorter<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Evaluate (L5)
+Bloom Taxonomy Verb: judge, critique, justify</p>
+<p>Learning objective: Given a rendered face built from a deliberately ambiguous parameter set, judge which two named emotions it could plausibly be read as, and justify that judgment by citing the specific overlapping eyebrow, eye, and mouth features responsible.</p>
+<p>Canvas layout:
+- Left 55% (responsive, roughly 380x320 at default width): a rendered face built from one of several preset ambiguous parameter sets
+- Right 45%: a bank of expression-name chips (all 13 named expressions plus "No clear emotion"), a two-slot answer zone, a "Submit" button, and a feedback panel</p>
+<p>Visual elements:
+- A rendered robot face using the same draw_face-style rendering as earlier chapter sims, built from an ambiguous face_state
+- A chip bank of 14 labeled options (13 expressions plus "No clear emotion")
+- A two-slot answer zone for the learner's chosen pair
+- A feedback panel that reveals the reference answer pair and a one-sentence parameter-level justification after submission</p>
+<p>Interactive controls:
+- Click (or drag) up to two chips into the answer zone; clicking a placed chip returns it to the bank
+- "Submit" button locks in the current answer and reveals feedback
+- "New Ambiguous Face" button loads the next preset ambiguous case and clears the answer zone
+- Preset case bank includes at least five ambiguous parameter sets drawn from confusable pairs discussed in the chapter: afraid/surprised, disgusted/angry, sad/tired, stern/angry, and contempt/neutral</p>
+<p>Default parameters: first case loaded is the afraid/surprised overlap face; answer zone empty</p>
+<p>Behavior: selecting chips highlights them in the answer zone; Submit compares the learner's pair, order-independent, against the reference pair and marks the attempt as a full match, partial match, or miss, but always reveals the parameter-level justification (for example, "Both share very raised eyebrows and wide eyes — arousal is high for both — but the mouth's slight downward pull nudges this toward afraid rather than surprised") regardless of whether the guess was correct, since the reasoning is the actual target of the exercise; "New Ambiguous Face" advances to the next preset case.</p>
+<p>Instructional Rationale: An Evaluate-level objective asking the learner to judge and justify which emotions a face could be confused for is best served by a Classification Sorter pattern with mandatory justification feedback rather than a single-right-answer quiz, because the chapter's point is that some faces legitimately support more than one reading, and a good designer must be able to name exactly why.</p>
+<p>Responsive design: the chip bank wraps to a scrollable row below the face rendering on viewports narrower than 600 pixels.</p>
+<p>Implementation: p5.js for face rendering, reusing draw_face()-equivalent logic from earlier chapter sims; a local array of at least five preset ambiguous face_state dictionaries, each carrying a reference answer pair and justification string.</p>
+</details>
+<h2 id="sound-motion-and-voice-this-book-leaves-out-multimodal-emotion-cues">Sound, Motion, and Voice This Book Leaves Out: Multimodal Emotion Cues</h2>
+<p>A full robot rarely has to rely on its face alone. <strong>Multimodal Emotion Cues</strong> are the additional channels — voice tone, body or arm motion, sound effects, even light color — that a complete robot can use alongside its face to signal emotion. A drooping posture, a sad little musical sting, and a downturned mouth all pointing the same direction communicate "sad" far more redundantly, and more forgivingly, than any single channel working alone.</p>
+<p>This course, on purpose, focuses entirely on the face — the course description's own list of topics not covered leaves voice synthesis, motor-driven body language, and sound design to other courses. That focus is not a limitation to apologize for; it is exactly why this chapter matters as much as it does. A screen-only face carries the entire emotional communication burden by itself, with no tone of voice or slumped posture to lean on if the expression is unclear. Understanding that multimodal cues exist, even without building them, is part of understanding why a robot face has to work extra hard to be clear on its own.</p>
+<h2 id="two-very-different-screens-two-very-different-rooms-viewing-distance-readability-and-classroom-lighting-consideration">Two Very Different Screens, Two Very Different Rooms: Viewing Distance Readability and Classroom Lighting Consideration</h2>
+<div class="admonition mascot-warning">
+<p class="admonition-title">Designed at Arm's Length, Tested from Across the Room</p>
+<p><img alt="Pixel warns you" class="mascot-admonition-img" src="../../img/mascot/warning.png" />
+It is easy to design and test an expression sitting six inches from your laptop screen, decide it looks great, and stop there. A robot rarely gets to live at six inches — a classroom robot might need to read clearly from the back row.</p>
+</div>
+<p><strong>Viewing Distance Readability</strong> is how clearly an expression communicates depending on how far away the viewer is standing, and it is a genuinely different design constraint than "does this look right up close." A subtle contempt expression's tiny one-sided mouth raise, perfectly visible on a code editor's zoomed-in preview, can vanish completely at classroom distance on Chapter 1's small 128x64 OLED. The much larger, brighter 240x240 color display gives an expression more raw pixels to work with, which helps readability at distance, but even a bigger screen cannot rescue a design that relies on a one- or two-pixel difference to make its point.</p>
+<p><strong>Classroom Lighting Consideration</strong> is the related constraint of how ambient light affects readability — the same face that looks crisp in a dim room can wash out under harsh fluorescent classroom lighting, especially on a display with less contrast or more glare-prone glass. Testing an expression only in ideal lighting, at ideal distance, is testing it in the one condition it is least likely to actually be viewed under.</p>
+<p>Two practical habits fix most of this:</p>
+<ul>
+<li>Step back from your screen — or better, view a photo of it from across a room — before deciding an expression is "done."</li>
+<li>Test under whatever light the robot will actually live in, not just the light on your desk.</li>
+</ul>
+<h2 id="the-expression-that-traveled-best-cross-cultural-recognition">The Expression That Traveled Best: Cross-Cultural Recognition</h2>
+<p>Chapter 10 introduced Ekman's claim that a handful of emotions are recognized universally, across dramatically different cultures — but "universal" deserves a closer look before you lean on it too hard. <strong>Cross-Cultural Recognition</strong> describes how consistently an expression is correctly identified by viewers from different cultural backgrounds, and the honest answer is: it depends heavily on which expression.</p>
+<p>Happiness is recognized with remarkable consistency almost everywhere it has been studied — an upward-curved smile reads as positive nearly universally. Fear, disgust, and especially contempt show noticeably more cross-cultural variation, with recognition rates that drop, and sometimes shift toward different labels entirely, depending on the culture being studied. A simple robot face, built directly on this same psychology research, inherits that same unevenness — do not expect every one of Chapter 10's thirteen expressions to travel equally well to every audience your robot might meet.</p>
+<h2 id="why-a-screen-ever-feels-like-someone-anthropomorphism">Why a Screen Ever Feels Like "Someone": Anthropomorphism</h2>
+<p>None of this chapter's careful parameter tuning would matter at all if humans simply refused to see emotion in a screen. <strong>Anthropomorphism</strong> is the tendency to attribute human characteristics, including emotions, to a non-human object — and it is the basic psychological phenomenon that makes an entire screen-face robot possible in the first place.</p>
+<p>People anthropomorphize readily, often without meaning to. Chapter 2's four commercial robots — Cozmo, Vector, Miko, and Buddy — all lean directly on this tendency: none of them has a real face made of skin and muscle, yet owners routinely describe them as curious, moody, or affectionate, based on nothing more than a screen displaying two eyes and some motion. Anthropomorphism is not a bug in human perception that clever robot design exploits unfairly — it is simply how people are wired to read intention and feeling into anything that moves and reacts, and this entire course exists because that wiring is real.</p>
+<h2 id="the-dip-your-simple-face-skips-uncanny-valley-effect">The Dip Your Simple Face Skips: Uncanny Valley Effect</h2>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">A Graph Worth Knowing By Shape</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Picture a graph: how comfortable people feel around a robot, plotted against how human-like that robot looks. You would expect that line to just climb steadily upward. It does not.</p>
+</div>
+<p>The <strong>Uncanny Valley Effect</strong> describes a well-documented dip in that comfort curve: as a robot or character becomes more human-like, people's warmth toward it rises — until it gets almost, but not quite, fully human-realistic, at which point comfort drops sharply into unsettling, even eerie territory, before recovering only once the robot looks essentially indistinguishable from a real person. Nearly-real is worse than obviously-fake.</p>
+<p>Here is the genuinely good news for this course: the deliberately simple, abstract, non-photorealistic faces you have been building since Chapter 9 — flat colors, ellipse eyes, triangle eyebrows, no skin texture or realistic proportions — sit comfortably on the safe, rising side of that curve, nowhere near the valley at all. A face that never attempts photorealism in the first place cannot fall into the gap reserved for faces that almost achieve it. This is a real design advantage worth calling out on purpose: staying simple is not a limitation this course is working around, it is a choice that sidesteps one of the hardest, least-solved problems in robot design entirely.</p>
+<h2 id="the-field-this-whole-course-lives-inside-affective-computing">The Field This Whole Course Lives Inside: Affective Computing</h2>
+<p>Zoom out from any single robot face and there is an entire academic and industry field built around the questions this chapter has been asking. <strong>Affective Computing</strong> is the broader field concerned with systems that can recognize, interpret, or simulate human emotion — everything from software that detects frustration in a user's voice, to wearables that track stress from heart rate, to the parameterized face this course teaches you to draw.</p>
+<p>This course is a small, hands-on slice of that much larger field — one narrow but genuinely useful corner: how to <em>simulate</em> recognizable emotion through a simple visual display. Affective computing researchers also study emotion <em>recognition</em> (can a system tell how a person feels) and emotion <em>response</em> (how a system should react once it knows), both larger topics than this book takes on, but both built on the same foundational question this chapter keeps circling: what actually makes an emotional signal readable and honest.</p>
+<h2 id="people-and-machines-studied-together-human-robot-interaction">People and Machines, Studied Together: Human-Robot Interaction</h2>
+<p><strong>Human-Robot Interaction</strong>, usually abbreviated HRI, is the broader field studying how people and robots interact — trust, communication, safety, collaboration, and yes, emotional expression, all as separate but related research threads. Expression design, the whole subject of this chapter, is one HRI research area among several, sitting alongside topics like how close a robot should stand to a person, how a robot should signal its intentions before moving, or how people build, and lose, trust in an autonomous machine over time.</p>
+<p>Situating expression design inside this larger field matters for a simple reason: a robot face is never really working in isolation. Every design choice this chapter has covered — intensity, ambiguity, readability, cultural nuance — is one piece of the much bigger question HRI researchers study professionally: how do we make machines and people understand each other well enough to work, learn, or simply share a room together comfortably?</p>
+<h2 id="judging-your-own-work-like-a-designer-would-emotional-design-rubric">Judging Your Own Work Like a Designer Would: Emotional Design Rubric</h2>
+<div class="admonition mascot-encourage">
+<p class="admonition-title">Critiquing Feels Harder Than Building — That's Normal</p>
+<p><img alt="Pixel cheers you on" class="mascot-admonition-img" src="../../img/mascot/encouraging.png" />
+Writing a <code>draw_face()</code> call has a clear finish line: the code runs, or it does not. Judging whether an expression is <em>good</em> has no compiler to check your answer. That discomfort is completely normal — it just means you need criteria instead of a gut feeling, which is exactly what the rubric below gives you.</p>
+</div>
+<p>Being able to look at any face design — yours or a classmate's — and say precisely why it will or will not land with a real person is a robot designer's superpower: the same one this book keeps returning to, now placed fully in your hands as a skill of judgment, not just a skill of code. The <strong>Emotional Design Rubric</strong> below turns everything this chapter has covered into a concrete checklist you can run against any expression.</p>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Guiding Question</th>
+<th>What a Pass Looks Like</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Immediate identifiability</td>
+<td>Is the primary emotion identifiable within about 2 seconds?</td>
+<td>A viewer names the intended emotion almost instantly, without hesitating or guessing</td>
+</tr>
+<tr>
+<td>Confusable-neighbor distance</td>
+<td>Is the expression distinguishable from its most likely confusable neighbor (see the valence-arousal model)?</td>
+<td>The expression sits clearly apart from its nearest neighbor on the valence-arousal grid, or uses an extra feature to break the tie</td>
+</tr>
+<tr>
+<td>Classroom-distance readability</td>
+<td>Does it read clearly at classroom viewing distance, not just close up?</td>
+<td>The expression is still identifiable in a photo taken several meters away</td>
+</tr>
+<tr>
+<td>Lighting robustness</td>
+<td>Does it still read under normal classroom lighting, not only in ideal conditions?</td>
+<td>Contrast and shape stay clear under bright, flat fluorescent light</td>
+</tr>
+<tr>
+<td>Appropriate intensity</td>
+<td>Does the intensity match the situation, rather than defaulting to maximum every time?</td>
+<td>A subtle moment gets a subtle expression; a big moment gets a big one</td>
+</tr>
+<tr>
+<td>Deliberate symmetry</td>
+<td>If the expression is asymmetric, was that a deliberate choice rather than an accident?</td>
+<td>Any asymmetry (confused, disgusted, contempt) is clearly intentional, not a coding slip</td>
+</tr>
+<tr>
+<td>Face-only clarity</td>
+<td>Does the expression work without relying on voice, motion, or sound the robot does not actually have?</td>
+<td>The face alone, with no other modality, still communicates the intended emotion</td>
+</tr>
+</tbody>
+</table>
+<p>Run this table against any face_state dictionary — your own or a classmate's — and you have a structured critique instead of a vague "it looks fine" or "something feels off." That is exactly the Evaluate-level skill this course has been building toward since Chapter 9's first <code>ellipse()</code> call.</p>
+<p>Rating a real design against every one of these criteria, with a required reason for each rating, is the deliberate practice version of the rubric above — try it before assuming you have internalized the checklist.</p>
+<h4 id="diagram-rubric-rater-score-this-expression">Diagram: Rubric Rater — Score This Expression</h4>
+<iframe src="../../sims/expression-rubric-rater/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Rubric Rater — Score This Expression</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> expression-rubric-rater<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Evaluate (L5)
+Bloom Taxonomy Verb: judge, assess, rate, justify</p>
+<p>Learning objective: Given a rendered face and its underlying face_state parameters, assess it against each criterion of the Emotional Design Rubric, assigning a rating per criterion with a written justification and an overall recommendation — directly rehearsing the course's Evaluate-level outcome of critiquing a classmate's design.</p>
+<p>Canvas layout:
+- Left 55% (responsive, roughly 420x340 at default width): a close-up rendering of the loaded sample face, alongside a shrunk, reduced-contrast thumbnail simulating classroom-distance and classroom-lighting viewing, plus a visible face_state parameter readout below both
+- Right 45%: the seven rubric criteria listed as rows, each with a three-point rating control (Fails / Borderline / Passes) and a required short justification text box, a "Load Sample Design" dropdown, and "Submit Assessment" / "Compare to Reference Rating" buttons</p>
+<p>Visual elements:
+- Two renderings of the same face_state: full-size close-up, and a smaller, lower-contrast version approximating classroom distance and lighting
+- A plain-text face_state parameter readout beneath the renderings
+- Seven rubric rows matching the Emotional Design Rubric table, each with a rating control and justification field
+- A feedback panel that appears after submission, showing the reference rating and justification for each criterion side by side with the learner's own</p>
+<p>Interactive controls:
+- Dropdown: "Load Sample Design" offering 5-6 pre-authored face_state examples of varying quality, including at least one deliberately weak design (for example, a "happy" mouth curvature too subtle to survive the classroom-distance thumbnail) and one strong design
+- Three-point rating buttons per rubric row (Fails / Borderline / Passes)
+- Short-text justification field per rubric row, required before submission is enabled
+- "Submit Assessment" button, enabled only once every row has both a rating and a justification
+- "Compare to Reference Rating" button, revealed after submission, showing the chapter's own reference ratings and justifications alongside the learner's for self-checking</p>
+<p>Default parameters: first sample design loaded is a deliberately flawed one (subtle happy mouth curvature that fails at classroom-distance thumbnail size); no ratings entered yet</p>
+<p>Behavior: loading a sample design renders both face views and the parameter readout; the learner rates and justifies every row before Submit Assessment activates; submitting locks in the assessment and reveals the "Compare to Reference Rating" option, which displays the reference rating and justification for every criterion next to the learner's own, letting them see precisely where their judgment agreed or diverged and why; choosing a new sample design from the dropdown resets all ratings and justifications.</p>
+<p>Instructional Rationale: A Rubric Rater is the canonical Evaluate-level pattern for this objective — scoring concrete examples against defined criteria with a required justification forces the learner past a vague "looks fine" impression and into the specific, defensible judgments a real design critique requires, directly matching the course's stated outcome of critiquing a classmate's face design.</p>
+<p>Responsive design: rubric rows and controls move below the face renderings on viewports narrower than 640 pixels; the close-up and thumbnail renderings stack vertically below 480 pixels.</p>
+<p>Implementation: p5.js for face rendering, with the thumbnail rendered at reduced scale and reduced contrast to approximate classroom-distance and classroom-lighting viewing; rubric criteria, sample designs, and reference ratings stored as local data arrays, keyed so the comparison feature can look up the matching reference for whichever sample is currently loaded.</p>
+</details>
+<h2 id="chapter-summary">Chapter Summary</h2>
+<p>You now know how to judge a robot face, not just build one — reading individual features, weighing intensity and ambiguity, connecting expression design to the wider fields that study it, and applying a concrete rubric to any design.</p>
+<ul>
+<li>Eyebrow Emotion Signaling is often the single strongest individual emotion signal a simple face has, sometimes stronger than the mouth; Mouth Emotion Signaling is a fast, strong valence signal but weaker at pinning down which emotion exactly; Eye Emotion Signaling is the most ambiguous feature alone for identity, but the clearest signal of arousal.</li>
+<li>Expression Intensity treats parameters like <code>eyebrow_angle</code> and <code>mouth_curvature</code> as a continuous range, not a switch — the same named expression can be subtle or extreme depending on how far those values move from neutral.</li>
+<li>Expression Ambiguity happens when a parameter combination plausibly reads as more than one emotion, echoing Chapter 10's recognition-accuracy research on commonly confused pairs like afraid, surprised, and disgusted.</li>
+<li>The Valence Arousal Model describes emotion with two numbers — valence (positive/negative) and arousal (energetic/calm) — instead of Ekman's named categories, and explains why confusable expressions like afraid and surprised sit near each other on that same grid.</li>
+<li>Multimodal Emotion Cues — voice, motion, sound — support emotion in a full robot, but this course deliberately focuses on the face alone, which means the face has to work extra hard without them.</li>
+<li>Viewing Distance Readability and Classroom Lighting Consideration are practical constraints grounded in Chapter 1's displays: a design that reads well close-up on a laptop, or under ideal light, may not survive classroom distance or fluorescent lighting.</li>
+<li>Cross-Cultural Recognition shows Ekman's universality claim holds more strongly for some expressions (happiness) than others (fear, disgust, contempt), and a simple robot face inherits that same unevenness.</li>
+<li>Anthropomorphism — attributing human traits and emotions to a non-human object — is the basic phenomenon that makes a screen-face robot like Chapter 2's Cozmo, Vector, Miko, or Buddy work at all.</li>
+<li>The Uncanny Valley Effect is the sharp dip in comfort that appears when a robot looks almost, but not quite, human — a trap this course's deliberately simple, abstract faces largely sidestep by never attempting photorealism in the first place.</li>
+<li>Affective Computing is the broader field of systems that recognize, interpret, or simulate emotion, and Human-Robot Interaction (HRI) is the broader field studying how people and robots interact overall — expression design is one HRI research thread, and this course is a small, hands-on slice of affective computing.</li>
+<li>The Emotional Design Rubric ties every idea in this chapter into one practical checklist — identifiability, confusable-neighbor distance, classroom-distance and lighting readability, appropriate intensity, deliberate symmetry, and face-only clarity — ready to run against your own or a classmate's design.</li>
+</ul>
+<div class="admonition mascot-celebration">
+<p class="admonition-title">You Can Now Judge a Face, Not Just Build One</p>
+<p><img alt="Pixel celebrates" class="mascot-admonition-img" src="../../img/mascot/celebration.png" />
+Look at everything you can do now that you could not do at the start of this chapter: name why an expression works, predict which ones will get confused, check a design against classroom distance and lighting before it ever leaves your laptop, and back up every opinion with a specific rubric criterion instead of a shrug. That is real design judgment, and it is yours now.</p>
+</div>
+<details class="question">
+<summary>Self-Check: A classmate shows you their 'afraid' face design, and you notice it looks a lot like their 'surprised' face. Using at least two ideas from this chapter, explain why that mix-up happened and what you would check first to fix it. — Click to reveal</summary>
+<p>Afraid and surprised sit very close together on the valence-arousal grid — both are high-arousal expressions, which is exactly why their eyebrow and eye combinations overlap so much: both raise the eyebrows, widen the eyes, and often open the mouth. This is a textbook case of Expression Ambiguity, and it matches Chapter 10's own recognition-accuracy research flagging afraid and surprised as commonly confused. To fix it, check the Emotional Design Rubric's "confusable-neighbor distance" criterion first: look at whether surprised's parameters are pushed further toward their extreme (very raised eyebrows, very wide eyes) than afraid's, and whether afraid's mouth is doing something distinct — like pulling rather than opening symmetrically — instead of just being a milder copy of the same recipe. If the two still look too similar at classroom distance, the fix is to widen the parameter gap between them, not just to redraw one of the two faces from scratch.</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2361 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Resources for teaching drawing of robot faces with microcontrollers and MicroPython to robotics students.  All content licensed Creative Commons ShareAlike Attribution Noncommercial">
+      
+      
+        <meta name="author" content="Dan McCreary">
+      
+      
+      
+        <link rel="prev" href="../02-history-of-robot-faces/">
+      
+      
+        <link rel="next" href="../04-micropython-fundamentals-2/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>3. MicroPython Fundamentals I: Syntax, Data & Loops - Robot Faces</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/mascot.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-FPTNK1XNJR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-FPTNK1XNJR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-FPTNK1XNJR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#642580" data-md-color-accent="#41BAC1">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#micropython-fundamentals-i-syntax-data-loops" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robot Faces" class="md-header__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Faces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. MicroPython Fundamentals I: Syntax, Data & Loops
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robot Faces" class="md-nav__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    Robot Faces
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Chapters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of Chapters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-hardware-electronics-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Hardware & Electronics Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-wired-hardware-to-working-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Wired Hardware to Working Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-micropython" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Is MicroPython?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#meet-thonny-your-micropython-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Meet Thonny: Your MicroPython Editor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-repl-talking-to-your-pico-one-line-at-a-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      The REPL: Talking to Your Pico One Line at a Time
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storing-information-variables-and-constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storing Information: Variables and Constants
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-types-integers-and-booleans" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Types: Integers and Booleans
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comments-notes-for-humans-not-the-computer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comments: Notes for Humans, Not the Computer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indentation-rules-pythons-silent-grammar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indentation Rules: Python's Silent Grammar
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Indentation Rules: Python&#39;s Silent Grammar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-indentation-error-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Indentation Error Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for-loops-repeating-a-set-number-of-times" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Loops: Repeating a Set Number of Times
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#while-loops-repeating-until-something-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      While Loops: Repeating Until Something Changes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="While Loops: Repeating Until Something Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-micropython-loop-tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: MicroPython Loop Tracer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bringing-in-extra-powers-import-statements-and-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bringing in Extra Powers: Import Statements and Modules
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collections-lists-tuples-and-dictionaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collections: Lists, Tuples, and Dictionaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Collections: Lists, Tuples, and Dictionaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-list-vs-tuple-vs-dictionary-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: List vs Tuple vs Dictionary Comparison
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-micropython-fundamentals-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-display-coordinate-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-basic-drawing-primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-ellipse-polygon-drawing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Ellipse & Polygon Drawing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-framebuf-version-history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-facial-anatomy-layout-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-emotion-theory-core-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Emotion Theory & the Core Expression Set
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-expression-design-readability-hri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-animating-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Animating Expressions: Timing & Motion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-interactive-controls-inputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-expression-menu-live-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-porting-faces-color-display/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Porting Faces to a Color Display
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-computational-thinking-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lessons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Lessons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    History of Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/screen-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/drawing-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Drawing Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/ellipse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ellipse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/polygon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polygon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/basic-face-layouts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Face Layouts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eye-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eyebrows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eyebrows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion-types.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emotion Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../parts-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Faces Parts List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About The Robot Faces Book
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Learning Graph
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Learning Graph
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/starting-concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Starting Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/course-description-assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quality-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/taxonomy-distribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy Distribution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/mascot-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mascot Test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Stories
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Stories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-wired-hardware-to-working-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Wired Hardware to Working Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-micropython" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Is MicroPython?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#meet-thonny-your-micropython-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Meet Thonny: Your MicroPython Editor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-repl-talking-to-your-pico-one-line-at-a-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      The REPL: Talking to Your Pico One Line at a Time
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storing-information-variables-and-constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storing Information: Variables and Constants
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-types-integers-and-booleans" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Types: Integers and Booleans
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comments-notes-for-humans-not-the-computer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comments: Notes for Humans, Not the Computer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indentation-rules-pythons-silent-grammar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indentation Rules: Python's Silent Grammar
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Indentation Rules: Python&#39;s Silent Grammar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-indentation-error-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Indentation Error Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for-loops-repeating-a-set-number-of-times" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Loops: Repeating a Set Number of Times
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#while-loops-repeating-until-something-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      While Loops: Repeating Until Something Changes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="While Loops: Repeating Until Something Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-micropython-loop-tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: MicroPython Loop Tracer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bringing-in-extra-powers-import-statements-and-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bringing in Extra Powers: Import Statements and Modules
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collections-lists-tuples-and-dictionaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collections: Lists, Tuples, and Dictionaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Collections: Lists, Tuples, and Dictionaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-list-vs-tuple-vs-dictionary-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: List vs Tuple vs Dictionary Comparison
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<hr />
+<p>title: MicroPython Fundamentals I: Syntax, Data &amp; Loops
+description: An introduction to the Thonny IDE and the MicroPython REPL, plus the core language building blocks of variables, data types, comments, indentation, loops, imports, and collections.
+generated_by: claude skill chapter-content-generator
+date: 2026-07-27 14:06:50
+version: 0.09</p>
+<hr />
+<h1 id="micropython-fundamentals-i-syntax-data-loops">MicroPython Fundamentals I: Syntax, Data &amp; Loops</h1>
+<h2 id="summary">Summary</h2>
+<p>This chapter covers the MicroPython development environment (the Thonny IDE and the MicroPython REPL) and the core language building blocks students need before writing any drawing code: variables, constants, basic data types, for/while loops, modules and imports, and the list/tuple/dictionary collection types. After completing this chapter, students will be able to write, run, and debug a simple MicroPython program on a Raspberry Pi Pico using Thonny.</p>
+<h2 id="concepts-covered">Concepts Covered</h2>
+<p>This chapter covers the following 17 concepts from the learning graph:</p>
+<ol>
+<li>MicroPython</li>
+<li>Thonny IDE</li>
+<li>MicroPython REPL</li>
+<li>Variable</li>
+<li>Constant</li>
+<li>Data Type</li>
+<li>Integer Data Type</li>
+<li>Boolean Data Type</li>
+<li>For Loop</li>
+<li>While Loop</li>
+<li>Import Statement</li>
+<li>Module</li>
+<li>List Data Structure</li>
+<li>Tuple Data Structure</li>
+<li>Dictionary Data Structure</li>
+<li>Comment Syntax</li>
+<li>Indentation Rules</li>
+</ol>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This chapter builds on concepts from:</p>
+<ul>
+<li><a href="../01-hardware-electronics-foundations/">Chapter 1: Hardware &amp; Electronics Foundations</a></li>
+</ul>
+<hr />
+<h2 id="from-wired-hardware-to-working-code">From Wired Hardware to Working Code</h2>
+<div class="admonition mascot-welcome">
+<p class="admonition-title">Time to Write Some Code</p>
+<p><img alt="Pixel waves hello" class="mascot-admonition-img" src="../../img/mascot/welcome.png" />
+Your hardware is wired, and you've seen what four real companies bet on when they built a screen-based face. Now it's your turn — this chapter hands you the programming language every project in this book runs on: MicroPython. By the end, you'll be running your own code on the Pico you wired up in Chapter 1.</p>
+</div>
+<p>Every expression Pixel draws — every blinking eye, every arched eyebrow — starts as text you type into a program. That program has to be written in a language the Raspberry Pi Pico can actually run, and this chapter introduces exactly that language. You will not draw anything on a screen yet; that begins once Chapter 4 introduces the coordinate system displays use. Instead, this chapter builds the vocabulary and grammar every later chapter assumes you already know: how to store information, repeat an action, and organize related values together.</p>
+<p>Think of this chapter as learning to hold a pencil before learning to sketch a face. The skills here — variables, loops, and a few ways of grouping data — are not exciting on their own, but they are exactly what a <code>draw_face()</code> function is built from underneath. Once they feel natural, the drawing chapters ahead move much faster.</p>
+<h2 id="what-is-micropython">What Is MicroPython?</h2>
+<p><strong>MicroPython</strong> is a compact reimplementation of the Python 3 programming language, rewritten to run directly on small microcontrollers such as the RP2040 chip inside your Pico. It supports most of the syntax and built-in features that make Python popular — readable code, no manual memory management, a huge standard vocabulary of ready-made tools — while fitting into a few hundred kilobytes of memory instead of the hundreds of megabytes a desktop Python installation needs.</p>
+<p>The biggest practical difference between MicroPython and the desktop Python you may have heard of is what sits underneath it. Desktop Python runs as an application on top of an operating system like Windows, macOS, or Linux, which handles files, memory, and hardware on the interpreter's behalf. MicroPython has no operating system to lean on: it is flashed directly onto the Pico's chip and becomes the only program running, talking straight to the RP2040's memory and pins the moment the board powers on. That is also why MicroPython boots and starts running your code in a fraction of a second — there is no operating system to wait for.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">No Operating System, No Waiting</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Here's the idea worth holding onto: when you plug in your Pico, there's no desktop, no login screen, and no other program competing for attention. MicroPython <em>is</em> the whole show, which is exactly why a $4 chip can redraw a face dozens of times per second without slowing down.</p>
+</div>
+<p>Because both languages share so much syntax, the table below is worth skimming once rather than memorizing — you will feel the differences the moment you start writing code.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Desktop Python</th>
+<th>MicroPython (on a Pico)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Runs on top of</td>
+<td>An operating system (Windows, macOS, Linux)</td>
+<td>Nothing — runs directly on the RP2040 chip</td>
+</tr>
+<tr>
+<td>Typical memory available</td>
+<td>Gigabytes</td>
+<td>About 264 kilobytes</td>
+</tr>
+<tr>
+<td>Startup time</td>
+<td>Seconds (loads the OS first)</td>
+<td>Near-instant on power-up</td>
+</tr>
+<tr>
+<td>Talks directly to hardware pins</td>
+<td>No, needs extra libraries</td>
+<td>Yes, built in (<code>machine</code> module)</td>
+</tr>
+<tr>
+<td>Core syntax (variables, loops, if/else)</td>
+<td>Full Python 3</td>
+<td>Same syntax, smaller standard library</td>
+</tr>
+</tbody>
+</table>
+<h2 id="meet-thonny-your-micropython-editor">Meet Thonny: Your MicroPython Editor</h2>
+<p>Writing MicroPython code by hand and sending it to a Pico one instruction at a time would be slow and error-prone, so this book uses an editor built for exactly this job. The <strong>Thonny IDE</strong> is a free, beginner-friendly integrated development environment — a single application that combines a code editor, a way to run your program, and a window that shows what the program prints — with built-in support for talking to a MicroPython board over a USB cable.</p>
+<p>Getting Thonny talking to your Pico takes only a few steps, and you only need to do it once per computer:</p>
+<ol>
+<li>Install Thonny from its official website and open it.</li>
+<li>Connect the Pico to your computer with a USB cable.</li>
+<li>In the bottom-right corner of the Thonny window, select the interpreter labeled "MicroPython (Raspberry Pi Pico)."</li>
+<li>Confirm the connection worked by checking that the Shell panel at the bottom of the window shows a <code>&gt;&gt;&gt;</code> prompt instead of an error message.</li>
+</ol>
+<p>Once connected, Thonny gives you two ways to run code, and this book uses both throughout every chapter. Clicking the green Run button (or pressing F5) sends the entire program in the editor to the Pico and runs it from the top. Typing directly into the Shell panel at the bottom of the window runs one line at a time — and that shell is actually a doorway into a tool worth understanding on its own.</p>
+<h2 id="the-repl-talking-to-your-pico-one-line-at-a-time">The REPL: Talking to Your Pico One Line at a Time</h2>
+<p>The Shell panel in Thonny is a window onto the <strong>MicroPython REPL</strong> — short for Read-Eval-Print Loop, an interactive prompt that reads one line of code you type, evaluates it immediately, prints any result, and then loops back to wait for your next line. Unlike a saved program that runs top to bottom all at once, the REPL lets you test a single idea, see the result instantly, and try something else without saving or re-running anything.</p>
+<p>A bridge worth building now: everything after the <code>&gt;&gt;&gt;</code> symbol below is something you would type; the line without it is what the Pico prints back.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="mi">4</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, robot!&quot;</span><span class="p">)</span>
+<span class="n">Hello</span><span class="p">,</span> <span class="n">robot</span><span class="err">!</span>
+</code></pre></div></td></tr></table></div>
+<p>The REPL is especially useful for quick experiments — checking what a function returns, testing a math expression, or confirming a module is available — before committing that code to a saved program. Every code example in this chapter can be typed directly into the REPL to see its result immediately, and you're encouraged to do exactly that as you read.</p>
+<div class="admonition mascot-tip">
+<p class="admonition-title">Test It in the REPL First</p>
+<p><img alt="Pixel gives a tip" class="mascot-admonition-img" src="../../img/mascot/tip.png" />
+Not sure what a line of code will do? Type it straight into Thonny's Shell panel before adding it to a saved program. The REPL answers in less than a second, and that habit will save you far more debugging time than it costs.</p>
+</div>
+<h2 id="storing-information-variables-and-constants">Storing Information: Variables and Constants</h2>
+<p>Every program in this book needs to remember values while it runs — how big an eye should be, whether the robot is currently awake, which expression is showing. A <strong>variable</strong> is a named location in memory that holds a value, and that value can change while the program runs. Creating one in MicroPython takes a single line: a name, an equals sign, and a value.</p>
+<p>MicroPython variable names follow a few firm rules and one strong convention. Names must start with a letter or an underscore, never a digit; they can contain letters, digits, and underscores after that first character; and they are case-sensitive, so <code>eyeSize</code> and <code>eyesize</code> are two different variables. This book follows Python's standard convention of <strong>snake_case</strong> — lowercase words separated by underscores — for every variable name.</p>
+<p>A bridge before the code: this next example creates three variables that a robot-face program might use to track its current state.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">eye_size</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">robot_name</span> <span class="o">=</span> <span class="s2">&quot;Pixel&quot;</span>
+<span class="n">is_awake</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div></td></tr></table></div>
+<p>Not every value should be free to change. A <strong>constant</strong> is a variable whose value is meant to stay fixed for the entire program — a screen width, a maximum brightness level, a pin number. MicroPython has no special keyword that locks a variable's value the way some languages do; instead, Python programmers signal "don't reassign this" by writing the name entirely in capital letters.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">MAX_BRIGHTNESS</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">SCREEN_WIDTH</span> <span class="o">=</span> <span class="mi">128</span>
+</code></pre></div></td></tr></table></div>
+<p>Nothing stops MicroPython from letting you change <code>MAX_BRIGHTNESS</code> later in the same program — the all-capitals name is a promise between you and anyone reading your code, not a rule the language enforces. You will see this convention used constantly once display code introduces fixed values like screen dimensions and color numbers.</p>
+<h2 id="data-types-integers-and-booleans">Data Types: Integers and Booleans</h2>
+<p>Every value stored in a variable belongs to a <strong>data type</strong>: a category that describes what kind of value it is and which operations make sense to perform on it. Adding two numbers together makes sense; adding two names together does not, so MicroPython tracks each value's type to catch that kind of mistake.</p>
+<p>This chapter introduces two of the simplest data types, and later chapters add more as drawing code demands them. The <strong>integer data type</strong> represents whole numbers — positive, negative, or zero — with no decimal point, and it is the type behind nearly every pixel coordinate, size, and angle you will use to draw a face. The <strong>boolean data type</strong> represents exactly one of two values, <code>True</code> or <code>False</code>, and it is the type behind every yes/no state a program tracks, such as whether the robot is currently blinking.</p>
+<p>MicroPython's built-in <code>type()</code> function reports a value's data type back to you, which is a fast way to confirm what you are working with.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">eye_size</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">is_awake</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">eye_size</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">is_awake</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+<p>Running that code prints <code>&lt;class 'int'&gt;</code> for <code>eye_size</code> and <code>&lt;class 'bool'&gt;</code> for <code>is_awake</code> — MicroPython's way of confirming that a whole number and a <code>True</code>/<code>False</code> value are, in fact, two different kinds of data.</p>
+<h2 id="comments-notes-for-humans-not-the-computer">Comments: Notes for Humans, Not the Computer</h2>
+<p>Code gets harder to remember the moment you look away from it for a day, so Python gives you a way to leave notes that the language itself completely ignores. <strong>Comment syntax</strong> in MicroPython starts with a <code>#</code> symbol: everything from that symbol to the end of the line is skipped entirely when the program runs, and exists purely for a human reader.</p>
+<p>A comment can sit on its own line above a piece of code, or trail after it on the same line — both styles appear throughout this book.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Set the robot&#39;s eye size in pixels</span>
+<span class="n">eye_size</span> <span class="o">=</span> <span class="mi">12</span>  <span class="c1"># Larger values draw bigger eyes</span>
+</code></pre></div></td></tr></table></div>
+<p>Good comments explain <em>why</em> a value or a line matters, not just <em>what</em> it does — <code>eye_size = 12</code> is already readable on its own, so the useful comment is the one that says what changing it accomplishes.</p>
+<h2 id="indentation-rules-pythons-silent-grammar">Indentation Rules: Python's Silent Grammar</h2>
+<p>Many programming languages mark which lines belong together — inside a loop, for example — using curly braces <code>{ }</code>. MicroPython, like desktop Python, uses <strong>indentation rules</strong> instead: consistent whitespace at the start of a line shows which lines are grouped together, with no braces required at all. The standard convention, used throughout this book, is four spaces per indentation level, and Thonny adds those spaces automatically when they're needed.</p>
+<p>Here's a quick preview of the pattern, using a loop you'll learn to write properly in the next section. Notice that the second line is indented four spaces further than the first — that indentation is what tells MicroPython the <code>print()</code> line belongs <em>inside</em> the loop, not after it.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Blink&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Indentation is not a style preference in Python — it is part of the language's grammar, exactly the way a period ends a sentence in English. Mixing tabs and spaces, or indenting a line by an inconsistent number of spaces, produces an <code>IndentationError</code> that stops your program before it runs at all.</p>
+<div class="admonition mascot-warning">
+<p class="admonition-title">Watch Your Whitespace</p>
+<p><img alt="Pixel warns you" class="mascot-admonition-img" src="../../img/mascot/warning.png" />
+An <code>IndentationError</code> trips up almost every new Python programmer at least once — it's one of the most common first bugs in this entire book. If Thonny reports one, check that every line inside the same block lines up with exactly the same number of spaces, and let Thonny's auto-indent do the counting for you whenever you can.</p>
+</div>
+<p>Seeing an indentation mistake happen, rather than just reading about it, makes the rule far easier to remember. The interactive tool below lets you nudge a line's indentation and watch exactly when MicroPython accepts it and when it throws an error.</p>
+<h4 id="diagram-indentation-error-visualizer">Diagram: Indentation Error Visualizer</h4>
+<iframe src="../../sims/indentation-error-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Indentation Error Visualizer</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> indentation-error-visualizer<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Understand (L2)
+Bloom Taxonomy Verb: explain, classify</p>
+<p>Learning objective: Explain why consistent indentation is required for a MicroPython code block to run, and classify a given indented line as correct, under-indented, or mixed-tabs-and-spaces.</p>
+<p>Canvas layout:
+- Left 65%: a short code listing (a <code>for</code> loop with one indented <code>print()</code> line) rendered as text with visible space-guide dots
+- Right 35%: a control panel and a status readout box</p>
+<p>Visual elements:
+- The code listing shown with each space rendered as a small gray dot so indentation depth is visually countable
+- A status readout reading "Valid" (green) or "IndentationError" (red) with the exact error message MicroPython would show
+- A highlighted line showing which line is currently misaligned, when applicable</p>
+<p>Interactive controls:
+- Stepper control: "Indent depth of line 2" with buttons to increase or decrease the space count from 0 to 8
+- Toggle: "Use a tab instead of spaces on line 2" (demonstrates mixed tabs/spaces errors)
+- Reset button restoring the default, correctly indented state (4 spaces, no tabs)</p>
+<p>Default parameters: line 2 indented by 4 spaces, no tabs, status "Valid"</p>
+<p>Data Visibility Requirements:
+  Stage 1 (4 spaces, no tab): status "Valid" — code block shown running with sample output "Blink 0 / Blink 1 / Blink 2"
+  Stage 2 (0 spaces): status "IndentationError: expected an indented block"
+  Stage 3 (2 spaces, inconsistent with a second indented line at 4 spaces): status "IndentationError: unindent does not match any outer indentation level"
+  Stage 4 (tab toggle on): status "TabError: inconsistent use of tabs and spaces in indentation"</p>
+<p>Behavior: every change to the stepper or toggle immediately updates the status readout and, when valid, shows the loop's printed output; when invalid, shows the exact error text and highlights the offending line in red.</p>
+<p>Instructional Rationale: An Understand-level objective calls for tracing concrete cause and effect between an indentation choice and its result, so a stepper-driven readout showing the exact resulting state at each depth is appropriate; a continuous animation would hide the discrete, rule-based nature of indentation checking.</p>
+<p>Responsive design: code listing and control panel stack vertically below 600 pixels wide; dot-per-space rendering scales down but remains countable.</p>
+<p>Implementation: p5.js for rendering the code listing and space-guide dots; a small rule-based JavaScript function maps indent depth and tab usage to one of the four status states.</p>
+</details>
+<h2 id="for-loops-repeating-a-set-number-of-times">For Loops: Repeating a Set Number of Times</h2>
+<p>Robot faces blink, and blinking is nothing more than an action repeated a fixed number of times. A <strong>for loop</strong> repeats a block of code a specific number of times, typically by stepping through a sequence of values one at a time — most often a range of numbers generated by MicroPython's built-in <code>range()</code> function.</p>
+<p>The bridge sentence for this next example: <code>range(5)</code> generates the numbers 0 through 4, and the indented <code>print()</code> line runs once for each of those five values.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Blink&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>That program prints five lines, <code>Blink 0</code> through <code>Blink 4</code>, then moves on to whatever code comes after the loop. The variable <code>i</code> is just a regular variable — it automatically takes on the next value in the sequence each time the loop repeats, and this book uses <code>i</code> by convention because it is short for "index."</p>
+<p><code>range()</code> also accepts a starting number and a step size, which becomes useful once you start counting something other than "0, 1, 2, 3...".</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">for</span> <span class="n">pupil_x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Move pupil to x =&quot;</span><span class="p">,</span> <span class="n">pupil_x</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>This version starts at 10, adds 5 each time, and stops before reaching 30 — printing pupil positions 10, 15, 20, and 25.</p>
+<h2 id="while-loops-repeating-until-something-changes">While Loops: Repeating Until Something Changes</h2>
+<p>Not every repeated action has a number attached to it in advance. A <strong>while loop</strong> repeats a block of code for as long as a condition stays <code>True</code>, without a fixed count decided before the loop starts — useful for anything that should keep going "until" something happens, rather than "exactly five times."</p>
+<p>Here's a bridge before the code: this example counts up from zero and keeps looping only while <code>count</code> is still less than 3, printing a message and increasing <code>count</code> by one on every pass.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Waiting for button press...&quot;</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div></td></tr></table></div>
+<p>Notice the last line inside the loop, <code>count = count + 1</code> — this is what eventually makes the condition <code>count &lt; 3</code> become <code>False</code> and stops the loop. Forgetting a line like that creates an <strong>infinite loop</strong>, one that never stops on its own, because the condition never has a chance to change. Later chapters use a related pattern, <code>while True:</code>, deliberately — an animation loop that is supposed to run forever, redrawing a face again and again until the Pico loses power.</p>
+<p>Predicting exactly what a loop will print, before running it, is one of the fastest ways to build real confidence with this syntax. The interactive tracer below lets you step through a short loop one iteration at a time and check your prediction against what actually happens.</p>
+<h4 id="diagram-micropython-loop-tracer">Diagram: MicroPython Loop Tracer</h4>
+<iframe src="../../sims/micropython-loop-tracer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>MicroPython Loop Tracer</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> micropython-loop-tracer<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Apply (L3)
+Bloom Taxonomy Verb: execute, demonstrate</p>
+<p>Learning objective: Execute a short for loop or while loop mentally, one iteration at a time, and demonstrate correct prediction of each variable's value and each line printed before revealing the actual result.</p>
+<p>Canvas layout:
+- Left 55%: a short code listing (selectable between a <code>for</code> loop and a <code>while</code> loop example) with the current line highlighted
+- Right 45%: a "Predict" input area, a running variable-state table, and a printed-output log</p>
+<p>Visual elements:
+- Code listing with a highlighted current line that advances one step at a time
+- A live variable-state table (for example, columns for <code>i</code> or <code>count</code>) showing values only after they are confirmed, not in advance
+- A printed-output log that fills in one line per confirmed step
+- A "Prediction" text box where the learner types what they think the next printed line will be</p>
+<p>Interactive controls:
+- Dropdown: "Example: For Loop / While Loop"
+- Text input: type a prediction for the next printed line, then a "Check" button reveals whether the prediction was correct
+- "Next Step" button advances the trace by one loop iteration after a prediction is checked
+- "Reset" button returns to the first line of the selected example</p>
+<p>Default parameters: For Loop example selected, <code>for i in range(5): print("Blink", i)</code>, step 0 (before the loop starts)</p>
+<p>Data Visibility Requirements:
+  Stage 1: Show the unexecuted code with <code>i</code> undefined and an empty output log
+  Stage 2: Learner predicts the first printed line, clicks Check, sees "Blink 0" confirmed or corrected, and the variable table updates to i = 0
+  Stage 3: Same pattern repeats for i = 1 through i = 4
+  Final: Show the complete output log alongside the final state of the loop variable after the loop exits</p>
+<p>Interaction: Step-through with Predict/Check/Next Step controls, not automatic animation</p>
+<p>Instructional Rationale: The Apply-level objective (execute, demonstrate) requires the learner to actively predict each step's outcome before seeing it confirmed, which is exactly what a predict-then-reveal step-through supports; continuous animation would let the learner passively watch instead of tracing the logic themselves.</p>
+<p>Responsive design: code listing and state panel stack vertically below 600 pixels wide; the prediction input remains full-width at every size.</p>
+<p>Implementation: p5.js for layout and rendering; a small interpreter-like JavaScript object steps through a pre-defined instruction list for each example and compares learner input against the expected next line.</p>
+</details>
+<h2 id="bringing-in-extra-powers-import-statements-and-modules">Bringing in Extra Powers: Import Statements and Modules</h2>
+<p>No program should have to reinvent basic tools like timing or hardware control from scratch, and MicroPython ships with a large collection of ready-made code to prevent exactly that. A <strong>module</strong> is a file containing pre-written code — variables, functions, and tools — bundled together so it can be reused in any program that needs it, instead of being retyped every time. MicroPython includes modules for timing (<code>time</code>), hardware pins (<code>machine</code>), and, as later chapters introduce, drawing to a display (<code>framebuf</code>).</p>
+<p>An <strong>import statement</strong> is the line of code that loads a module, or a specific piece of one, into your program so you can use its contents. The most common form imports an entire module by name.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;One second has passed&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>That example loads the whole <code>time</code> module, then calls its <code>sleep()</code> function using dot notation — <code>time.sleep(1)</code> pauses the program for one second before continuing. A second form of the import statement pulls out just one specific tool from a module, which is useful when you only need a single piece of a larger module.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+
+<span class="n">led</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>This form imports only <code>Pin</code>, a tool from the <code>machine</code> module — the same module that connects your MicroPython code to the GPIO pins you wired up in Chapter 1 — so you can write <code>Pin(25, Pin.OUT)</code> directly instead of the longer <code>machine.Pin(25, Pin.OUT)</code>. Once display chapters begin, you will import two more modules by name: <code>ssd1306</code>, which speaks the OLED driver's command set, and <code>framebuf</code>, which provides the drawing methods — <code>fill()</code>, <code>ellipse()</code>, <code>poly()</code>, and more — that every face in this book is built from.</p>
+<h2 id="collections-lists-tuples-and-dictionaries">Collections: Lists, Tuples, and Dictionaries</h2>
+<p>Real programs rarely work with just one value at a time — a robot face needs to track a whole set of possible expressions, a fixed color, or several related settings together. MicroPython groups related values using three collection types, and each one exists because it fits a different kind of data.</p>
+<p>A <strong>list data structure</strong> is an ordered, changeable collection of values, written with square brackets and separated by commas. Because a list can grow, shrink, and have its items edited while a program runs, it fits data expected to change — such as the set of expressions a robot face can display.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">expressions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;happy&quot;</span><span class="p">,</span> <span class="s2">&quot;sad&quot;</span><span class="p">,</span> <span class="s2">&quot;angry&quot;</span><span class="p">,</span> <span class="s2">&quot;surprised&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">expressions</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></td></tr></table></div>
+<p>That code prints <code>happy</code>, the first item in the list — Python counts positions starting at 0, so <code>expressions[0]</code> means "the first item," not the second.</p>
+<p>A <strong>tuple data structure</strong> is also an ordered collection written with commas, but it uses parentheses instead of square brackets, and once created, its values cannot be changed. That permanence makes a tuple the right choice for a fixed value that should never accidentally be edited later in a program — a screen's color model, RGB565, represents each color as three fixed numbers, which is exactly the kind of value a tuple protects.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">eye_color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span> <span class="mi">165</span><span class="p">)</span>  <span class="c1"># a fixed teal color, similar to Pixel&#39;s own limbs</span>
+</code></pre></div></td></tr></table></div>
+<p>A <strong>dictionary data structure</strong> stores values in key-value pairs instead of by position, written with curly braces — each value is looked up by a name, called a key, rather than by counting its position in a sequence. This makes a dictionary the natural fit for a group of named settings that belong together, such as every parameter that defines a single facial expression.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">happy_face</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;eye_size&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span> <span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;mouth_curve&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">happy_face</span><span class="p">[</span><span class="s2">&quot;mouth_curve&quot;</span><span class="p">])</span>
+</code></pre></div></td></tr></table></div>
+<p>That code prints <code>20</code> — MicroPython looks up the value stored under the key <code>"mouth_curve"</code> directly, with no need to know or count its position among the other settings.</p>
+<div class="admonition mascot-encourage">
+<p class="admonition-title">Three Collections, Three Jobs</p>
+<p><img alt="Pixel cheers you on" class="mascot-admonition-img" src="../../img/mascot/encouraging.png" />
+If lists, tuples, and dictionaries are starting to blur together, that's completely normal on a first read. Focus on the job each one is best at — a list for things that change, a tuple for a value that shouldn't, a dictionary for named settings — and the choice will start feeling automatic well before Chapter 5 asks you to make it.</p>
+</div>
+<p>Now that all three collection types have been introduced individually, the table below puts their key differences side by side.</p>
+<table>
+<thead>
+<tr>
+<th>Collection</th>
+<th>Written With</th>
+<th>Changeable?</th>
+<th>Accessed By</th>
+<th>Typical Robot-Face Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List</td>
+<td><code>[ ]</code> square brackets</td>
+<td>Yes</td>
+<td>Position (index)</td>
+<td>A list of expression names to cycle through</td>
+</tr>
+<tr>
+<td>Tuple</td>
+<td><code>( )</code> parentheses</td>
+<td>No</td>
+<td>Position (index)</td>
+<td>A fixed RGB565 color value</td>
+</tr>
+<tr>
+<td>Dictionary</td>
+<td><code>{ }</code> curly braces</td>
+<td>Yes</td>
+<td>Key (name)</td>
+<td>Named parameters for one expression</td>
+</tr>
+</tbody>
+</table>
+<p>Choosing the right collection is itself a small design decision, and it is one worth practicing before real drawing code raises the stakes. The interactive infographic below lets you compare all three side by side and check your understanding against a short scenario.</p>
+<h4 id="diagram-list-vs-tuple-vs-dictionary-comparison">Diagram: List vs Tuple vs Dictionary Comparison</h4>
+<iframe src="../../sims/collection-types-comparison-infographic/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>List vs Tuple vs Dictionary Comparison</summary>
+<p>Type: infographic
+<strong>sim-id:</strong> collection-types-comparison-infographic<br/>
+<strong>Library:</strong> HTML/CSS/JS<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Analyze (L4)
+Bloom Taxonomy Verb: differentiate, distinguish</p>
+<p>Learning objective: Differentiate lists, tuples, and dictionaries by mutability, syntax, and access method, and distinguish which collection type best fits a short scenario describing robot-face data.</p>
+<p>Purpose and main message: Show that the three collection types are not interchangeable — each is the correct tool for a specific kind of data, and choosing the wrong one either invites accidental bugs (using a list when data must stay fixed) or awkward code (using a dictionary just to count through items in order)</p>
+<p>Layout: three columns, one per collection type (List, Tuple, Dictionary), each column topped with its bracket symbol as a large icon; a scenario card area below the three columns</p>
+<p>Data to display per column, visible by default:
+- Symbol: <code>[ ]</code>, <code>( )</code>, <code>{ }</code>
+- Mutability: Changeable / Not changeable / Changeable
+- Access method: by position / by position / by key name
+- One short robot-face code example matching the examples used earlier in the chapter (expressions list, eye_color tuple, happy_face dictionary)</p>
+<p>Interactive elements:
+- Clicking any column header expands a short "Why choose this one?" explanation beneath it
+- A "Try a Scenario" panel presents one short scenario at a time (for example: "You need to store a fixed background color that must never change") with three buttons labeled List, Tuple, and Dictionary
+- Selecting an answer highlights the chosen column green if correct or red if incorrect, and reveals a one-sentence explanation citing the mutability or access-method rule that decided the answer
+- A "Next Scenario" button cycles through at least four scenarios covering each collection type at least once</p>
+<p>Color coding or visual hierarchy: List column in teal, Tuple column in coral, Dictionary column in purple, matching Pixel's own color palette; correct/incorrect scenario feedback uses green/red overlays independent of the column colors</p>
+<p>Responsive behavior: three columns side by side above 700 pixels wide, stacking to a single column below 700 pixels with the scenario panel remaining pinned beneath the visible column</p>
+<p>Instructional Rationale: The Analyze-level objective requires distinguishing structural properties (mutability, access method) across three related data structures and applying that distinction to new cases, so a compare-then-test-with-scenarios pattern is appropriate; simply displaying the three definitions side by side would only support a Remember-level objective, not this Analyze-level one.</p>
+<p>Implementation: HTML/CSS grid for the three-column layout, vanilla JavaScript for expand-on-click behavior and scenario-checking logic; no external charting library needed.</p>
+</details>
+<h2 id="chapter-summary">Chapter Summary</h2>
+<p>You now have the full MicroPython vocabulary this book's drawing code is built from — from typing your first line into the REPL to choosing the right collection for a set of related values.</p>
+<ul>
+<li>MicroPython is a compact version of Python 3 that runs directly on the RP2040 chip with no operating system underneath it.</li>
+<li>Thonny is the IDE this book uses to connect to a Pico, edit programs, and run them either as a saved file or one line at a time in the REPL.</li>
+<li>Variables store values that can change; constants, written in ALL_CAPS by convention, store values meant to stay fixed.</li>
+<li>The integer and boolean data types cover whole numbers and True/False states, and <code>type()</code> reveals which type any value has.</li>
+<li>Comments, starting with <code>#</code>, are notes for human readers that MicroPython ignores completely when a program runs.</li>
+<li>Indentation is not a style choice — it is how MicroPython knows which lines belong to a loop, and inconsistent indentation raises an <code>IndentationError</code>.</li>
+<li>For loops repeat a known number of times, often using <code>range()</code>; while loops repeat until a condition becomes False, which risks an infinite loop if that condition never changes.</li>
+<li>Import statements load modules like <code>time</code> and <code>machine</code> so a program can reuse ready-made tools instead of rewriting them.</li>
+<li>Lists, tuples, and dictionaries each store multiple values, but differ in whether they can change and how their items are accessed — a distinction that matters the moment real expression data enters the picture.</li>
+</ul>
+<div class="admonition mascot-celebration">
+<p class="admonition-title">You Just Learned to Talk to a Pico</p>
+<p><img alt="Pixel celebrates" class="mascot-admonition-img" src="../../img/mascot/celebration.png" />
+Variables, loops, imports, and three kinds of collections — that's the entire language foundation this book needs, and it's already yours. Chapter 4 builds on every piece of it as you meet the screen's coordinate system and start drawing your very first pixels.</p>
+</div>
+<details class="question">
+<summary>Self-Check: Which collection type would you choose? — Click to reveal</summary>
+<p>A fixed RGB565 color value that should never accidentally change belongs in a tuple, written with parentheses, because tuples are unchangeable once created — unlike a list, which is meant for values like a set of expression names that can grow or be edited, or a dictionary, which is meant for named settings looked up by key rather than by position.</p>
+</details>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

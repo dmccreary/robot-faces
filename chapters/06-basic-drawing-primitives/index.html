@@ -1,0 +1,2395 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The core FrameBuf drawing methods — fill, pixel, lines, rectangles, scroll, blit, and text — that every shape in this book is built from.">
+      
+      
+        <meta name="author" content="Dan McCreary">
+      
+      
+      
+        <link rel="prev" href="../05-display-coordinate-systems/">
+      
+      
+        <link rel="next" href="../07-ellipse-polygon-drawing/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Basic Drawing Primitives - Robot Faces</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/mascot.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-FPTNK1XNJR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-FPTNK1XNJR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-FPTNK1XNJR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#642580" data-md-color-accent="#41BAC1">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#basic-drawing-primitives" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robot Faces" class="md-header__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Faces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Basic Drawing Primitives
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robot Faces" class="md-nav__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    Robot Faces
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Chapters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of Chapters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-hardware-electronics-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Hardware & Electronics Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-micropython-fundamentals-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-micropython-fundamentals-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-display-coordinate-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-first-real-drawing-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Your First Real Drawing Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#naming-colors-drawing-constants-and-the-drawing-color-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      Naming Colors: Drawing Constants and the Drawing Color Value
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-pixel-method-one-dot-at-a-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Pixel Method: One Dot at a Time
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clearing-the-canvas-the-fill-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clearing the Canvas: The Fill Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#straight-lines-the-fast-way-horizontal-and-vertical-line-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Straight Lines the Fast Way: Horizontal and Vertical Line Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lines-at-any-angle-the-line-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lines at Any Angle: The Line Method
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lines at Any Angle: The Line Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-pixel-drawing-sandbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Pixel Drawing Sandbox
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rectangles-outlines-and-filled-shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rectangles: Outlines and Filled Shapes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safety-net-clipping-at-the-screen-edge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safety Net: Clipping at the Screen Edge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shifting-pixels-the-scroll-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shifting Pixels: The Scroll Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pre-drawn-art-sprites-bitmaps-and-byte-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-Drawn Art: Sprites, Bitmaps, and Byte Arrays
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copying-pixels-fast-the-blit-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copying Pixels Fast: The Blit Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-backgrounds-show-through-the-transparent-color-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making Backgrounds Show Through: The Transparent Color Key
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Making Backgrounds Show Through: The Transparent Color Key">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-blit-transparency-key-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Blit Transparency Key Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-peek-ahead-blit-palette-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Peek Ahead: Blit Palette Mapping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labeling-your-work-the-text-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Labeling Your Work: The Text Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#order-matters-draw-order-layering-and-overdraw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Order Matters: Draw Order Layering and Overdraw
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drawing-smarter-draw-call-order-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drawing Smarter: Draw Call Order Optimization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Drawing Smarter: Draw Call Order Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-draw-order-and-overdraw-stepper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Draw Order and Overdraw Stepper
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-together-an-eyebrow-and-a-mouth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting It Together: An Eyebrow and a Mouth
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-ellipse-polygon-drawing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Ellipse & Polygon Drawing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-framebuf-version-history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-facial-anatomy-layout-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-emotion-theory-core-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Emotion Theory & the Core Expression Set
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-expression-design-readability-hri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-animating-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Animating Expressions: Timing & Motion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-interactive-controls-inputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-expression-menu-live-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-porting-faces-color-display/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Porting Faces to a Color Display
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-computational-thinking-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lessons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Lessons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    History of Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/screen-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/drawing-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Drawing Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/ellipse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ellipse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/polygon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polygon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/basic-face-layouts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Face Layouts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eye-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eyebrows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eyebrows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion-types.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emotion Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../parts-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Faces Parts List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About The Robot Faces Book
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Learning Graph
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Learning Graph
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/starting-concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Starting Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/course-description-assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quality-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/taxonomy-distribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy Distribution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/mascot-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mascot Test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Stories
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Stories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-first-real-drawing-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Your First Real Drawing Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#naming-colors-drawing-constants-and-the-drawing-color-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      Naming Colors: Drawing Constants and the Drawing Color Value
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-pixel-method-one-dot-at-a-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Pixel Method: One Dot at a Time
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clearing-the-canvas-the-fill-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clearing the Canvas: The Fill Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#straight-lines-the-fast-way-horizontal-and-vertical-line-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Straight Lines the Fast Way: Horizontal and Vertical Line Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lines-at-any-angle-the-line-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lines at Any Angle: The Line Method
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lines at Any Angle: The Line Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-pixel-drawing-sandbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Pixel Drawing Sandbox
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rectangles-outlines-and-filled-shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rectangles: Outlines and Filled Shapes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safety-net-clipping-at-the-screen-edge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safety Net: Clipping at the Screen Edge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shifting-pixels-the-scroll-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shifting Pixels: The Scroll Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pre-drawn-art-sprites-bitmaps-and-byte-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-Drawn Art: Sprites, Bitmaps, and Byte Arrays
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copying-pixels-fast-the-blit-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copying Pixels Fast: The Blit Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-backgrounds-show-through-the-transparent-color-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making Backgrounds Show Through: The Transparent Color Key
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Making Backgrounds Show Through: The Transparent Color Key">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-blit-transparency-key-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Blit Transparency Key Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-peek-ahead-blit-palette-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Peek Ahead: Blit Palette Mapping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labeling-your-work-the-text-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Labeling Your Work: The Text Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#order-matters-draw-order-layering-and-overdraw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Order Matters: Draw Order Layering and Overdraw
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drawing-smarter-draw-call-order-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drawing Smarter: Draw Call Order Optimization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Drawing Smarter: Draw Call Order Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-draw-order-and-overdraw-stepper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Draw Order and Overdraw Stepper
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-together-an-eyebrow-and-a-mouth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting It Together: An Eyebrow and a Mouth
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="basic-drawing-primitives">Basic Drawing Primitives</h1>
+<h2 id="summary">Summary</h2>
+<p>This chapter teaches the foundational FrameBuf drawing methods: fill, horizontal/vertical/general lines, rectangles (outlined and filled), blit (including transparency and palette mapping), and text. These primitives are the building blocks every later drawing technique in this book — ellipses, polygons, and full face layouts — is built from. After completing this chapter, students will be able to draw and combine basic shapes and sprites on either target display.</p>
+<h2 id="concepts-covered">Concepts Covered</h2>
+<p>This chapter covers the following 21 concepts from the learning graph:</p>
+<ol>
+<li>Fill Method</li>
+<li>Horizontal Line Method</li>
+<li>Vertical Line Method</li>
+<li>Line Method</li>
+<li>Rectangle Method</li>
+<li>Filled Rectangle Method</li>
+<li>Scroll Method</li>
+<li>Blit Method</li>
+<li>Transparent Color Key</li>
+<li>Blit Palette Mapping</li>
+<li>Pixel Method</li>
+<li>Drawing Color Value</li>
+<li>Drawing Constants</li>
+<li>Sprite</li>
+<li>Bitmap</li>
+<li>Unsigned Byte Array</li>
+<li>Text Method</li>
+<li>Draw Order Layering</li>
+<li>Overdraw</li>
+<li>Clipping At Screen Edge</li>
+<li>Draw Call Order Optimization</li>
+</ol>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This chapter builds on concepts from:</p>
+<ul>
+<li><a href="../03-micropython-fundamentals-1/">Chapter 3: MicroPython Fundamentals I: Syntax, Data &amp; Loops</a></li>
+<li><a href="../05-display-coordinate-systems/">Chapter 5: Display &amp; Coordinate Systems</a></li>
+</ul>
+<hr />
+<h2 id="your-first-real-drawing-code">Your First Real Drawing Code</h2>
+<div class="admonition mascot-welcome">
+<p class="admonition-title">Let's Actually Draw Something</p>
+<p><img alt="Pixel waves hello" class="mascot-admonition-img" src="../../img/mascot/welcome.png" />
+Every chapter so far has been building toward this moment. You know how coordinates work, you know what a frame buffer is, and now you get to put pixels on a screen. This chapter hands you the exact set of drawing methods every eye, eyebrow, and mouth in this book will use.</p>
+</div>
+<p>Chapter 5 explained how a frame buffer stores pixel state in memory and how the <code>.show()</code> method pushes that memory out to a physical screen. This chapter fills in the missing piece: the actual drawing methods that change what a frame buffer holds. Every example below assumes a variable named <code>fb</code>, an already-initialized FrameBuffer object exactly like the <code>display</code> object Chapter 5 created — you can call drawing methods directly on it and finish with <code>fb.show()</code> to make the result appear.</p>
+<h2 id="naming-colors-drawing-constants-and-the-drawing-color-value">Naming Colors: Drawing Constants and the Drawing Color Value</h2>
+<p>Every FrameBuf drawing method needs to know what color to use, and on the monochrome OLED that choice is simple. A <strong>drawing color value</strong> is the number a drawing method uses to decide what a pixel should look like once it is drawn. On a 1-bit monochrome display, only two drawing color values exist: <code>0</code>, meaning the pixel is off (black), and <code>1</code>, meaning the pixel is on (white).</p>
+<p>Writing bare <code>0</code> and <code>1</code> throughout a program works, but it forces every reader to remember which number means what. <strong>Drawing constants</strong> solve this by giving those two values readable names, assigned once near the top of a program.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">BLACK</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">WHITE</span> <span class="o">=</span> <span class="mi">1</span>
+</code></pre></div></td></tr></table></div>
+<p>From here forward, every example in this chapter uses <code>BLACK</code> and <code>WHITE</code> instead of raw <code>0</code> and <code>1</code>. Code that reads <code>fb.pixel(10, 10, WHITE)</code> explains itself; code that reads <code>fb.pixel(10, 10, 1)</code> makes a reader stop and think. This small habit pays off constantly once face-drawing code starts mixing many colors and shapes together in later chapters.</p>
+<h2 id="the-pixel-method-one-dot-at-a-time">The Pixel Method: One Dot at a Time</h2>
+<p>Every shape a frame buffer can draw is ultimately built from single dots, and MicroPython gives you a method that controls exactly one of them. The <strong>pixel method</strong>, called as <code>fb.pixel(x, y, color)</code>, sets the color of a single pixel at the given (x, y) coordinate — the most basic drawing primitive a frame buffer offers.</p>
+<p>A bridge before the code: this example turns on one pixel dead center on the 128x64 OLED, using the coordinate system Chapter 5 taught.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fb</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">)</span>
+<span class="n">fb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>Nothing about <code>fb.pixel()</code> is complicated, but that simplicity is exactly the point — every method covered later in this chapter, from lines to rectangles to text, is really just many calls to something like <code>fb.pixel()</code> running automatically, one dot at a time, so you never have to write that loop yourself.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">Everything Is Built From Pixels</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Hold onto this idea for the rest of the chapter: <code>fb.line()</code>, <code>fb.rect()</code>, and even <code>fb.text()</code> are all just fast, pre-written ways of calling something equivalent to <code>fb.pixel()</code> many times in a row. Learning the pixel method first means every other method in this chapter is really just a shortcut you already understand.</p>
+</div>
+<h2 id="clearing-the-canvas-the-fill-method">Clearing the Canvas: The Fill Method</h2>
+<p>Before drawing anything new, most robot-face programs need to erase whatever was drawn last frame — otherwise old eyebrows and new eyebrows would overlap into a smear. The <strong>fill method</strong>, called as <code>fb.fill(color)</code>, sets every single pixel in the entire frame buffer to the same color in one call.</p>
+<p>A bridge before the code: this example clears the whole buffer to black, the way almost every drawing routine in this book starts.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fb</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">BLACK</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Calling <code>fb.fill(BLACK)</code> once at the start of every frame gives you a clean, predictable starting point, exactly the way erasing a whiteboard before drawing a new picture keeps old lines from bleeding into the new one. Most of the drawing code you write from Chapter 7 onward will begin with this exact line before anything else happens.</p>
+<h2 id="straight-lines-the-fast-way-horizontal-and-vertical-line-methods">Straight Lines the Fast Way: Horizontal and Vertical Line Methods</h2>
+<p>Many shapes on a robot's face — a flat eyebrow, the closed line of a resting mouth — are simply straight lines running directly across or down the screen. MicroPython gives these common cases their own optimized methods instead of making you use the general-purpose line drawer for everything.</p>
+<p>The <strong>horizontal line method</strong>, called as <code>fb.hline(x, y, width, color)</code>, draws a straight line of pixels running sideways, starting at (x, y) and extending <code>width</code> pixels to the right. The <strong>vertical line method</strong>, called as <code>fb.vline(x, y, height, color)</code>, works the same way but draws downward, starting at (x, y) and extending <code>height</code> pixels.</p>
+<p>A bridge before the code: this example draws one horizontal line for a simple flat mouth and one vertical line as a marker down the left edge of the screen.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fb</span><span class="o">.</span><span class="n">hline</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">)</span>   <span class="c1"># a flat mouth, 60 pixels wide</span>
+<span class="n">fb</span><span class="o">.</span><span class="n">vline</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">)</span>    <span class="c1"># a vertical marker, 40 pixels tall</span>
+</code></pre></div></td></tr></table></div>
+<p>Because <code>fb.hline()</code> and <code>fb.vline()</code> only ever move in one direction, MicroPython can draw them faster internally than a method that has to check direction on every single pixel. That speed matters once a face redraws many lines every frame during an animation.</p>
+<h2 id="lines-at-any-angle-the-line-method">Lines at Any Angle: The Line Method</h2>
+<p>A flat mouth is common, but an angry eyebrow tilted at a sharp angle or a smiling mouth's curve both need lines that run diagonally, not just sideways or straight down. The <strong>line method</strong>, called as <code>fb.line(x1, y1, x2, y2, color)</code>, draws a straight line between any two points on the screen, at any angle.</p>
+<p>A bridge before the code: this example connects two corners of the screen with a single diagonal line.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fb</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Under the hood, <code>fb.line()</code> uses an efficient pixel-stepping algorithm, conceptually similar to the classic Bresenham's line algorithm, that figures out which pixels best approximate a straight line between the two endpoints without needing any decimal math. You never have to understand that algorithm to use the method — just remember that any two coordinates on the screen can become a line with one call.</p>
+<p>Now that you have four different ways to lay down straight lines — one pixel at a time, sideways, straight down, or at an angle — trying them out directly makes the differences click faster than reading about them.</p>
+<h4 id="diagram-pixel-drawing-sandbox">Diagram: Pixel Drawing Sandbox</h4>
+<iframe src="../../sims/pixel-drawing-sandbox/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Pixel Drawing Sandbox</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> pixel-drawing-sandbox<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Apply (L3)
+Bloom Taxonomy Verb: demonstrate, execute</p>
+<p>Learning objective: Demonstrate the effect of <code>pixel()</code>, <code>hline()</code>, and <code>vline()</code> calls by drawing directly on a simulated frame buffer, and execute the correct tool choice for horizontal, vertical, and single-dot marks.</p>
+<p>Canvas layout:
+- Left 70% (responsive, roughly 450x300 at default width): a scaled-up 128x64 pixel grid representing the OLED frame buffer, drawn as small squares
+- Right 30%: a tool selector, a live code readout, and a "Clear" button</p>
+<p>Visual elements:
+- A grid of squares, each square either black (off) or white (on), matching the monochrome OLED
+- The currently selected tool highlighted in the tool selector
+- A live-updating code readout showing the exact method call the last action generated, e.g. <code>fb.pixel(64, 32, WHITE)</code> or <code>fb.hline(10, 20, 45, WHITE)</code>
+- A running list of the last five method calls made, scrollable</p>
+<p>Interactive controls:
+- Tool selector: "Pixel", "Horizontal Line", "Vertical Line"
+- Clicking the grid with "Pixel" selected toggles that one pixel on or off and logs <code>fb.pixel(x, y, WHITE)</code>
+- Clicking and dragging horizontally with "Horizontal Line" selected draws a line from the click point to the release point and logs the equivalent <code>fb.hline(x, y, width, WHITE)</code> call
+- Clicking and dragging vertically with "Vertical Line" selected does the same for <code>fb.vline()</code>
+- "Clear" button calls the fill-method equivalent, resetting the entire grid to black and logging <code>fb.fill(BLACK)</code></p>
+<p>Default parameters: "Pixel" tool selected, grid fully black, call log empty</p>
+<p>Behavior: every click or drag immediately updates the grid and appends the equivalent FrameBuf method call to the code readout and the call history list, so the learner can connect a hand gesture directly to the exact line of MicroPython it represents.</p>
+<p>Instructional Rationale: An Apply-level, direct-manipulation pattern is appropriate because the objective requires the learner to actively produce marks with each tool and see the resulting method call, building an accurate mental model of what each primitive does rather than reading a description of it.</p>
+<p>Responsive design: the grid and control panel stack vertically below 600 pixels wide; the grid scales to fill its container's width while preserving the OLED's 2:1 aspect ratio.</p>
+<p>Implementation: p5.js for the grid rendering, drag detection, and code-string generation; a 2D array tracks the on/off state of every simulated pixel.</p>
+</details>
+<h2 id="rectangles-outlines-and-filled-shapes">Rectangles: Outlines and Filled Shapes</h2>
+<p>Eyebrows, simple mouths, and status bars on a robot's face are often just rectangles, so FrameBuf gives you a method built specifically for that shape. The <strong>rectangle method</strong>, called as <code>fb.rect(x, y, width, height, color)</code>, draws only the outline of a rectangle — four straight lines forming a border, with the inside left untouched.</p>
+<p>Many shapes on a robot's face, though, need to be solid rather than hollow — a thick, filled eyebrow reads far more clearly than a thin outlined one. The <strong>filled rectangle method</strong> uses that same <code>fb.rect()</code> call with one extra argument: <code>fb.rect(x, y, width, height, color, True)</code>, where the final <code>True</code> tells FrameBuf to fill the entire rectangle instead of just outlining it.</p>
+<p>A bridge before the code: this example draws one outlined rectangle and one filled rectangle side by side so you can compare them directly.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fb</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">)</span>          <span class="c1"># outline only</span>
+<span class="n">fb</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>    <span class="c1"># filled solid</span>
+</code></pre></div></td></tr></table></div>
+<p>That single <code>True</code> argument is easy to miss, so it is worth a deliberate glance every time you write a filled shape — leaving it off silently changes a solid eyebrow into a thin, hollow-looking box.</p>
+<h2 id="safety-net-clipping-at-the-screen-edge">Safety Net: Clipping at the Screen Edge</h2>
+<p>New programmers worry, reasonably, about what happens if a coordinate accidentally lands off the edge of the display — does the program crash? FrameBuf handles that situation gracefully. <strong>Clipping at screen edge</strong> describes how every FrameBuf drawing method automatically ignores or trims any part of a shape that falls outside the buffer's valid coordinate range, instead of raising an error. If a rectangle's corner math comes out slightly wrong and part of a shape would land at x = 140 on a 128-pixel-wide OLED, FrameBuf just quietly skips drawing that part — no crash, no error message. That safety net makes it much less risky to experiment with coordinate math while you are still learning.</p>
+<p>A bridge before the code: this example deliberately draws a rectangle that extends past the OLED's right edge, to show that MicroPython simply clips it rather than failing.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fb</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">)</span>  <span class="c1"># right edge would land at x=150, off a 128-wide screen</span>
+<span class="n">fb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>Running that code draws only the visible portion of the rectangle, from x = 100 up to the screen's actual edge at x = 127; the rest is silently discarded. Clipping is reassuring while you are experimenting, but it is not a substitute for correct math — a shape clipped at the edge still will not look the way you intended, so treat this as a safety net, not a design tool.</p>
+<h2 id="shifting-pixels-the-scroll-method">Shifting Pixels: The Scroll Method</h2>
+<p>Sometimes a program needs to move everything already drawn in a frame buffer, rather than erasing it and redrawing from scratch. The <strong>scroll method</strong>, called as <code>fb.scroll(dx, dy)</code>, shifts every pixel already in the buffer by <code>dx</code> pixels horizontally and <code>dy</code> pixels vertically, without needing to know what shapes are currently drawn.</p>
+<p>A bridge before the code: this example shifts the entire buffer's contents two pixels upward, the kind of call an animation might repeat every frame to make something appear to float.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fb</span><span class="o">.</span><span class="n">scroll</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Pixels that scroll past an edge simply disappear, and the space left behind is not automatically cleared — a scrolled buffer usually needs a fresh <code>fb.fill()</code> in the newly emptied area before it looks right. Chapter 12 builds full animations on exactly this method, so it is worth remembering that "moving" pixels on a frame buffer really means shifting existing memory, not redrawing shapes at new coordinates.</p>
+<h2 id="pre-drawn-art-sprites-bitmaps-and-byte-arrays">Pre-Drawn Art: Sprites, Bitmaps, and Byte Arrays</h2>
+<p>Every shape so far in this chapter has been drawn live, one method call at a time, but robot-face code often reuses the exact same small image over and over — a blinking-eye icon, a tiny heart, a battery glyph. A <strong>sprite</strong> is a small, pre-drawn image, stored ready to be placed onto a frame buffer as a single unit instead of redrawn pixel by pixel every time it is needed.</p>
+<p>A sprite has to be stored as data somewhere, and that data has a specific shape. A <strong>bitmap</strong> is pixel data stored as a raw sequence of bytes, where each byte (or group of bits within it) represents the color of one or more pixels — exactly the same idea behind the frame buffer itself, just usually much smaller. MicroPython represents a bitmap's raw bytes using an <strong>unsigned byte array</strong>, the <code>bytearray</code> data type Chapter 3 introduced, where every entry holds a whole number from 0 to 255 with no negative values possible.</p>
+<p>A bridge before the code: this example builds a tiny 8x2-pixel sprite, two rows of solid pixels that could serve as a small eyebrow shape, and wraps it in its own FrameBuffer object.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">eyebrow_bitmap</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">([</span><span class="mb">0b11111111</span><span class="p">,</span> <span class="mb">0b11111111</span><span class="p">])</span>
+<span class="n">eyebrow_sprite</span> <span class="o">=</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">FrameBuffer</span><span class="p">(</span><span class="n">eyebrow_bitmap</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">MONO_HLSB</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p><code>eyebrow_bitmap</code> is the raw unsigned byte array — two bytes, one per row, each holding eight <code>1</code> bits for eight lit pixels. Wrapping that bytearray in its own <code>framebuf.FrameBuffer(...)</code> object, exactly the way Chapter 4 first introduced that constructor, turns raw bytes into a drawable sprite with its own tiny coordinate system, ready to be placed onto a larger buffer.</p>
+<h2 id="copying-pixels-fast-the-blit-method">Copying Pixels Fast: The Blit Method</h2>
+<p>Once a sprite exists as its own small FrameBuffer, placing it onto a larger frame buffer needs a method built for copying pixels between buffers, not drawing shapes one at a time. The <strong>blit method</strong>, called as <code>fb.blit(source_fb, x, y)</code>, copies every pixel from a source frame buffer onto the destination buffer, positioned with its top-left corner at (x, y).</p>
+<p>A bridge before the code: this example places the <code>eyebrow_sprite</code> built above onto the main display buffer, positioned above where a left eye will eventually go.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fb</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">eyebrow_sprite</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Blitting a sprite is dramatically faster than recalculating and redrawing its shape with individual <code>pixel()</code> or <code>rect()</code> calls every frame, because the pixel data is already fully computed — <code>fb.blit()</code> just copies it into place. This is exactly why sprites exist: draw a shape once, store it, then reuse it with a single fast call anywhere it is needed.</p>
+<h2 id="making-backgrounds-show-through-the-transparent-color-key">Making Backgrounds Show Through: The Transparent Color Key</h2>
+<p>A plain <code>fb.blit()</code> call copies every pixel from a sprite, including its background — which is a problem the moment a sprite is not a perfect rectangle. Blitting a round pupil sprite with a square bounding box, for example, would paint over whatever was already drawn in that pupil's four corners. A <strong>transparent color key</strong> solves this: passing a fourth argument to <code>fb.blit()</code>, as in <code>fb.blit(source, x, y, key)</code>, tells FrameBuf to skip copying any source pixel that matches the <code>key</code> color, leaving whatever was already there untouched.</p>
+<p>A bridge before the code: this example blits the same eyebrow sprite again, but treats <code>BLACK</code> as transparent so only the lit pixels actually get copied.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fb</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">eyebrow_sprite</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">BLACK</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>With <code>BLACK</code> set as the color key, every pixel in <code>eyebrow_sprite</code> that is black gets skipped instead of overwriting the destination, so only the sprite's white pixels land on the buffer. This is the trick that lets a non-rectangular sprite — a circular pupil, a curved eyelid — blit over an existing background without leaving a visible box around it.</p>
+<div class="admonition mascot-warning">
+<p class="admonition-title">Forgetting the Color Key Leaves a Box</p>
+<p><img alt="Pixel warns you" class="mascot-admonition-img" src="../../img/mascot/warning.png" />
+A very common mistake: blitting a round or irregular sprite without a transparency key. The sprite's shape looks fine, but a faint rectangular patch appears around it wherever the background color didn't match — because every pixel in that bounding box got copied, background included. If a sprite looks like it has an invisible box around it, check whether you forgot the color-key argument.</p>
+</div>
+<p>Seeing a sprite blitted with and without a transparency key, side by side, makes this idea far more obvious than a written description alone.</p>
+<h4 id="diagram-blit-transparency-key-visualizer">Diagram: Blit Transparency Key Visualizer</h4>
+<iframe src="../../sims/blit-transparency-key-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Blit Transparency Key Visualizer</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> blit-transparency-key-visualizer<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Analyze (L4)
+Bloom Taxonomy Verb: differentiate, examine</p>
+<p>Learning objective: Differentiate a transparent blit from an opaque blit by examining how a circular sprite overlaps existing background content with and without a transparent color key.</p>
+<p>Canvas layout:
+- Left 65% (responsive, roughly 420x300 at default width): a simulated frame buffer already containing a striped or patterned background, with a draggable circular sprite (drawn inside a square bounding box) that can be moved on top of it
+- Right 35%: a toggle for the transparency key, a legend, and a short readout of the current <code>fb.blit()</code> call</p>
+<p>Visual elements:
+- A background pattern of alternating teal and white stripes already "drawn" on the buffer before any blit happens
+- A circular sprite (white circle inside a black square bounding box) that the learner can drag anywhere over the background
+- When the transparency toggle is off, the sprite's full square bounding box is copied, visibly overwriting the striped background with a black square around the circle
+- When the transparency toggle is on, only the circle's pixels are copied; the striped background remains visible around the circle, unbroken
+- A live code readout showing either <code>fb.blit(sprite, x, y)</code> or <code>fb.blit(sprite, x, y, BLACK)</code> depending on the toggle state, with x and y updating as the sprite is dragged</p>
+<p>Interactive controls:
+- Toggle: "Transparent color key: Off / On" (default Off)
+- Drag the sprite anywhere over the background to reposition it
+- "Reset" button returns the sprite to its starting position and turns the toggle off</p>
+<p>Default parameters: transparency toggle off, sprite positioned near the top-left corner of the background pattern</p>
+<p>Behavior: dragging the sprite immediately redraws the buffer, showing the opaque square or the transparent circle depending on the toggle state; toggling transparency on or off instantly redraws the current sprite position under the new rule without requiring a fresh drag.</p>
+<p>Instructional Rationale: An Analyze-level objective requires the learner to examine and differentiate two overlapping outcomes — opaque and transparent blitting — of the same underlying action, which direct side-by-side comparison through dragging and toggling supports better than a static before/after image pair.</p>
+<p>Responsive design: control panel moves below the canvas on narrow viewports; the sprite remains draggable at every screen size using touch or mouse input.</p>
+<p>Implementation: p5.js for the canvas, drag handling, and pixel-level compositing logic that checks each source pixel against the color key before drawing it onto the background layer.</p>
+</details>
+<h2 id="a-peek-ahead-blit-palette-mapping">A Peek Ahead: Blit Palette Mapping</h2>
+<p>Blitting works cleanly when a sprite and its destination buffer share the same pixel format, but that is not always true — a sprite drawn for a monochrome buffer, for instance, does not automatically know how to become a specific RGB565 color on the color display. <strong>Blit palette mapping</strong> is an advanced <code>fb.blit()</code> feature that remaps colors from a source buffer's format into a destination buffer's format during the copy, using an extra palette argument.</p>
+<p>This feature is genuinely useful once Chapter 15 introduces the color round display and its 16-bit RGB565 format, but it is worth flagging one detail now: blit palette mapping shipped in MicroPython version 1.17, not in every earlier release. Chapter 8 covers MicroPython's version history in full and explains why checking a feature's minimum version matters before relying on it in a project.</p>
+<h2 id="labeling-your-work-the-text-method">Labeling Your Work: The Text Method</h2>
+<p>Every method so far draws geometric shapes, but sometimes the fastest way to communicate information on a display is simply to print words. The <strong>text method</strong>, called as <code>fb.text(string, x, y, color)</code>, draws a string of characters using a built-in, blocky 8x8-pixel font, starting with its top-left corner at (x, y).</p>
+<p>A bridge before the code: this example writes a short debug label near the top of the screen, reporting a battery percentage while a program is being developed.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fb</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;BATT 82%&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>The built-in font is deliberately simple and a little chunky, since it has to fit inside an 8x8 grid per character, so it reads best as a debugging or status tool rather than as part of a finished expression. A robot's smiling mouth or raised eyebrow should almost always be built from lines and rectangles, not text — save <code>fb.text()</code> for labels a developer needs to see while building and testing, not for the face itself.</p>
+<h2 id="order-matters-draw-order-layering-and-overdraw">Order Matters: Draw Order Layering and Overdraw</h2>
+<p>Every method in this chapter draws onto the same shared frame buffer, and that has an important consequence: whatever gets drawn last is what actually ends up visible. <strong>Draw order layering</strong> describes how each drawing call paints directly over anything already in the buffer at those coordinates, so the sequence of calls in your code determines the final image just as much as the shapes themselves do.</p>
+<p>A bridge before the code: this example deliberately draws a face's background rectangle after its eye, to show what goes wrong when draw order is backwards.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fb</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">BLACK</span><span class="p">)</span>
+<span class="n">fb</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>   <span class="c1"># draw the eye first</span>
+<span class="n">fb</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">)</span>       <span class="c1"># oops - background drawn second, covers the eye</span>
+</code></pre></div></td></tr></table></div>
+<p>Because the background rectangle in that second example was drawn after the eye, its outline paints directly across pixels the eye had already lit, and part of the eye disappears from view. Correct code draws a face's background first, then layers eyes, eyebrows, and a mouth on top of it — the same way an artist blocks in a background before adding foreground detail.</p>
+<p>Layering shapes on top of each other is often unavoidable and completely fine, but it does have a cost worth naming. <strong>Overdraw</strong> is the waste of redrawing pixels that immediately get covered by something drawn afterward — CPU time and drawing calls spent on pixels the viewer will never actually see in the final image.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">Every Overwritten Pixel Was Still Work</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Here's the part that's easy to miss: even a pixel that gets completely covered by something drawn afterward still cost time to draw the first time. A frame buffer doesn't know or care that a pixel is about to be hidden — it does the work regardless. On a fast microcontroller, a little overdraw rarely matters, but it adds up once a face redraws dozens of shapes every single animation frame.</p>
+</div>
+<h2 id="drawing-smarter-draw-call-order-optimization">Drawing Smarter: Draw Call Order Optimization</h2>
+<p>Once you know that draw order determines the final image and that overdraw wastes work, the natural next step is choosing an order that minimizes both problems at once. <strong>Draw call order optimization</strong> is the practice of grouping and sequencing drawing calls deliberately — background first, then larger shapes, then the smallest details last — to reduce wasted overdraw and keep a program's frame rate high.</p>
+<p>The table below summarizes the layering habit worth building into every face-drawing routine from here forward.</p>
+<table>
+<thead>
+<tr>
+<th>Draw First</th>
+<th>Draw Later</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full-screen background fill</td>
+<td>Eyes, eyebrows, mouth</td>
+<td>Background must not cover features drawn after it</td>
+</tr>
+<tr>
+<td>Large shapes (face outline)</td>
+<td>Small shapes (pupils, highlights)</td>
+<td>Large shapes drawn last would bury small detail underneath them</td>
+</tr>
+<tr>
+<td>Static elements</td>
+<td>Frequently changing elements</td>
+<td>Keeps redraw cost concentrated on what actually needs to update</td>
+</tr>
+</tbody>
+</table>
+<p>This is not a strict rule enforced by MicroPython — nothing stops you from drawing in the wrong order, and clipping and layering will not throw an error either way. It is a habit worth building deliberately, because a face drawn in a sensible order is both correct and efficient, while a face drawn in a random order is at best lucky and at worst broken.</p>
+<p>Stepping through a sequence of draw calls one at a time, watching exactly which pixels get covered and when, makes both layering and overdraw far easier to reason about than reading a rule.</p>
+<h4 id="diagram-draw-order-and-overdraw-stepper">Diagram: Draw Order and Overdraw Stepper</h4>
+<iframe src="../../sims/draw-order-overdraw-stepper/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Draw Order and Overdraw Stepper</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> draw-order-overdraw-stepper<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Analyze (L4)
+Bloom Taxonomy Verb: examine, differentiate</p>
+<p>Learning objective: Examine a sequence of FrameBuf draw calls step by step to differentiate which pixels remain visible in the final image from which pixels were drawn and then overdrawn by a later call.</p>
+<p>Canvas layout:
+- Left 60%: a simulated frame buffer showing the cumulative drawing result after each step
+- Right 40%: an ordered list of draw calls (a short code listing) with the current step highlighted, plus a running "wasted pixels" counter</p>
+<p>Visual elements:
+- A code listing of five to six FrameBuf calls, such as a background fill, a face outline rectangle, two eye rectangles, and a mouth line, each on its own numbered line
+- The frame buffer view updates after each step, showing exactly what the buffer looks like at that point
+- Pixels that were drawn in an earlier step and then overwritten by the current step flash briefly in coral before settling into their new color, visually marking overdraw
+- A running counter: "Overdrawn pixels so far: N"</p>
+<p>Interactive controls:
+- "Step Forward" button applies the next draw call in the sequence
+- "Step Back" button undoes the most recent draw call
+- Toggle: "Reorder: Original / Optimized" — swaps between a version where the background is drawn last (causing heavy overdraw) and a version where it is drawn first (causing none)
+- "Reset" button returns to an empty buffer and step 0</p>
+<p>Default parameters: "Original" (unoptimized) order selected, step 0, empty buffer, overdraw counter at 0</p>
+<p>Data Visibility Requirements:
+  Stage 1: Show the empty buffer and the full list of upcoming draw calls
+  Stage 2: Each step forward shows the exact call being applied, highlighted in the code listing
+  Stage 3: Any pixel overwritten by that step flashes coral, and the overdraw counter increments by the number of overwritten pixels
+  Stage 4: After the final step, compare the "Original" order's total overdraw count against the "Optimized" order's count using the same toggle</p>
+<p>Interaction: Step-through with Step Forward/Step Back controls, not automatic animation, so the learner controls the pace of comparison</p>
+<p>Instructional Rationale: The Analyze-level objective requires examining a sequence of individual actions and attributing specific pixels to "kept" versus "overdrawn" categories, which a controllable step-through with a visible overdraw counter supports far better than a single before/after image, since the learner can isolate exactly which call caused which overdraw.</p>
+<p>Responsive design: code listing moves below the frame buffer view on narrow viewports; step controls remain reachable at every width.</p>
+<p>Implementation: p5.js for the frame buffer rendering and step logic; each draw call is stored as a small function that records which pixels it touches, allowing the overdraw counter to compare each step's touched pixels against the buffer's prior state.</p>
+</details>
+<h2 id="putting-it-together-an-eyebrow-and-a-mouth">Putting It Together: An Eyebrow and a Mouth</h2>
+<p>Every method in this chapter now has a name and a purpose, so it is worth combining a few of them into something that starts to look like part of a robot's face. A bridge before the code: this example clears the screen, draws one filled rectangle as a straight eyebrow, and draws one horizontal line as a simple neutral mouth, in a deliberately background-first order.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">BLACK</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">WHITE</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">fb</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">BLACK</span><span class="p">)</span>                          <span class="c1"># 1. background first</span>
+<span class="n">fb</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>     <span class="c1"># 2. filled rectangle eyebrow</span>
+<span class="n">fb</span><span class="o">.</span><span class="n">hline</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">)</span>             <span class="c1"># 3. horizontal line mouth</span>
+<span class="n">fb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                               <span class="c1"># 4. push the buffer to the screen</span>
+</code></pre></div></td></tr></table></div>
+<p>That short program uses exactly two shapes — a filled rectangle and a horizontal line — and already reads as the beginning of an expression. Chapter 7 adds curved shapes like ellipses to this toolkit, and Chapter 9 combines everything into complete, parameterized faces with eyes, eyebrows, and mouths that change together to express an emotion.</p>
+<div class="admonition mascot-encourage">
+<p class="admonition-title">You're Drawing With Real Primitives Now</p>
+<p><img alt="Pixel cheers you on" class="mascot-admonition-img" src="../../img/mascot/encouraging.png" />
+Twenty-one concepts in one chapter is genuinely a lot to hold onto, and if some of it — bitmaps, byte arrays, palette mapping — still feels a little fuzzy, that is completely normal. You do not need to memorize every detail today. Keep this chapter bookmarked; every drawing chapter from here on will point straight back to the exact methods you just met.</p>
+</div>
+<h2 id="chapter-summary">Chapter Summary</h2>
+<p>You now know the core FrameBuf drawing methods, how they interact with each other on a shared buffer, and how to combine a few of them into a recognizable piece of a face.</p>
+<ul>
+<li>Drawing constants (<code>BLACK = 0</code>, <code>WHITE = 1</code>) give readable names to the raw drawing color values a monochrome display accepts.</li>
+<li>The pixel method (<code>fb.pixel()</code>) sets one dot and underlies every other drawing method; the fill method (<code>fb.fill()</code>) clears or fills the entire buffer in one call, typically once per frame.</li>
+<li>The horizontal and vertical line methods (<code>fb.hline()</code>, <code>fb.vline()</code>) are fast special cases for straight lines; the general line method (<code>fb.line()</code>) draws a line between any two points at any angle.</li>
+<li>The rectangle method (<code>fb.rect()</code>) draws an outline; adding a final <code>True</code> argument produces a filled rectangle instead.</li>
+<li>Clipping at the screen edge means FrameBuf safely ignores out-of-range coordinates instead of crashing, and the scroll method (<code>fb.scroll()</code>) shifts existing buffer content, a preview of animation techniques in Chapter 12.</li>
+<li>A sprite is a small pre-drawn image; a bitmap is that image's pixel data stored as raw bytes; MicroPython holds those bytes in a <code>bytearray</code>, an unsigned byte array where every value runs from 0 to 255.</li>
+<li>The blit method (<code>fb.blit()</code>) copies a sprite's frame buffer onto another at a given position; a transparent color key skips a chosen color during that copy so non-rectangular sprites blend in cleanly; blit palette mapping remaps colors between formats and requires MicroPython 1.17 or later.</li>
+<li>The text method (<code>fb.text()</code>) draws a blocky built-in font, useful for debug labels rather than a finished face.</li>
+<li>Draw order layering means later calls paint over earlier ones; overdraw wastes work on pixels that get covered anyway; draw call order optimization means drawing background, then large shapes, then small details, in that order.</li>
+</ul>
+<div class="admonition mascot-celebration">
+<p class="admonition-title">You Just Drew Part of a Face</p>
+<p><img alt="Pixel celebrates" class="mascot-admonition-img" src="../../img/mascot/celebration.png" />
+Look at what you built with just a fill, a filled rectangle, and a horizontal line — the beginning of a real expression, drawn with real MicroPython code. Every pixel really does tell a story, and you now know how to place them on purpose. Chapter 7 hands you curved shapes next, so eyebrows can arch and mouths can smile.</p>
+</div>
+<details class="question">
+<summary>Self-Check: You blit a round pupil sprite onto a background that already has a pattern drawn on it, and a faint square patch appears around the pupil. What went wrong, and how do you fix it? — Click to reveal</summary>
+<p>The <code>fb.blit()</code> call was missing its transparent color key argument, so FrameBuf copied the sprite's entire square bounding box — including its background color — instead of skipping the pixels around the circular pupil. Adding the color key as a fourth argument, such as <code>fb.blit(pupil_sprite, x, y, BLACK)</code>, tells FrameBuf to skip any source pixel matching <code>BLACK</code>, so only the pupil's actual pixels get copied and the existing background pattern shows through everywhere else.</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

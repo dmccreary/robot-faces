@@ -1,0 +1,2525 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Naming the computational-thinking skills used throughout the book and applying constraint-driven design, iteration, peer review, and justification to plan, build, document, and present an original capstone robot face.">
+      
+      
+        <meta name="author" content="Dan McCreary">
+      
+      
+      
+        <link rel="prev" href="../15-porting-faces-color-display/">
+      
+      
+        <link rel="next" href="../../lessons/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Computational Thinking & Capstone Design - Robot Faces</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/mascot.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-FPTNK1XNJR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-FPTNK1XNJR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-FPTNK1XNJR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#642580" data-md-color-accent="#41BAC1">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#computational-thinking-capstone-design" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robot Faces" class="md-header__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Faces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Computational Thinking & Capstone Design
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robot Faces" class="md-nav__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    Robot Faces
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Chapters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of Chapters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-hardware-electronics-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Hardware & Electronics Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-micropython-fundamentals-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-micropython-fundamentals-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-display-coordinate-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-basic-drawing-primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-ellipse-polygon-drawing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Ellipse & Polygon Drawing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-framebuf-version-history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-facial-anatomy-layout-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-emotion-theory-core-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Emotion Theory & the Core Expression Set
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-expression-design-readability-hri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-animating-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Animating Expressions: Timing & Motion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-interactive-controls-inputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-expression-menu-live-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-porting-faces-color-display/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Porting Faces to a Color Display
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-last-chapter-one-big-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      One Last Chapter, One Big Project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#computational-thinking-a-name-for-what-you-already-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      Computational Thinking: A Name for What You Already Do
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstraction-a-feeling-becomes-a-handful-of-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Abstraction: A Feeling Becomes a Handful of Numbers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decomposition-breaking-the-face-into-parts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decomposition: Breaking the Face Into Parts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modularity-one-function-every-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modularity: One Function, Every Expression
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pattern-recognition-why-one-function-could-make-thirteen-faces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pattern Recognition: Why One Function Could Make Thirteen Faces
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithm-design-the-recipes-behind-the-motion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithm Design: The Recipes Behind the Motion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-reuse-the-practical-payoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Reuse: The Practical Payoff
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Reuse: The Practical Payoff">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-computational-thinking-concept-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Computational Thinking Concept Map
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constraint-driven-design-limits-are-normal-not-a-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constraint-Driven Design: Limits Are Normal, Not a Problem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimum-viable-feature-set-start-small-add-more-later" class="md-nav__link">
+    <span class="md-ellipsis">
+      Minimum Viable Feature Set: Start Small, Add More Later
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expressiveness-versus-complexity-the-tension-youll-manage-all-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expressiveness Versus Complexity: The Tension You'll Manage All Project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expression-set-planning-put-it-on-paper-before-you-touch-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expression Set Planning: Put It on Paper Before You Touch Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prototyping-before-the-hardware-turtle-graphics-and-software-display-emulators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prototyping Before the Hardware: Turtle Graphics and Software Display Emulators
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iterative-design-process-build-rough-test-refine-repeat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Iterative Design Process: Build Rough, Test, Refine, Repeat
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-trade-off-analysis-reasoning-youve-already-practiced" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Trade-Off Analysis: Reasoning You've Already Practiced
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#peer-design-review-and-rubric-based-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Peer Design Review and Rubric-Based Assessment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Peer Design Review and Rubric-Based Assessment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-capstone-rubric-scoring-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Capstone Rubric Scoring Tool
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-critique-giving-and-receiving-feedback-well" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Critique: Giving and Receiving Feedback Well
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-justification-explaining-the-why-behind-every-choice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Justification: Explaining the "Why" Behind Every Choice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-documentation-writing-it-down-for-the-demo-and-beyond" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project Documentation: Writing It Down for the Demo and Beyond
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#original-robot-personality-make-it-yours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Original Robot Personality: Make It Yours
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-capstone-project-and-capstone-demonstration" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Capstone Project and Capstone Demonstration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Capstone Project and Capstone Demonstration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-capstone-planning-worksheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Capstone Planning Worksheet
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lessons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Lessons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    History of Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/screen-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/drawing-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Drawing Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/ellipse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ellipse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/polygon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polygon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/basic-face-layouts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Face Layouts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eye-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eyebrows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eyebrows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion-types.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emotion Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../parts-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Faces Parts List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About The Robot Faces Book
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Learning Graph
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Learning Graph
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/starting-concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Starting Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/course-description-assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quality-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/taxonomy-distribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy Distribution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/mascot-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mascot Test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Stories
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Stories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-last-chapter-one-big-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      One Last Chapter, One Big Project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#computational-thinking-a-name-for-what-you-already-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      Computational Thinking: A Name for What You Already Do
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstraction-a-feeling-becomes-a-handful-of-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Abstraction: A Feeling Becomes a Handful of Numbers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decomposition-breaking-the-face-into-parts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decomposition: Breaking the Face Into Parts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modularity-one-function-every-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modularity: One Function, Every Expression
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pattern-recognition-why-one-function-could-make-thirteen-faces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pattern Recognition: Why One Function Could Make Thirteen Faces
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithm-design-the-recipes-behind-the-motion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithm Design: The Recipes Behind the Motion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-reuse-the-practical-payoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Reuse: The Practical Payoff
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Reuse: The Practical Payoff">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-computational-thinking-concept-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Computational Thinking Concept Map
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constraint-driven-design-limits-are-normal-not-a-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constraint-Driven Design: Limits Are Normal, Not a Problem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimum-viable-feature-set-start-small-add-more-later" class="md-nav__link">
+    <span class="md-ellipsis">
+      Minimum Viable Feature Set: Start Small, Add More Later
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expressiveness-versus-complexity-the-tension-youll-manage-all-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expressiveness Versus Complexity: The Tension You'll Manage All Project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expression-set-planning-put-it-on-paper-before-you-touch-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expression Set Planning: Put It on Paper Before You Touch Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prototyping-before-the-hardware-turtle-graphics-and-software-display-emulators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prototyping Before the Hardware: Turtle Graphics and Software Display Emulators
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iterative-design-process-build-rough-test-refine-repeat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Iterative Design Process: Build Rough, Test, Refine, Repeat
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-trade-off-analysis-reasoning-youve-already-practiced" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Trade-Off Analysis: Reasoning You've Already Practiced
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#peer-design-review-and-rubric-based-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Peer Design Review and Rubric-Based Assessment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Peer Design Review and Rubric-Based Assessment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-capstone-rubric-scoring-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Capstone Rubric Scoring Tool
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-critique-giving-and-receiving-feedback-well" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Critique: Giving and Receiving Feedback Well
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-justification-explaining-the-why-behind-every-choice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Justification: Explaining the "Why" Behind Every Choice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-documentation-writing-it-down-for-the-demo-and-beyond" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project Documentation: Writing It Down for the Demo and Beyond
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#original-robot-personality-make-it-yours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Original Robot Personality: Make It Yours
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-capstone-project-and-capstone-demonstration" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Capstone Project and Capstone Demonstration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Capstone Project and Capstone Demonstration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-capstone-planning-worksheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Capstone Planning Worksheet
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="computational-thinking-capstone-design">Computational Thinking &amp; Capstone Design</h1>
+<h2 id="summary">Summary</h2>
+<p>This final chapter names the computational-thinking skills used throughout the book — abstraction, decomposition, modularity, pattern recognition, and algorithm design — and applies them, along with an iterative, constraint-driven design process and peer review, to a capstone project: designing, building, documenting, and presenting an original robot face personality on one or both displays. After completing this chapter, students will be able to plan, build, and justify the design of an original robot face expression set and present it to an audience.</p>
+<h2 id="concepts-covered">Concepts Covered</h2>
+<p>This chapter covers the following 23 concepts from the learning graph:</p>
+<ol>
+<li>Computational Thinking</li>
+<li>Abstraction</li>
+<li>Decomposition</li>
+<li>Modularity</li>
+<li>Pattern Recognition</li>
+<li>Algorithm Design</li>
+<li>Code Reuse</li>
+<li>Design Critique</li>
+<li>Design Trade-Off Analysis</li>
+<li>Expressiveness Versus Complexity</li>
+<li>Software Display Emulator</li>
+<li>Turtle Graphics Prototype</li>
+<li>Iterative Design Process</li>
+<li>Peer Design Review</li>
+<li>Rubric-Based Assessment</li>
+<li>Constraint-Driven Design</li>
+<li>Minimum Viable Feature Set</li>
+<li>Capstone Project</li>
+<li>Capstone Demonstration</li>
+<li>Original Robot Personality</li>
+<li>Project Documentation</li>
+<li>Design Justification</li>
+<li>Expression Set Planning</li>
+</ol>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This chapter builds on concepts from:</p>
+<ul>
+<li><a href="../02-history-of-robot-faces/">Chapter 2: A History of Screen-Based Robot Faces</a></li>
+<li><a href="../03-micropython-fundamentals-1/">Chapter 3: MicroPython Fundamentals I: Syntax, Data &amp; Loops</a></li>
+<li><a href="../04-micropython-fundamentals-2/">Chapter 4: MicroPython Fundamentals II: Functions &amp; the FrameBuf Module</a></li>
+<li><a href="../05-display-coordinate-systems/">Chapter 5: Display &amp; Coordinate Systems</a></li>
+<li><a href="../06-basic-drawing-primitives/">Chapter 6: Basic Drawing Primitives</a></li>
+<li><a href="../07-ellipse-polygon-drawing/">Chapter 7: Ellipse &amp; Polygon Drawing</a></li>
+<li><a href="../09-facial-anatomy-layout-design/">Chapter 9: Facial Anatomy &amp; Layout Design</a></li>
+<li><a href="../11-expression-design-readability-hri/">Chapter 11: Expression Design, Readability &amp; Human-Robot Interaction</a></li>
+<li><a href="../12-animating-expressions/">Chapter 12: Animating Expressions: Timing &amp; Motion</a></li>
+<li><a href="../13-interactive-controls-inputs/">Chapter 13: Interactive Controls: Inputs &amp; Concurrency</a></li>
+<li><a href="../15-porting-faces-color-display/">Chapter 15: Porting Faces to a Color Display</a></li>
+</ul>
+<hr />
+<h2 id="one-last-chapter-one-big-project">One Last Chapter, One Big Project</h2>
+<div class="admonition mascot-welcome">
+<p class="admonition-title">This Is It — The Last One</p>
+<p><img alt="Pixel waves hello" class="mascot-admonition-img" src="../../img/mascot/welcome.png" />
+Fifteen chapters in, you've wired hardware, drawn ellipses, animated blinks, and read buttons — and now it's time to put all of it into one project that's entirely yours. This chapter has two jobs: name the thinking skills you've been quietly building all along, then help you plan a capstone that shows them off.</p>
+</div>
+<p>You did not learn a pile of unrelated tricks across the last fifteen chapters. You learned a small set of powerful problem-solving habits and practiced each one on a real, physical robot face. This chapter first gives those habits their proper names, then walks you through planning, building, documenting, and presenting a capstone project that is entirely your own design. Nothing here is a new programming skill — it's about thinking clearly with skills you already have.</p>
+<h2 id="computational-thinking-a-name-for-what-you-already-do">Computational Thinking: A Name for What You Already Do</h2>
+<p><strong>Computational Thinking</strong> is the general term for a set of problem-solving habits — abstraction, decomposition, modularity, pattern recognition, and algorithm design — that let a person break a complicated real-world problem into pieces a computer can actually solve. It is not a new topic. It is a label for habits you have been practicing since the very first <code>draw_face()</code> call in Chapter 9, whether you noticed it or not.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">You Were Already Doing This</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Here's a strange but true fact about computational thinking: you cannot really be taught it from scratch in one chapter, because you have already been doing it since Chapter 9. What this chapter gives you is the vocabulary to notice it, name it, and use it on purpose next time.</p>
+</div>
+<p>Naming a skill you already have is not busywork. Once you can say "this is decomposition" or "this is an abstraction problem," you can recognize the same shape of problem next time it shows up, in any project or language. The sections below walk through each habit in the order the book taught it, pointing back to the exact chapter and code where you first used it.</p>
+<h2 id="abstraction-a-feeling-becomes-a-handful-of-numbers">Abstraction: A Feeling Becomes a Handful of Numbers</h2>
+<p><strong>Abstraction</strong> means representing something complex — in this book's case, a human facial expression — using a small set of numbers or values instead of a full, literal picture. Chapter 9's <code>face_state</code> dictionary is abstraction in its purest form: a feeling as rich and nuanced as "surprised" gets reduced to a handful of key-value pairs like <code>eyebrow_angle</code>, <code>eye_size</code>, and <code>mouth_curvature</code>.</p>
+<p>That reduction sounds like it should lose something, and in a sense it does — three numbers cannot capture everything a human face can express. But abstraction is not about capturing everything; it is about capturing exactly enough to solve the problem in front of you. Chapter 10 proved a handful of well-chosen parameters is enough for a viewer to correctly identify thirteen emotions, so Chapter 9's abstraction was not a compromise — it was the right amount of detail for the job.</p>
+<h2 id="decomposition-breaking-the-face-into-parts">Decomposition: Breaking the Face Into Parts</h2>
+<p><strong>Decomposition</strong> means breaking a complicated whole into smaller, independent pieces that are each easier to design and build on their own. Chapter 9 decomposed "a face" into eyes, eyebrows, and a mouth — three separately parameterized, separately drawable parts — rather than treating a face as one giant, indivisible shape.</p>
+<p>That decomposition is why Chapter 11 could treat eyebrow, mouth, and eye signaling as three distinct research questions instead of one blob of a topic, and why you could debug a broken eyebrow without touching your mouth-drawing code. Decomposition is not just a coding convenience — it is what let this book teach expression design one testable piece at a time.</p>
+<h2 id="modularity-one-function-every-expression">Modularity: One Function, Every Expression</h2>
+<p><strong>Modularity</strong> means writing one reusable piece of code — a single function — instead of duplicating separate code for every situation it needs to handle. Chapter 9's <code>draw_face()</code> function is the clearest example of modularity anywhere in this book: one function, called with a different <code>face_state</code> dictionary, draws a completely different expression every time.</p>
+<p>Here is the same function signature you first wrote in Chapter 9, still doing exactly the job it always has — reading a state dictionary and drawing the face it describes onto a frame buffer:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">draw_face</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="n">draw_eyebrows</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">])</span>
+    <span class="n">draw_eyes</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eye_size&quot;</span><span class="p">])</span>
+    <span class="n">draw_mouth</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;mouth_curvature&quot;</span><span class="p">])</span>
+</code></pre></div></td></tr></table></div>
+<p>Without modularity, Chapter 10's thirteen-expression set would have needed thirteen near-identical drawing functions — a maintenance nightmare where fixing one bug meant fixing it thirteen times. With modularity, one tiny function handles all thirteen, and every capstone expression you invent will run through that same function too.</p>
+<h2 id="pattern-recognition-why-one-function-could-make-thirteen-faces">Pattern Recognition: Why One Function Could Make Thirteen Faces</h2>
+<p><strong>Pattern Recognition</strong> means noticing that many different-looking problems actually share the same underlying structure. Chapter 10's entire thirteen-expression set exists because of a pattern recognition insight: happy, sad, angry, surprised, and every other expression are not thirteen unrelated drawing problems — they are the same three parameters, <code>eyebrow_angle</code>, <code>eye_size</code>, and <code>mouth_curvature</code>, just set to thirteen different combinations of values.</p>
+<p>Once you see that pattern, expression design stops being "invent a new drawing algorithm for every emotion" and becomes "find the right numbers, using a function that already exists" — the difference between thirteen separate engineering problems and one problem solved thirteen times. Your own capstone expressions will lean on exactly this pattern.</p>
+<h2 id="algorithm-design-the-recipes-behind-the-motion">Algorithm Design: The Recipes Behind the Motion</h2>
+<p><strong>Algorithm Design</strong> means planning a clear, ordered, step-by-step procedure for solving a problem, before worrying about the exact code that implements it. Every animation loop, every blinking routine, and every button-driven state machine in Chapters 12 through 14 started life as an algorithm — a numbered list of steps — before it became working MicroPython.</p>
+<p>Consider the blink routine from Chapter 12: close the eyelids over a few frames, hold briefly, then reopen over a few more, all timed with <code>ticks_ms()</code> instead of a blocking <code>sleep()</code> call. That sequence is an algorithm regardless of language. Chapter 13's state machines — cycling a face between expressions on each button press — are algorithms too: a defined set of states and defined rules for moving between them. Thinking through the steps clearly before typing a line is a skill you will lean on heavily when planning your capstone's animation and control logic.</p>
+<h2 id="code-reuse-the-practical-payoff">Code Reuse: The Practical Payoff</h2>
+<p><strong>Code Reuse</strong> means building new work on top of code that already exists and already works, instead of starting over from a blank file. This is where abstraction and modularity stop being tidy ideas and start saving you real time: your capstone project will not need a new drawing engine. It will reuse the exact <code>draw_face()</code> function and <code>face_state</code> parameter system you have already built, tested, and trusted since Chapter 9.</p>
+<p>That is the single biggest practical reason this book spent so much time on abstraction, decomposition, and modularity — not just because they are elegant ideas, but because they make a capstone possible in the time you actually have. A student starting from zero would need weeks to get a shape on a screen; you already have a working face-drawing engine in hand.</p>
+<p>The table below collects all five computational-thinking skills in one place, alongside exactly where in the book you first practiced each one.</p>
+<table>
+<thead>
+<tr>
+<th>Computational-Thinking Skill</th>
+<th>What It Means Here</th>
+<th>Where You Already Used It</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Abstraction</td>
+<td>Representing a facial expression as a small set of numbers instead of a full picture</td>
+<td>Chapter 9's <code>face_state</code> dictionary (<code>eyebrow_angle</code>, <code>eye_size</code>, <code>mouth_curvature</code>)</td>
+</tr>
+<tr>
+<td>Decomposition</td>
+<td>Breaking a face into independent, separately drawable parts</td>
+<td>Chapter 9's eyes / eyebrows / mouth breakdown, revisited by Chapter 11's per-feature signaling research</td>
+</tr>
+<tr>
+<td>Modularity</td>
+<td>Writing one reusable function instead of one function per expression</td>
+<td>Chapter 9's single <code>draw_face(fb, state)</code> function</td>
+</tr>
+<tr>
+<td>Pattern Recognition</td>
+<td>Noticing that many expressions share the same underlying structure and just vary a few values</td>
+<td>Chapter 10's 13-expression set, all produced from one function</td>
+</tr>
+<tr>
+<td>Algorithm Design</td>
+<td>Designing a clear, ordered, step-by-step procedure</td>
+<td>Chapters 12–14's blink timing, gaze animation, and button/encoder state machines</td>
+</tr>
+<tr>
+<td>Code Reuse</td>
+<td>Building new work on proven code instead of starting from scratch</td>
+<td>Your capstone project, reusing Chapter 9's <code>draw_face()</code> and parameter system directly</td>
+</tr>
+</tbody>
+</table>
+<p>Reading that table is one thing — tracing the actual connections yourself, chapter by chapter, is what makes the pattern stick. The concept map below lets you click each computational-thinking skill and see exactly which earlier chapter and code example it traces back to.</p>
+<h4 id="diagram-computational-thinking-concept-map">Diagram: Computational Thinking Concept Map</h4>
+<iframe src="../../sims/computational-thinking-concept-map/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Computational Thinking Concept Map</summary>
+<p>Type: diagram
+<strong>sim-id:</strong> computational-thinking-concept-map<br/>
+<strong>Library:</strong> vis-network<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Understand (L2) / Analyze (L4)
+Bloom Taxonomy Verb: explain, relate, differentiate</p>
+<p>Learning objective: Explain each computational-thinking skill in plain language and relate it to the specific earlier chapter and code example where the student already practiced it, differentiating the five skills from one another by the distinct role each one plays.</p>
+<p>Canvas layout:
+- Center: one large "Computational Thinking" hub node
+- Middle ring: six skill nodes — Abstraction, Decomposition, Modularity, Pattern Recognition, Algorithm Design, Code Reuse — connected to the hub by lines
+- Outer ring: one matching "earlier chapter" node per skill (Chapter 9 face_state, Chapter 9 eyes/eyebrows/mouth, Chapter 9 draw_face(), Chapter 10 13-expression set, Chapters 12-14 timing/state machines, Capstone project), each linked only to its skill node</p>
+<p>Visual elements: hub node in coral, larger than the rest; six skill nodes in teal; six outer example nodes in a neutral color, each labeled with a short chapter tag; plain lines with no arrowheads, since this is a relationship map, not a flowchart</p>
+<p>Interactive controls:
+- Click any skill node to open an infobox with a one-sentence definition and highlight its edges to the hub and its matching outer node
+- Click any outer chapter/example node to open an infobox naming the specific code or concept, and highlight the edge back to its skill
+- Drag any node to reposition it (force-directed physics gently repositions neighbors); mouse wheel to zoom, drag empty canvas to pan
+- "Reset Layout" button restores the default positions</p>
+<p>Default parameters: default force-directed layout, no node selected, infobox reads "Click any node to learn what it connects to"</p>
+<p>Behavior: clicking a skill node highlights its hub and example edges in coral, dims all others, and opens the infobox with the skill's definition; clicking an outer node does the reverse, starting from the concrete example and revealing which skill it demonstrates. Only one node's connections are highlighted at a time.</p>
+<p>Instructional Rationale: A clickable force-directed concept map fits an Understand/Analyze objective because the point is relating each skill to a concrete, already-familiar example, not memorizing six isolated definitions — clicking back and forth between skill and instance is what cements the connection, which a static list cannot provide.</p>
+<p>Responsive design: canvas fills its container width and reflows on resize; on narrow viewports the infobox moves below the canvas.</p>
+<p>Implementation: vis-network for force-directed rendering and click/hover handling; node and edge data stored as a local JSON array pairing each skill with its definition and matching chapter example.</p>
+</details>
+<h2 id="constraint-driven-design-limits-are-normal-not-a-problem">Constraint-Driven Design: Limits Are Normal, Not a Problem</h2>
+<p>With the vocabulary in place, it's time to turn from naming what you have already done to planning what comes next. <strong>Constraint-Driven Design</strong> means treating real limits — a fixed display resolution, the RP2040's limited memory and speed, a budget under $30 — as a normal, productive part of engineering, not an obstacle standing between you and a good design.</p>
+<p>Every chapter in this book was already shaped by constraints you may not have noticed. Chapter 1's $30 kit budget determined which displays were even options; Chapter 5's fixed pixel grid determined how much detail an eyebrow could show. This chapter does not remove those limits for your capstone — it hands them to you on purpose, because working productively within real constraints is one of the most transferable skills this course teaches. Professional engineers almost never design with unlimited time, memory, or budget; they get good at building something excellent inside the limits they are actually given.</p>
+<h2 id="minimum-viable-feature-set-start-small-add-more-later">Minimum Viable Feature Set: Start Small, Add More Later</h2>
+<div class="admonition mascot-tip">
+<p class="admonition-title">Start Smaller Than You Think You Need To</p>
+<p><img alt="Pixel gives a tip" class="mascot-admonition-img" src="../../img/mascot/tip.png" />
+Here's a trick every experienced builder uses: define the smallest version of your project that would still count as finished, build that first, and only then decide what to add. A capstone that reaches "done" with room to spare beats an ambitious one that never quite gets there.</p>
+</div>
+<p>A <strong>Minimum Viable Feature Set</strong> is the smallest collection of expressions and features that would still make a complete, demonstrable project — the version you could show the class tomorrow if you had to stop today. Before sketching a single expression, decide what that smallest complete version looks like: which expressions are non-negotiable, which display you'll target first, and which control scheme is simplest to get working.</p>
+<p>A practical minimum viable feature set for this course's capstone might look like this:</p>
+<ul>
+<li>Eight required expressions, chosen from familiar Chapter 10 territory (happy, sad, angry, surprised, afraid, neutral, tired, disgust) so the parameter values are mostly known quantities</li>
+<li>One idle animation — a simple blink loop is enough to start</li>
+<li>One control input — a single button cycling forward through the expression list</li>
+<li>One target display — whichever one you already have wired and tested</li>
+</ul>
+<p>Only after that minimum works end to end should you consider stretch goals: extra expressions, gaze movement layered onto the blink, a second control input, or a port to the second display. Planning a minimum first is not lowering your ambition — it is protecting your ambition from running out of time.</p>
+<h2 id="expressiveness-versus-complexity-the-tension-youll-manage-all-project">Expressiveness Versus Complexity: The Tension You'll Manage All Project</h2>
+<p><strong>Expressiveness Versus Complexity</strong> names the design tension between adding more visual richness or more features and keeping a project simple enough to finish, debug, and demonstrate with confidence. Every extra expression, animation layer, or control input makes your capstone more expressive — and also adds more code that can break, more states to test, and more chances your demonstration goes wrong in front of the class.</p>
+<p>Chapter 11's readability rubric already warned about one side of this: a face that says too much at once, with too many features changing simultaneously, becomes harder to read, not easier. That same tension now shows up at the project level. A ten-expression capstone with clean, well-tested code is a stronger project than a twenty-expression one that crashes mid-presentation because half its states were never fully tested. Managing this tension deliberately, rather than by accident, is one of the real skills this capstone builds.</p>
+<h2 id="expression-set-planning-put-it-on-paper-before-you-touch-code">Expression Set Planning: Put It on Paper Before You Touch Code</h2>
+<p><strong>Expression Set Planning</strong> means sketching out, on paper or in a simple table, exactly which expressions your capstone will include and roughly what parameter values each will use — before writing a single line of drawing code. This is where your minimum viable feature set turns from a list of names into something concrete enough to build.</p>
+<p>A planning table does not need to be fancy: the expression's name, its rough parameter values (refine exact numbers later), and a short note on what makes it distinct from its nearest neighbor on Chapter 11's valence-arousal grid. Here is a partial example partway through planning:</p>
+<table>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Eyebrow Angle</th>
+<th>Eye Size</th>
+<th>Mouth Curvature</th>
+<th>Design Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Happy</td>
+<td>+6</td>
+<td>12</td>
+<td>+8</td>
+<td>Baseline positive expression, moderate intensity</td>
+</tr>
+<tr>
+<td>Surprised</td>
+<td>+10</td>
+<td>18</td>
+<td>+4 (open)</td>
+<td>Push eyebrows and eyes further than Afraid to stay distinct</td>
+</tr>
+<tr>
+<td>Afraid</td>
+<td>+9</td>
+<td>17</td>
+<td>+2, slight pull</td>
+<td>Mouth pulls rather than opens symmetrically, per Chapter 11</td>
+</tr>
+<tr>
+<td>Curious (original)</td>
+<td>(+8, -2) asymmetric</td>
+<td>12</td>
+<td>+1</td>
+<td>One eyebrow raised, inspired by Confused but a distinct read</td>
+</tr>
+</tbody>
+</table>
+<p>Planning expressions this way, before coding any of them, is what lets you catch a confusable pair — like Surprised and Afraid sitting too close together — on paper, where fixing it costs nothing, instead of after it is already implemented in code.</p>
+<h2 id="prototyping-before-the-hardware-turtle-graphics-and-software-display-emulators">Prototyping Before the Hardware: Turtle Graphics and Software Display Emulators</h2>
+<p>A <strong>Turtle Graphics Prototype</strong> is a rough sketch of a face's layout drawn using simple turtle-graphics-style commands — move forward, turn, draw a line — well before that layout touches a real display or real FrameBuf code. A <strong>Software Display Emulator</strong> is a program that mimics the look of the OLED or color display on a computer screen, letting you preview roughly how a face will appear without wiring up any hardware.</p>
+<p>Neither tool produces final code. Both exist to speed up the earliest, roughest stage of iteration, when you are still deciding where an eyebrow sits relative to an eye, long before exact pixel coordinates or <code>ellipse()</code> quadrant codes matter. Sketching five eyebrow placements with a turtle-graphics loop takes minutes; wiring and re-flashing a real OLED five times to test the same question takes much longer. Once a rough layout feels right, only then is it worth translating into the real <code>draw_face()</code> function on real hardware.</p>
+<h2 id="iterative-design-process-build-rough-test-refine-repeat">Iterative Design Process: Build Rough, Test, Refine, Repeat</h2>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">This Book Taught You Iteration by Doing It To You</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Look back at how this book itself was structured: drawing primitives before ellipses, ellipses before a full face, a full face before animation. That was never an accident — it was the iterative design process, used on you, one chapter at a time.</p>
+</div>
+<p>The <strong>Iterative Design Process</strong> means building a rough version of something, testing it, refining it based on what you learned, and repeating — rather than trying to get every detail perfect on the first attempt. This book modeled that process on you deliberately: plain lines and rectangles before curved ellipses, single features before a whole face, a static face before one that moves. Each chapter was a rough version, tested against real code on real hardware, refined into the next chapter's more capable version.</p>
+<p>Your capstone deserves the same treatment. Do not try to write a final, polished <code>draw_face()</code> call for all eight-plus expressions in one sitting. Build one, get it rendering correctly, test it at classroom distance, then move to the next. Add the idle animation only once the static expressions work; add the second display port only once the first is solid. Each rough pass earns you the right to attempt the next, more polished one.</p>
+<h2 id="design-trade-off-analysis-reasoning-youve-already-practiced">Design Trade-Off Analysis: Reasoning You've Already Practiced</h2>
+<p><strong>Design Trade-Off Analysis</strong> is the general skill of weighing two or more competing design options against each other and choosing deliberately, rather than by accident or default. You have already done this twice without naming it: Chapter 11's rubric forced a trade-off between visual richness and classroom-distance readability, and Chapter 15's color-versus-monochrome comparison traded expressive range against memory and drawing-time cost.</p>
+<p>Your capstone will present its own version of this reasoning, over and over. Should eyebrows move smoothly across ten animation frames, or is a simpler three-frame version just as readable and far less code to debug? Should remaining project time go to a second-display port, or to polishing the idle animation? None of these questions has one universally correct answer — that is what makes them trade-offs. What matters is that you can name the options you considered and explain, specifically, why you chose the one you did.</p>
+<h2 id="peer-design-review-and-rubric-based-assessment">Peer Design Review and Rubric-Based Assessment</h2>
+<p><strong>Peer Design Review</strong> means having classmates examine and critique your capstone design before you consider it finished, using a shared rubric rather than casual opinions. <strong>Rubric-Based Assessment</strong> is the broader practice of scoring a design against explicitly named criteria instead of one overall impression — the same approach Chapter 11's Emotional Design Rubric introduced for individual expressions.</p>
+<p>The capstone extends that same rubric idea to a whole project. Beyond Chapter 11's original seven criteria — identifiability, confusable-neighbor distance, classroom-distance readability, lighting robustness, appropriate intensity, deliberate symmetry, and face-only clarity — a capstone review adds criteria that only make sense at the project level: does the expression set reach the required eight, does the idle animation look natural rather than jittery, does the control input respond promptly, and is the project documented well enough for a reviewer who has never seen your code to understand it. A classmate applying this fuller rubric before your final demonstration is one of the most useful checks available — a second, less attached pair of eyes almost always catches something you stopped noticing.</p>
+<p>Reading a rubric is very different from actually using one on somebody else's real project. Try scoring a sample capstone plan yourself, criterion by criterion, and see how much more specific your feedback becomes once you have to justify every rating in writing.</p>
+<h4 id="diagram-capstone-rubric-scoring-tool">Diagram: Capstone Rubric Scoring Tool</h4>
+<iframe src="../../sims/capstone-rubric-scoring-tool/main.html" width="100%" height="520px" scrolling="no"></iframe>
+
+<details>
+<summary>Capstone Rubric Scoring Tool</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> capstone-rubric-scoring-tool<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Evaluate (L5)
+Bloom Taxonomy Verb: judge, assess, justify, critique</p>
+<p>Learning objective: Given a summary of a sample classmate's capstone plan (expression list, chosen display, control scheme, and idle animation description), assess it against an extended capstone rubric that builds on Chapter 11's Emotional Design Rubric, assigning a rating and a required written justification per criterion, and compose that feedback into a peer-review summary ready to hand to the presenter.</p>
+<p>Canvas layout:
+- Left 45% (responsive, roughly 340px at default width): a scrollable "capstone plan summary" card showing a sample classmate's plan — 8+ planned expressions with brief parameter notes, chosen display target, control scheme, and a one-paragraph idle-animation description
+- Right 55%: twelve rubric rows (Chapter 11's original seven plus five capstone additions: Expression Set Completeness, Idle Animation Naturalness, Control Responsiveness, Documentation Clarity, Original Personality), each with a four-point rating control (Needs Work / Developing / Solid / Excellent) and a required justification text box
+- Bottom: "Load Sample Plan" dropdown, "Compose Peer Feedback" button, and a feedback-summary output panel</p>
+<p>Visual elements: the plan summary card, styled like a filled-in worksheet rather than a rendered face, since the object under review is the whole project plan, not one expression; twelve rubric rows with rating buttons and justification fields; an auto-composed feedback panel, appearing after all rows are rated, formatted as a short paragraph per criterion suitable for handing to the plan's author</p>
+<p>Interactive controls:
+- Dropdown: "Load Sample Plan" offering 3-4 pre-authored plans of varying quality, including one with fewer than eight expressions and one clearly complete plan
+- Four-point rating buttons and a required short-text justification field per row; "Compose Peer Feedback" stays disabled until every row has both
+- "Compose Peer Feedback" button assembles all twelve justifications into one readable summary
+- "Start New Review" button clears all ratings, justifications, and the output panel</p>
+<p>Default parameters: first sample plan lists only six expressions with a vague idle-animation description, giving Expression Set Completeness and Idle Animation Naturalness an obvious issue to flag; no ratings entered yet</p>
+<p>Behavior: loading a plan populates the summary card; the learner rates and justifies all twelve rows before the compose button activates; composing feedback assembles a single summary, ordered by rubric row, directly from the learner's own justification text, modeling a real written peer-review handoff; loading a different plan resets everything.</p>
+<p>Instructional Rationale: An Evaluate-level Rubric Rater fits this objective because judging a full project against an extended, named rubric with required written justification is exactly the peer-review skill the capstone needs; composing justifications into one output models the actual deliverable — written peer feedback — rather than a private self-check.</p>
+<p>Responsive design: the plan card and rubric rows stack vertically below 700 pixels; the output panel appears below both sections.</p>
+<p>Implementation: p5.js or plain HTML/CSS for the form; sample plans and rubric criteria stored as local JSON; the compose step is string concatenation of the learner's own justification fields, not a generated response.</p>
+</details>
+<h2 id="design-critique-giving-and-receiving-feedback-well">Design Critique: Giving and Receiving Feedback Well</h2>
+<p><strong>Design Critique</strong> is the general skill of giving and receiving specific, constructive feedback on a design — the skill the rubric tool above only pays off if the people using it also practice well. A useful critique names a specific criterion, points to specific evidence, and suggests a next step; a vague critique like "it looks kind of confusing" gives the designer nothing to act on.</p>
+<p>A few habits separate a useful critique from a discouraging one:</p>
+<ul>
+<li>Point to a specific rubric criterion instead of a general impression — "confusable-neighbor distance" is actionable, "something feels off" is not.</li>
+<li>Describe what you observed, not what you assume the designer intended.</li>
+<li>Pair every criticism with a concrete next step the designer could take.</li>
+<li>Receive critique as information about your design, not a judgment of you — every designer in this book, including the ones behind Cozmo and Vector, shipped designs that later needed revision.</li>
+</ul>
+<p>Design critique gets easier with practice, and the peer review step of your capstone is exactly the practice round this course gives you before you defend your project live in front of the class.</p>
+<h2 id="design-justification-explaining-the-why-behind-every-choice">Design Justification: Explaining the "Why" Behind Every Choice</h2>
+<p><strong>Design Justification</strong> means being able to explain, specifically, why a particular design choice was made — not just that it was made. This is the Evaluate-level thinking this entire course has been building toward, now aimed squarely at defending your own work instead of critiquing someone else's.</p>
+<p>A weak justification restates the choice: "I made the eyebrows asymmetric because I wanted it to look confused." A strong one connects the choice to evidence: <em>"I made the eyebrows asymmetric because Chapter 10 showed that reads clearly as confused, and I wanted this expression distinguishable from my symmetric surprised face at classroom distance."</em> The strong version names a specific source of evidence, a specific goal, and a specific alternative it beat out — exactly what your demonstration audience and rubric scorers will be listening for when they ask "why did you design it that way?"</p>
+<h2 id="project-documentation-writing-it-down-for-the-demo-and-beyond">Project Documentation: Writing It Down for the Demo and Beyond</h2>
+<p><strong>Project Documentation</strong> means writing down what your project does and how it works, both to support your live demonstration and for anyone who might build on it later. Documentation is not an afterthought — it is the record that lets your design justifications survive past the moment you say them out loud.</p>
+<p>Useful capstone documentation does not need to be long. It needs to cover:</p>
+<ul>
+<li>Which display or displays your project runs on, and how it is wired</li>
+<li>The full list of expressions included, with a one-line design note for each — essentially your expression set planning table, cleaned up</li>
+<li>How the control input works (which button or encoder action does what)</li>
+<li>A short description of the idle animation</li>
+<li>At least one design trade-off you made deliberately, and why</li>
+</ul>
+<p>Written this way, your documentation doubles as a cheat sheet for your live demonstration — you won't need to remember every justification if you already wrote the strongest version of each one down in advance.</p>
+<h2 id="original-robot-personality-make-it-yours">Original Robot Personality: Make It Yours</h2>
+<p>An <strong>Original Robot Personality</strong> is a face design with its own distinct visual style and expression choices — not a copy of Cozmo, Vector, Miko, or Buddy from Chapter 2, even though all four clearly helped inspire why this course, and your capstone, exist.</p>
+<p>"Original" does not mean inventing an entirely new visual language from nothing. It means making enough of your own choices that the result reads as yours: a distinctive eye shape, a particular color palette on the round display, an expression or two beyond the required core set, or a quirk in how your idle animation behaves. Chapter 2's four commercial robots did not invent facial expression from scratch either — they built on decades of the same research this book taught you, and still ended up with four visibly distinct personalities. Your capstone gets to do the same: stand on everything this course taught you, and still be recognizably, personally yours.</p>
+<h2 id="the-capstone-project-and-capstone-demonstration">The Capstone Project and Capstone Demonstration</h2>
+<div class="admonition mascot-encourage">
+<p class="admonition-title">A Little Nervous About the Capstone? Good Sign.</p>
+<p><img alt="Pixel cheers you on" class="mascot-admonition-img" src="../../img/mascot/encouraging.png" />
+Feeling a flutter of nerves about presenting your own project to the class is completely normal — it means you actually care how it lands. You have already built every skill this project needs; the capstone just asks you to put them all in one place at once.</p>
+</div>
+<p>The <strong>Capstone Project</strong> is the assignment this chapter has been preparing you for: an original robot face program pulling together hardware wiring, expression design, animation, and interactive control into one finished piece of work. The <strong>Capstone Demonstration</strong> is presenting that project live to the class, running on real hardware, with a spoken explanation of the design choices behind it.</p>
+<p>Here is exactly what the capstone project requires, spelled out as a checklist you can hold yourself to from the very first planning session:</p>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>What It Means</th>
+<th>Where You Learned the Skill</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>At least 8 distinct, recognizable expressions</td>
+<td>Each one identifiable within a couple of seconds, distinguishable from its nearest confusable neighbor</td>
+<td>Chapters 9–11</td>
+</tr>
+<tr>
+<td>Idle animation</td>
+<td>Blinking and/or gaze movement plays continuously while the robot is not showing a specific triggered emotion</td>
+<td>Chapter 12</td>
+</tr>
+<tr>
+<td>Physical control input</td>
+<td>A button, potentiometer, or rotary encoder triggers expression changes or tunes a parameter live</td>
+<td>Chapter 13</td>
+</tr>
+<tr>
+<td>Runs on at least one target display</td>
+<td>The 128x64 OLED or the 240x240 color round display, fully wired and working — porting to both is strongly encouraged</td>
+<td>Chapters 1, 15</td>
+</tr>
+<tr>
+<td>Live demonstration with design justification</td>
+<td>Presented to the class on real hardware, explaining the specific design choice behind each expression</td>
+<td>This chapter</td>
+</tr>
+</tbody>
+</table>
+<p>"Runs on both displays" is not a strict requirement, but it is worth aiming for. Chapter 15 already did the hard conceptual work of porting a <code>draw_face()</code> design from monochrome to RGB565 color — porting your own original expressions the same way is one of the strongest ways to show a rubric scorer you understand the parameter system, not just one display's code.</p>
+<p>Everything from this chapter — minimum viable feature set, expression set planning, prototyping, iteration, peer review, trade-off analysis, justification — exists to get you to this checklist with confidence instead of a last-minute scramble. The planning tool below is where that work starts: fill it in honestly, before writing a single new line of drawing code.</p>
+<h4 id="diagram-capstone-planning-worksheet">Diagram: Capstone Planning Worksheet</h4>
+<iframe src="../../sims/capstone-planning-worksheet/main.html" width="100%" height="560px" scrolling="no"></iframe>
+
+<details>
+<summary>Capstone Planning Worksheet</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> capstone-planning-worksheet<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Create (L6)
+Bloom Taxonomy Verb: design, plan, formulate, construct</p>
+<p>Learning objective: Design an original capstone plan by formulating a minimum viable expression set of at least eight named expressions with rough parameter notes, selecting a target display and control scheme, and describing an idle animation — producing a complete, personally-authored project plan that satisfies every capstone requirement before any drawing code is written.</p>
+<p>Canvas layout:
+- Left 60% (responsive, roughly 480px at default width): an editable worksheet with a growable list of expression-name rows, a display-target selector, a control-scheme selector, and an idle-animation description field
+- Right 40%: a live "Plan Completeness" panel listing the five capstone requirements with a checkmark or open circle, updating in real time, plus "Export Plan as Text" and "Clear Worksheet" buttons</p>
+<p>Visual elements: an expression list starting with one empty row and an "Add Expression" button, each row holding a name field and a short design-note field; a "Target Display" selector (OLED / Color Round / Both); "Control Scheme" checkboxes (Push Button, Potentiometer, Rotary Encoder); a multi-line "Idle Animation Description" field; the completeness panel's five rows toggling green once each condition is met (for example, "8+ Expressions" checks once eight rows have non-empty names)</p>
+<p>Interactive controls:
+- "Add Expression" appends a blank row; a small "remove" control on each row deletes it
+- Text input on every name and design-note field, the display selector, control-scheme checkboxes, and the idle-animation text area
+- "Export Plan as Text" assembles all entered fields into a copyable, formatted plain-text summary suitable for pasting into a documentation file
+- "Clear Worksheet" resets all fields after a confirmation prompt</p>
+<p>Default parameters: worksheet starts with one blank expression row, no display or control scheme selected, empty idle-animation field; all five completeness rows shown as open circles</p>
+<p>Behavior: every keystroke or selection updates the completeness panel immediately; the "8+ Expressions" check turns green only once at least eight rows have non-empty names, while the other checks turn green as soon as their fields are non-empty; "Export Plan as Text" stays enabled at any time but shows a warning if fewer than all five checks are green, so a student can still export an in-progress plan.</p>
+<p>Instructional Rationale: A Create-level Model Editor / Synthesis Canvas pattern fits because the objective asks the learner to design and formulate an original plan, not evaluate someone else's — a free-entry worksheet with live completeness feedback lets the learner build the actual capstone plan inside the tool, tied directly to this section's checklist requirements.</p>
+<p>Responsive design: the worksheet and completeness panel stack vertically below 700 pixels, with the completeness panel moving above the worksheet so students see the requirements first.</p>
+<p>Implementation: p5.js or plain HTML/CSS/JavaScript for the form; expression rows stored as a local array of {name, note} objects; completeness checks are boolean conditions evaluated on every input event; export concatenates current field values into a formatted string.</p>
+</details>
+<h2 id="chapter-summary">Chapter Summary</h2>
+<p>Zoom all the way out, and this is the arc the whole book just walked you through: hardware and history, MicroPython fundamentals and coordinate systems, drawing primitives that grew into ellipses and polygons, a parameterized face brought to life with emotion theory, animation, and physical controls, a port to a second display, and now — a project entirely your own.</p>
+<ul>
+<li>Computational Thinking names the abstraction, decomposition, modularity, pattern recognition, algorithm design, and code reuse habits you have practiced since Chapter 9's first <code>face_state</code> dictionary — not a new topic, a new label.</li>
+<li>Abstraction reduced a feeling to a handful of numbers; Decomposition split a face into eyes, eyebrows, and a mouth; Modularity turned every expression into one <code>draw_face()</code> function; Pattern Recognition made thirteen expressions possible from that one function; Algorithm Design shaped the timing loops and state machines in Chapters 12–14; Code Reuse is why your capstone starts from working code, not a blank file.</li>
+<li>Constraint-Driven Design treats display resolution, RP2040 memory, and a tight budget as normal engineering conditions; a Minimum Viable Feature Set gives you a realistic starting target before stretch goals.</li>
+<li>Expressiveness Versus Complexity is a tension you'll manage all project; Expression Set Planning — sketching expressions and parameters on paper first — is how you catch problems before they cost coding time.</li>
+<li>Turtle Graphics Prototypes and a Software Display Emulator speed up early iteration before real hardware; the Iterative Design Process — build rough, test, refine, repeat — is the same process this book used on you, chapter by chapter.</li>
+<li>Design Trade-Off Analysis, Peer Design Review, and Rubric-Based Assessment extend Chapter 11's rubric to a whole project; Design Critique is the skill of giving and receiving that feedback well.</li>
+<li>Design Justification means explaining specifically why, not just what, you chose; Project Documentation preserves those justifications past your live Capstone Demonstration.</li>
+<li>An Original Robot Personality is inspired by Cozmo, Vector, Miko, and Buddy without copying any of them, and the Capstone Project asks for at least eight expressions, an idle animation, physical control input, one working display, and a live demonstration of your design choices.</li>
+</ul>
+<div class="admonition mascot-celebration">
+<p class="admonition-title">Every Pixel Really Did Tell a Story</p>
+<p><img alt="Pixel celebrates" class="mascot-admonition-img" src="../../img/mascot/celebration.png" />
+Think back to Chapter 1, when a single lit pixel on a bare OLED felt like a small victory. Since then you've wired real hardware, drawn eyes and eyebrows and mouths from nothing but ellipses and polygons, taught a face to blink and change its mind on a button press, judged your own designs against a real rubric, and ported a whole personality across two displays. Now you're about to design one that's entirely yours. Communicating feelings between robots and people is a robot designer's superpower, and after everything you've built across this book, it is genuinely, provably yours — go build a face that makes someone smile back at it. Every pixel tells a story!</p>
+</div>
+<details class="question">
+<summary>Self-Check: Name three computational-thinking skills used in this book, and for each one, name the specific earlier chapter or code example where you first used it — then explain in one sentence how your capstone project will reuse that same skill. — Click to reveal</summary>
+<p>Sample answer: (1) Abstraction — first used in Chapter 9's <code>face_state</code> dictionary; my capstone reuses this by describing each original expression as its own small dictionary of the same parameters instead of inventing new drawing code per expression. (2) Modularity — first used in Chapter 9's single <code>draw_face(fb, state)</code> function; my capstone reuses that exact function, unmodified, to render every original expression. (3) Algorithm Design — first used in Chapter 12's blink timing loop built on <code>ticks_ms()</code>; my capstone reuses that same timing pattern for its idle animation, just with different hold and transition durations. Any three of Abstraction, Decomposition, Modularity, Pattern Recognition, Algorithm Design, or Code Reuse, paired with a correct chapter reference and a plausible capstone connection, count as a correct answer.</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

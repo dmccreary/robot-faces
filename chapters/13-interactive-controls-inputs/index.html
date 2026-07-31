@@ -1,0 +1,2418 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Resources for teaching drawing of robot faces with microcontrollers and MicroPython to robotics students.  All content licensed Creative Commons ShareAlike Attribution Noncommercial">
+      
+      
+        <meta name="author" content="Dan McCreary">
+      
+      
+      
+        <link rel="prev" href="../12-animating-expressions/">
+      
+      
+        <link rel="next" href="../14-expression-menu-live-controls/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>13. Interactive Controls: Inputs & Concurrency - Robot Faces</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/mascot.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-FPTNK1XNJR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-FPTNK1XNJR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-FPTNK1XNJR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#642580" data-md-color-accent="#41BAC1">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#interactive-controls-inputs-concurrency" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robot Faces" class="md-header__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Faces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              13. Interactive Controls: Inputs & Concurrency
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robot Faces" class="md-nav__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    Robot Faces
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Chapters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of Chapters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-hardware-electronics-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Hardware & Electronics Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-micropython-fundamentals-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-micropython-fundamentals-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-display-coordinate-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-basic-drawing-primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-ellipse-polygon-drawing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Ellipse & Polygon Drawing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-framebuf-version-history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-facial-anatomy-layout-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-emotion-theory-core-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Emotion Theory & the Core Expression Set
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-expression-design-readability-hri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-animating-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Animating Expressions: Timing & Motion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-watching-to-listening" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Watching to Listening
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-a-buttons-state-digital-input-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading a Button's State: Digital Input Reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-every-frame-the-polling-input-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checking Every Frame: The Polling Input Loop
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-alternative-button-interrupt-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Alternative: Button Interrupt Handler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Alternative: Button Interrupt Handler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-polling-vs-interrupt-response-simulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Polling vs Interrupt Response Simulator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-bigger-idea-event-driven-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Bigger Idea: Event-Driven Programming
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-a-smooth-signal-analog-input-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading a Smooth Signal: Analog Input Reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#turning-a-raw-number-into-something-useful-potentiometer-value-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Turning a Raw Number Into Something Useful: Potentiometer Value Mapping
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Turning a Raw Number Into Something Useful: Potentiometer Value Mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-potentiometer-adc-mapping-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Potentiometer ADC Mapping Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tracking-which-mode-a-face-is-in-the-mode-state-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tracking Which Mode a Face Is In: The Mode State Machine
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tracking Which Mode a Face Is In: The Mode State Machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-mode-state-transition-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Mode State Transition Diagram
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#doing-two-things-truly-at-once-cooperative-multitasking-and-dual-core-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Doing Two Things Truly at Once: Cooperative Multitasking and Dual-Core Processing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-together-a-button-driven-mode-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting It Together: A Button-Driven Mode Cycle
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-expression-menu-live-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-porting-faces-color-display/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Porting Faces to a Color Display
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-computational-thinking-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lessons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Lessons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    History of Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/screen-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/drawing-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Drawing Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/ellipse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ellipse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/polygon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polygon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/basic-face-layouts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Face Layouts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eye-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eyebrows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eyebrows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion-types.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emotion Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../parts-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Faces Parts List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About The Robot Faces Book
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Learning Graph
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Learning Graph
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/starting-concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Starting Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/course-description-assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quality-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/taxonomy-distribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy Distribution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/mascot-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mascot Test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Stories
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Stories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-watching-to-listening" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Watching to Listening
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-a-buttons-state-digital-input-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading a Button's State: Digital Input Reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-every-frame-the-polling-input-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checking Every Frame: The Polling Input Loop
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-alternative-button-interrupt-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Alternative: Button Interrupt Handler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Alternative: Button Interrupt Handler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-polling-vs-interrupt-response-simulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Polling vs Interrupt Response Simulator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-bigger-idea-event-driven-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Bigger Idea: Event-Driven Programming
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-a-smooth-signal-analog-input-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading a Smooth Signal: Analog Input Reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#turning-a-raw-number-into-something-useful-potentiometer-value-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Turning a Raw Number Into Something Useful: Potentiometer Value Mapping
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Turning a Raw Number Into Something Useful: Potentiometer Value Mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-potentiometer-adc-mapping-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Potentiometer ADC Mapping Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tracking-which-mode-a-face-is-in-the-mode-state-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tracking Which Mode a Face Is In: The Mode State Machine
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tracking Which Mode a Face Is In: The Mode State Machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-mode-state-transition-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Mode State Transition Diagram
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#doing-two-things-truly-at-once-cooperative-multitasking-and-dual-core-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Doing Two Things Truly at Once: Cooperative Multitasking and Dual-Core Processing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-together-a-button-driven-mode-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting It Together: A Button-Driven Mode Cycle
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<hr />
+<p>title: Interactive Controls: Inputs &amp; Concurrency
+description: How to read buttons and potentiometers in MicroPython, choose between polling and interrupts, and use a mode state machine to let a robot face respond to physical controls.
+generated_by: claude skill chapter-content-generator
+date: 2026-07-27 16:01:46
+version: 0.09</p>
+<hr />
+<h1 id="interactive-controls-inputs-concurrency">Interactive Controls: Inputs &amp; Concurrency</h1>
+<h2 id="summary">Summary</h2>
+<p>This chapter explains how to read digital and analog input — buttons, potentiometers, and rotary encoders — using both interrupt-driven and polling approaches, how the RP2040's dual cores can be used cooperatively, and how a simple state machine with global state and a state-transition diagram lets a robot face respond to physical input. After completing this chapter, students will be able to read a physical control and use its value to change a face's behavior through a basic state machine.</p>
+<h2 id="concepts-covered">Concepts Covered</h2>
+<p>This chapter covers the following 13 concepts from the learning graph:</p>
+<ol>
+<li>Cooperative Multitasking</li>
+<li>Digital Input Reading</li>
+<li>Analog Input Reading</li>
+<li>Analog-To-Digital Conversion</li>
+<li>Button Interrupt Handler</li>
+<li>Potentiometer Value Mapping</li>
+<li>Mode State Machine</li>
+<li>Event-Driven Programming</li>
+<li>Polling Input Loop</li>
+<li>Dual-Core Processing</li>
+<li>Core Task Assignment</li>
+<li>Global State Variable</li>
+<li>State Transition Diagram</li>
+</ol>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This chapter builds on concepts from:</p>
+<ul>
+<li><a href="../01-hardware-electronics-foundations/">Chapter 1: Hardware &amp; Electronics Foundations</a></li>
+<li><a href="../04-micropython-fundamentals-2/">Chapter 4: MicroPython Fundamentals II: Functions &amp; the FrameBuf Module</a></li>
+<li><a href="../12-animating-expressions/">Chapter 12: Animating Expressions: Timing &amp; Motion</a></li>
+</ul>
+<hr />
+<h2 id="from-watching-to-listening">From Watching to Listening</h2>
+<div class="admonition mascot-welcome">
+<p class="admonition-title">Let's Give This Face Some Buttons</p>
+<p><img alt="Pixel waves hello" class="mascot-admonition-img" src="../../img/mascot/welcome.png" />
+Chapter 12 taught this face to blink and glance around all on its own, but it still cannot respond to anything a person does. This chapter fixes that: by the end of it, a real push button or twist of a knob will change what the face shows, in real time.</p>
+</div>
+<p>Every robot face built so far reacts to nothing outside its own code. Chapter 1 wired a momentary push button and a potentiometer onto a breadboard, connected to pull-up resistors and analog pins, but nothing has read those wires yet. This chapter is where that hardware finally gets a job: reading a button press, reading a knob's position, and using either one to change what <code>draw_face()</code> shows on screen. Along the way, this chapter also answers a question every animated program eventually runs into — how does a robot's face keep animating smoothly while also paying attention to a button that could be pressed at any instant?</p>
+<h2 id="reading-a-buttons-state-digital-input-reading">Reading a Button's State: Digital Input Reading</h2>
+<p>A momentary push button reports only two possible states — pressed or not pressed — which makes it a <strong>digital</strong> signal: one of exactly two values, HIGH or LOW, with nothing in between. <strong>Digital input reading</strong> is the act of asking a GPIO pin for its current logic level and getting back one of those two values. Chapter 1 explained why a button wired to a pin needs a pull-up resistor: without one, an unpressed button leaves the pin electrically floating, and a floating pin reads as a random, flickering mix of HIGH and LOW instead of a steady value.</p>
+<p>A bridge sentence before the code: this snippet configures GPIO pin 14 as a digital input with the RP2040's built-in pull-up resistor enabled, then reads its current value.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+
+<span class="n">button</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">PULL_UP</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">button</span><span class="o">.</span><span class="n">value</span><span class="p">())</span>   <span class="c1"># 1 (HIGH) when released, 0 (LOW) when pressed</span>
+</code></pre></div></td></tr></table></div>
+<p><code>Pin(14, Pin.IN, Pin.PULL_UP)</code> does two things at once: it sets pin 14 to act as an input rather than an output, and it turns on the RP2040's internal pull-up resistor for that pin, so no external resistor is required on the breadboard. With the pull-up enabled, <code>button.value()</code> returns <code>1</code> whenever the button is not being pressed, because the pull-up holds the pin at 3.3 volts. Pressing the button connects the pin directly to ground, and <code>.value()</code> immediately returns <code>0</code>. Every input technique in this chapter builds on this one method call.</p>
+<h2 id="checking-every-frame-the-polling-input-loop">Checking Every Frame: The Polling Input Loop</h2>
+<p>The simplest way to notice a button press is to ask the button, over and over, "are you pressed right now?" A <strong>polling input loop</strong> checks a control's current state repeatedly — typically once per pass through an animation loop — rather than waiting to be told a change happened. This fits naturally into the non-blocking animation loop Chapter 12 already built, since that loop was already running continuously without ever calling <code>sleep()</code>.</p>
+<p>A bridge sentence before the code: this loop reuses Chapter 12's non-blocking animation timing and adds one new check near the bottom, comparing the button's current state against its state on the previous pass to detect the exact moment a press begins.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">last_button_state</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># 1 = released, matches the pull-up&#39;s resting HIGH</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">ticks_ms</span><span class="p">()</span>
+    <span class="c1"># ... Chapter 12&#39;s blink and gaze timing goes here ...</span>
+
+    <span class="n">current_button_state</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">current_button_state</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">last_button_state</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">handle_button_press</span><span class="p">()</span>          <span class="c1"># fires once, on the HIGH-to-LOW edge</span>
+    <span class="n">last_button_state</span> <span class="o">=</span> <span class="n">current_button_state</span>
+
+    <span class="n">fb</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">BLACK</span><span class="p">)</span>
+    <span class="n">draw_face</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>Notice that <code>handle_button_press()</code> only runs when <code>current_button_state</code> is <code>0</code> <strong>and</strong> <code>last_button_state</code> was <code>1</code> the previous pass — that comparison is what turns a button held down for half a second into a single event instead of hundreds of repeated calls while the loop keeps spinning. Polling is easy to reason about because the check sits in plain sight, right inside a loop whose order you already control. Its weakness is timing: a press that starts and finishes entirely between two passes through the loop can be missed completely, and a loop busy with something slow, like a long drawing operation, checks the button less often than it should.</p>
+<h2 id="the-alternative-button-interrupt-handler">The Alternative: Button Interrupt Handler</h2>
+<p>Polling has to keep asking. An <strong>interrupt</strong> flips that relationship around: instead of the main program checking a pin, the pin tells the program the instant something changes. A <strong>button interrupt handler</strong> is a function registered with <code>Pin.irq()</code> that MicroPython runs automatically the moment a button's state changes, without the main loop needing to check that pin at all.</p>
+<p>A bridge sentence before the code: this snippet registers a handler function that runs the instant pin 14 drops from HIGH to LOW, setting a flag the main loop can check whenever it is convenient.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+
+<span class="n">button_pressed_flag</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">def</span> <span class="nf">on_button_press</span><span class="p">(</span><span class="n">pin</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">button_pressed_flag</span>
+    <span class="n">button_pressed_flag</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">button</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">PULL_UP</span><span class="p">)</span>
+<span class="n">button</span><span class="o">.</span><span class="n">irq</span><span class="p">(</span><span class="n">trigger</span><span class="o">=</span><span class="n">Pin</span><span class="o">.</span><span class="n">IRQ_FALLING</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="n">on_button_press</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p><code>trigger=Pin.IRQ_FALLING</code> tells MicroPython to call <code>on_button_press()</code> only on a falling edge — the exact moment the pin drops from HIGH to LOW, which is when this pull-up-wired button is first pressed. The handler itself does almost nothing: it just sets <code>button_pressed_flag</code> to <code>True</code> and returns immediately, leaving the main loop to notice that flag and react to it on its own schedule.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">Two Ways to Notice the Same Press</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Polling and interrupts solve the exact same problem — "did the button change?" — from two opposite directions. Polling means your code keeps asking; an interrupt means the hardware keeps watching and taps your program on the shoulder. Neither one is simply "better" — each trades away something the other one has.</p>
+</div>
+<p>The table below lines up the two approaches side by side, the same way Chapter 12 compared <code>sleep()</code> and <code>ticks_ms()</code> timing.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Polling Input Loop</th>
+<th>Button Interrupt Handler</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>How it notices a press</td>
+<td>Main loop checks <code>.value()</code> every pass</td>
+<td><code>Pin.irq()</code> calls a handler automatically</td>
+</tr>
+<tr>
+<td>Can miss a very brief press</td>
+<td>Yes, if the press falls between two checks</td>
+<td>No, the handler fires on the exact edge</td>
+</tr>
+<tr>
+<td>Wastes cycles when idle</td>
+<td>Yes, checks constantly even when nothing changed</td>
+<td>No, the handler only runs when something happens</td>
+</tr>
+<tr>
+<td>Code complexity</td>
+<td>Simple — one <code>if</code> statement in a loop you already control</td>
+<td>More complex — requires a short handler, often a flag, and debouncing</td>
+</tr>
+<tr>
+<td>Timing predictability</td>
+<td>Runs exactly where you placed the check</td>
+<td>Can interrupt the main loop at any point, mid-instruction</td>
+</tr>
+</tbody>
+</table>
+<p>Watching a simulated press land at different moments makes the trade-off in that table far more concrete than reading it as a list of bullet points.</p>
+<h4 id="diagram-polling-vs-interrupt-response-simulator">Diagram: Polling vs Interrupt Response Simulator</h4>
+<iframe src="../../sims/polling-vs-interrupt-response-simulator/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Polling vs Interrupt Response Simulator</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> polling-vs-interrupt-response-simulator<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Analyze (L4)
+Bloom Taxonomy Verb: differentiate, examine</p>
+<p>Learning objective: Differentiate polling-based button reading from interrupt-driven button reading by examining, for presses of varying length and timing, whether each approach detects a simulated button press.</p>
+<p>Canvas layout:
+- Left 70% (responsive, roughly 460x320 at default width): two stacked panels, top labeled "Polling loop" and bottom labeled "Interrupt handler", each showing a repeating loop-check tick marker (polling panel) or a "listening" indicator (interrupt panel)
+- Right 30%: a "Press Button" control with a press-duration slider, a "Loop check interval" slider (polling panel only), a shared event log, and a "Reset" button</p>
+<p>Visual elements:
+- Polling panel: a horizontal timeline with small tick marks at each loop check (spaced by the check-interval slider); a press rendered as a shaded bar over the timeline
+- Interrupt panel: a horizontal timeline with no discrete ticks, since the handler can fire at any instant; a press rendered the same shaded bar
+- When a simulated press bar overlaps at least one polling tick, the polling panel flashes green ("CAUGHT"); when a very brief press falls entirely between two ticks, the polling panel flashes red ("MISSED")
+- The interrupt panel always flashes green the instant the press begins, regardless of duration
+- Event log lines such as "t=212ms: 15ms press started", "t=212ms: interrupt handler fired at t=212ms", "t=212ms: polling loop next checks at t=250ms — MISSED"</p>
+<p>Interactive controls:
+- Slider: "Press duration" from 5-500ms
+- Slider: "Loop check interval (polling panel only)" from 10-200ms
+- Button: "Press Button Now" — triggers a press at the current simulated time using the chosen duration
+- Button: "Reset" — clears the log and restarts both timelines from zero</p>
+<p>Default parameters: press duration 20ms, loop check interval 50ms, log empty</p>
+<p>Data Visibility Requirements:
+  Stage 1: Show both panels idle, with the polling panel's tick spacing matching the check-interval slider
+  Stage 2: Triggering a press shows the exact press-start time logged for both panels simultaneously
+  Stage 3: The interrupt panel logs its fire time as identical, or within 1ms, of the press-start time
+  Stage 4: The polling panel logs either the next tick time (if caught) or "MISSED" if the press duration is shorter than the gap to the next tick</p>
+<p>Instructional Rationale: An Analyze-level objective requires the learner to examine two detection mechanisms under the same triggering event and identify why one can fail where the other cannot; letting the learner control press duration and loop interval directly lets them construct the exact failure case — a very short press between two polling ticks — rather than being told about it.</p>
+<p>Responsive design: controls and log move below the two panels on viewports narrower than 600 pixels; panels scale to fill their container's width.</p>
+<p>Implementation: p5.js for the timeline rendering and simulated clock; a shared simulated millisecond counter drives both panels so press timing is directly comparable between them.</p>
+</details>
+<div class="admonition mascot-warning">
+<p class="admonition-title">Keep Interrupt Handlers Short</p>
+<p><img alt="Pixel warns you" class="mascot-admonition-img" src="../../img/mascot/warning.png" />
+Never call <code>draw_face()</code>, <code>fb.show()</code>, or anything else slow directly inside an interrupt handler. The handler can fire in the middle of the main loop doing something else entirely, and a slow handler blocks that other work exactly the way a long <code>sleep()</code> call did in Chapter 12. Set a flag, and let the main loop do the real work when it is ready.</p>
+</div>
+<p>One more wrinkle deserves a mention before moving on: a real mechanical push button does not switch cleanly between HIGH and LOW. Its metal contacts physically bounce for a few milliseconds when pressed, so a single physical press can trigger an interrupt handler several times in quick succession — a problem called <strong>switch bounce</strong>. Production-quality interrupt code typically debounces a button by ignoring any second trigger that arrives within a few milliseconds of the first one, using a stored timestamp compared with <code>ticks_diff()</code>, the same tool Chapter 12 used for animation timing.</p>
+<h2 id="the-bigger-idea-event-driven-programming">The Bigger Idea: Event-Driven Programming</h2>
+<p>The interrupt handler in the previous section is one example of a much bigger idea in computer science. <strong>Event-driven programming</strong> is a paradigm in which code runs in response to something happening — a button press, a sensor trigger, an incoming message — rather than executing in one fixed, predetermined sequence from top to bottom. Every program in this book up through Chapter 12 has been <strong>sequential</strong>: <code>while True:</code> loops, functions called in a fixed order, one line always following the line before it. <code>Pin.irq()</code> breaks that pattern for the first time — <code>on_button_press()</code> might run between any two lines of the main loop, at a moment the programmer does not control and cannot predict in advance.</p>
+<p>This shift matters beyond robot faces. Web browsers, phone apps, and video games are almost entirely event-driven: a click, a tap, or a network response triggers code, and the rest of the program waits and reacts rather than marching through a script. Recognizing "this is event-driven" the first time you meet <code>Pin.irq()</code> means recognizing the same underlying pattern the next time it shows up in a very different context.</p>
+<h2 id="reading-a-smooth-signal-analog-input-reading">Reading a Smooth Signal: Analog Input Reading</h2>
+<p>A button only ever reports two states, but a potentiometer reports something richer. <strong>Analog input reading</strong> captures a continuously variable voltage — one that can be anywhere between two limits, not just HIGH or LOW — through one of the RP2040's dedicated analog input pins. Chapter 1 introduced the potentiometer itself: a knob that divides the board's voltage smoothly between 0 and 3.3 volts as it turns.</p>
+<p>A bridge sentence before the code: this snippet creates an analog input on GPIO pin 26 and reads the potentiometer's current position as a raw digital number.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">ADC</span><span class="p">,</span> <span class="n">Pin</span>
+
+<span class="n">pot</span> <span class="o">=</span> <span class="n">ADC</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">26</span><span class="p">))</span>
+<span class="n">raw_value</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">read_u16</span><span class="p">()</span>   <span class="c1"># 0-65535</span>
+</code></pre></div></td></tr></table></div>
+<p>A microcontroller's internal circuitry cannot store or compute with a raw voltage directly — it needs numbers. <strong>Analog-to-digital conversion</strong> is the process that solves this: a dedicated piece of hardware called an ADC (analog-to-digital converter) measures an incoming analog voltage and converts it into a discrete digital number the RP2040's processor can actually use in code. The RP2040's ADC reports that number across a 16-bit range, from 0 (0 volts) up to 65535 (3.3 volts), which is why <code>read_u16()</code> — read as an unsigned 16-bit integer — is the method used to retrieve it.</p>
+<h2 id="turning-a-raw-number-into-something-useful-potentiometer-value-mapping">Turning a Raw Number Into Something Useful: Potentiometer Value Mapping</h2>
+<p>A raw ADC reading between 0 and 65535 is not, by itself, a useful number for a face parameter — nobody wants an eyebrow angle measured in tens of thousands. <strong>Potentiometer value mapping</strong> converts that raw ADC range into a smaller, meaningful range for a specific face parameter, such as an eyebrow angle running from -30 to 30 degrees, using a simple linear formula.</p>
+<p>A bridge sentence before the code: this reusable function maps any value from one numeric range into a different numeric range, preserving its relative position — for example, a raw ADC reading exactly in the middle of its range maps to a value exactly in the middle of the output range.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">map_range</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">in_min</span><span class="p">,</span> <span class="n">in_max</span><span class="p">,</span> <span class="n">out_min</span><span class="p">,</span> <span class="n">out_max</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Linearly map value from [in_min, in_max] into [out_min, out_max].&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">out_min</span> <span class="o">+</span> <span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="n">in_min</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">out_max</span> <span class="o">-</span> <span class="n">out_min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">in_max</span> <span class="o">-</span> <span class="n">in_min</span><span class="p">)</span>
+
+<span class="n">raw_value</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">read_u16</span><span class="p">()</span>                              <span class="c1"># e.g. 32768, roughly mid-turn</span>
+<span class="n">eyebrow_angle</span> <span class="o">=</span> <span class="n">map_range</span><span class="p">(</span><span class="n">raw_value</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">65535</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>  <span class="c1"># -&gt; 0.0 degrees, dead center</span>
+</code></pre></div></td></tr></table></div>
+<p>The formula works by first turning <code>value</code> into a fraction of the input range — how far along, from 0.0 to 1.0, the raw reading sits between <code>in_min</code> and <code>in_max</code> — and then applying that same fraction to the output range. A raw reading of 0 always maps to <code>out_min</code>, a raw reading of 65535 always maps to <code>out_max</code>, and anything in between lands proportionally in the output range. This exact <code>map_range()</code> function will reappear throughout the rest of this book any time a continuous control needs to drive a face parameter.</p>
+<p>Turning a simulated knob and watching both the raw ADC number and the mapped output change together, with the formula's own arithmetic shown live, makes this conversion far easier to trust than reading the formula alone.</p>
+<h4 id="diagram-potentiometer-adc-mapping-visualizer">Diagram: Potentiometer ADC Mapping Visualizer</h4>
+<iframe src="../../sims/potentiometer-adc-mapping-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Potentiometer ADC Mapping Visualizer</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> potentiometer-adc-mapping-visualizer<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Apply (L3)
+Bloom Taxonomy Verb: calculate, demonstrate</p>
+<p>Learning objective: Calculate a mapped face-parameter value from a raw ADC reading using the linear mapping formula, and demonstrate how turning a simulated potentiometer knob changes the raw value, the mapped value, and the live arithmetic together.</p>
+<p>Canvas layout:
+- Left 45% (responsive, roughly 260x300 at default width): a rotating knob graphic the learner can drag, with a small eyebrow icon that tilts live to preview the mapped output
+- Right 55%: raw ADC readout (0-65535), the <code>map_range()</code> formula with the current numbers substituted in, the mapped output readout, and range-editing number inputs</p>
+<p>Visual elements:
+- Knob graphic rotating from a 7-o'clock to 5-o'clock position as it is dragged, labeled with its current percentage of full travel
+- Raw readout: "raw_value = 41,000 / 65535"
+- Live formula line: "eyebrow_angle = -30 + (41000 - 0) * (30 - (-30)) / (65535 - 0) = 7.5"
+- A small face preview showing one eyebrow tilted to the current mapped angle
+- Editable number inputs for <code>out_min</code> and <code>out_max</code>, defaulting to -30 and 30, so the learner can see the same raw value map differently into a different output range</p>
+<p>Interactive controls:
+- Draggable knob (mouse drag or click-and-hold-and-move) sets the raw ADC value continuously from 0 to 65535
+- Number inputs: "Output min" and "Output max" (default -30 and 30), re-rendering the formula line and mapped output immediately
+- Button: "Snap to center" sets the knob to exactly the midpoint for a clean round-number example
+- Button: "Reset ranges" restores -30/30 defaults</p>
+<p>Default parameters: knob at 50% (raw_value = 32768), out_min = -30, out_max = 30</p>
+<p>Data Visibility Requirements:
+  Stage 1: Show the raw ADC value updating live as the knob is dragged, with no mapping applied yet
+  Stage 2: Show the full map_range formula with the current raw_value, in_min, in_max, out_min, and out_max substituted in as concrete numbers
+  Stage 3: Show the resulting mapped value and the eyebrow preview updating together, in sync with the knob
+  Stage 4: Changing out_min/out_max re-maps the same raw_value to a visibly different output, reinforcing that mapping depends on both ranges</p>
+<p>Instructional Rationale: An Apply-level objective calls for a parameter-exploration calculator rather than a passive animation — the learner must manipulate the raw input and directly observe the calculated output, with the formula's real numbers visible at every step, to be able to compute a mapped value themselves afterward.</p>
+<p>Responsive design: the formula and readouts stack below the knob on viewports narrower than 600 pixels; the knob scales proportionally on window resize.</p>
+<p>Implementation: p5.js for the knob drag interaction and live-updating formula text; the same <code>map_range()</code> logic taught in this chapter reimplemented directly in JavaScript so the displayed arithmetic always matches the MicroPython code exactly.</p>
+</details>
+<h2 id="tracking-which-mode-a-face-is-in-the-mode-state-machine">Tracking Which Mode a Face Is In: The Mode State Machine</h2>
+<p>A button and a potentiometer are more useful together than either is alone, but combining them cleanly requires a way to track what the robot is currently doing. A <strong>mode state machine</strong> is a pattern for organizing a program around a small, fixed set of named modes, with clear rules for which button press moves the program from one mode to the next. A <strong>global state variable</strong> is the single piece of state, visible to the entire program, that stores which mode is currently active — the state machine's memory of where it is right now.</p>
+<p>A bridge sentence before the code: this snippet names three modes as constants, then stores the currently active one in a single global variable that starts in the first mode.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">NEUTRAL_MODE</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">GAZE_MODE</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ADJUST_MODE</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">current_mode</span> <span class="o">=</span> <span class="n">NEUTRAL_MODE</span>   <span class="c1"># the global state variable</span>
+</code></pre></div></td></tr></table></div>
+<p>Naming each mode as a constant (<code>NEUTRAL_MODE</code>, <code>GAZE_MODE</code>, <code>ADJUST_MODE</code>) instead of using bare numbers like <code>0</code>, <code>1</code>, and <code>2</code> throughout the program makes every later comparison, like <code>if current_mode == GAZE_MODE:</code>, read clearly instead of forcing you to remember what each number means. <code>current_mode</code> is deliberately just one variable, storing exactly one of those three values at any moment — never more than one mode is active at the same time.</p>
+<p>A picture of exactly which modes exist and which button presses move between them is called a <strong>state transition diagram</strong> — a small graph where each mode is a labeled circle, and each arrow shows a transition triggered by some event, most often a button press in this book's projects. This chapter's three-mode example uses the simplest possible transition rule: a single short button press always advances to the next mode in a fixed cycle, wrapping back to the first mode after the last one.</p>
+<table>
+<thead>
+<tr>
+<th>Current Mode</th>
+<th>Trigger</th>
+<th>Next Mode</th>
+<th>What the Face Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NEUTRAL_MODE</td>
+<td>Button press</td>
+<td>GAZE_MODE</td>
+<td>Face looks calm; button press begins gaze-following mode</td>
+</tr>
+<tr>
+<td>GAZE_MODE</td>
+<td>Button press</td>
+<td>ADJUST_MODE</td>
+<td>Pupils track a simulated target; button press switches to adjusting a parameter</td>
+</tr>
+<tr>
+<td>ADJUST_MODE</td>
+<td>Button press</td>
+<td>NEUTRAL_MODE</td>
+<td>Potentiometer controls eyebrow angle live; button press returns to neutral</td>
+</tr>
+</tbody>
+</table>
+<p>Clicking through the same three modes and transitions on an interactive diagram, instead of only reading the table above, makes the cycle's direction and triggers easier to remember.</p>
+<h4 id="diagram-mode-state-transition-diagram">Diagram: Mode State Transition Diagram</h4>
+<iframe src="../../sims/mode-state-transition-diagram/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Mode State Transition Diagram</summary>
+<p>Type: graph-model
+<strong>sim-id:</strong> mode-state-transition-diagram<br/>
+<strong>Library:</strong> vis-network<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Understand (L2)
+Bloom Taxonomy Verb: explain, interpret</p>
+<p>Learning objective: Explain the mode state machine's states and transitions by clicking each mode and each transition arrow to interpret what button action triggers it, what the global state variable's value becomes, and what the face does in that mode.</p>
+<p>Purpose: Illustrate the three-mode cycle (NEUTRAL_MODE, GAZE_MODE, ADJUST_MODE) this chapter builds, letting the learner explore triggers and behaviors interactively rather than reading them only in prose or a table</p>
+<p>Node types:
+1. Mode node (rounded rectangle, one per mode)
+   - Properties: mode name, constant value (0, 1, or 2), one-sentence description of face behavior
+   - Examples: "NEUTRAL_MODE (0)", "GAZE_MODE (1)", "ADJUST_MODE (2)"</p>
+<p>Edge types:
+1. Transition arrow (directed, curved to show the cycle)
+   - Properties: trigger event, resulting global state variable assignment
+   - Example: NEUTRAL_MODE → GAZE_MODE labeled "button press"</p>
+<p>Sample data:
+- NEUTRAL_MODE --button press--&gt; GAZE_MODE
+- GAZE_MODE --button press--&gt; ADJUST_MODE
+- ADJUST_MODE --button press--&gt; NEUTRAL_MODE</p>
+<p>Layout: Circular layout with three nodes evenly spaced and curved directional arrows forming a visible cycle</p>
+<p>Interactive features:
+- Click a mode node: highlights it and opens a side panel showing its constant value, a one-sentence description of face behavior in that mode, and the code line that sets <code>current_mode</code> to it
+- Click a transition arrow: opens a side panel showing the trigger ("a single short button press, detected on the HIGH-to-LOW edge") and the exact line of code that performs the reassignment, e.g. <code>current_mode = ADJUST_MODE</code>
+- Hover a node or arrow: shows a short tooltip with its name before clicking for full detail
+- Drag nodes to reposition; scroll to zoom; click background to deselect and clear the side panel</p>
+<p>Visual styling:
+- NEUTRAL_MODE node in teal, GAZE_MODE node in coral, ADJUST_MODE node in a neutral gray-blue, consistent with the mascot's color identity
+- Selected node or edge highlighted with a thicker border and brighter color
+- Arrows drawn with visible arrowheads showing direction of the cycle</p>
+<p>Legend: A small key explaining that circles are modes and arrows are button-triggered transitions</p>
+<p>Implementation: vis-network for the graph rendering, click and hover event handlers wired to a side-panel infobox; a small JavaScript object storing each node's and edge's descriptive text</p>
+</details>
+<h2 id="doing-two-things-truly-at-once-cooperative-multitasking-and-dual-core-processing">Doing Two Things Truly at Once: Cooperative Multitasking and Dual-Core Processing</h2>
+<p>Every technique so far — polling, interrupts, mode switching — has run on a single processor core, one instruction after another. Chapter 1 mentioned that the RP2040 actually contains two identical processor cores, and MicroPython can put that second core to work. <strong>Dual-core processing</strong> means running separate, independent code on each of the RP2040's two cores at the same time, rather than one core doing everything alone. <strong>Core task assignment</strong> is the design decision of which job goes on which core — for example, dedicating core 0 to redrawing and animating the face while core 1 does nothing but poll a button and a potentiometer.</p>
+<p>A bridge sentence before the code: this snippet starts a second thread running on the RP2040's other core, using MicroPython's <code>_thread</code> module, dedicated entirely to polling input while the main loop keeps animating the face.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">_thread</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">core1_input_task</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Runs on the second core: polls the button and potentiometer only.&quot;&quot;&quot;</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">current_button_state</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">current_button_state</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">handle_button_press</span><span class="p">()</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">_thread</span><span class="o">.</span><span class="n">start_new_thread</span><span class="p">(</span><span class="n">core1_input_task</span><span class="p">,</span> <span class="p">())</span>
+
+<span class="c1"># core 0 keeps running the animation loop, uninterrupted by input polling</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">BLACK</span><span class="p">)</span>
+    <span class="n">draw_face</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p><code>_thread.start_new_thread()</code> hands <code>core1_input_task</code> off to the RP2040's second core, which then runs that function's <code>while True:</code> loop completely independently of the main program below it. The benefit is real: a slow or busy task on one core — a complicated draw call, for instance — can no longer make the other core late in checking a button. The cost is real too: both cores can potentially read and write the same global state variable, like <code>current_mode</code>, at the exact same instant, and getting that safe requires care.</p>
+<p>That shared-safety idea is what the word <strong>cooperative</strong> in "cooperative multitasking" actually refers to here — the two cores are not fighting over the same resources because the program is written carefully, with each core sticking to its assigned job and touching shared state in predictable, limited ways, not because MicroPython enforces it automatically.</p>
+<div class="admonition mascot-encourage">
+<p class="admonition-title">This One's Optional — And That's Fine</p>
+<p><img alt="Pixel cheers you on" class="mascot-admonition-img" src="../../img/mascot/encouraging.png" />
+Dual-core code is genuinely more advanced than anything else in this chapter, and a single-core polling loop is completely sufficient for nearly every robot face project in this course. Understanding <em>why</em> dual-core task assignment exists — and that the RP2040 is unusual among cheap microcontrollers for having it — is the real goal here, not mastering every detail of <code>_thread</code> today.</p>
+</div>
+<h2 id="putting-it-together-a-button-driven-mode-cycle">Putting It Together: A Button-Driven Mode Cycle</h2>
+<p>Every idea in this chapter converges in one small, complete program: a polling input loop, edge detection on a button press, and a three-mode state machine stored in a single global state variable — running comfortably on one core, exactly as most projects in this book will.</p>
+<p>A bridge sentence before the code: this loop polls the button once per pass, advances <code>current_mode</code> through the NEUTRAL_MODE, GAZE_MODE, ADJUST_MODE cycle on each new press, and reads the potentiometer only while in ADJUST_MODE.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span><span class="p">,</span> <span class="n">ADC</span>
+
+<span class="n">NEUTRAL_MODE</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">GAZE_MODE</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ADJUST_MODE</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">button</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">PULL_UP</span><span class="p">)</span>
+<span class="n">pot</span> <span class="o">=</span> <span class="n">ADC</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">26</span><span class="p">))</span>
+
+<span class="n">current_mode</span> <span class="o">=</span> <span class="n">NEUTRAL_MODE</span>      <span class="c1"># global state variable</span>
+<span class="n">last_button_state</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">current_button_state</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">current_button_state</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">last_button_state</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">current_mode</span> <span class="o">==</span> <span class="n">NEUTRAL_MODE</span><span class="p">:</span>
+            <span class="n">current_mode</span> <span class="o">=</span> <span class="n">GAZE_MODE</span>
+        <span class="k">elif</span> <span class="n">current_mode</span> <span class="o">==</span> <span class="n">GAZE_MODE</span><span class="p">:</span>
+            <span class="n">current_mode</span> <span class="o">=</span> <span class="n">ADJUST_MODE</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">current_mode</span> <span class="o">=</span> <span class="n">NEUTRAL_MODE</span>
+    <span class="n">last_button_state</span> <span class="o">=</span> <span class="n">current_button_state</span>
+
+    <span class="k">if</span> <span class="n">current_mode</span> <span class="o">==</span> <span class="n">ADJUST_MODE</span><span class="p">:</span>
+        <span class="n">raw_value</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">read_u16</span><span class="p">()</span>
+        <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">map_range</span><span class="p">(</span><span class="n">raw_value</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">65535</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+
+    <span class="n">fb</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">BLACK</span><span class="p">)</span>
+    <span class="n">draw_face</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>Read that loop the way you would read the state transition diagram above: the button-edge check decides whether <code>current_mode</code> moves forward one step, the <code>if current_mode == ADJUST_MODE:</code> block only runs the potentiometer-mapping code while that specific mode is active, and the drawing call at the bottom runs every single pass no matter which mode is current. Chapter 14 takes this exact pattern and grows it into a full expression menu — more modes, more transitions, and a state transition diagram that looks a lot like a small map of a robot's personality.</p>
+<h2 id="chapter-summary">Chapter Summary</h2>
+<p>You now know how to read a button and a potentiometer in MicroPython, choose between polling and interrupts, and use a small state machine to let physical controls change a robot face's behavior.</p>
+<ul>
+<li>Digital input reading uses <code>machine.Pin(n, Pin.IN, Pin.PULL_UP)</code> and <code>.value()</code> to read a button as HIGH (1, released) or LOW (0, pressed), building directly on Chapter 1's pull-up resistor wiring.</li>
+<li>A polling input loop checks a control's state once per pass through the animation loop; it is simple to reason about but can miss very brief presses and wastes cycles checking nothing.</li>
+<li>A button interrupt handler, registered with <code>Pin.irq()</code>, runs automatically the instant a pin changes state, catching even very brief presses — at the cost of added complexity like debouncing and keeping the handler short.</li>
+<li>Event-driven programming is the general paradigm interrupt handlers exemplify: code that runs in response to an event rather than in one fixed sequential order.</li>
+<li>Analog input reading, through <code>machine.ADC()</code>, captures a potentiometer's continuously variable voltage; analog-to-digital conversion is the hardware process that turns that voltage into a discrete digital number, typically 0-65535 on the RP2040.</li>
+<li>Potentiometer value mapping uses a linear formula to convert that raw range into a useful range for a face parameter, such as -30 to 30 degrees of eyebrow angle.</li>
+<li>A mode state machine tracks which of a small set of named modes — like NEUTRAL_MODE, GAZE_MODE, and ADJUST_MODE — is currently active in one global state variable, with button presses driving transitions shown on a state transition diagram.</li>
+<li>Cooperative multitasking and dual-core processing let the RP2040 assign separate tasks, like animation and input polling, to its two cores independently; this is optional and advanced, since a single-core polling loop is enough for most robot face projects.</li>
+</ul>
+<div class="admonition mascot-celebration">
+<p class="admonition-title">Your Face Can Finally Listen</p>
+<p><img alt="Pixel celebrates" class="mascot-admonition-img" src="../../img/mascot/celebration.png" />
+Look at everything just connected: the button and potentiometer Chapter 1 wired, the non-blocking loop Chapter 12 built, and a small state machine now tying it all together. This robot face can finally respond to a person standing next to it — which is the whole point of drawing a face in the first place.</p>
+</div>
+<details class="question">
+<summary>Self-Check: Why would you choose a button interrupt handler over a polling input loop, and what is the trade-off? — Click to reveal</summary>
+<p>An interrupt handler, registered with <code>Pin.irq()</code>, is the better choice when a press must never be missed — for example, if it could be very brief or arrive while the main loop is busy with something slow. Unlike a polling input loop, which only notices a button change on its next pass through the loop, an interrupt handler runs the instant the pin's state changes, regardless of what else the program is doing at that moment. The trade-off is complexity: an interrupt handler can fire in the middle of any other code, so it must be kept extremely short — usually just setting a flag — and real button hardware needs debouncing to avoid one physical press firing the handler several times. A polling input loop, by contrast, is simple to read and reason about, and is completely adequate for most robot face projects where missing an occasional very brief press is not a serious problem.</p>
+</details>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

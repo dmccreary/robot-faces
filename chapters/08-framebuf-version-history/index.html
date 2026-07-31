@@ -1,0 +1,2258 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A short history of how ellipse() and poly() moved from a GitHub pull request to a stable MicroPython release, and what that journey teaches about open source software.">
+      
+      
+        <meta name="author" content="Dan McCreary">
+      
+      
+      
+        <link rel="prev" href="../07-ellipse-polygon-drawing/">
+      
+      
+        <link rel="next" href="../09-facial-anatomy-layout-design/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>A History of MicroPython's FrameBuf Drawing Support - Robot Faces</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/mascot.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-FPTNK1XNJR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-FPTNK1XNJR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-FPTNK1XNJR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#642580" data-md-color-accent="#41BAC1">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a-history-of-micropythons-framebuf-drawing-support" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robot Faces" class="md-header__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Faces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              A History of MicroPython's FrameBuf Drawing Support
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robot Faces" class="md-nav__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    Robot Faces
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Chapters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of Chapters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-hardware-electronics-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Hardware & Electronics Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-micropython-fundamentals-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-micropython-fundamentals-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-display-coordinate-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-basic-drawing-primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-ellipse-polygon-drawing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Ellipse & Polygon Drawing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-did-ellipse-and-poly-actually-come-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where Did ellipse() and poly() Actually Come From?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#micropython-lives-on-github-in-the-open" class="md-nav__link">
+    <span class="md-ellipsis">
+      MicroPython Lives on GitHub, in the Open
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-an-idea-becomes-code-the-open-source-contribution-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      How an Idea Becomes Code: The Open Source Contribution Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-framebuf-could-draw-before-v120" class="md-nav__link">
+    <span class="md-ellipsis">
+      What framebuf Could Draw Before v1.20
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faking-curves-with-straight-lines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Faking Curves With Straight Lines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Faking Curves With Straight Lines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-old-workaround-vs-new-ellipse-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Old Workaround vs. New ellipse() Call
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blit-learns-to-cross-formats-v117-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      blit() Learns to Cross Formats (v1.17, 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-merge-that-changed-everything-august-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Merge That Changed Everything (August 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nightly-build-firmware-getting-a-feature-early-and-why-you-probably-shouldnt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nightly Build Firmware: Getting a Feature Early (and Why You Probably Shouldn't)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-version-numbers-major-minor-patch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding Version Numbers: Major, Minor, Patch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v1200-the-release-this-book-assumes-april-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v1.20.0: The Release This Book Assumes (April 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#even-shipped-features-keep-improving-the-v1241-bug-fix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Even Shipped Features Keep Improving: The v1.24.1 Bug Fix
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-your-own-picos-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating Your Own Pico's Firmware
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-whole-story-on-one-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Whole Story, on One Timeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Whole Story, on One Timeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-framebuf-version-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: FrameBuf Version Timeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-facial-anatomy-layout-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-emotion-theory-core-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Emotion Theory & the Core Expression Set
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-expression-design-readability-hri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-animating-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Animating Expressions: Timing & Motion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-interactive-controls-inputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-expression-menu-live-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-porting-faces-color-display/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Porting Faces to a Color Display
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-computational-thinking-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lessons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Lessons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    History of Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/screen-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/drawing-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Drawing Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/ellipse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ellipse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/polygon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polygon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/basic-face-layouts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Face Layouts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eye-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eyebrows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eyebrows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion-types.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emotion Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../parts-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Faces Parts List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About The Robot Faces Book
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Learning Graph
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Learning Graph
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/starting-concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Starting Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/course-description-assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quality-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/taxonomy-distribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy Distribution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/mascot-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mascot Test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Stories
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Stories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-did-ellipse-and-poly-actually-come-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where Did ellipse() and poly() Actually Come From?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#micropython-lives-on-github-in-the-open" class="md-nav__link">
+    <span class="md-ellipsis">
+      MicroPython Lives on GitHub, in the Open
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-an-idea-becomes-code-the-open-source-contribution-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      How an Idea Becomes Code: The Open Source Contribution Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-framebuf-could-draw-before-v120" class="md-nav__link">
+    <span class="md-ellipsis">
+      What framebuf Could Draw Before v1.20
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faking-curves-with-straight-lines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Faking Curves With Straight Lines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Faking Curves With Straight Lines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-old-workaround-vs-new-ellipse-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Old Workaround vs. New ellipse() Call
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blit-learns-to-cross-formats-v117-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      blit() Learns to Cross Formats (v1.17, 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-merge-that-changed-everything-august-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Merge That Changed Everything (August 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nightly-build-firmware-getting-a-feature-early-and-why-you-probably-shouldnt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nightly Build Firmware: Getting a Feature Early (and Why You Probably Shouldn't)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-version-numbers-major-minor-patch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding Version Numbers: Major, Minor, Patch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v1200-the-release-this-book-assumes-april-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v1.20.0: The Release This Book Assumes (April 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#even-shipped-features-keep-improving-the-v1241-bug-fix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Even Shipped Features Keep Improving: The v1.24.1 Bug Fix
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-your-own-picos-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating Your Own Pico's Firmware
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-whole-story-on-one-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Whole Story, on One Timeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Whole Story, on One Timeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-framebuf-version-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: FrameBuf Version Timeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="a-history-of-micropythons-framebuf-drawing-support">A History of MicroPython's FrameBuf Drawing Support</h1>
+<h2 id="summary">Summary</h2>
+<p>Now that students can use ellipse() and poly(), this chapter explains where those methods came from: MicroPython's framebuf module supported only basic shapes and blit() through v1.19.1, gained ellipse() and poly() in an August 2022 development-branch merge, shipped them in an official stable release for the first time in v1.20.0 (April 2023), and later received an ellipse() bug fix in v1.24.1. After completing this chapter, students will be able to explain why some older MicroPython code and tutorials cannot use ellipse() or poly(), and how open-source contributions reach a stable release.</p>
+<h2 id="concepts-covered">Concepts Covered</h2>
+<p>This chapter covers the following 12 concepts from the learning graph:</p>
+<ol>
+<li>FrameBuf Version Timeline</li>
+<li>Blit Cross-Format Support V1.17</li>
+<li>Framebuf Method Set Before V1.20</li>
+<li>Ellipse Poly Dev Branch Merge</li>
+<li>Nightly Build Firmware</li>
+<li>MicroPython V1.20.0 Release</li>
+<li>Ellipse Bug Fix V1.24.1</li>
+<li>Pre-2023 Curve Workaround</li>
+<li>MicroPython Release Versioning</li>
+<li>MicroPython Firmware Update</li>
+<li>Open Source Contribution Model</li>
+<li>MicroPython GitHub Repository</li>
+</ol>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This chapter builds on concepts from:</p>
+<ul>
+<li><a href="../04-micropython-fundamentals-2/">Chapter 4: MicroPython Fundamentals II: Functions &amp; the FrameBuf Module</a></li>
+<li><a href="../06-basic-drawing-primitives/">Chapter 6: Basic Drawing Primitives</a></li>
+<li><a href="../07-ellipse-polygon-drawing/">Chapter 7: Ellipse &amp; Polygon Drawing</a></li>
+</ul>
+<hr />
+<h2 id="where-did-ellipse-and-poly-actually-come-from">Where Did ellipse() and poly() Actually Come From?</h2>
+<div class="admonition mascot-welcome">
+<p class="admonition-title">One Question Before We Move On</p>
+<p><img alt="Pixel waves hello" class="mascot-admonition-img" src="../../img/mascot/welcome.png" />
+In Chapter 7, you called <code>ellipse()</code> and <code>poly()</code> like they had always been there. They hadn't. This chapter is a quick, true story about how those two functions got added to MicroPython — and why knowing that story makes you a sharper programmer, not just a more curious one.</p>
+</div>
+<p>Every function you have used so far in this book — <code>pixel()</code>, <code>line()</code>, <code>rect()</code>, <code>blit()</code>, <code>ellipse()</code>, <code>poly()</code> — lives inside a piece of software called <strong>MicroPython</strong>, a compact version of the Python programming language built to run on small microcontrollers like the one you wired up in Chapter 1. MicroPython did not arrive complete. It grew, one contributed change at a time, over more than a decade, and the drawing tools you now take for granted are a perfect case study in how that growth actually happens.</p>
+<p>This chapter follows one small, specific feature — the ability to draw ellipses and polygons — from "does not exist" to "ships in every download" to "gets quietly improved two years later." Understanding that path will change how you read documentation, choose which MicroPython version to install, and troubleshoot old tutorials that mysteriously will not run.</p>
+<h2 id="micropython-lives-on-github-in-the-open">MicroPython Lives on GitHub, in the Open</h2>
+<p>MicroPython is <strong>open source</strong> software: its complete source code is published publicly, anyone can read it, and anyone can propose a change to it. That code lives in the <strong>MicroPython GitHub repository</strong>, a public project page hosted on GitHub where every file, every past change, and every discussion about a new feature is stored and visible to anyone with an internet connection — no special account or company access required.</p>
+<p>That openness is not just a legal detail. It means the exact conversation that led to <code>ellipse()</code> and <code>poly()</code> being added to <code>framebuf</code> is still sitting online today, with real dates, real usernames, and real back-and-forth about how the code should behave. Nothing in this chapter is secondhand — it is the visible, permanent record of how one feature you already use came to exist.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">Public by Design</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Compare this to a product like a game console's operating system, where the source code stays locked inside one company. With MicroPython, the entire history of every function is public. That transparency is exactly why this chapter can tell such a precise, dated story.</p>
+</div>
+<h2 id="how-an-idea-becomes-code-the-open-source-contribution-model">How an Idea Becomes Code: The Open Source Contribution Model</h2>
+<p>Anyone can imagine a new feature, but typing code into a copy of the MicroPython repository does not ship it to your Pico automatically. Open source projects like MicroPython follow the <strong>open source contribution model</strong>: a contributor writes and proposes a code change, called a <strong>pull request</strong>, and one or more <strong>maintainers</strong> — experienced project members trusted to protect the project's quality — review that change before deciding whether to merge it in.</p>
+<p>A pull request is a formal request that says, in effect, "here is a specific, complete set of code changes; please review them and add them to the project if you agree they belong." Maintainers read the proposed code line by line, test it, ask the contributor to fix problems, and only merge it once they are satisfied. This review step is exactly what happened with <code>ellipse()</code> and <code>poly()</code>: a contributor wrote code to draw ellipses and polygons inside the <code>framebuf</code> module, opened a pull request, and MicroPython's maintainers reviewed and refined it before it became part of the project.</p>
+<p>That process protects every MicroPython user, including you. A function that ships to millions of microcontrollers needs to work correctly, use memory efficiently, and fit the style of the rest of the module — a maintainer's review step is what makes that outcome likely instead of accidental.</p>
+<p>Open source contribution follows a predictable path from idea to your device:</p>
+<ol>
+<li>A contributor identifies a gap — in this case, no way to draw circles or many-sided shapes in <code>framebuf</code>.</li>
+<li>The contributor writes code and opens a pull request against the MicroPython GitHub repository.</li>
+<li>Maintainers review the pull request, suggest changes, and the contributor revises it.</li>
+<li>Once approved, the maintainers merge the pull request into the project's development branch.</li>
+<li>The change eventually ships inside an official, numbered MicroPython release.</li>
+</ol>
+<h2 id="what-framebuf-could-draw-before-v120">What framebuf Could Draw Before v1.20</h2>
+<p>Before this story's ending — the version most of this book assumes — it helps to know exactly what you would have been missing. Through MicroPython version 1.19.1, the <strong>framebuf method set before v1.20</strong> included only nine drawing methods, and neither <code>ellipse()</code> nor <code>poly()</code> was one of them.</p>
+<p>Here is the complete list a MicroPython programmer had to work with before v1.20:</p>
+<ul>
+<li><code>fill()</code> — fill the entire frame buffer with one color</li>
+<li><code>pixel()</code> — set or read a single pixel</li>
+<li><code>hline()</code> — draw a horizontal line</li>
+<li><code>vline()</code> — draw a vertical line</li>
+<li><code>line()</code> — draw a line between any two points</li>
+<li><code>rect()</code> — draw a rectangle, outlined or filled</li>
+<li><code>scroll()</code> — shift existing pixel content in any direction</li>
+<li><code>blit()</code> — copy one frame buffer's contents onto another</li>
+<li><code>text()</code> — draw simple built-in bitmap text</li>
+</ul>
+<p>That is a genuinely useful toolkit — it is everything Chapter 6 covered — but notice what is missing. No circles, no ellipses, no triangles, no five-sided badges. Anything curved or many-sided had to be built by hand out of straight lines and rectangles.</p>
+<h2 id="faking-curves-with-straight-lines">Faking Curves With Straight Lines</h2>
+<p>Chapter 7 introduced the idea of approximating a curve with many short line segments. That is not a teaching simplification invented for this book — it is exactly what real MicroPython projects had to do before <code>ellipse()</code> existed. The <strong>pre-2023 curve workaround</strong> was a common pattern: loop through a full circle in small angle steps, calculate an (x, y) point on the circle's edge at each step using trigonometry, and connect consecutive points with <code>line()</code>.</p>
+<p>Here is roughly what that workaround looked like in code a programmer might have written in 2021 or 2022, before <code>ellipse()</code> shipped in any stable release:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">draw_circle_workaround</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">24</span><span class="p">):</span>
+    <span class="n">prev_x</span> <span class="o">=</span> <span class="n">cx</span> <span class="o">+</span> <span class="n">radius</span>
+    <span class="n">prev_y</span> <span class="o">=</span> <span class="n">cy</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="n">steps</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cx</span> <span class="o">+</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cy</span> <span class="o">+</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span>
+        <span class="n">fb</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">prev_x</span><span class="p">,</span> <span class="n">prev_y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+        <span class="n">prev_x</span><span class="p">,</span> <span class="n">prev_y</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+</code></pre></div></td></tr></table></div>
+<p>That function works, and it is a reasonable piece of code — but look at what it costs: a <code>math</code> import, an angle calculation, a loop, and careful bookkeeping of the previous point, just to draw one circle. Now compare it to the one line of code that same circle takes once <code>ellipse()</code> exists:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition mascot-tip">
+<p class="admonition-title">Always Check Your Version First</p>
+<p><img alt="Pixel gives a tip" class="mascot-admonition-img" src="../../img/mascot/tip.png" />
+If you ever see MicroPython code online that draws circles with a loop full of trigonometry, it is not wrong — it is probably just older than v1.20.0, or written for a device stuck on an older firmware. Always check <code>sys.implementation.version</code> before assuming a function like <code>ellipse()</code> is available.</p>
+</div>
+<p>One line, no import, no loop, no angle math — and it fills the shape too. That difference between eleven lines of trigonometry and one short function call is the entire reason this chapter's story matters: it is the visible payoff of an open source contribution landing in a stable release.</p>
+<p>Now that you can see exactly what changed, it helps to compare both approaches side by side and toggle between them.</p>
+<h4 id="diagram-old-workaround-vs-new-ellipse-call">Diagram: Old Workaround vs. New ellipse() Call</h4>
+<iframe src="../../sims/ellipse-workaround-before-after-toggle/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Old Workaround vs. New ellipse() Call</summary>
+<p>Type: infographic
+<strong>sim-id:</strong> ellipse-workaround-before-after-toggle<br/>
+<strong>Library:</strong> HTML/CSS/JS<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Analyze (L4)
+Bloom Taxonomy Verb: contrast, differentiate</p>
+<p>Learning objective: Contrast the pre-2023 line-loop workaround for drawing a circle with the one-line ellipse() call available since v1.20.0, and differentiate what each approach requires in terms of code, memory, and mental effort.</p>
+<p>Purpose and main message: Make the practical cost of a missing feature versus a shipped feature visible and concrete, reinforcing why open source contributions like ellipse() and poly() matter to an everyday programmer.</p>
+<p>Layout: A two-panel view with a toggle switch at the top labeled "Old Workaround" / "New ellipse() Call". The left panel always shows a rendered circle on a simulated small display; the right panel always shows the exact code that produced it. Only one toggle state is visible at a time.</p>
+<p>Data to display:
+- Old Workaround state: the full line-loop code (import math, for-loop, angle calculation, line() calls) with a line counter reading "11 lines of code" and a small badge reading "Needs: math import, loop, trigonometry"
+- New ellipse() Call state: the single ellipse() line with a line counter reading "1 line of code" and a badge reading "Needs: nothing extra — built into framebuf since v1.20.0"
+- Both states render a visually identical filled circle on the simulated display, to emphasize that the output did not change, only the effort required to produce it</p>
+<p>Interactive elements:
+- Toggle switch at the top instantly swaps both panels between the two states
+- Hovering the code panel highlights the specific line responsible for drawing the circle's edge
+- A small "Lines of Code" counter animates between 11 and 1 as the learner toggles, reinforcing the size difference
+- Clicking a "Why does this matter?" button reveals a short caption: "Both circles look identical. One took an import, a loop, and trigonometry. The other took one line — because a contributor's pull request became part of MicroPython."</p>
+<p>Color coding: old workaround panel uses a muted amber accent to suggest legacy code; new ellipse() panel uses the book's teal accent to suggest the current, recommended approach</p>
+<p>Responsive design: panels stack vertically below 700 pixels wide, with the toggle switch remaining fixed at the top; code text wraps rather than scrolling horizontally</p>
+<p>Instructional Rationale: The Analyze-level objective asks learners to differentiate two approaches to the same problem, so a direct toggle between matched panels showing the same visual output but different code cost lets a learner isolate exactly what changed, without being distracted by unrelated visual differences.</p>
+<p>Implementation: HTML/CSS for the two-panel layout and toggle switch; vanilla JavaScript swaps panel content and animates the line-count badge; the rendered circle can be a static SVG since only the code panel needs to change between states.</p>
+</details>
+<h2 id="blit-learns-to-cross-formats-v117-2021">blit() Learns to Cross Formats (v1.17, 2021)</h2>
+<p>Not every framebuf improvement added a brand-new method — some improvements made an existing method more capable. Chapter 6 introduced <code>blit()</code> for copying one frame buffer's contents onto another, and mentioned that <code>blit()</code> can map between different color palettes. That capability is not as old as <code>blit()</code> itself.</p>
+<p><strong>Blit cross-format support v1.17</strong> refers to an improvement released in MicroPython version 1.17 in 2021: before that release, <code>blit()</code> could only copy between frame buffers that used the exact same color format. Starting in v1.17, <code>blit()</code> gained the ability to copy between frame buffers using different color formats — for example, blitting a monochrome sprite onto a full-color RGB565 display, with MicroPython handling the color conversion using a palette you provide.</p>
+<p>That change matters for the same reason <code>ellipse()</code> and <code>poly()</code> matter: it is another example of a real, dated contribution that expanded what <code>framebuf</code> could do, years before this book's assumed version. It also proves this story is not a single event — <code>framebuf</code> has been improving steadily, one pull request at a time, for years.</p>
+<h2 id="the-merge-that-changed-everything-august-2022">The Merge That Changed Everything (August 2022)</h2>
+<p>Every open source project keeps its most current, work-in-progress code in a <strong>development branch</strong> — a version of the codebase where approved changes land first, before they are bundled into an official, tested release that ordinary users download. The <strong>ellipse poly dev branch merge</strong> is the moment this chapter has been building toward: in August 2022, the pull request adding <code>ellipse()</code> and <code>poly()</code> to <code>framebuf</code> was reviewed, approved, and merged into MicroPython's development branch.</p>
+<p>That is a critical distinction to hold onto: merged into the development branch is not the same as shipped in a release. In August 2022, the code for <code>ellipse()</code> and <code>poly()</code> existed and worked, but no official, downloadable MicroPython release included it yet. Anyone who wanted those two functions had exactly one option, and it was not one this book recommends for most students.</p>
+<h2 id="nightly-build-firmware-getting-a-feature-early-and-why-you-probably-shouldnt">Nightly Build Firmware: Getting a Feature Early (and Why You Probably Shouldn't)</h2>
+<p>Between a development-branch merge and the next official release, some projects — including MicroPython — automatically build fresh firmware from the latest development code every day or so. This is called <strong>nightly build firmware</strong>: an unofficial, automatically generated build that includes the very latest merged changes, but has not gone through the full testing and stabilization process of an official release.</p>
+<p>During the gap between the August 2022 merge and MicroPython's next stable release, an adventurous programmer could flash a nightly build to a Pico and start using <code>ellipse()</code> and <code>poly()</code> months before anyone else. That sounds appealing, but nightly builds trade stability for speed:</p>
+<ul>
+<li>They can contain bugs that have not been found or fixed yet, because they skip most of a release's testing period.</li>
+<li>They change daily, so a tutorial or your own notes written against one nightly build might not match a nightly build from even a week later.</li>
+<li>They are not the version this book, or most published tutorials, test against — troubleshooting help becomes much harder to find.</li>
+</ul>
+<p>For that reason, this book — and most MicroPython documentation — recommends sticking with official, numbered releases unless you have a specific, advanced reason to do otherwise. The wait between a dev-branch merge and a stable release exists on purpose, to let real-world testing catch problems before millions of devices run the code.</p>
+<h2 id="understanding-version-numbers-major-minor-patch">Understanding Version Numbers: Major, Minor, Patch</h2>
+<p>To talk precisely about "which release," MicroPython uses <strong>MicroPython release versioning</strong>: a three-part major.minor.patch numbering scheme, where each part signals a different kind of change. Version 1.20.0 breaks down as major version 1, minor version 20, and patch version 0.</p>
+<p>Here is what each part of that number tells you:</p>
+<table>
+<thead>
+<tr>
+<th>Version part</th>
+<th>Example</th>
+<th>What a change here usually means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Major</td>
+<td>the first <code>1</code> in v1.20.0</td>
+<td>A large, foundational change to the whole project; rare</td>
+</tr>
+<tr>
+<td>Minor</td>
+<td>the <code>20</code> in v1.20.0</td>
+<td>New features added, like <code>ellipse()</code> and <code>poly()</code> joining <code>framebuf</code></td>
+</tr>
+<tr>
+<td>Patch</td>
+<td>the final <code>0</code> in v1.20.0, or the <code>1</code> in v1.24.1</td>
+<td>Bug fixes only, no new features</td>
+</tr>
+</tbody>
+</table>
+<p>That pattern tells you what to expect before you even read the release notes: a minor version bump, from v1.19 to v1.20, is where you should look for new drawing methods, while a patch bump, from v1.24.0 to v1.24.1, is where you should look for a fix to something that already existed.</p>
+<h2 id="v1200-the-release-this-book-assumes-april-2023">v1.20.0: The Release This Book Assumes (April 2023)</h2>
+<p>The wait ended in April 2023, when MicroPython shipped version 1.20.0 — the <strong>MicroPython v1.20.0 release</strong> milestone, and the first official, stable release to include <code>ellipse()</code> and <code>poly()</code> inside <code>framebuf</code>. Roughly eight months passed between the August 2022 development-branch merge and this stable release: time spent testing, refining, and making sure the feature was solid enough for every MicroPython user, not just the adventurous ones running nightly builds.</p>
+<p>This is the exact version this book assumes you are running. Every <code>ellipse()</code> and <code>poly()</code> call in Chapter 7, and every quadrant-fill and point-array technique built on top of them, depends on v1.20.0 or newer being installed on your board.</p>
+<div class="admonition mascot-encourage">
+<p class="admonition-title">You Timed This Perfectly</p>
+<p><img alt="Pixel cheers you on" class="mascot-admonition-img" src="../../img/mascot/encouraging.png" />
+You never had to wait eight months, flash a risky nightly build, or write a single line of trigonometry to get <code>ellipse()</code> working. Someone else already did that waiting for you. That is one of the quiet gifts of open source software: stand on a stable release, and years of other people's careful work are simply included.</p>
+</div>
+<h2 id="even-shipped-features-keep-improving-the-v1241-bug-fix">Even Shipped Features Keep Improving: The v1.24.1 Bug Fix</h2>
+<p>Shipping in a stable release is not the end of a feature's story. The <strong>ellipse bug fix v1.24.1</strong> milestone shows that even a feature that has been stable and widely used for a year can still be refined: in 2024, MicroPython's patch release v1.24.1 fixed a specific bug in how <code>ellipse()</code> handled certain edge cases in its drawing logic.</p>
+<p>Notice the version number pattern from the table above doing exactly what it promised: v1.24.1 is a patch release, not a minor release, so this was a bug fix to existing behavior rather than a new feature. <code>ellipse()</code> itself did not change what it could draw — it just got more correct at drawing it. That is a healthy, ordinary part of any actively maintained open source project, and it is one more reason to keep your own MicroPython firmware reasonably current rather than freezing it the day it first works.</p>
+<h2 id="updating-your-own-picos-firmware">Updating Your Own Pico's Firmware</h2>
+<p>Knowing that MicroPython keeps shipping fixes and features is only useful if you know how to receive them. A <strong>MicroPython firmware update</strong> is the practical process of replacing the MicroPython software installed on your board with a newer official release.</p>
+<p>On a Raspberry Pi Pico, that process is refreshingly simple:</p>
+<ol>
+<li>Download the latest official <code>.uf2</code> firmware file for your board from the MicroPython downloads page.</li>
+<li>Hold the Pico's BOOTSEL button while plugging it into your computer over USB; it will appear as a small removable drive.</li>
+<li>Drag and drop the downloaded <code>.uf2</code> file onto that drive.</li>
+<li>The Pico automatically reboots a few seconds later, running the new MicroPython version.</li>
+</ol>
+<p>That drag-and-drop simplicity is a direct benefit of the version numbering and release process described earlier in this chapter — you are not choosing between risky nightly builds and being stuck on old code forever. You are simply picking the current official release, confident it has already been tested by the wider MicroPython community.</p>
+<h2 id="the-whole-story-on-one-timeline">The Whole Story, on One Timeline</h2>
+<p>Every milestone in this chapter fits into a single, continuous <strong>FrameBuf version timeline</strong>: a feature that did not exist, then existed unofficially, then shipped officially, then got quietly better. The table below lines up each milestone with its approximate date before you explore the full interactive timeline.</p>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Approximate Date</th>
+<th>What Changed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pre-v1.17 framebuf</td>
+<td>before 2021</td>
+<td>Only fill, pixel, hline, vline, line, rect, scroll, blit, and text — same-format blitting only</td>
+</tr>
+<tr>
+<td>Blit cross-format support</td>
+<td>2021 (v1.17)</td>
+<td>blit() gains the ability to blit between different color formats and palettes</td>
+</tr>
+<tr>
+<td>Ellipse/poly dev branch merge</td>
+<td>August 2022</td>
+<td>ellipse() and poly() code merged into the development branch; not yet in any stable release</td>
+</tr>
+<tr>
+<td>Nightly build availability</td>
+<td>Aug 2022 - Apr 2023</td>
+<td>Adventurous users could flash unstable nightly firmware to get early access</td>
+</tr>
+<tr>
+<td>MicroPython v1.20.0</td>
+<td>April 2023</td>
+<td>First stable release including ellipse() and poly() — the version this book assumes</td>
+</tr>
+<tr>
+<td>Ellipse bug fix</td>
+<td>2024 (v1.24.1)</td>
+<td>Patch release fixes a specific ellipse() edge-case bug</td>
+</tr>
+</tbody>
+</table>
+<p>Now explore the same story as an interactive timeline. Click any milestone to see exactly what changed and why it mattered to programmers writing MicroPython code at the time.</p>
+<h4 id="diagram-framebuf-version-timeline">Diagram: FrameBuf Version Timeline</h4>
+<iframe src="../../sims/framebuf-version-timeline-explorer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>FrameBuf Version Timeline</summary>
+<p>Type: timeline
+<strong>sim-id:</strong> framebuf-version-timeline-explorer<br/>
+<strong>Library:</strong> vis-timeline<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Understand (L2)
+Bloom Taxonomy Verb: summarize, interpret</p>
+<p>Learning objective: Interpret the sequence of framebuf drawing-support milestones from before v1.17 through v1.24.1, and summarize why the gap between the development-branch merge and the stable release matters to a programmer choosing which MicroPython version to install.</p>
+<p>Time period: 2017-2024, with an emphasis band on 2021-2024</p>
+<p>Orientation: Horizontal, left to right</p>
+<p>Events:
+- Before 2021: framebuf ships with only fill, pixel, hline, vline, line, rect, scroll, blit, and text — no ellipse() or poly(), and blit() only works between matching color formats
+- 2021 (v1.17): blit() gains cross-format support, able to blit between frame buffers using different color formats and palettes
+- August 2022: the pull request adding ellipse() and poly() is merged into MicroPython's development branch, not yet part of any stable release
+- Aug 2022-Apr 2023: adventurous users can flash unofficial nightly build firmware to use ellipse() and poly() early, at the cost of stability and support
+- April 2023 (v1.20.0): first official stable release to include ellipse() and poly() in framebuf — the version this book assumes
+- 2024 (v1.24.1): a patch release fixes a specific ellipse() edge-case bug, refining the feature after a year of real-world use</p>
+<p>Visual style: horizontal timeline with color-coded event dots grouped by milestone type (method availability, dev-branch activity, stable releases)</p>
+<p>Detail level per event: each event shows a one-sentence description on hover, and a two-to-three-sentence expanded description with a "why it matters" note on click</p>
+<p>Color coding: gray for the pre-v1.17 baseline, teal for stable releases (v1.17, v1.20.0, v1.24.1), amber for development-branch and nightly-build activity that had not yet reached a stable release</p>
+<p>Interactive features:
+- Hover over any event dot to preview its one-sentence description in a tooltip
+- Click an event dot to open a detail panel below the timeline with the full description and a "why it matters" note
+- A toggle labeled "Show only stable releases" hides the dev-branch-merge and nightly-build events, letting a learner compare the official release story against the full story
+- Learner can zoom and pan the timeline horizontally with a scroll or drag gesture</p>
+<p>Instructional Rationale: The Understand-level objective calls for interpreting the sequence and summarizing why timing matters, so the "Show only stable releases" toggle directly supports comparing the simplified release history against the full history including the dev-branch merge and nightly builds, making the eight-month gap concrete rather than abstract.</p>
+<p>Responsive design: timeline compresses to a scrollable horizontal strip on narrow screens, with the detail panel stacking below rather than beside the timeline.</p>
+<p>Implementation: vis-timeline JavaScript library for the timeline rendering; a JSON array of event objects (date, milestone type, title, short description, long description) drives both the timeline and the detail panel.</p>
+</details>
+<h2 id="chapter-summary">Chapter Summary</h2>
+<p>A single feature's journey — from missing, to merged, to shipped, to refined — is a compact lesson in how all open source software grows.</p>
+<ul>
+<li>MicroPython is open source software developed publicly in the MicroPython GitHub repository, where every past change is visible to anyone.</li>
+<li>New features like ellipse() and poly() arrive through the open source contribution model: a contributor proposes a pull request, and maintainers review it before merging.</li>
+<li>Before v1.20, framebuf offered only nine methods — fill, pixel, hline, vline, line, rect, scroll, blit, and text — with no way to draw ellipses or polygons.</li>
+<li>Programmers who needed curves before ellipse() existed approximated them with many short line() calls in a loop, exactly the technique introduced in Chapter 7.</li>
+<li>blit() gained the ability to blit between different color formats in v1.17 (2021), a separate but related framebuf improvement.</li>
+<li>The ellipse()/poly() pull request merged into MicroPython's development branch in August 2022, months before any stable release included it.</li>
+<li>MicroPython v1.20.0, released in April 2023, was the first stable release to include ellipse() and poly() — the version this book assumes throughout.</li>
+<li>A 2024 patch release, v1.24.1, fixed a specific ellipse() bug, proving that shipped features keep getting refined even after they ship.</li>
+<li>Updating a Pico's firmware is a simple drag-and-drop process using an official .uf2 file — no need to gamble on unstable nightly builds.</li>
+</ul>
+<div class="admonition mascot-celebration">
+<p class="admonition-title">Now You Know the Whole Story</p>
+<p><img alt="Pixel celebrates" class="mascot-admonition-img" src="../../img/mascot/celebration.png" />
+Every <code>ellipse()</code> and <code>poly()</code> call you write from here on carries this history with it: a pull request, a review, a merge, a wait, and a stable release. Every pixel really does tell a story — sometimes that story is a whole software timeline. Onward to the next chapter!</p>
+</div>
+<details class="question">
+<summary>Self-Check: Why couldn't a MicroPython tutorial from early 2022 use ellipse()? — Click to reveal</summary>
+<p>In early 2022, ellipse() and poly() did not exist in any MicroPython release yet — the pull request adding them was not merged into the development branch until August 2022, and it did not reach a stable, official release until v1.20.0 in April 2023. Before that, framebuf only had fill(), pixel(), hline(), vline(), line(), rect(), scroll(), blit(), and text(), so a 2022 tutorial drawing a circle would have had to approximate it with many short line() calls in a loop, the same pre-2023 curve workaround described in this chapter.</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

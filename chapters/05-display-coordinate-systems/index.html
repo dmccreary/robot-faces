@@ -1,0 +1,2359 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="How a screen's pixels map to (x, y) coordinates and an in-memory frame buffer, covering resolution, bit depth, buffer size math, and the circular display's square-buffer quirk.">
+      
+      
+        <meta name="author" content="Dan McCreary">
+      
+      
+      
+        <link rel="prev" href="../04-micropython-fundamentals-2/">
+      
+      
+        <link rel="next" href="../06-basic-drawing-primitives/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Display & Coordinate Systems - Robot Faces</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/mascot.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-FPTNK1XNJR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-FPTNK1XNJR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-FPTNK1XNJR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#642580" data-md-color-accent="#41BAC1">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#display-coordinate-systems" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robot Faces" class="md-header__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Faces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Display & Coordinate Systems
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robot Faces" class="md-nav__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    Robot Faces
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Chapters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of Chapters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-hardware-electronics-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Hardware & Electronics Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-micropython-fundamentals-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-micropython-fundamentals-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-frame-buffer-to-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Frame Buffer to Coordinates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-pixel" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Is a Pixel?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-a-screen-like-a-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading a Screen Like a Grid
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-origin-sits-in-the-upper-left-corner" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Origin Sits in the Upper-Left Corner
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-quadrant-not-four" class="md-nav__link">
+    <span class="md-ellipsis">
+      One Quadrant, Not Four
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#framing-a-shape-the-bounding-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framing a Shape: The Bounding Box
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Framing a Shape: The Bounding Box">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-coordinate-grid-explorer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Coordinate Grid Explorer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-frame-buffer-where-pixels-live-before-theyre-seen" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Frame Buffer: Where Pixels Live Before They're Seen
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-many-colors-can-a-pixel-hold-bit-depth" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Many Colors Can a Pixel Hold? Bit Depth
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calculating-a-frame-buffers-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calculating a Frame Buffer's Size
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Calculating a Frame Buffer&#39;s Size">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-frame-buffer-size-calculator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Frame Buffer Size Calculator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#packing-pixels-into-bytes-byte-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Packing Pixels into Bytes: Byte Alignment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolution-and-shape-comparing-the-two-displays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resolution and Shape: Comparing the Two Displays
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-circle-inside-a-square-circular-display-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Circle Inside a Square: Circular Display Geometry
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A Circle Inside a Square: Circular Display Geometry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-circular-buffer-waste-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Circular Buffer Waste Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-much-memory-does-a-display-really-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Much Memory Does a Display Really Use?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#turning-on-a-display-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Turning On a Display: Initialization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nothing-happens-until-you-call-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nothing Happens Until You Call .show()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#static-images-not-video-the-screen-refresh-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Static Images, Not Video: The Screen Refresh Cycle
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-basic-drawing-primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-ellipse-polygon-drawing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Ellipse & Polygon Drawing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-framebuf-version-history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-facial-anatomy-layout-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-emotion-theory-core-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Emotion Theory & the Core Expression Set
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-expression-design-readability-hri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-animating-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Animating Expressions: Timing & Motion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-interactive-controls-inputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-expression-menu-live-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-porting-faces-color-display/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Porting Faces to a Color Display
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-computational-thinking-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lessons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Lessons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    History of Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/screen-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/drawing-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Drawing Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/ellipse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ellipse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/polygon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polygon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/basic-face-layouts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Face Layouts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eye-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eyebrows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eyebrows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion-types.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emotion Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../parts-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Faces Parts List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About The Robot Faces Book
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Learning Graph
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Learning Graph
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/starting-concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Starting Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/course-description-assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quality-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/taxonomy-distribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy Distribution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/mascot-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mascot Test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Stories
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Stories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-frame-buffer-to-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Frame Buffer to Coordinates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-pixel" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Is a Pixel?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-a-screen-like-a-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading a Screen Like a Grid
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-origin-sits-in-the-upper-left-corner" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Origin Sits in the Upper-Left Corner
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-quadrant-not-four" class="md-nav__link">
+    <span class="md-ellipsis">
+      One Quadrant, Not Four
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#framing-a-shape-the-bounding-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framing a Shape: The Bounding Box
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Framing a Shape: The Bounding Box">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-coordinate-grid-explorer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Coordinate Grid Explorer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-frame-buffer-where-pixels-live-before-theyre-seen" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Frame Buffer: Where Pixels Live Before They're Seen
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-many-colors-can-a-pixel-hold-bit-depth" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Many Colors Can a Pixel Hold? Bit Depth
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calculating-a-frame-buffers-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calculating a Frame Buffer's Size
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Calculating a Frame Buffer&#39;s Size">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-frame-buffer-size-calculator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Frame Buffer Size Calculator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#packing-pixels-into-bytes-byte-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Packing Pixels into Bytes: Byte Alignment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolution-and-shape-comparing-the-two-displays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resolution and Shape: Comparing the Two Displays
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-circle-inside-a-square-circular-display-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Circle Inside a Square: Circular Display Geometry
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A Circle Inside a Square: Circular Display Geometry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-circular-buffer-waste-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Circular Buffer Waste Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-much-memory-does-a-display-really-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Much Memory Does a Display Really Use?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#turning-on-a-display-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Turning On a Display: Initialization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nothing-happens-until-you-call-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nothing Happens Until You Call .show()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#static-images-not-video-the-screen-refresh-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Static Images, Not Video: The Screen Refresh Cycle
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="display-coordinate-systems">Display &amp; Coordinate Systems</h1>
+<h2 id="summary">Summary</h2>
+<p>This chapter explains how a screen is represented in software: pixels, the frame buffer that holds them, the screen coordinate system with its origin in the upper-left corner, and how resolution, bit depth, and circular versus rectangular geometry differ between the monochrome OLED and the color round display. After completing this chapter, students will be able to convert between a desired on-screen position and the (x, y) coordinates a drawing command expects, on either display.</p>
+<h2 id="concepts-covered">Concepts Covered</h2>
+<p>This chapter covers the following 19 concepts from the learning graph:</p>
+<ol>
+<li>Screen Coordinate System</li>
+<li>Origin At Upper-Left</li>
+<li>X Axis Direction</li>
+<li>Y Axis Direction</li>
+<li>Pixel</li>
+<li>Frame Buffer</li>
+<li>Display Resolution</li>
+<li>Monochrome Color Model</li>
+<li>Display Buffer Memory</li>
+<li>Screen Refresh Cycle</li>
+<li>Aspect Ratio</li>
+<li>Circular Display Geometry</li>
+<li>Coordinate Plane Quadrant</li>
+<li>Bounding Box</li>
+<li>Display Initialization</li>
+<li>Show Method</li>
+<li>Frame Buffer Size Calculation</li>
+<li>Bit Depth</li>
+<li>Byte Alignment In Buffer</li>
+</ol>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This chapter builds on concepts from:</p>
+<ul>
+<li><a href="../01-hardware-electronics-foundations/">Chapter 1: Hardware &amp; Electronics Foundations</a></li>
+<li><a href="../03-micropython-fundamentals-1/">Chapter 3: MicroPython Fundamentals I: Syntax, Data &amp; Loops</a></li>
+<li><a href="../04-micropython-fundamentals-2/">Chapter 4: MicroPython Fundamentals II: Functions &amp; the FrameBuf Module</a></li>
+</ul>
+<hr />
+<h2 id="from-frame-buffer-to-coordinates">From Frame Buffer to Coordinates</h2>
+<div class="admonition mascot-welcome">
+<p class="admonition-title">Ready to Draw Your First Pixel?</p>
+<p><img alt="Pixel waves hello" class="mascot-admonition-img" src="../../img/mascot/welcome.png" />
+Chapter 4 ended with a first look at the FrameBuf module and a promise that Chapter 5 would hand you the coordinate system a frame buffer actually uses. That promise starts paying off right now — by the end of this chapter, you'll be able to point at any spot on either display and know exactly which numbers to hand MicroPython to draw there.</p>
+</div>
+<p>Every shape you will ever draw on a robot's face — an eye, an eyebrow, a curved smiling mouth — starts as a set of numbers describing where pixels belong. Chapter 1 introduced the two target displays purely as hardware: chips, wires, and part numbers. Chapter 4 introduced the frame buffer conceptually, as memory shaped like a screen. This chapter connects those two ideas by teaching the coordinate system that turns a location on a screen into a location in memory — the exact translation every drawing command from Chapter 6 onward depends on.</p>
+<h2 id="what-is-a-pixel">What Is a Pixel?</h2>
+<p>A <strong>pixel</strong> — short for "picture element" — is a single addressable point of light or color on a display, the smallest unit a screen can control on its own. Every image a display shows, from one glowing dot to a fully drawn face, is built entirely out of pixels, the same way a mosaic is built entirely out of small tiles. The 128x64 OLED from Chapter 1 has exactly 8,192 pixels arranged in a grid; the 240x240 color round display has 57,600. Neither display can show anything smaller than a single pixel — what looks like a smooth curved eyebrow up close is really a staircase of individually lit squares.</p>
+<p>Because a display holds thousands of pixels, a program needs a reliable way to say <em>which one</em> it means every time it draws something. That naming scheme is the screen coordinate system, and it is the single most important idea in this chapter.</p>
+<h2 id="reading-a-screen-like-a-grid">Reading a Screen Like a Grid</h2>
+<p>A <strong>screen coordinate system</strong> is the scheme a display uses to address every pixel individually, treating the whole screen as a grid and giving each pixel a pair of numbers that names its exact position. Those two numbers are written as an <strong>(x, y) pair</strong>, where the first number locates a pixel horizontally and the second locates it vertically. Handing MicroPython the pair <code>(64, 32)</code> tells it, unambiguously, exactly one pixel out of the thousands available — no description in words could be that precise.</p>
+<p>The two numbers in an (x, y) pair are not interchangeable, and each one moves along its own axis:</p>
+<ul>
+<li><strong>X axis direction:</strong> the X value increases as you move to the right across the screen. The leftmost column of pixels has the smallest possible X value, and the rightmost column has the largest.</li>
+<li><strong>Y axis direction:</strong> the Y value increases as you move <em>downward</em> on the screen. The topmost row of pixels has the smallest possible Y value, and the bottommost row has the largest.</li>
+</ul>
+<p>That second rule — Y growing downward — is worth pausing on, because it breaks a habit almost every student already has.</p>
+<h2 id="the-origin-sits-in-the-upper-left-corner">The Origin Sits in the Upper-Left Corner</h2>
+<p>The <strong>origin</strong> is the pixel at coordinate (0, 0), the fixed reference point every other coordinate is measured from. On both displays in this book, and on nearly every computer screen you have ever used, the origin sits in the <strong>upper-left corner</strong> — not the center, and not the bottom-left corner a math class coordinate plane usually uses.</p>
+<div class="admonition mascot-warning">
+<p class="admonition-title">Y Goes Down, Not Up</p>
+<p><img alt="Pixel warns you" class="mascot-admonition-img" src="../../img/mascot/warning.png" />
+This one catches almost everybody the first time: in math class, Y increases as you go <em>up</em> the page. On a screen, Y increases as you go <em>down</em> the page, because (0, 0) lives in the upper-left corner instead of the bottom-left. If an eyebrow you meant to draw near the top of the screen shows up near the bottom instead, check your Y value first — you probably flipped this rule out of habit.</p>
+</div>
+<p>Placing the origin in the upper-left corner is a convention, not a law of physics — it exists because early computer displays drew pixels row by row, starting at the top-left and scanning rightward and downward, the same order English text reads on a page. Every drawing coordinate you write from here forward assumes this convention, so it is worth memorizing before Chapter 6 introduces actual drawing commands.</p>
+<h2 id="one-quadrant-not-four">One Quadrant, Not Four</h2>
+<p>A math-class coordinate plane usually shows four <strong>quadrants</strong>, formed where a horizontal X axis and a vertical Y axis cross at a center point, with positive and negative values extending in every direction. A <strong>coordinate plane quadrant</strong> is one of those four regions, distinguished by whether X and Y are each positive or negative in that region.</p>
+<p>A screen coordinate system throws three of those four quadrants away. Because the origin sits in the corner rather than the center, and because pixel positions can never be negative, every valid coordinate on a display uses only positive X and positive Y values — the single quadrant where both numbers stay positive, just with the Y axis pointing down instead of up. This is a helpful simplification: you never need to worry about negative coordinates when planning where a shape belongs on screen, only about staying within the display's width and height.</p>
+<p>Before looking at a diagram that puts the origin, the axes, and this positive-only region on screen together, it helps to define one more idea you'll use constantly when planning where a shape goes: the bounding box.</p>
+<h2 id="framing-a-shape-the-bounding-box">Framing a Shape: The Bounding Box</h2>
+<p>A <strong>bounding box</strong> is the smallest rectangle that completely encloses a shape, described by the coordinates of its corners or by a starting corner plus a width and height. Before drawing a single pixel of an eye, a robot-face designer sketches its bounding box first — deciding, for example, that a left eye will occupy the rectangle from (20, 15) to (40, 35), a 20-by-20-pixel square, before worrying about the exact curve of the eyelid inside it.</p>
+<p>Bounding boxes matter for a very practical reason: they let you plan a whole face's layout using simple rectangles, checking that an eye, an eyebrow, and a mouth don't overlap, before writing any drawing code at all. Later chapters use this exact habit to lay out every feature on a face.</p>
+<p>Now that the origin, both axes, and the bounding box idea are all defined, the interactive grid below lets you test your understanding directly by clicking anywhere on a simulated display and reading back its coordinates.</p>
+<h4 id="diagram-coordinate-grid-explorer">Diagram: Coordinate Grid Explorer</h4>
+<iframe src="../../sims/coordinate-grid-explorer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Coordinate Grid Explorer</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> coordinate-grid-explorer<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Apply (L3)
+Bloom Taxonomy Verb: demonstrate, identify</p>
+<p>Learning objective: Demonstrate the mapping between a screen position and its (x, y) coordinate pair by clicking anywhere on a simulated pixel grid, and identify the origin, X axis direction, and Y axis direction when they are toggled into view.</p>
+<p>Canvas layout:
+- Left 70% (responsive, roughly 450x300 at default width): a scaled-up pixel grid representing the display, each simulated pixel drawn as a small square
+- Right 30%: a control panel with toggles and a live coordinate readout</p>
+<p>Visual elements:
+- A grid of squares representing display pixels, with a faint darker gridline every 8 pixels to hint at byte boundaries
+- An origin marker (a small teal circle) at the upper-left corner, shown only when "Show origin &amp; axes" is checked
+- Arrows along the top edge (labeled "X increases →") and the left edge (labeled "Y increases ↓") when axes are shown
+- A crosshair marker placed at the most recently clicked pixel, in coral
+- A shaded overlay covering the entire grid in a translucent teal when "Show valid quadrant" is checked, with the caption "Only positive X, positive Y — the rest of the plane is never used"</p>
+<p>Interactive controls:
+- Dropdown: "Display: 128x64 OLED / 240x240 Color Round" — changes the grid's proportions and pixel count
+- Checkbox: "Show origin &amp; axes" (default on)
+- Checkbox: "Show valid quadrant shading" (default off)
+- Click anywhere on the grid to drop a crosshair marker and update the coordinate readout
+- "Reset" button clears the marker and restores default toggle states</p>
+<p>Default parameters: 128x64 OLED selected, origin and axes shown, quadrant shading off, no marker placed</p>
+<p>Behavior: clicking any grid cell immediately updates a readout reading "You clicked: (x, y)" with the exact integer coordinates of that cell, snapping to the nearest whole pixel. Switching the display dropdown redraws the grid at the new width and height and clears any placed marker. Toggling quadrant shading overlays or removes the teal tint without affecting the marker.</p>
+<p>Instructional Rationale: An Apply-level, direct-manipulation pattern is appropriate because the objective requires the learner to actively test the coordinate mapping by clicking real positions and checking the reported (x, y) pair against their own prediction, rather than passively watching an animation demonstrate it.</p>
+<p>Responsive design: the grid and control panel stack vertically below 600 pixels wide; the grid scales to fill its container's width on window resize while preserving the display's aspect ratio.</p>
+<p>Implementation: p5.js for the grid rendering and click detection; a state object tracks the selected display size, toggle states, and the last-clicked coordinate.</p>
+</details>
+<h2 id="the-frame-buffer-where-pixels-live-before-theyre-seen">The Frame Buffer: Where Pixels Live Before They're Seen</h2>
+<p>Chapter 4 introduced the <strong>frame buffer</strong> as an in-memory rectangle of pixels a program draws into before that image is ever sent to a real screen — now that you know how coordinates work, it's worth returning to that idea with more precision. A frame buffer stores the current on/off or color state of every single pixel on a display, arranged in memory so that the coordinate system you just learned maps directly onto specific bytes.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">A Frame Buffer Is a Grid Twice Over</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Here's the idea to hold onto: a frame buffer is a grid of pixel positions, just like the coordinate system you just explored, laid directly on top of a grid of memory addresses. Every <code>(x, y)</code> you hand a drawing method gets translated, behind the scenes, into "which byte, and which bit inside that byte." You'll never have to do that translation by hand — MicroPython's <code>framebuf</code> module does it for you — but knowing it happens explains everything else in this chapter.</p>
+</div>
+<p>Nothing about a frame buffer is visible to anyone looking at the physical screen while a program is drawing into it. A program can fill it, clear it, and redraw dozens of shapes, and the actual display keeps showing whatever it displayed last, completely unaffected, until that buffer is explicitly sent to the screen — a step covered later in this chapter.</p>
+<h2 id="how-many-colors-can-a-pixel-hold-bit-depth">How Many Colors Can a Pixel Hold? Bit Depth</h2>
+<p>Not every pixel needs the same amount of information to describe its state. <strong>Bit depth</strong> is the number of bits of memory used to store each pixel's value in a frame buffer, and it determines how many distinct colors or shades that pixel can represent. A pixel described with more bits can represent more possible states, the same way a longer combination lock has more possible combinations.</p>
+<p>The two displays from Chapter 1 sit at opposite ends of this scale. The 128x64 OLED uses 1-bit depth: each pixel's entire state fits in a single bit, which can only be <code>0</code> or <code>1</code>. The <strong>monochrome color model</strong> that results from this is strict — a pixel is either fully on (lit) or fully off (dark), with no gray levels, no dimming, and no in-between state possible. The 240x240 color round display uses 16-bit depth, following the <strong>RGB565</strong> color format briefly mentioned in the course description, which packs a red, green, and blue value into those 16 bits and can represent 65,536 distinct colors per pixel.</p>
+<p>The table below reinforces the contrast between these two bit depths now that both have been explained in prose.</p>
+<table>
+<thead>
+<tr>
+<th>Display</th>
+<th>Bit Depth</th>
+<th>Possible States per Pixel</th>
+<th>Color Model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>128x64 OLED</td>
+<td>1 bit</td>
+<td>2 (on or off)</td>
+<td>Monochrome</td>
+</tr>
+<tr>
+<td>240x240 Color Round</td>
+<td>16 bits</td>
+<td>65,536</td>
+<td>RGB565 color</td>
+</tr>
+</tbody>
+</table>
+<h2 id="calculating-a-frame-buffers-size">Calculating a Frame Buffer's Size</h2>
+<p>Bit depth is not just an abstract property — it directly determines how much memory a frame buffer needs, and that number matters a great deal on a microcontroller with a limited memory budget. <strong>Frame buffer size calculation</strong> is the arithmetic that converts a display's width, height, and bit depth into a number of bytes: multiply width by height to get the total pixel count, multiply that by the bit depth to get the total number of bits, then divide by 8 because memory is addressed in whole bytes, not individual bits.</p>
+<p>Written as a formula, that calculation is:</p>
+<p>[ \text{bytes} = \frac{\text{width} \times \text{height} \times \text{bit depth}}{8} ]</p>
+<p>Seeing this formula applied to real numbers makes it concrete. The code below calculates the exact buffer size for both of this book's target displays, using the same formula for each.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 128x64 monochrome OLED: 1 bit per pixel</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">height</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">bits_per_pixel</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">oled_bytes</span> <span class="o">=</span> <span class="n">width</span> <span class="o">*</span> <span class="n">height</span> <span class="o">*</span> <span class="n">bits_per_pixel</span> <span class="o">//</span> <span class="mi">8</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">oled_bytes</span><span class="p">)</span>   <span class="c1"># 1024 bytes (1 KB)</span>
+
+<span class="c1"># 240x240 color round display: 16 bits per pixel (RGB565)</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">240</span>
+<span class="n">height</span> <span class="o">=</span> <span class="mi">240</span>
+<span class="n">bits_per_pixel</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">color_bytes</span> <span class="o">=</span> <span class="n">width</span> <span class="o">*</span> <span class="n">height</span> <span class="o">*</span> <span class="n">bits_per_pixel</span> <span class="o">//</span> <span class="mi">8</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">color_bytes</span><span class="p">)</span>  <span class="c1"># 115200 bytes (112.5 KB)</span>
+</code></pre></div></td></tr></table></div>
+<p>Running that code prints <code>1024</code> for the OLED and <code>115200</code> for the color display — a difference of more than 100 times, even though the color display has only about seven times as many pixels. Bit depth, not pixel count alone, is what drives a frame buffer's memory footprint. Now that you have seen the calculation worked out by hand, the interactive calculator below lets you change width, height, and bit depth independently and watch the byte count respond live.</p>
+<h4 id="diagram-frame-buffer-size-calculator">Diagram: Frame Buffer Size Calculator</h4>
+<iframe src="../../sims/buffer-size-calculator/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Frame Buffer Size Calculator</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> buffer-size-calculator<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Apply (L3)
+Bloom Taxonomy Verb: calculate, demonstrate</p>
+<p>Learning objective: Calculate the number of bytes a frame buffer requires given width, height, and bit depth, and demonstrate how independently changing each parameter changes the total memory footprint.</p>
+<p>Canvas layout:
+- Top: three controls in a row (width slider, height slider, bit-depth selector)
+- Middle: the formula "bytes = width x height x bit depth / 8" with the current numbers substituted in live
+- Bottom: a large byte/kilobyte readout and a horizontal comparison bar showing this buffer's size as a fraction of the RP2040's 264 KB of RAM</p>
+<p>Visual elements:
+- Width slider (8 to 240, step 8) and height slider (8 to 240, step 8), each showing its current value
+- Bit-depth selector with two options: "1-bit monochrome" and "16-bit color (RGB565)"
+- Live formula line, e.g. "bytes = 128 x 64 x 1 / 8 = 1024 bytes (1.0 KB)"
+- A horizontal bar labeled "RP2040 total RAM: 264 KB" with a filled segment showing what fraction the current buffer size occupies, plus a percentage label
+- Two preset buttons: "128x64 mono (OLED)" and "240x240 color (Round LCD)", each jumping all controls to that display's real values</p>
+<p>Interactive controls:
+- Width slider
+- Height slider
+- Bit-depth selector (radio buttons or dropdown)
+- Preset buttons for the two real displays
+- "Reset" button restores width 128, height 64, bit depth 1-bit</p>
+<p>Default parameters: width 128, height 64, bit depth 1-bit monochrome (matching the OLED)</p>
+<p>Behavior: moving any slider or changing the bit-depth selector immediately recalculates and redisplays the formula line, the byte/KB readout, and the RAM comparison bar. Clicking a preset button animates the sliders to that display's exact values so the learner can see the two real-world cases directly. The RAM comparison bar changes color from teal to coral once the buffer exceeds roughly 50% of the RP2040's 264 KB, to call attention to the color display's much larger footprint.</p>
+<p>Instructional Rationale: An Apply-level calculator supports the objective directly, since the learner must manipulate the three inputs and observe the resulting calculation rather than watch a worked example passively; live recalculation on every input change lets the learner isolate the effect of each parameter one at a time.</p>
+<p>Responsive design: controls stack vertically below 600 pixels wide; the comparison bar remains full-width and legible at every screen size.</p>
+<p>Implementation: p5.js for the sliders, formula text, and comparison bar; the byte calculation is a single JavaScript expression re-evaluated on every input event.</p>
+</details>
+<h2 id="packing-pixels-into-bytes-byte-alignment">Packing Pixels into Bytes: Byte Alignment</h2>
+<p>The frame buffer size formula divides by 8 because a byte holds exactly 8 bits, and for a 1-bit monochrome buffer, that means 8 pixels share a single byte. <strong>Byte alignment in buffer</strong> describes how those 8 pixels pack together, and it explains why some display widths are more convenient to work with than others.</p>
+<p>The 128-pixel width of the OLED is not an arbitrary choice — 128 divided by 8 is exactly 16, so every row of pixels packs into a whole number of bytes (16 of them) with nothing left over. If a designer instead chose a 100-pixel-wide display, 100 divided by 8 is 12.5, meaning the last byte in every row would only be half-filled with real pixels, wasting 4 bits of that byte on every single row. Widths that are multiples of 8 avoid this waste entirely, which is exactly why so many small monochrome displays, including this book's OLED, use dimensions like 128 and 64.</p>
+<div class="admonition mascot-tip">
+<p class="admonition-title">Multiples of 8 Are a Display Designer's Best Friend</p>
+<p><img alt="Pixel gives a tip" class="mascot-admonition-img" src="../../img/mascot/tip.png" />
+Next time you see a display advertised as 128x64, 96x16, or 128x32, notice that both numbers are always multiples of 8. That's not a coincidence — it's byte alignment working in the manufacturer's favor, packing every row of pixels into whole bytes with nothing wasted.</p>
+</div>
+<h2 id="resolution-and-shape-comparing-the-two-displays">Resolution and Shape: Comparing the Two Displays</h2>
+<p><strong>Display resolution</strong> is the exact pixel count of a screen, given as width times height, and it is the same number you have already been using throughout this chapter's coordinate and buffer-size examples. Revisiting Chapter 1's two displays in coordinate terms: the OLED's resolution of 128x64 means valid X coordinates run from 0 to 127 and valid Y coordinates run from 0 to 63, while the color display's 240x240 resolution means both X and Y run from 0 to 239.</p>
+<p>Resolution alone does not describe a display's shape — two displays can have very different proportions even with a similar total pixel count. <strong>Aspect ratio</strong> is the ratio of a display's width to its height, expressed in simplest form, and it determines whether a screen reads as wide, tall, or square. The OLED's 128:64 ratio simplifies to 2:1, a wide rectangle exactly twice as wide as it is tall. The color display's 240:240 ratio simplifies to 1:1, a perfect square.</p>
+<p>That difference in aspect ratio has a real design consequence worth stating plainly before it resurfaces in later chapters: a face designed for the OLED's wide rectangle needs to spread its eyes, eyebrows, and mouth across a horizontal band, while a face designed for the square color display has equal room in both directions — and, as the next section explains, that square buffer hides a further twist.</p>
+<h2 id="a-circle-inside-a-square-circular-display-geometry">A Circle Inside a Square: Circular Display Geometry</h2>
+<p>Chapter 1 described the 240x240 color display as physically round, shaped like a smartwatch face — but every frame buffer calculation so far has treated it as a 240x240 square. Both facts are true at once, and reconciling them is what <strong>circular display geometry</strong> is about. The display's frame buffer is genuinely a square, 240 pixels by 240 pixels, because that is the simplest shape to address with an (x, y) coordinate system. The physical glass, however, is round, with a diameter of 240 pixels — meaning the visible pixels form a circle inscribed inside that square buffer.</p>
+<div class="admonition mascot-encourage">
+<p class="admonition-title">Yes, Some Pixels Really Do Go Nowhere</p>
+<p><img alt="Pixel cheers you on" class="mascot-admonition-img" src="../../img/mascot/encouraging.png" />
+This one takes a moment to sink in, and that's completely normal — a square buffer holding a round image feels backwards at first. Picture a circular cookie cutter pressed into a square sheet of dough: the corners of the dough are still there, still real dough, but they never become part of the cookie. The corner pixels of this buffer work the same way.</p>
+</div>
+<p>A pixel near one of the square buffer's four corners has valid (x, y) coordinates, and a drawing command will happily write to it without any error — but that corner sits outside the physical circular glass, so nothing ever lights up there. Roughly 21 percent of the pixels in this buffer are physically invisible, present only in memory and never seen by anyone looking at the screen; the remaining 79 percent fill the visible circle. This matters most when planning layout: an eye's bounding box that reaches too close to a corner may be drawing into space nobody will ever see.</p>
+<p>Seeing exactly which buffer pixels fall inside the visible circle, and which ones are wasted in the corners, is far easier with a picture than with a percentage. The interactive diagram below lets you explore that boundary directly.</p>
+<h4 id="diagram-circular-buffer-waste-visualizer">Diagram: Circular Buffer Waste Visualizer</h4>
+<iframe src="../../sims/circular-buffer-waste-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Circular Buffer Waste Visualizer</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> circular-buffer-waste-visualizer<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Analyze (L4)
+Bloom Taxonomy Verb: differentiate, examine</p>
+<p>Learning objective: Analyze the relationship between the 240x240 square frame buffer and the circular physical display by examining which buffer pixels fall inside versus outside the visible circle, and differentiate "visible" pixels from "wasted" pixels.</p>
+<p>Canvas layout:
+- Left 65% (responsive, roughly 400x400 at default width): a 240x240 grid representing the frame buffer, with a circle of diameter 240 drawn inscribed inside it
+- Right 35%: a control panel, a running pixel-count readout, and an infobox for the hovered pixel</p>
+<p>Visual elements:
+- The full square grid shown in light gray gridlines
+- Pixels inside the inscribed circle shaded teal ("visible" region)
+- Pixels outside the circle but inside the square shaded coral ("wasted" region), visible only when the "Show wasted pixels" toggle is on
+- A running counter: "Visible pixels: 45,238 (78.5%) | Wasted pixels: 12,362 (21.5%)"
+- A crosshair on the currently hovered pixel with a small infobox showing its (x, y) coordinate, its buffer byte offset, and whether it is Visible or Wasted</p>
+<p>Interactive controls:
+- Toggle: "Show wasted pixels" (default on)
+- Toggle: "Show buffer byte grid" — overlays boundaries showing how bytes group pixels, for 16-bit color pixels
+- Hover any cell to update the infobox with its coordinate, byte offset, and visible/wasted status
+- Click a cell to pin the infobox open for closer reading
+- "Reset" button clears any pinned selection and restores default toggles</p>
+<p>Default parameters: "Show wasted pixels" on, "Show buffer byte grid" off, no pixel hovered or pinned</p>
+<p>Behavior: hovering any grid cell immediately updates the infobox with that pixel's exact coordinate and whether it falls inside the visible circle; the running counter at the top recalculates once, at load time, and stays fixed since the circle's position never changes. Toggling "Show wasted pixels" instantly recolors or hides the coral corner regions without affecting the counter.</p>
+<p>Instructional Rationale: An Analyze-level objective requires the learner to examine the structural relationship between two overlapping shapes — a square buffer and an inscribed circle — and correctly attribute individual pixels to one category or the other, which direct hover-driven examination supports better than a static labeled picture or a passive animation.</p>
+<p>Responsive design: the grid scales proportionally to its container's width on window resize, remaining square at every size; the control panel moves below the grid on narrow viewports.</p>
+<p>Implementation: p5.js for the grid rendering and circle-inclusion test (distance from center compared to radius); a precomputed lookup avoids recalculating the circle test on every frame.</p>
+</details>
+<h2 id="how-much-memory-does-a-display-really-use">How Much Memory Does a Display Really Use?</h2>
+<p>The buffer size calculations from earlier in this chapter translate directly into a real constraint on the hardware from Chapter 1. <strong>Display buffer memory</strong> is the amount of the RP2040's onboard RAM a program must set aside to hold one display's frame buffer, and it competes with every other variable, list, and function your program needs while it runs.</p>
+<p>Chapter 1 noted that the RP2040 includes 264 kilobytes of memory in total. Measured against that budget, the two displays could hardly be more different: the OLED's 1,024-byte buffer uses well under 1 percent of available RAM, leaving nearly all of it free for program logic, while the color display's 115,200-byte buffer uses roughly 43 percent of the RP2040's entire memory on its own. This is one of the real performance trade-offs Chapter 15 explores in depth when adapting a face design to the color display — for now, the key habit is remembering to check a buffer's byte size against the 264 KB budget before assuming memory will not be a problem.</p>
+<h2 id="turning-on-a-display-initialization">Turning On a Display: Initialization</h2>
+<p>Every idea in this chapter so far has described a frame buffer sitting quietly in memory. <strong>Display initialization</strong> is the step where a program creates that frame buffer object and connects it to a physical screen, using the exact SPI wiring pins introduced back in Chapter 1 — clock, data, chip select, data/command, and reset.</p>
+<p>A bridge before the code: this example builds an SPI connection using the pins from Chapter 1's wiring table, then hands that connection to MicroPython's <code>ssd1306</code> driver module along with the OLED's width, height, and each control pin, creating a display object ready to draw into.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span><span class="p">,</span> <span class="n">SPI</span>
+<span class="kn">import</span> <span class="nn">ssd1306</span>
+
+<span class="n">spi</span> <span class="o">=</span> <span class="n">SPI</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sck</span><span class="o">=</span><span class="n">Pin</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">mosi</span><span class="o">=</span><span class="n">Pin</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">ssd1306</span><span class="o">.</span><span class="n">SSD1306_SPI</span><span class="p">(</span>
+    <span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">spi</span><span class="p">,</span>
+    <span class="n">dc</span><span class="o">=</span><span class="n">Pin</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">res</span><span class="o">=</span><span class="n">Pin</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">cs</span><span class="o">=</span><span class="n">Pin</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>That single <code>SSD1306_SPI(...)</code> call does two things at once: it allocates a 1,024-byte frame buffer sized exactly the way this chapter's formula predicts, and it wires that buffer to the physical SPI pins so a later step can push pixel data out to the glass. Chapter 6 returns to this exact line of code and explains every argument in full; for now, the important idea is simpler — initialization is the moment a plain block of memory becomes a working display object your program can draw into.</p>
+<h2 id="nothing-happens-until-you-call-show">Nothing Happens Until You Call .show()</h2>
+<p>Drawing into a frame buffer, no matter how many shapes a program adds, changes nothing on the physical screen by itself — a detail introduced in Chapter 4 and worth restating precisely now that you know how initialization works. The <strong>show method</strong>, called as <code>.show()</code> on a display object, is the command that copies the entire in-memory frame buffer out over SPI to the physical display in one step, making every pending change visible at once.</p>
+<p>Here's the bridge before this next example: it clears the buffer, turns on exactly one pixel at the screen's center, and only then calls <code>.show()</code> to make that single pixel actually appear.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">display</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>           <span class="c1"># clear the buffer to all-off (black)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># turn on one pixel, dead center on the OLED</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>            <span class="c1"># push the buffer to the physical screen</span>
+</code></pre></div></td></tr></table></div>
+<p>Until that final <code>display.show()</code> line runs, the OLED keeps showing whatever it displayed before this code started — the <code>fill()</code> and <code>pixel()</code> calls only change memory. This is a deliberate design, not a limitation: it lets a program build up a complex expression, adjusting eyes, eyebrows, and a mouth one drawing call at a time, and reveal the finished result to the viewer in a single, flicker-free update.</p>
+<h2 id="static-images-not-video-the-screen-refresh-cycle">Static Images, Not Video: The Screen Refresh Cycle</h2>
+<p>It is tempting to picture a display constantly scanning and redrawing itself many times per second, the way a television or a computer monitor does. Neither display in this book works that way. The <strong>screen refresh cycle</strong> for the OLED and the color round display is event-driven, not continuous: the driver chip holds whatever image was last sent to it, showing that exact static picture indefinitely, and it only changes when a program explicitly calls <code>.show()</code> again.</p>
+<p>This has a genuinely useful consequence for robot-face programming: a face can sit perfectly still, showing a calm neutral expression, using essentially no drawing activity at all — the display keeps that same image lit with zero ongoing work from your program. Animation, covered fully in Chapter 12, is really just calling <code>.show()</code> repeatedly with a slightly different buffer each time, fast enough that a viewer's eye reads the sequence as smooth motion rather than as a series of individual static pictures.</p>
+<h2 id="chapter-summary">Chapter Summary</h2>
+<p>You now know exactly how a screen's pixels map to coordinates, how those coordinates map to bytes in a frame buffer, and how that buffer finally reaches the physical glass of a display.</p>
+<ul>
+<li>A pixel is the smallest addressable point on a display; a screen coordinate system names every pixel with an (x, y) pair.</li>
+<li>The origin (0, 0) sits in the upper-left corner; X increases rightward and Y increases <em>downward</em> — the opposite of a typical math-class graph.</li>
+<li>Because the origin sits in a corner, only one coordinate plane quadrant (positive X, positive Y) is ever used; a bounding box is the smallest rectangle enclosing a shape, useful for planning layout before drawing.</li>
+<li>A frame buffer stores every pixel's state in memory before it reaches a screen; bit depth (1-bit monochrome versus 16-bit RGB565 color) determines how much memory each pixel needs.</li>
+<li>Frame buffer size calculation (width × height × bit depth ÷ 8) gives 1,024 bytes for the 128x64 OLED and 115,200 bytes for the 240x240 color display — a difference driven mostly by bit depth, not pixel count.</li>
+<li>Byte alignment packs 8 monochrome pixels per byte, which is why display widths that are multiples of 8, like 128, avoid wasted bits.</li>
+<li>Display resolution and aspect ratio describe a screen's pixel count and shape; the OLED is a 2:1 wide rectangle, and the color display is a 1:1 square.</li>
+<li>The color display's square frame buffer holds an inscribed circle of visible pixels — roughly 21 percent of the buffer's pixels sit in the corners and are never physically visible.</li>
+<li>Display buffer memory competes with the RP2040's 264 KB of total RAM; the color display's buffer alone uses roughly 43 percent of it.</li>
+<li>Display initialization creates a frame buffer and wires it to physical SPI pins; the show method pushes that buffer to the screen; and the screen refresh cycle is static and event-driven, not continuous, until <code>.show()</code> is called again.</li>
+</ul>
+<div class="admonition mascot-celebration">
+<p class="admonition-title">You Can Now Speak in Pixels</p>
+<p><img alt="Pixel celebrates" class="mascot-admonition-img" src="../../img/mascot/celebration.png" />
+Every pixel really does tell a story — and now you know exactly how to find any one of them, on either display, and turn it on. Chapter 6 hands you the actual drawing methods — <code>fill()</code>, <code>hline()</code>, <code>vline()</code>, <code>line()</code>, and <code>rect()</code> — that put this coordinate system to work.</p>
+</div>
+<details class="question">
+<summary>Self-Check: Why does the OLED buffer take so much less memory than the color display's buffer, even though the color display only has about seven times as many pixels? — Click to reveal</summary>
+<p>Memory footprint depends on bit depth as well as pixel count. The OLED uses 1 bit per pixel (128 x 64 x 1 / 8 = 1,024 bytes), while the color display uses 16 bits per pixel for RGB565 color (240 x 240 x 16 / 8 = 115,200 bytes). Multiplying by 16 instead of 1 accounts for most of the roughly 112x difference, even though the color display's pixel count is only about seven times larger.</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

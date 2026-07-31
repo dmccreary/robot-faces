@@ -1,0 +1,2555 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="How to debounce buttons, track a rotary encoder's quadrature signal, and combine both with Chapter 9's parameterized face into a working expression menu with live parameter tuning.">
+      
+      
+        <meta name="author" content="Dan McCreary">
+      
+      
+      
+        <link rel="prev" href="../13-interactive-controls-inputs/">
+      
+      
+        <link rel="next" href="../15-porting-faces-color-display/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Building an Expression Menu & Live Controls - Robot Faces</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/mascot.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-FPTNK1XNJR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-FPTNK1XNJR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-FPTNK1XNJR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#642580" data-md-color-accent="#41BAC1">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#building-an-expression-menu-live-controls" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robot Faces" class="md-header__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Faces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Building an Expression Menu & Live Controls
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robot Faces" class="md-nav__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    Robot Faces
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Chapters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of Chapters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-hardware-electronics-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Hardware & Electronics Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-micropython-fundamentals-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-micropython-fundamentals-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-display-coordinate-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-basic-drawing-primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-ellipse-polygon-drawing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Ellipse & Polygon Drawing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-framebuf-version-history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-facial-anatomy-layout-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-emotion-theory-core-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Emotion Theory & the Core Expression Set
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-expression-design-readability-hri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-animating-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Animating Expressions: Timing & Motion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-interactive-controls-inputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-two-chapters-to-one-working-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Two Chapters to One Working Menu
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-buttons-are-messy-button-debounce-and-the-debounce-time-constant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real Buttons Are Messy: Button Debounce and the Debounce Time Constant
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#waiting-it-out-input-debouncing-delay" class="md-nav__link">
+    <span class="md-ellipsis">
+      Waiting It Out: Input Debouncing Delay
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Waiting It Out: Input Debouncing Delay">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-button-bounce-timeline-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Button Bounce Timeline Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-home-base-the-default-idle-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Home Base: The Default Idle State
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-the-menu-multi-mode-menu-and-expression-selection-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building the Menu: Multi-Mode Menu and Expression Selection Menu
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-an-entrance-state-based-animation-trigger" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making an Entrance: State-Based Animation Trigger
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deciding-what-each-control-does-control-mapping-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deciding What Each Control Does: Control Mapping Design
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#going-deeper-on-the-knob-rotary-encoder-position-direction-and-the-quadrature-signal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Going Deeper on the Knob: Rotary Encoder Position, Direction, and the Quadrature Signal
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Going Deeper on the Knob: Rotary Encoder Position, Direction, and the Quadrature Signal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-encoder-quadrature-signal-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Encoder Quadrature Signal Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watching-a-parameter-change-live-live-parameter-tuning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watching a Parameter Change Live: Live Parameter Tuning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#confirming-what-just-happened-user-interface-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confirming What Just Happened: User Interface Feedback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-all-together-a-complete-expression-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting It All Together: A Complete Expression Menu
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Putting It All Together: A Complete Expression Menu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-expression-menu-live-simulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Expression Menu Live Simulator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-porting-faces-color-display/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Porting Faces to a Color Display
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-computational-thinking-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lessons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Lessons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    History of Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/screen-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/drawing-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Drawing Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/ellipse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ellipse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/polygon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polygon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/basic-face-layouts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Face Layouts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eye-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eyebrows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eyebrows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion-types.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emotion Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../parts-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Faces Parts List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About The Robot Faces Book
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Learning Graph
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Learning Graph
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/starting-concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Starting Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/course-description-assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quality-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/taxonomy-distribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy Distribution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/mascot-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mascot Test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Stories
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Stories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-two-chapters-to-one-working-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Two Chapters to One Working Menu
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-buttons-are-messy-button-debounce-and-the-debounce-time-constant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real Buttons Are Messy: Button Debounce and the Debounce Time Constant
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#waiting-it-out-input-debouncing-delay" class="md-nav__link">
+    <span class="md-ellipsis">
+      Waiting It Out: Input Debouncing Delay
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Waiting It Out: Input Debouncing Delay">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-button-bounce-timeline-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Button Bounce Timeline Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-home-base-the-default-idle-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Home Base: The Default Idle State
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-the-menu-multi-mode-menu-and-expression-selection-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building the Menu: Multi-Mode Menu and Expression Selection Menu
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-an-entrance-state-based-animation-trigger" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making an Entrance: State-Based Animation Trigger
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deciding-what-each-control-does-control-mapping-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deciding What Each Control Does: Control Mapping Design
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#going-deeper-on-the-knob-rotary-encoder-position-direction-and-the-quadrature-signal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Going Deeper on the Knob: Rotary Encoder Position, Direction, and the Quadrature Signal
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Going Deeper on the Knob: Rotary Encoder Position, Direction, and the Quadrature Signal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-encoder-quadrature-signal-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Encoder Quadrature Signal Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watching-a-parameter-change-live-live-parameter-tuning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watching a Parameter Change Live: Live Parameter Tuning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#confirming-what-just-happened-user-interface-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confirming What Just Happened: User Interface Feedback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-all-together-a-complete-expression-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting It All Together: A Complete Expression Menu
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Putting It All Together: A Complete Expression Menu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-expression-menu-live-simulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Expression Menu Live Simulator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="building-an-expression-menu-live-controls">Building an Expression Menu &amp; Live Controls</h1>
+<h2 id="summary">Summary</h2>
+<p>This chapter combines the previous chapter's state machine and input-reading skills into a complete, working interaction design: a multi-mode expression-selection menu with a default idle state, properly debounced buttons, rotary-encoder position and direction tracking, and live tuning of a face parameter in response to user input. After completing this chapter, students will be able to build a menu that lets a user cycle through and adjust a robot's expressions with physical controls.</p>
+<h2 id="concepts-covered">Concepts Covered</h2>
+<p>This chapter covers the following 13 concepts from the learning graph:</p>
+<ol>
+<li>State-Based Animation Trigger</li>
+<li>Button Debounce</li>
+<li>Rotary Encoder Position Tracking</li>
+<li>Encoder Direction Detection</li>
+<li>Multi-Mode Menu</li>
+<li>Expression Selection Menu</li>
+<li>Live Parameter Tuning</li>
+<li>Input Debouncing Delay</li>
+<li>User Interface Feedback</li>
+<li>Control Mapping Design</li>
+<li>Default Idle State</li>
+<li>Debounce Time Constant</li>
+<li>Encoder Quadrature Signal</li>
+</ol>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This chapter builds on concepts from:</p>
+<ul>
+<li><a href="../01-hardware-electronics-foundations/">Chapter 1: Hardware &amp; Electronics Foundations</a></li>
+<li><a href="../09-facial-anatomy-layout-design/">Chapter 9: Facial Anatomy &amp; Layout Design</a></li>
+<li><a href="../10-emotion-theory-core-expressions/">Chapter 10: Emotion Theory &amp; the Core Expression Set</a></li>
+<li><a href="../12-animating-expressions/">Chapter 12: Animating Expressions: Timing &amp; Motion</a></li>
+<li><a href="../13-interactive-controls-inputs/">Chapter 13: Interactive Controls: Inputs &amp; Concurrency</a></li>
+</ul>
+<hr />
+<h2 id="from-two-chapters-to-one-working-menu">From Two Chapters to One Working Menu</h2>
+<div class="admonition mascot-welcome">
+<p class="admonition-title">Time to Build the Real Thing</p>
+<p><img alt="Pixel waves hello" class="mascot-admonition-img" src="../../img/mascot/welcome.png" />
+Chapter 13 taught you to read a button, read a knob, and track a mode with a small state machine. This chapter turns those separate skills into one real project: a menu a person can actually use to make a robot face smile, frown, or look surprised, on command, with a knob to fine-tune whatever expression is showing.</p>
+</div>
+<p>Every piece this chapter needs already exists somewhere in this book. Chapter 9 gave every expression a dictionary of parameters — an eyebrow angle here, a mouth curve there. Chapter 10 gave those dictionaries thirteen named expressions to choose between. Chapter 12 taught a face to animate smoothly over time instead of snapping between poses. Chapter 13 taught a program to notice a button press or a knob turn. This chapter's job is to wire all four of those skills into a single menu, and to fix a hardware wrinkle — a button's messy electrical behavior — that would otherwise sabotage the whole thing.</p>
+<h2 id="real-buttons-are-messy-button-debounce-and-the-debounce-time-constant">Real Buttons Are Messy: Button Debounce and the Debounce Time Constant</h2>
+<p>Chapter 13 mentioned, in passing, that a real mechanical push button does not switch cleanly from released to pressed. It is time to take that seriously. When a metal contact inside a button snaps shut, it physically bounces — springing apart and touching again several times over the space of a few milliseconds — before settling into a steady connection. <strong>Button debounce</strong> is the general problem this causes: a single physical press can register as several rapid, separate presses if a program reads the pin during that bouncing window instead of after it.</p>
+<p>For a menu, this is not a minor annoyance. A polling loop or an interrupt handler that reacts to every raw edge sees three, five, or even eight presses where a person made exactly one. In an expression menu that advances one expression per press, an undebounced button does not calmly advance from "happy" to "sad" — it can leap straight past "sad," "surprised," and "angry" in the time it takes a thumb to finish pressing down.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">Milliseconds You Can't See, But Definitely Feel</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Contact bounce usually lasts somewhere between 1 and 20 milliseconds — far too fast for a human finger to notice, but easily fast enough for a microcontroller running millions of instructions per second to catch several times. The fix is not to make the button better; it is to make the code patient.</p>
+</div>
+<p>The fix is a fixed waiting period. A <strong>debounce time constant</strong> is the short amount of time — typically somewhere between 20 and 50 milliseconds — that a program deliberately ignores any further changes on a pin after it first detects a press. As long as the debounce time constant is longer than the button's actual bounce duration, every one of those extra bounce edges arrives during the ignore window and never reaches the rest of the program. Choosing a value too short leaves bounce edges free to slip through; choosing a value far too long, on the other hand, can make a program feel sluggish by refusing to notice a genuinely fast second press.</p>
+<h2 id="waiting-it-out-input-debouncing-delay">Waiting It Out: Input Debouncing Delay</h2>
+<p>Knowing that a debounce time constant is needed is only half the job — a program still needs a concrete way to enforce it. <strong>Input debouncing delay</strong> is the practical implementation of that waiting period, and this book uses two different techniques depending on whether a button is read by polling or by interrupt.</p>
+<p>The first technique fits naturally into a polling input loop, the same style of loop Chapter 13 built for reading buttons every pass through the animation loop. Instead of ignoring changes for a fixed stretch of code, the loop remembers the timestamp of the last accepted press and simply refuses to accept a new one until enough time has passed.</p>
+<p>A bridge sentence before the code: this loop reuses Chapter 13's edge-detection pattern, but only accepts a new HIGH-to-LOW transition as a real press if the debounce time constant has already elapsed since the previous accepted press.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+
+<span class="n">button</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">PULL_UP</span><span class="p">)</span>
+
+<span class="n">last_button_state</span> <span class="o">=</span> <span class="mi">1</span>     <span class="c1"># 1 = released, matches the pull-up&#39;s resting HIGH</span>
+<span class="n">last_press_time</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">DEBOUNCE_MS</span> <span class="o">=</span> <span class="mi">30</span>          <span class="c1"># the debounce time constant</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">ticks_ms</span><span class="p">()</span>
+    <span class="n">current_button_state</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">current_button_state</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">last_button_state</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">ticks_diff</span><span class="p">(</span><span class="n">now</span><span class="p">,</span> <span class="n">last_press_time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">DEBOUNCE_MS</span><span class="p">:</span>
+            <span class="n">handle_button_press</span><span class="p">()</span>
+            <span class="n">last_press_time</span> <span class="o">=</span> <span class="n">now</span>
+    <span class="n">last_button_state</span> <span class="o">=</span> <span class="n">current_button_state</span>
+</code></pre></div></td></tr></table></div>
+<p>Every bounce still produces its own HIGH-to-LOW transition, so the <code>if current_button_state == 0 and last_button_state == 1:</code> check still fires several times during a single physical press. What stops those extra firings from reaching <code>handle_button_press()</code> is the inner check: <code>time.ticks_diff(now, last_press_time)</code> measures how long it has been since the last <em>accepted</em> press, and any bounce arriving within <code>DEBOUNCE_MS</code> of that timestamp is silently dropped.</p>
+<p>The second technique works inside an interrupt handler instead, and it takes advantage of the fact that the handler already knows the exact instant a change occurred. Chapter 13 warned that interrupt handlers must stay short — this is the one narrow exception, because a very brief pause of 20 milliseconds is short enough not to meaningfully delay the rest of the program, and it is exactly what a debounce time constant calls for.</p>
+<p>A bridge sentence before the code: this handler pauses for the debounce time constant the instant it fires, then rechecks the pin — if the pin is still LOW after that pause, the press was real; if it has already bounced back HIGH, the handler ignores it.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">button</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">PULL_UP</span><span class="p">)</span>
+<span class="n">button_pressed_flag</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">def</span> <span class="nf">on_button_press</span><span class="p">(</span><span class="n">pin</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">button_pressed_flag</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>          <span class="c1"># the debounce time constant, held inside the handler</span>
+    <span class="k">if</span> <span class="n">pin</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>       <span class="c1"># still pressed after the bounce has settled?</span>
+        <span class="n">button_pressed_flag</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">button</span><span class="o">.</span><span class="n">irq</span><span class="p">(</span><span class="n">trigger</span><span class="o">=</span><span class="n">Pin</span><span class="o">.</span><span class="n">IRQ_FALLING</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="n">on_button_press</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Both techniques solve the same problem from opposite directions, which the table below lines up side by side.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Polling Cooldown</th>
+<th>Interrupt Recheck</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Where the wait happens</td>
+<td>Comparing <code>ticks_diff()</code> against the last accepted press</td>
+<td>A short <code>sleep_ms()</code> inside the handler itself</td>
+</tr>
+<tr>
+<td>Extra bounce edges</td>
+<td>Rejected by the cooldown timestamp check</td>
+<td>Never even seen — the handler recheck confirms the pin is still LOW</td>
+</tr>
+<tr>
+<td>Fits which style</td>
+<td>Polling input loops</td>
+<td>Button interrupt handlers</td>
+</tr>
+<tr>
+<td>Main risk if done wrong</td>
+<td>Debounce window too short, letting a bounce through</td>
+<td>Sleeping too long, delaying other interrupt-driven work</td>
+</tr>
+</tbody>
+</table>
+<p>Watching a real bounce pattern next to its cleaned-up debounced output makes the whole idea click faster than reading timestamps in a table.</p>
+<h4 id="diagram-button-bounce-timeline-visualizer">Diagram: Button Bounce Timeline Visualizer</h4>
+<iframe src="../../sims/button-bounce-timeline-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Button Bounce Timeline Visualizer</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> button-bounce-timeline-visualizer<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Analyze (L4)
+Bloom Taxonomy Verb: differentiate, examine</p>
+<p>Learning objective: Differentiate a raw, bouncing button signal from a properly debounced signal by examining a shared timeline, and identify how the debounce time constant determines which transitions get accepted as a single press.</p>
+<p>Canvas layout:
+- Top panel (responsive, roughly 600x120 at default width): raw signal timeline labeled "Raw pin reading"
+- Middle panel (same width, 120px tall): debounced signal timeline labeled "Debounced output"
+- Bottom: "Press the Button" button, "Bounce severity" slider, "Debounce time constant" slider, event log</p>
+<p>Visual elements:
+- Raw trace as a stepped HIGH/LOW line with 3-8 rapid spikes within the first 5-15ms after a simulated press begins, spike count set by the bounce-severity slider
+- Debounced trace as a single clean HIGH-to-LOW step, delayed until the debounce window has elapsed since the first raw edge
+- A shaded band overlaid on both timelines marking the active debounce time constant window after the first detected edge
+- Event log lines such as "t=0ms: contact bounce begins", "t=3ms: bounce", "t=7ms: bounce", "t=30ms: debounce window closes, press accepted"</p>
+<p>Interactive controls:
+- Button: "Press the Button" triggers one simulated press with bounce
+- Slider: "Bounce severity" from 1-8 spikes
+- Slider: "Debounce time constant" from 5-100ms
+- Button: "Reset" clears the timelines and log</p>
+<p>Default parameters: bounce severity 4 spikes, debounce time constant 30ms</p>
+<p>Behavior: setting the debounce time constant comfortably longer than the bounce duration always produces exactly one clean debounced edge. Dragging the debounce time constant below the actual bounce duration lets a second raw spike slip past the shaded window, producing a second, incorrect step in the debounced trace — a direct, visible demonstration of the "menu skips expressions" failure this chapter warns about.</p>
+<p>Instructional Rationale: An Analyze-level objective requires examining two related signals side by side and identifying the structural cause of correct versus incorrect debouncing; letting the learner shrink the debounce time constant below the bounce duration lets them construct the exact failure mode described in this chapter rather than being told about it.</p>
+<p>Responsive design: panels stack vertically below 600px, with sliders and buttons moving beneath the timelines.</p>
+<p>Implementation: p5.js for the timeline rendering and a simulated bounce generator; a shared simulated millisecond clock drives both panels so the debounce window is visibly synchronized to the raw trace.</p>
+</details>
+<div class="admonition mascot-warning">
+<p class="admonition-title">Skip the Debounce, Skip the Expressions</p>
+<p><img alt="Pixel warns you" class="mascot-admonition-img" src="../../img/mascot/warning.png" />
+Forget to debounce a menu button and the symptom is unmistakable: one press of "next expression" jumps from "happy" straight to "angry," skipping two or three expressions in between. Every bounce edge counted as its own press. If your menu ever seems to have a mind of its own, check the debounce logic first.</p>
+</div>
+<h2 id="a-home-base-the-default-idle-state">A Home Base: The Default Idle State</h2>
+<p>A menu that only ever reacts to buttons has a gap: what does the face show before anyone touches a control, or after a person walks away? A <strong>default idle state</strong> is the expression, and its accompanying animation, that a face returns to or starts in whenever nothing else is happening — a sensible "home" the menu falls back to rather than freezing on whatever was last selected.</p>
+<p>The idle state is not a blank or frozen face. Chapter 12 built idle animation specifically so a resting face still blinks occasionally and glances around, rather than staring, motionless, like a broken screen. This chapter's menu reuses that exact idle animation as its default state: neutral eyebrows, a relaxed mouth, and the same slow blink-and-gaze behavior from Chapter 12, active any time the menu has not been touched for a while. A simple inactivity timer — comparing the current time against a timestamp updated on every button press or knob turn — decides when to fall back to idle.</p>
+<h2 id="building-the-menu-multi-mode-menu-and-expression-selection-menu">Building the Menu: Multi-Mode Menu and Expression Selection Menu</h2>
+<p>With debouncing solved and a default state defined, the menu structure itself can finally be built. A <strong>multi-mode menu</strong> organizes a program around more than one distinct interaction mode — browsing expressions, tuning a parameter, sitting idle — the same way Chapter 13's mode state machine organized a face around NEUTRAL_MODE, GAZE_MODE, and ADJUST_MODE. An <strong>expression selection menu</strong> is this chapter's specific multi-mode menu: one button press advances forward through Chapter 10's named expressions, with each expression showing immediately as a live preview the instant it is selected.</p>
+<p>Cycling forward through a fixed list, wrapping back to the start after the last item, is one of the simplest and most reliable menu patterns available — a student never needs to guess how far "back" is, because there is only one direction to press.</p>
+<p>A bridge sentence before the code: this snippet stores Chapter 10's expression names in order, keeps a single index of which one is currently selected, and advances that index by one, wrapping around, every time the menu button is pressed.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">EXPRESSION_NAMES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;neutral&quot;</span><span class="p">,</span> <span class="s2">&quot;happy&quot;</span><span class="p">,</span> <span class="s2">&quot;sad&quot;</span><span class="p">,</span> <span class="s2">&quot;surprised&quot;</span><span class="p">,</span> <span class="s2">&quot;angry&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;disgusted&quot;</span><span class="p">,</span> <span class="s2">&quot;fearful&quot;</span><span class="p">,</span> <span class="s2">&quot;sleepy&quot;</span><span class="p">,</span> <span class="s2">&quot;curious&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;confused&quot;</span><span class="p">,</span> <span class="s2">&quot;mischievous&quot;</span><span class="p">,</span> <span class="s2">&quot;loving&quot;</span><span class="p">,</span> <span class="s2">&quot;bored&quot;</span><span class="p">,</span>
+<span class="p">]</span>   <span class="c1"># Chapter 10&#39;s full 13-expression core set</span>
+
+<span class="n">current_index</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">next_expression</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">current_index</span>
+    <span class="n">current_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">current_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">EXPRESSION_NAMES</span><span class="p">)</span>
+    <span class="n">enter_expression</span><span class="p">(</span><span class="n">EXPRESSION_NAMES</span><span class="p">[</span><span class="n">current_index</span><span class="p">])</span>
+</code></pre></div></td></tr></table></div>
+<p><code>(current_index + 1) % len(EXPRESSION_NAMES)</code> is the wraparound trick: adding 1 normally advances to the next name in the list, and the <code>%</code> (modulo) operator resets the index back to 0 the moment it would otherwise run past the last entry — from "bored" straight back to "neutral," with no special-case code required. <code>enter_expression()</code> is a function this chapter defines next, and it is where a plain index turns into an actual face change.</p>
+<h2 id="making-an-entrance-state-based-animation-trigger">Making an Entrance: State-Based Animation Trigger</h2>
+<p>Simply swapping one expression's parameter dictionary for another, instantly, works but feels flat — real faces do not snap into surprise, they widen their eyes first and then settle. A <strong>state-based animation trigger</strong> is a short, automatic animation that fires the moment a face enters a particular state, before that state's resting parameters take over. Entering "surprised" is the clearest example in this chapter's expression set: the eyebrows should briefly overshoot upward before easing back down to their normal surprised position.</p>
+<p>A bridge sentence before the code: this pair of functions records the exact time an expression is entered, and — only while that expression is "surprised" and only for the first 150 milliseconds after entering it — overrides the eyebrow angle with a dramatic, temporary overshoot value before letting the expression's normal parameters take over.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">surprise_burst_start</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">def</span> <span class="nf">enter_expression</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">current_expression</span><span class="p">,</span> <span class="n">surprise_burst_start</span>
+    <span class="n">current_expression</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;surprised&quot;</span><span class="p">:</span>
+        <span class="n">surprise_burst_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">ticks_ms</span><span class="p">()</span>   <span class="c1"># arms the eyebrow-flick trigger</span>
+
+<span class="k">def</span> <span class="nf">apply_animation_triggers</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">current_expression</span> <span class="o">==</span> <span class="s2">&quot;surprised&quot;</span> <span class="ow">and</span> <span class="n">surprise_burst_start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">ticks_diff</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">ticks_ms</span><span class="p">(),</span> <span class="n">surprise_burst_start</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">elapsed</span> <span class="o">&lt;</span> <span class="mi">150</span><span class="p">:</span>
+            <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">40</span>   <span class="c1"># brief overshoot, well past the resting angle</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">EXPRESSIONS</span><span class="p">[</span><span class="s2">&quot;surprised&quot;</span><span class="p">][</span><span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">state</span>
+</code></pre></div></td></tr></table></div>
+<p>This is the exact same "compare elapsed time against a threshold" pattern Chapter 12 used for blinking and gazing — nothing new is invented here, it is simply pointed at a state entry instead of a repeating idle behavior. Any expression could get its own trigger this way: a "mischievous" entry could flick one eyebrow up and back down, or a "sleepy" entry could ease the eyes half-shut over half a second instead of snapping shut instantly.</p>
+<h2 id="deciding-what-each-control-does-control-mapping-design">Deciding What Each Control Does: Control Mapping Design</h2>
+<p>A menu with two buttons and a knob has several controls, and nothing forces any particular one of them to mean "next expression" instead of "adjust a parameter." <strong>Control mapping design</strong> is the deliberate decision of which physical control performs which function — and it is a decision, not something to leave implicit or figure out later while wiring. A well-documented control mapping is the difference between a menu a classmate can pick up and use immediately, and one only its original builder can operate.</p>
+<p>This chapter's expression menu uses a simple, three-control mapping that every example from here forward assumes.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Function</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Button 1 ("Next")</td>
+<td>Advance to the next expression</td>
+<td>The most frequent action deserves the simplest control</td>
+</tr>
+<tr>
+<td>Button 2 ("Tune")</td>
+<td>Toggle live-tuning mode on/off</td>
+<td>A rare action gets its own dedicated confirm-style button, so it is never triggered by accident</td>
+</tr>
+<tr>
+<td>Potentiometer or encoder</td>
+<td>Adjust the current expression's parameter, only while tuning mode is on</td>
+<td>A continuous control naturally fits a continuously adjustable value</td>
+</tr>
+</tbody>
+</table>
+<p>Writing this table down before wiring a single breadboard connection is worth the five minutes it takes. A control mapping documented this clearly also becomes the answer key for a common bug report — "the knob does nothing" almost always turns out to mean tuning mode was never toggled on.</p>
+<h2 id="going-deeper-on-the-knob-rotary-encoder-position-direction-and-the-quadrature-signal">Going Deeper on the Knob: Rotary Encoder Position, Direction, and the Quadrature Signal</h2>
+<p>Chapter 1 introduced the rotary encoder as a knob that reports discrete clicks of rotation instead of an absolute voltage. It is time to see how that actually works, because a menu that lets a student turn a knob to fine-tune a parameter depends on tracking that rotation accurately.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">Two Signals, Slightly Out of Step</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+A rotary encoder doesn't send one signal — it sends two, and the whole trick to reading it lives in the tiny timing gap between them. Once that gap makes sense, direction detection stops feeling like magic.</p>
+</div>
+<p>Inside a rotary encoder are two separate switches, wired to two separate GPIO pins, both toggling on and off as the knob turns. An <strong>encoder quadrature signal</strong> is the pattern these two square-wave outputs form together: the two signals are offset from each other by a quarter of a full step cycle, so one of them always changes slightly before the other. Turning the knob clockwise makes signal A lead signal B; turning it counter-clockwise reverses that order, making B lead A. Comparing which signal changed first is a complete, reliable way to know which direction the knob just turned — no absolute position sensor required.</p>
+<p><strong>Encoder direction detection</strong> is the act of making that comparison in code: reading both pins whenever either one changes, and checking whether they currently agree or disagree with each other. <strong>Rotary encoder position tracking</strong> is the running total this comparison feeds — a single counter that increases by one for every detected clockwise step and decreases by one for every counter-clockwise step, giving a program a continuously updated sense of "how far has this knob turned, and in which direction," even though the knob itself never reports an absolute position.</p>
+<p>A bridge sentence before the code: this snippet wires both encoder pins to interrupts, and on every edge, compares the two pins' current values — if they differ, the knob just moved one step clockwise; if they match, it moved one step counter-clockwise.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+
+<span class="n">encoder_a</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">PULL_UP</span><span class="p">)</span>
+<span class="n">encoder_b</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">PULL_UP</span><span class="p">)</span>
+
+<span class="n">encoder_position</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">on_encoder_turn</span><span class="p">(</span><span class="n">pin</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">encoder_position</span>
+    <span class="k">if</span> <span class="n">encoder_a</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="o">!=</span> <span class="n">encoder_b</span><span class="o">.</span><span class="n">value</span><span class="p">():</span>
+        <span class="n">encoder_position</span> <span class="o">+=</span> <span class="mi">1</span>      <span class="c1"># A led B: clockwise step</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">encoder_position</span> <span class="o">-=</span> <span class="mi">1</span>      <span class="c1"># B led A: counter-clockwise step</span>
+
+<span class="n">encoder_a</span><span class="o">.</span><span class="n">irq</span><span class="p">(</span><span class="n">trigger</span><span class="o">=</span><span class="n">Pin</span><span class="o">.</span><span class="n">IRQ_FALLING</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="n">on_encoder_turn</span><span class="p">)</span>
+<span class="n">encoder_b</span><span class="o">.</span><span class="n">irq</span><span class="p">(</span><span class="n">trigger</span><span class="o">=</span><span class="n">Pin</span><span class="o">.</span><span class="n">IRQ_FALLING</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="n">on_encoder_turn</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Both <code>encoder_a</code> and <code>encoder_b</code> are registered on the same handler, so <code>on_encoder_turn()</code> runs the instant either pin changes — exactly the moment needed to compare the two pins' current values against each other. This is a simplified version of the pattern; production MicroPython code often reaches for a small dedicated encoder library that also filters out electrical noise, but the underlying idea — compare two out-of-phase signals to recover direction — is exactly what is happening either way.</p>
+<p>Watching two square waves scroll by, one step at a time, makes the phase relationship far easier to trust than reading the comparison in code alone.</p>
+<h4 id="diagram-encoder-quadrature-signal-visualizer">Diagram: Encoder Quadrature Signal Visualizer</h4>
+<iframe src="../../sims/encoder-quadrature-signal-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Encoder Quadrature Signal Visualizer</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> encoder-quadrature-signal-visualizer<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Understand (L2) / Analyze (L4)
+Bloom Taxonomy Verb: explain, differentiate</p>
+<p>Learning objective: Explain how a quadrature encoder's two out-of-phase square-wave signals encode rotation, and differentiate clockwise from counter-clockwise rotation by examining which of the two signals changes first on each step.</p>
+<p>Canvas layout:
+- Top (responsive, roughly 300x300 at default width): a rotating knob graphic with a "Position: N" counter beneath it
+- Right/bottom 500x220: two stacked square-wave timelines labeled "Signal A" and "Signal B", scrolling as the knob turns, with a direction indicator above them</p>
+<p>Visual elements:
+- Two square waves offset by a quarter cycle from each other, redrawn live as the knob turns
+- A vertical marker line at each edge showing which signal (A or B) transitioned first
+- Direction indicator flashing green "CW" or blue "CCW" the instant a new step completes
+- Position counter incrementing or decrementing by exactly 1 per detected step</p>
+<p>Interactive controls:
+- Draggable knob: dragging clockwise or counter-clockwise generates both signals live
+- Button: "Step CW" and button "Step CCW" advance exactly one quadrature step at a time for careful inspection
+- Toggle: "Slow motion" slows the timeline scroll speed
+- Button: "Reset position to 0"</p>
+<p>Default parameters: position 0, knob at rest, slow motion off</p>
+<p>Data Visibility Requirements:
+  Stage 1: Show both signals flat and idle with the knob at rest
+  Stage 2: Turning the knob one step CW shows Signal A's edge arriving before Signal B's edge, with the marker line highlighting A's edge first
+  Stage 3: Turning the knob one step CCW shows the reverse: Signal B's edge arrives before Signal A's edge
+  Stage 4: The position counter and direction indicator update in sync with the completed step, tying the waveform directly to the chapter's <code>encoder_position += 1</code> / <code>-= 1</code> code</p>
+<p>Instructional Rationale: This concept sits between explaining what quadrature signals are and analyzing two signals to derive direction, so step-by-step controls ("Step CW" / "Step CCW") are provided instead of relying only on continuous dragging — the learner can freeze on a single step and see exactly which signal led, keeping concrete data visible rather than relying on a fast-moving animation.</p>
+<p>Responsive design: the knob and timelines stack vertically below 600px; timelines scale their horizontal span to the container width.</p>
+<p>Implementation: p5.js for the knob-drag interaction and the two-signal timeline; a small state machine generates only valid quadrature transitions (exactly one signal changes per step, never both at once) so the visualization always matches real encoder behavior.</p>
+</details>
+<h2 id="watching-a-parameter-change-live-live-parameter-tuning">Watching a Parameter Change Live: Live Parameter Tuning</h2>
+<p>Tracking an encoder's position, or reading a potentiometer's voltage, is only useful once that number actually changes something on screen. <strong>Live parameter tuning</strong> connects a continuous control's current value directly to one of Chapter 9's face parameters, updating the drawn face in real time as a student turns a knob — the same <code>map_range()</code> function from Chapter 13, now applied while the face is actively being watched rather than read once at startup.</p>
+<p>A bridge sentence before the code: this loop only recalculates <code>mouth_curve</code> when the encoder's position has actually changed since the last pass, mapping its running position count onto a sensible mouth-curve range and immediately redrawing the face with the new value.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">last_encoder_position</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">encoder_position</span> <span class="o">!=</span> <span class="n">last_encoder_position</span><span class="p">:</span>
+        <span class="n">state</span><span class="p">[</span><span class="s2">&quot;mouth_curve&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">map_range</span><span class="p">(</span><span class="n">encoder_position</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">last_encoder_position</span> <span class="o">=</span> <span class="n">encoder_position</span>
+
+    <span class="n">fb</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">BLACK</span><span class="p">)</span>
+    <span class="n">draw_face</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>Notice what makes this feel "live": the loop keeps redrawing every single pass regardless of whether the knob moved, so the instant <code>encoder_position</code> changes, the very next frame shows the new mouth curve — no separate "apply" step, no delay. A student turning the knob sees the mouth reshape under their fingers in real time, which is exactly the payoff Chapter 9's parameterization work was building toward all along.</p>
+<h2 id="confirming-what-just-happened-user-interface-feedback">Confirming What Just Happened: User Interface Feedback</h2>
+<p>A menu that changes something the instant a button is pressed still needs one more thing: proof, for the person operating it, that the press actually registered. <strong>User interface feedback</strong> is the general design principle that a good interface confirms what just happened, rather than leaving a user to wonder whether their input landed. Chapter 11's readability and design-rubric thinking applies directly here — a clearly readable expression is itself a form of feedback, but a menu can do even better.</p>
+<div class="admonition mascot-tip">
+<p class="admonition-title">Let the Face Be Its Own Confirmation</p>
+<p><img alt="Pixel gives a tip" class="mascot-admonition-img" src="../../img/mascot/tip.png" />
+The simplest feedback in this entire chapter costs nothing extra to build: the expression itself changing on screen <em>is</em> confirmation that a button press worked. A student pressing "next" and immediately seeing "sad" turn into "surprised" never has to wonder if anything happened.</p>
+</div>
+<p>Beyond the expression change itself, a few small techniques make a menu feel noticeably more responsive:</p>
+<ul>
+<li>Briefly flash the new expression's name as text on screen for half a second whenever the menu advances, so a student glancing away from the face for a moment still knows what changed.</li>
+<li>Use a short state-based animation trigger, like the surprised eyebrow flick from earlier in this chapter, as motion-based confirmation that is hard to miss even out of the corner of an eye.</li>
+<li>Reset the idle timer on every input, so a control that was just used never appears to have been ignored by the face suddenly drifting off into idle animation mid-adjustment.</li>
+<li>Give tuning mode a visible indicator — a small icon or label — so a knob turn that does nothing (because tuning mode is off) does not read as a broken control.</li>
+</ul>
+<h2 id="putting-it-all-together-a-complete-expression-menu">Putting It All Together: A Complete Expression Menu</h2>
+<p>Every concept from this chapter converges here: a debounced "next" button cycling through Chapter 10's named expressions, a debounced "tune" button toggling live parameter tuning on and off, a potentiometer adjusting the current expression's mouth curve only while tuning mode is active, and a default idle state the face falls back to after a stretch of no input at all.</p>
+<p>A bridge sentence before the code: this program follows the control mapping documented earlier — Button 1 advances the expression, Button 2 toggles tuning mode, and the potentiometer adjusts the live-tuned parameter — while an inactivity timer returns the face to its default idle state whenever nothing has been touched recently.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span><span class="p">,</span> <span class="n">ADC</span>
+
+<span class="c1"># ---- Hardware, following this chapter&#39;s documented control mapping ----</span>
+<span class="n">next_button</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">PULL_UP</span><span class="p">)</span>     <span class="c1"># Button 1: next expression</span>
+<span class="n">tune_button</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">PULL_UP</span><span class="p">)</span>     <span class="c1"># Button 2: toggle tuning mode</span>
+<span class="n">pot</span> <span class="o">=</span> <span class="n">ADC</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">26</span><span class="p">))</span>                             <span class="c1"># Live parameter tuning</span>
+
+<span class="c1"># ---- Expression data (Chapter 9&#39;s parameterized face-state dictionaries) ----</span>
+<span class="n">EXPRESSION_NAMES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;neutral&quot;</span><span class="p">,</span> <span class="s2">&quot;happy&quot;</span><span class="p">,</span> <span class="s2">&quot;sad&quot;</span><span class="p">,</span> <span class="s2">&quot;surprised&quot;</span><span class="p">,</span> <span class="s2">&quot;angry&quot;</span><span class="p">]</span>  <span class="c1"># full set has 13</span>
+<span class="n">EXPRESSIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;neutral&quot;</span><span class="p">:</span>   <span class="p">{</span><span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>   <span class="s2">&quot;mouth_curve&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="s2">&quot;eye_openness&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>
+    <span class="s2">&quot;happy&quot;</span><span class="p">:</span>     <span class="p">{</span><span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>   <span class="s2">&quot;mouth_curve&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>  <span class="s2">&quot;eye_openness&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">},</span>
+    <span class="s2">&quot;sad&quot;</span><span class="p">:</span>       <span class="p">{</span><span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;mouth_curve&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;eye_openness&quot;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">},</span>
+    <span class="s2">&quot;surprised&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>  <span class="s2">&quot;mouth_curve&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>  <span class="s2">&quot;eye_openness&quot;</span><span class="p">:</span> <span class="mf">1.3</span><span class="p">},</span>
+    <span class="s2">&quot;angry&quot;</span><span class="p">:</span>     <span class="p">{</span><span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;mouth_curve&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;eye_openness&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">DEBOUNCE_MS</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">IDLE_TIMEOUT_MS</span> <span class="o">=</span> <span class="mi">8000</span>
+
+<span class="n">current_index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tuning_mode</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">state</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">EXPRESSIONS</span><span class="p">[</span><span class="s2">&quot;neutral&quot;</span><span class="p">])</span>        <span class="c1"># default idle state at startup</span>
+
+<span class="n">last_next_state</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">last_tune_state</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">last_next_time</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">last_tune_time</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">last_activity_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">ticks_ms</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">enter_expression</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">current_index</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">last_activity_time</span>
+    <span class="n">current_index</span> <span class="o">=</span> <span class="n">index</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">EXPRESSIONS</span><span class="p">[</span><span class="n">EXPRESSION_NAMES</span><span class="p">[</span><span class="n">current_index</span><span class="p">]])</span>
+    <span class="n">last_activity_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">ticks_ms</span><span class="p">()</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">ticks_ms</span><span class="p">()</span>
+
+    <span class="c1"># --- Button 1: next expression, debounced with a polling cooldown ---</span>
+    <span class="n">next_state</span> <span class="o">=</span> <span class="n">next_button</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">next_state</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">last_next_state</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">ticks_diff</span><span class="p">(</span><span class="n">now</span><span class="p">,</span> <span class="n">last_next_time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">DEBOUNCE_MS</span><span class="p">:</span>
+            <span class="n">enter_expression</span><span class="p">((</span><span class="n">current_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">EXPRESSION_NAMES</span><span class="p">))</span>
+            <span class="n">last_next_time</span> <span class="o">=</span> <span class="n">now</span>
+    <span class="n">last_next_state</span> <span class="o">=</span> <span class="n">next_state</span>
+
+    <span class="c1"># --- Button 2: toggle live-tuning mode, debounced the same way ---</span>
+    <span class="n">tune_state</span> <span class="o">=</span> <span class="n">tune_button</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">tune_state</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">last_tune_state</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">ticks_diff</span><span class="p">(</span><span class="n">now</span><span class="p">,</span> <span class="n">last_tune_time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">DEBOUNCE_MS</span><span class="p">:</span>
+            <span class="n">tuning_mode</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">tuning_mode</span>
+            <span class="n">last_activity_time</span> <span class="o">=</span> <span class="n">now</span>
+            <span class="n">last_tune_time</span> <span class="o">=</span> <span class="n">now</span>
+    <span class="n">last_tune_state</span> <span class="o">=</span> <span class="n">tune_state</span>
+
+    <span class="c1"># --- Potentiometer: live parameter tuning, only while tuning_mode is on ---</span>
+    <span class="k">if</span> <span class="n">tuning_mode</span><span class="p">:</span>
+        <span class="n">raw_value</span> <span class="o">=</span> <span class="n">pot</span><span class="o">.</span><span class="n">read_u16</span><span class="p">()</span>
+        <span class="n">state</span><span class="p">[</span><span class="s2">&quot;mouth_curve&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">map_range</span><span class="p">(</span><span class="n">raw_value</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">65535</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># --- Default idle state: fall back to neutral after inactivity ---</span>
+    <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">ticks_diff</span><span class="p">(</span><span class="n">now</span><span class="p">,</span> <span class="n">last_activity_time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">IDLE_TIMEOUT_MS</span><span class="p">:</span>
+        <span class="n">enter_expression</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># back to &quot;neutral&quot;</span>
+
+    <span class="n">fb</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">BLACK</span><span class="p">)</span>
+    <span class="n">draw_face</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>Trace this loop the same way you traced Chapter 13's mode cycle: each button gets its own debounce cooldown so bounce never leaks through, <code>tuning_mode</code> acts as a gate that only lets the potentiometer touch <code>mouth_curve</code> while it is <code>True</code>, and the idle-timeout check quietly resets the whole menu to neutral if a person walks away mid-adjustment. Every one of this chapter's thirteen concepts has a line of code — or a design decision behind one — living somewhere in this loop.</p>
+<p>Clicking through a simulated version of this exact menu, rather than only reading the code, is the best way to feel how all these pieces click together into one responsive interface.</p>
+<h4 id="diagram-expression-menu-live-simulator">Diagram: Expression Menu Live Simulator</h4>
+<iframe src="../../sims/expression-menu-live-simulator/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Expression Menu Live Simulator</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> expression-menu-live-simulator<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Apply (L3) / Create (L6)
+Bloom Taxonomy Verb: demonstrate, construct</p>
+<p>Learning objective: Demonstrate a complete expression-menu program's behavior by operating simulated buttons and a knob to cycle expressions, trigger a state-based animation, and live-tune a parameter; optionally construct a custom control mapping by reassigning which control performs which function.</p>
+<p>Canvas layout:
+- Left 60% (responsive, roughly 320x320 at default width): a live preview face drawn from the same state-dictionary parameters taught in Chapter 9, plus a simulated two-button panel
+- Right 40%: current expression name label, tuning-mode indicator, control-mapping legend, and an "Advanced: remap controls" toggle</p>
+<p>Visual elements:
+- Preview face redrawn live from the current state dictionary (eyebrow_angle, mouth_curve, eye_openness)
+- Two simulated push buttons labeled by their currently mapped function (default "NEXT" and "TUNE")
+- A simulated rotary knob for live parameter tuning, enabled only while tuning mode is on and visibly dimmed when it is off
+- A name label that flashes the new expression's name for about 500ms every time the menu advances
+- An idle indicator appearing after a few seconds of no input, showing the face has returned to its default idle state</p>
+<p>Interactive controls:
+- Click "NEXT": advances to the next of 13 expressions, applies its full parameter dictionary, flashes the name label, and resets the idle timer
+- Click "TUNE": toggles live-tuning mode on/off
+- Drag the knob (only while tuning mode is on): live-adjusts the current expression's mouth_curve and updates the preview face immediately
+- Toggle "Advanced: remap controls": lets the learner drag function labels ("Next", "Tune", "Adjust") onto the two buttons and the knob, rebuilding the control mapping and immediately changing what each control does
+- Slider: idle timeout speed, so the default idle state can be observed without a long real wait</p>
+<p>Default parameters: expression index 0 ("neutral"), tuning mode off, idle timeout 8 simulated seconds, default control mapping (Button 1 = Next, Button 2 = Tune, Knob = Adjust)</p>
+<p>Behavior: clicking NEXT cycles current_index forward through the 13 expressions, applying that expression's parameter dictionary in one step; entering "surprised" briefly overshoots eyebrow_angle before settling, demonstrating the state-based animation trigger; leaving all controls untouched for the idle timeout returns the preview face to the default idle state; remapping controls in advanced mode changes which click or drag performs which function without changing the underlying expression data.</p>
+<p>Instructional Rationale: As the chapter's capstone interactive, this targets Apply by default — operate a working menu and observe cause and effect exactly as the chapter's final code example does — with an optional Create-level extension letting a student design their own control mapping and immediately see the consequences, matching this chapter's create-leaning learning outcome.</p>
+<p>Responsive design: preview face and controls stack vertically below 650px; the face canvas scales to its container width, and remapping drag targets rearrange into a stacked list on narrow screens.</p>
+<p>Implementation: p5.js for the preview face rendering, reusing the same parameterized drawing approach as Chapter 9, and for the simulated button/knob interactions; a JavaScript object mirrors the chapter's EXPRESSIONS dictionary so preview values match the MicroPython code exactly.</p>
+</details>
+<h2 id="chapter-summary">Chapter Summary</h2>
+<p>You now know how to combine debounced buttons, a rotary encoder's quadrature signal, and a default idle state into one complete expression menu that lets a person cycle through expressions and tune a parameter live.</p>
+<ul>
+<li>Button debounce solves contact bounce — a mechanical button's contacts physically bouncing for a few milliseconds — using a debounce time constant, typically 20-50ms, during which further changes are ignored.</li>
+<li>Input debouncing delay can be implemented as a ticks-based cooldown check in a polling loop, or as a short recheck delay inside an interrupt handler; both compare a debounce time constant against real elapsed time.</li>
+<li>A default idle state gives a face a sensible "home" — Chapter 12's blink-and-gaze idle animation — that it falls back to after a period without any input.</li>
+<li>A multi-mode menu, built as an expression selection menu, cycles forward through Chapter 10's 13 named expressions using a wraparound index, showing a live preview of each one as it is selected.</li>
+<li>A state-based animation trigger fires a short automatic animation, like a brief eyebrow overshoot, the moment a face enters a particular expression, before that expression's resting parameters take over.</li>
+<li>Control mapping design is a deliberate, documented decision about which physical control performs which function — this chapter mapped Button 1 to "next expression," Button 2 to "toggle tuning mode," and a potentiometer or encoder to "adjust the current parameter."</li>
+<li>A rotary encoder reports rotation through an encoder quadrature signal — two square waves offset from each other — and comparing which one changes first gives encoder direction detection; a running total from that comparison gives rotary encoder position tracking.</li>
+<li>Live parameter tuning connects an encoder's position or a potentiometer's mapped value directly to one of Chapter 9's face parameters, updating the drawn face in real time as a control is adjusted.</li>
+<li>User interface feedback — a flashing label, a state-based animation, or simply the expression itself changing — confirms to a user that their input was received, connecting back to Chapter 11's readability and design-rubric thinking.</li>
+</ul>
+<div class="admonition mascot-celebration">
+<p class="admonition-title">You Built a Real Interface</p>
+<p><img alt="Pixel celebrates" class="mascot-admonition-img" src="../../img/mascot/celebration.png" />
+Look at what just came together: debounced buttons, a quadrature-tracked knob, thirteen expressions, and a default idle state, all working as one menu a person can actually pick up and use. This is the moment a robot face stops being a program you watch, and becomes something you talk to.</p>
+</div>
+<details class="question">
+<summary>Self-Check: Why does an expression menu need both button debounce and a default idle state, even though they solve completely different problems? — Click to reveal</summary>
+<p>Button debounce and a default idle state solve different problems, but a menu without either one feels broken in its own way. Button debounce prevents a single physical press from being read as several rapid presses, because a mechanical button's contacts bounce for a few milliseconds when pressed; without it, one press of "next expression" can skip past two or three expressions at once. A default idle state solves a completely separate problem: what the face should do when nobody is touching any control at all. Without it, a face would either freeze on whatever expression was last selected, looking static and lifeless, or would need to be manually reset every time a person walked away. Together, they cover both ends of a menu's behavior — debounce makes sure every intended input is read correctly exactly once, and the default idle state makes sure the face still looks alive during the much longer stretches of time when no input is happening at all.</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

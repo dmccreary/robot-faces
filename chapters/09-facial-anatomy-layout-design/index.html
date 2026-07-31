@@ -1,0 +1,2608 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="How to plan a face's proportions and symmetry, then combine ellipse(), poly(), and quadrant fill code into one reusable, parameterized draw_face() function.">
+      
+      
+        <meta name="author" content="Dan McCreary">
+      
+      
+      
+        <link rel="prev" href="../08-framebuf-version-history/">
+      
+      
+        <link rel="next" href="../10-emotion-theory-core-expressions/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Facial Anatomy & Layout Design - Robot Faces</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/mascot.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-FPTNK1XNJR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-FPTNK1XNJR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-FPTNK1XNJR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#642580" data-md-color-accent="#41BAC1">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#facial-anatomy-layout-design" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robot Faces" class="md-header__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Faces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Facial Anatomy & Layout Design
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robot Faces" class="md-nav__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/coderdojo-logo.jpg" alt="logo">
+
+    </a>
+    Robot Faces
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Chapters
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of Chapters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-hardware-electronics-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Hardware & Electronics Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-micropython-fundamentals-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-micropython-fundamentals-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-display-coordinate-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-basic-drawing-primitives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-ellipse-polygon-drawing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Ellipse & Polygon Drawing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-framebuf-version-history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-face-built-from-everything-you-know" class="md-nav__link">
+    <span class="md-ellipsis">
+      One Face, Built From Everything You Know
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-boundary-of-a-face-face-outline" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Boundary of a Face: Face Outline
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#planning-before-you-draw-face-layout-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      Planning Before You Draw: Face Layout Grid
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Planning Before You Draw: Face Layout Grid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-face-layout-grid-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Face Layout Grid Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-much-room-each-feature-gets-facial-proportion" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Much Room Each Feature Gets: Facial Proportion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mirror-image-facial-symmetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mirror Image: Facial Symmetry
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mirror Image: Facial Symmetry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-facial-symmetry-mirror-demonstrator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Facial Symmetry Mirror Demonstrator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-circles-placed-on-purpose-eye-placement-eye-size-and-eye-spacing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Two Circles, Placed on Purpose: Eye Placement, Eye Size, and Eye Spacing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-point-of-focus-pupil-and-pupil-size-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Point of Focus: Pupil and Pupil Size Parameter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#half-closed-and-sleepy-eyelid-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Half-Closed and Sleepy: Eyelid Representation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shaping-a-mood-eyebrow-shape-and-eyebrow-angle-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shaping a Mood: Eyebrow Shape and Eyebrow Angle Parameter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#curving-a-mouth-mouth-shape-mouth-curvature-parameter-and-bottom-half-mouth-curve" class="md-nav__link">
+    <span class="md-ellipsis">
+      Curving a Mouth: Mouth Shape, Mouth Curvature Parameter, and Bottom-Half Mouth Curve
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#small-but-not-unimportant-nose-representation-and-cheek-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Small But Not Unimportant: Nose Representation and Cheek Representation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#same-code-every-screen-feature-scaling-for-screen-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      Same Code, Every Screen: Feature Scaling For Screen Size
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-design-principle-not-just-a-mechanic-feature-independence" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Design Principle, Not Just a Mechanic: Feature Independence
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bundling-the-numbers-face-state-data-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bundling the Numbers: Face State Data Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-sensible-starting-point-default-face-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Sensible Starting Point: Default Face Parameters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-big-idea-parameterized-face-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Big Idea: Parameterized Face Design
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-every-piece-together-the-draw-face-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting Every Piece Together: The Draw Face Function
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Putting Every Piece Together: The Draw Face Function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-face-parameter-slider-playground" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Face Parameter Slider Playground
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-emotion-theory-core-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Emotion Theory & the Core Expression Set
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-expression-design-readability-hri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-animating-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Animating Expressions: Timing & Motion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-interactive-controls-inputs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-expression-menu-live-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-porting-faces-color-display/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Porting Faces to a Color Display
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-computational-thinking-capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lessons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Lessons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/history-of-robot-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    History of Robot Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/screen-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/drawing-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Drawing Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/ellipse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ellipse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/polygon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polygon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/basic-face-layouts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Face Layouts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eye-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lessons/eyebrows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eyebrows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion-types.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emotion Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../parts-lists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Faces Parts List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About The Robot Faces Book
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Learning Graph
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Learning Graph
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/starting-concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Starting Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/course-description-assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course Description Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept List
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quality-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/taxonomy-distribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy Distribution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/mascot-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mascot Test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Stories
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Stories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stories/anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-face-built-from-everything-you-know" class="md-nav__link">
+    <span class="md-ellipsis">
+      One Face, Built From Everything You Know
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-boundary-of-a-face-face-outline" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Boundary of a Face: Face Outline
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#planning-before-you-draw-face-layout-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      Planning Before You Draw: Face Layout Grid
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Planning Before You Draw: Face Layout Grid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-face-layout-grid-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Face Layout Grid Visualizer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-much-room-each-feature-gets-facial-proportion" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Much Room Each Feature Gets: Facial Proportion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mirror-image-facial-symmetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mirror Image: Facial Symmetry
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mirror Image: Facial Symmetry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-facial-symmetry-mirror-demonstrator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Facial Symmetry Mirror Demonstrator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-circles-placed-on-purpose-eye-placement-eye-size-and-eye-spacing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Two Circles, Placed on Purpose: Eye Placement, Eye Size, and Eye Spacing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-point-of-focus-pupil-and-pupil-size-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Point of Focus: Pupil and Pupil Size Parameter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#half-closed-and-sleepy-eyelid-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Half-Closed and Sleepy: Eyelid Representation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shaping-a-mood-eyebrow-shape-and-eyebrow-angle-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shaping a Mood: Eyebrow Shape and Eyebrow Angle Parameter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#curving-a-mouth-mouth-shape-mouth-curvature-parameter-and-bottom-half-mouth-curve" class="md-nav__link">
+    <span class="md-ellipsis">
+      Curving a Mouth: Mouth Shape, Mouth Curvature Parameter, and Bottom-Half Mouth Curve
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#small-but-not-unimportant-nose-representation-and-cheek-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Small But Not Unimportant: Nose Representation and Cheek Representation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#same-code-every-screen-feature-scaling-for-screen-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      Same Code, Every Screen: Feature Scaling For Screen Size
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-design-principle-not-just-a-mechanic-feature-independence" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Design Principle, Not Just a Mechanic: Feature Independence
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bundling-the-numbers-face-state-data-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bundling the Numbers: Face State Data Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-sensible-starting-point-default-face-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Sensible Starting Point: Default Face Parameters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-big-idea-parameterized-face-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Big Idea: Parameterized Face Design
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-every-piece-together-the-draw-face-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting Every Piece Together: The Draw Face Function
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Putting Every Piece Together: The Draw Face Function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram-face-parameter-slider-playground" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagram: Face Parameter Slider Playground
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chapter Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="facial-anatomy-layout-design">Facial Anatomy &amp; Layout Design</h1>
+<h2 id="summary">Summary</h2>
+<p>This chapter shows how to decompose a robot face into independently parameterized parts — face outline, eyes, pupils, eyebrows, mouth, and an optional nose — and combine them into a single, reusable draw_face() function driven by a face-state data structure. After completing this chapter, students will be able to write a parameterized draw_face() function and explain why independent, parameterized features make a face design easier to animate and extend.</p>
+<h2 id="concepts-covered">Concepts Covered</h2>
+<p>This chapter covers the following 23 concepts from the learning graph:</p>
+<ol>
+<li>Face Outline</li>
+<li>Eye Placement</li>
+<li>Eye Size Parameter</li>
+<li>Eye Spacing</li>
+<li>Pupil</li>
+<li>Pupil Size Parameter</li>
+<li>Eyebrow Shape</li>
+<li>Eyebrow Angle Parameter</li>
+<li>Mouth Shape</li>
+<li>Mouth Curvature Parameter</li>
+<li>Bottom-Half Mouth Curve</li>
+<li>Nose Representation</li>
+<li>Facial Symmetry</li>
+<li>Facial Proportion</li>
+<li>Draw Face Function</li>
+<li>Parameterized Face Design</li>
+<li>Face Layout Grid</li>
+<li>Feature Independence</li>
+<li>Eyelid Representation</li>
+<li>Cheek Representation</li>
+<li>Face State Data Structure</li>
+<li>Default Face Parameters</li>
+<li>Feature Scaling For Screen Size</li>
+</ol>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This chapter builds on concepts from:</p>
+<ul>
+<li><a href="../03-micropython-fundamentals-1/">Chapter 3: MicroPython Fundamentals I: Syntax, Data &amp; Loops</a></li>
+<li><a href="../04-micropython-fundamentals-2/">Chapter 4: MicroPython Fundamentals II: Functions &amp; the FrameBuf Module</a></li>
+<li><a href="../05-display-coordinate-systems/">Chapter 5: Display &amp; Coordinate Systems</a></li>
+<li><a href="../07-ellipse-polygon-drawing/">Chapter 7: Ellipse &amp; Polygon Drawing</a></li>
+</ul>
+<hr />
+<h2 id="one-face-built-from-everything-you-know">One Face, Built From Everything You Know</h2>
+<div class="admonition mascot-welcome">
+<p class="admonition-title">Time to Build a Whole Face</p>
+<p><img alt="Pixel waves hello" class="mascot-admonition-img" src="../../img/mascot/welcome.png" />
+Six chapters of coordinates, frame buffers, and drawing calls have all been pointing at this moment. This chapter is where separate exercises stop being separate — eyes, eyebrows, and a mouth combine into one complete, reusable face.</p>
+</div>
+<p>Chapter 6 taught you rectangles and lines; Chapter 7 taught you <code>ellipse()</code> and <code>poly()</code>, including the quadrant fill code that draws just part of a curve. Every one of those tools still works exactly the way you learned it. What changes in this chapter is scale: instead of drawing one shape at a time, you will plan an entire face's layout, then write one function that draws every feature in the right place, at the right size, in the right order.</p>
+<h2 id="the-boundary-of-a-face-face-outline">The Boundary of a Face: Face Outline</h2>
+<p>Every drawing needs an edge to work inside, and a robot's face is no exception. The <strong>face outline</strong> is the overall shape or boundary that contains a face's features — the visible edge a viewer's eye reads as "this is where the face is."</p>
+<p>What that boundary actually looks like depends heavily on which display a robot uses. On the round 240x240 color display Chapter 15 introduces later, the physical screen itself is already circular, so the face outline needs no code at all — the glass edge of the display does that job for free. On the rectangular 128x64 OLED, a face outline is more of a choice: you can leave it implicit, letting the rectangular screen edge simply be the boundary, or you can draw a soft outlined ellipse just inside the edges to suggest a rounder, friendlier head shape.</p>
+<p>A bridge sentence before the code: this example draws an optional face outline on the OLED as a large outlined ellipse, leaving a small margin so the boundary never touches the physical screen edge.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">FACE_OUTLINE_MARGIN</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># pixels of breathing room from the screen edge</span>
+
+<span class="k">def</span> <span class="nf">draw_face_outline</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span>
+        <span class="n">width</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">width</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">FACE_OUTLINE_MARGIN</span><span class="p">,</span>
+        <span class="n">height</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">FACE_OUTLINE_MARGIN</span><span class="p">,</span>
+        <span class="n">color</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Notice that <code>draw_face_outline()</code> never mentions the number 128 or 64 directly — it takes <code>width</code> and <code>height</code> as arguments instead. That habit matters far more than it looks like it does right now, and this whole chapter keeps coming back to it.</p>
+<h2 id="planning-before-you-draw-face-layout-grid">Planning Before You Draw: Face Layout Grid</h2>
+<p>Jumping straight into coordinates for eyes, eyebrows, and a mouth invites a cluttered, lopsided result — features fighting each other for space instead of sitting where a viewer expects them. A <strong>face layout grid</strong> is a simple mental or literal grid drawn across the display's width and height, used to plan where each feature sits before any drawing code runs.</p>
+<p>You do not need graph paper or special software to use a face layout grid. Sketching a rectangle on scratch paper, dividing it into rough horizontal bands — a margin at the top, a band for eyes, a band for a mouth, a margin at the bottom — is enough to catch layout mistakes before they become fifteen lines of <code>ellipse()</code> calls that need reworking.</p>
+<p>Seeing a grid overlaid on a real face, with each band's purpose labeled, makes this planning habit far more concrete than a written description alone.</p>
+<h4 id="diagram-face-layout-grid-visualizer">Diagram: Face Layout Grid Visualizer</h4>
+<iframe src="../../sims/face-layout-grid-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Face Layout Grid Visualizer</summary>
+<p>Type: diagram
+<strong>sim-id:</strong> face-layout-grid-visualizer<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Understand (L2)
+Bloom Taxonomy Verb: interpret, explain</p>
+<p>Learning objective: Interpret how a face layout grid divides display height into margin, eye, nose/cheek, and mouth bands by hovering each band to reveal its proportion, and explain why a robot face adapts real face-proportion conventions rather than copying them exactly.</p>
+<p>Canvas layout:
+- Left 65% (responsive, roughly 420x300 at default width): a rectangle matching a 128x64 OLED's aspect ratio, overlaid with horizontal guideline bands, containing a simple neutral face drawn to fit the bands
+- Right 35%: a legend listing each band, a display-shape toggle, and an infobox</p>
+<p>Visual elements:
+- Five horizontal bands stacked top to bottom: top margin, eye band, nose/cheek band, mouth band, bottom margin, each in a distinct pale color
+- A simple neutral face (two eyes, a flat eyebrow each, a small flat mouth) drawn so each feature sits inside its intended band
+- Percentage labels on each band showing what fraction of the total height it occupies
+- An infobox that displays the hovered band's name, percentage, and a one-sentence note on why a robot face uses that proportion</p>
+<p>Interactive controls:
+- Hovering any band highlights it with a brighter border and updates the infobox with its name, height percentage, and purpose
+- Toggle: "Display shape: 128x64 OLED / 240x240 Round" — re-renders the grid and face at the new aspect ratio, keeping each band's percentage of height the same
+- "Show real-face reference lines" checkbox overlays a faint classic portrait guideline (eyes at the vertical midpoint) for comparison</p>
+<p>Default parameters: 128x64 OLED shape selected, no band hovered, reference lines off</p>
+<p>Behavior: hovering a band immediately highlights it and populates the infobox; toggling the display shape re-renders the entire grid and face at new pixel dimensions while keeping every band's percentage of height identical, visually demonstrating that proportions — not raw pixel counts — are what a layout grid actually plans.</p>
+<p>Instructional Rationale: An Understand-level objective calling for interpretation and explanation is best served by a hover-to-reveal exploration with concrete percentage data at each stage, rather than a continuous animation, so the learner can pause on any single band and connect it to a specific, stated reason.</p>
+<p>Responsive design: legend and infobox move below the canvas on viewports narrower than 600 pixels; the grid rectangle scales to fill its container's width while preserving the selected display's aspect ratio.</p>
+<p>Implementation: p5.js for band rendering and the aspect-ratio toggle; band percentages are stored as constants shared between the two display-shape renders so the proportions never drift between toggles.</p>
+</details>
+<h2 id="how-much-room-each-feature-gets-facial-proportion">How Much Room Each Feature Gets: Facial Proportion</h2>
+<p>A layout grid only helps once you know roughly how big each band should be, and that is exactly what <strong>facial proportion</strong> describes: roughly how much of a display's height and width gets reserved for eyes, for a mouth, and for margins around both. Classic portrait drawing has taught this kind of proportion for centuries — eyes near the vertical middle of a head, a nose and mouth filling out the lower half — and a robot face borrows that convention loosely, adapted for a much simpler cartoon-style design.</p>
+<p>The table below is a starting point, not a rulebook — every emotion later chapters teach will nudge some of these numbers around.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Classic Portrait Convention</th>
+<th>Robot Face Adaptation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyes</td>
+<td>roughly at the head's vertical midpoint</td>
+<td>placed at or slightly above the display's vertical center</td>
+</tr>
+<tr>
+<td>Nose and cheeks</td>
+<td>occupy the middle third of the face</td>
+<td>a thin, often minimal band between the eyes and the mouth</td>
+</tr>
+<tr>
+<td>Mouth</td>
+<td>sits in the lower third of the face</td>
+<td>positioned in the lower third of the display's height</td>
+</tr>
+<tr>
+<td>Margins</td>
+<td>hairline and chin edges</td>
+<td>a consistent top and bottom gap so no feature touches the screen edge</td>
+</tr>
+</tbody>
+</table>
+<p>Treat these as reasonable defaults to start from, not exact requirements — a robot face with eyes set slightly higher or lower than "textbook" proportion can still look completely natural, as long as the choice is deliberate rather than accidental.</p>
+<h2 id="mirror-image-facial-symmetry">Mirror Image: Facial Symmetry</h2>
+<p>Look at almost any cartoon face, real face, or emoji, and one pattern jumps out immediately: the left and right sides mirror each other. <strong>Facial symmetry</strong> is the simplifying assumption that most facial features mirror left-right around a vertical centerline running down the middle of the display — useful because it means you only ever have to work out one side's math and reuse it for the other.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">Compute Once, Mirror Once</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Here's the payoff of facial symmetry: you never have to think through where the right eye goes as its own separate problem. Work out the left eye's x-position relative to the center, then flip the sign of that distance for the right eye. One calculation, reflected — half the thinking, for a face that still looks correctly balanced.</p>
+</div>
+<p>A bridge sentence before the code: this example writes a small helper function that reflects any x-coordinate across a given centerline, then uses it to compute a right eye's position purely from a left eye's position.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">mirror_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">center_x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reflect an x-coordinate across the face&#39;s vertical centerline.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">center_x</span> <span class="o">+</span> <span class="p">(</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">center_x</span> <span class="o">=</span> <span class="mi">64</span>                 <span class="c1"># horizontal center of a 128-pixel-wide OLED</span>
+<span class="n">left_eye_x</span> <span class="o">=</span> <span class="mi">44</span>
+<span class="n">right_eye_x</span> <span class="o">=</span> <span class="n">mirror_x</span><span class="p">(</span><span class="n">left_eye_x</span><span class="p">,</span> <span class="n">center_x</span><span class="p">)</span>   <span class="c1"># 84</span>
+</code></pre></div></td></tr></table></div>
+<p>Facial symmetry is a simplification, not a law of nature — a wink, a raised single eyebrow, or a sideways glance all break it on purpose, and Chapter 11 explores exactly those asymmetrical expressions. For now, treat symmetry as the default behavior a neutral face follows, and something you deliberately override only when an expression calls for it.</p>
+<p>Dragging one eye and watching its mirror image update automatically makes the reflection math behind facial symmetry click far faster than reading a formula.</p>
+<h4 id="diagram-facial-symmetry-mirror-demonstrator">Diagram: Facial Symmetry Mirror Demonstrator</h4>
+<iframe src="../../sims/facial-symmetry-mirror-demonstrator/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Facial Symmetry Mirror Demonstrator</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> facial-symmetry-mirror-demonstrator<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Apply (L3)
+Bloom Taxonomy Verb: demonstrate, apply</p>
+<p>Learning objective: Demonstrate facial symmetry by adjusting one eye's x-position and size, and apply the mirroring rule to predict and verify how the opposite eye updates automatically around the vertical centerline.</p>
+<p>Canvas layout:
+- Left 65% (responsive, roughly 420x300 at default width): a face outline on a simulated frame buffer, with a dashed vertical centerline and two eyes
+- Right 35%: sliders controlling the left eye only, a "Break symmetry" toggle, and a live code readout showing the <code>mirror_x()</code> calculation</p>
+<p>Visual elements:
+- A face outline with a dashed vertical centerline drawn down the middle
+- A left eye the learner directly controls and a right eye that mirrors it
+- A live readout: <code>mirror_x(44, 64) = 84</code>, updating as the left eye moves
+- When "Break symmetry" is enabled, independent sliders appear for the right eye too, and the centerline label changes to "Symmetry off"</p>
+<p>Interactive controls:
+- Slider: left eye x-offset from center (range -40 to -5)
+- Slider: left eye size (range 4-16)
+- Toggle: "Break symmetry" (default off) — reveals independent right-eye sliders when on
+- "Reset to Symmetric" button restores mirrored behavior and default positions</p>
+<p>Default parameters: symmetry on, left eye x-offset -20 from center, eye size 8</p>
+<p>Behavior: moving either left-eye slider immediately redraws both eyes, with the right eye's position and size recalculated through <code>mirror_x()</code> every frame; enabling "Break symmetry" freezes the right eye's current mirrored values into independent sliders so the learner can compare a symmetric face against a deliberately asymmetric one side by side.</p>
+<p>Instructional Rationale: An Apply-level objective calling for direct parameter manipulation is best served by immediate, linked visual feedback, so the learner can form and test a prediction about the mirrored eye's position before the redraw confirms or corrects it.</p>
+<p>Responsive design: control panel moves below the canvas on viewports narrower than 600 pixels; the face view scales to fill its container's width while preserving the OLED's 2:1 aspect ratio.</p>
+<p>Implementation: p5.js for face rendering and the live <code>mirror_x()</code> calculation; the independent right-eye state used by "Break symmetry" is stored separately from the mirrored value so toggling back to symmetric mode can restore it exactly.</p>
+</details>
+<h2 id="two-circles-placed-on-purpose-eye-placement-eye-size-and-eye-spacing">Two Circles, Placed on Purpose: Eye Placement, Eye Size, and Eye Spacing</h2>
+<p>With a layout grid, a proportion plan, and a mirroring rule in place, actual eye-drawing code becomes almost simple. <strong>Eye placement</strong> means positioning both eyes using <code>ellipse()</code> from Chapter 7, with every value that controls where and how big they are exposed as a parameter, rather than typed in as fixed numbers.</p>
+<p>Three specific parameters do the real work. The <strong>eye size parameter</strong> controls each eye's radius, exactly the <code>xradius</code>/<code>yradius</code> arguments Chapter 7 introduced for <code>fb.ellipse()</code>. The <strong>eye spacing</strong> parameter controls the horizontal gap between the two eyes' centers — a single number that, combined with facial symmetry, determines both eyes' x-positions at once.</p>
+<p>A bridge sentence before the code: this function draws both eyes as filled circles, computing each eye's x-position from a shared center point and a spacing value instead of hardcoding two separate coordinates.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">draw_eyes</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">center_x</span><span class="p">,</span> <span class="n">eye_y</span><span class="p">,</span> <span class="n">eye_size</span><span class="p">,</span> <span class="n">eye_spacing</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+    <span class="n">left_x</span> <span class="o">=</span> <span class="n">center_x</span> <span class="o">-</span> <span class="n">eye_spacing</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">right_x</span> <span class="o">=</span> <span class="n">center_x</span> <span class="o">+</span> <span class="n">eye_spacing</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">left_x</span><span class="p">,</span> <span class="n">eye_y</span><span class="p">,</span> <span class="n">eye_size</span><span class="p">,</span> <span class="n">eye_size</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">right_x</span><span class="p">,</span> <span class="n">eye_y</span><span class="p">,</span> <span class="n">eye_size</span><span class="p">,</span> <span class="n">eye_size</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Every argument to <code>draw_eyes()</code> is a parameter, not a constant baked into the function body. Call <code>draw_eyes(fb, 64, 30, 8, 40, WHITE)</code> for a normal-looking pair of eyes, or call it again with <code>eye_spacing=20</code> for eyes set close together, and the exact same function body produces a completely different look.</p>
+<h2 id="a-point-of-focus-pupil-and-pupil-size-parameter">A Point of Focus: Pupil and Pupil Size Parameter</h2>
+<p>An eye without a pupil reads as a blank circle — friendly enough, but expressionless, with nothing for a viewer to focus on. A <strong>pupil</strong> is a smaller ellipse drawn centered, or deliberately offset, inside each eye, giving the face something concrete for a viewer's own eyes to land on. The <strong>pupil size parameter</strong> controls how large that inner ellipse is relative to the eye that contains it.</p>
+<p>A bridge sentence before the code: this function draws both pupils, each offset from center by the same <code>gaze_offset_x</code> value, a small preview of the gaze-direction animation Chapter 12 builds later.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">draw_pupils</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">center_x</span><span class="p">,</span> <span class="n">eye_y</span><span class="p">,</span> <span class="n">eye_spacing</span><span class="p">,</span> <span class="n">pupil_size</span><span class="p">,</span> <span class="n">gaze_offset_x</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+    <span class="n">left_x</span> <span class="o">=</span> <span class="n">center_x</span> <span class="o">-</span> <span class="n">eye_spacing</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">gaze_offset_x</span>
+    <span class="n">right_x</span> <span class="o">=</span> <span class="n">center_x</span> <span class="o">+</span> <span class="n">eye_spacing</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">gaze_offset_x</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">left_x</span><span class="p">,</span> <span class="n">eye_y</span><span class="p">,</span> <span class="n">pupil_size</span><span class="p">,</span> <span class="n">pupil_size</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">right_x</span><span class="p">,</span> <span class="n">eye_y</span><span class="p">,</span> <span class="n">pupil_size</span><span class="p">,</span> <span class="n">pupil_size</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>With <code>gaze_offset_x</code> left at 0, both pupils sit dead-center in their eyes, looking straight ahead — the setting every default, neutral face uses. Nudging that same parameter a few pixels left or right shifts both pupils together, since they share one offset value, previewing exactly how Chapter 12 will animate a robot's gaze without touching a single line of this drawing code.</p>
+<h2 id="half-closed-and-sleepy-eyelid-representation">Half-Closed and Sleepy: Eyelid Representation</h2>
+<p>Not every expression needs a fully open, wide circle of an eye — a tired, relaxed, or content robot often needs an eye that looks partway shut. <strong>Eyelid representation</strong> reuses Chapter 7's quadrant fill code directly: redrawing the top portion of an eye's ellipse in the background color simulates a lowered lid without needing any new drawing method at all.</p>
+<p>A bridge sentence before the code: this function draws a lowered eyelid by redrawing the top half of an already-drawn eye ellipse in the background color, the exact quadrant-mask technique Chapter 7's closing example used.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">TOP_HALF</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span>   <span class="c1"># upper-left + upper-right quadrants, from Chapter 7</span>
+
+<span class="k">def</span> <span class="nf">draw_eyelid</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eye_size</span><span class="p">,</span> <span class="n">background_color</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cover the top half of an eye with the background color to simulate a lowered lid.&quot;&quot;&quot;</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eye_size</span><span class="p">,</span> <span class="n">eye_size</span><span class="p">,</span> <span class="n">background_color</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">TOP_HALF</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Calling <code>draw_eyelid()</code> right after <code>draw_eyes()</code> in a draw sequence produces a half-closed look with a single extra function call — no new shape, no new method, just the same quadrant mask idea from last chapter aimed at a new job.</p>
+<h2 id="shaping-a-mood-eyebrow-shape-and-eyebrow-angle-parameter">Shaping a Mood: Eyebrow Shape and Eyebrow Angle Parameter</h2>
+<p>Chapter 7's triangle eyebrow shape technique — a three-point <code>fb.poly()</code> triangle instead of a flat rectangle — is exactly what a robot face needs, because a slanted triangle reads as far more emotional than a straight bar ever could. <strong>Eyebrow shape</strong> is that triangle; the <strong>eyebrow angle parameter</strong> is the single number that controls how sharply it tilts, so the same drawing code can produce a neutral, raised, or furrowed brow just by changing one value.</p>
+<p>A bridge sentence before the code: this function builds an eyebrow's point array from a width, a height, and an angle in degrees, tilting the triangle's outer points up or down based on that angle.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">array</span> <span class="kn">import</span> <span class="n">array</span>
+
+<span class="k">def</span> <span class="nf">build_eyebrow_points</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">angle_degrees</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a 3-point array for one eyebrow triangle tilted by angle_degrees.&quot;&quot;&quot;</span>
+    <span class="n">tilt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">height</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle_degrees</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">height</span> <span class="o">-</span> <span class="n">tilt</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">+</span> <span class="n">tilt</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">draw_eyebrow</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">angle_degrees</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="n">build_eyebrow_points</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">angle_degrees</span><span class="p">)</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Calling <code>draw_eyebrow(fb, 15, 10, 20, 6, 0, WHITE)</code> draws a flat, neutral brow. Changing only the fifth argument to <code>20</code> raises the outer edge for a curious, surprised look; changing it to <code>-20</code> drops the outer edge for a furrowed, serious one — the same function, the same point count, one parameter doing all the emotional work.</p>
+<div class="admonition mascot-warning">
+<p class="admonition-title">Hardcoded Numbers Can't Change Their Mind</p>
+<p><img alt="Pixel warns you" class="mascot-admonition-img" src="../../img/mascot/warning.png" />
+It is tempting to skip the angle parameter entirely and just type in the exact point array for "the angry eyebrow" you want right now. That works — once. The moment you need a slightly less furrowed version, or want the same shape mirrored for a wink, you would have to redo that point array by hand from scratch. A parameter you can change with one number is worth the extra few lines of setup every single time.</p>
+</div>
+<h2 id="curving-a-mouth-mouth-shape-mouth-curvature-parameter-and-bottom-half-mouth-curve">Curving a Mouth: Mouth Shape, Mouth Curvature Parameter, and Bottom-Half Mouth Curve</h2>
+<p>A mouth communicates as much as eyes and eyebrows combined, and it turns out to need nothing more than a shape you already know. <strong>Mouth shape</strong> on a robot face is almost always a <strong>bottom-half mouth curve</strong> — an ellipse drawn with only its bottom two quadrants filled, using the exact <code>BOTTOM_HALF</code> mask Chapter 7 introduced. A smile is a bottom-half ellipse bulging downward; a frown is that same technique inverted, using the top half instead, shifted lower on the screen.</p>
+<p>The <strong>mouth curvature parameter</strong> controls how pronounced that curve is — in practice, the ellipse's <code>yradius</code> for the mouth. A small curvature value produces a nearly flat line, close to the neutral mouth Chapter 6 drew with <code>fb.hline()</code>; a large value produces a deep, obvious smile or frown.</p>
+<p>A bridge sentence before the code: this function draws a smiling mouth when curvature is positive and a frowning mouth when curvature is negative, reusing one quadrant mask for the smile and its opposite for the frown.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">BOTTOM_HALF</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">8</span>   <span class="c1"># lower-left + lower-right quadrants</span>
+<span class="n">TOP_HALF</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span>       <span class="c1"># upper-left + upper-right quadrants</span>
+
+<span class="k">def</span> <span class="nf">draw_mouth</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">center_x</span><span class="p">,</span> <span class="n">mouth_y</span><span class="p">,</span> <span class="n">mouth_width</span><span class="p">,</span> <span class="n">curvature</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Positive curvature draws a smile; negative curvature draws a frown.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">curvature</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">mouth_y</span><span class="p">,</span> <span class="n">mouth_width</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">curvature</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">BOTTOM_HALF</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">mouth_y</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">curvature</span><span class="p">),</span> <span class="n">mouth_width</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">curvature</span><span class="p">),</span> <span class="n">color</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">TOP_HALF</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>A <code>curvature</code> of <code>0</code> is a special case worth noticing: <code>yradius</code> becomes 0, so the "curve" flattens into something very close to a straight line — a calm, neutral mouth, without needing a separate function or a separate drawing method at all.</p>
+<h2 id="small-but-not-unimportant-nose-representation-and-cheek-representation">Small But Not Unimportant: Nose Representation and Cheek Representation</h2>
+<p>Not every feature on a real face carries equal emotional weight, and a robot face can safely admit that. <strong>Nose representation</strong> is usually just a short vertical line, a single dot, or a tiny <code>poly()</code> shape — enough to suggest a nose exists without demanding much visual attention. <strong>Cheek representation</strong> is similarly minimal: a couple of small dots or short marks placed below the eyes, often used later for a blush effect rather than any structural purpose.</p>
+<p>A bridge sentence before the code: this pair of small functions adds a simple tick-mark nose and two single-pixel cheek marks to a face, using the smallest tools this book has covered.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">draw_nose</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">center_x</span><span class="p">,</span> <span class="n">nose_y</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">vline</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">nose_y</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>   <span class="c1"># a short vertical tick is often all a nose needs</span>
+
+<span class="k">def</span> <span class="nf">draw_cheeks</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">center_x</span><span class="p">,</span> <span class="n">cheek_y</span><span class="p">,</span> <span class="n">eye_spacing</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">eye_spacing</span><span class="p">,</span> <span class="n">cheek_y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">center_x</span> <span class="o">+</span> <span class="n">eye_spacing</span><span class="p">,</span> <span class="n">cheek_y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Both features are optional in nearly every face this book builds, and that is intentional. Chapters 10 and 11 explain why: research on emotional expression consistently shows eyes, eyebrows, and a mouth carry almost all of a face's readable emotion, while a nose and cheeks mostly just help a face look a little more face-shaped.</p>
+<h2 id="same-code-every-screen-feature-scaling-for-screen-size">Same Code, Every Screen: Feature Scaling For Screen Size</h2>
+<p>Every function built so far in this chapter takes a coordinate or a size as a plain number — 8 pixels for an eye, 40 pixels for spacing. Those numbers were chosen for a 128x64 OLED, and they will look completely wrong, tiny and clustered in one corner, on the much larger 240x240 color display Chapter 15 introduces. <strong>Feature scaling for screen size</strong> solves this by computing every parameter as a fraction of the display's actual width and height, instead of a fixed pixel count.</p>
+<p>A bridge sentence before the code: this function builds a full set of face parameters from nothing but a target width and height, so the exact same face code produces a correctly proportioned result on either display.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">default_state_for_display</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;eye_size&quot;</span><span class="p">:</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s2">&quot;eye_spacing&quot;</span><span class="p">:</span> <span class="n">width</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;eye_y&quot;</span><span class="p">:</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="s2">&quot;pupil_size&quot;</span><span class="p">:</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="s2">&quot;mouth_width&quot;</span><span class="p">:</span> <span class="n">width</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;mouth_y&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">height</span> <span class="o">*</span> <span class="mf">0.75</span><span class="p">),</span>
+    <span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Call <code>default_state_for_display(128, 64)</code> and every value comes out sized for the OLED; call <code>default_state_for_display(240, 240)</code> and every value scales up proportionally for the round display, without a single number in the function itself needing to change. This is the same lesson <code>draw_face_outline()</code> demonstrated earlier in this chapter, just applied to every feature at once.</p>
+<h2 id="a-design-principle-not-just-a-mechanic-feature-independence">A Design Principle, Not Just a Mechanic: Feature Independence</h2>
+<p>Every function this chapter has built so far shares one quiet property worth naming directly. <strong>Feature independence</strong> means each feature's drawing code should not depend on the internal details of any other feature's code — <code>draw_eyebrow()</code> does not need to know how <code>draw_mouth()</code> computes its curve, and <code>draw_eyes()</code> does not care what <code>draw_nose()</code> looks like.</p>
+<p>This is a design principle, not just a technical requirement, and it pays off in concrete ways:</p>
+<ul>
+<li>A feature can be redesigned or replaced entirely — a new eyebrow shape, a different mouth style — without touching any other feature's function</li>
+<li>Individual features can be tested and debugged on their own, one <code>ellipse()</code> or <code>poly()</code> call at a time, instead of untangling one giant block of code</li>
+<li>New features can be added later — Chapter 11's blush marks, Chapter 12's animated blinking — by writing one new function, not editing every existing one</li>
+</ul>
+<p>Feature independence is what makes the face state dictionary and the draw face function, both coming up next, actually manageable. A tangled web of features that all secretly depend on each other's internal variables would make both of those ideas far harder to build correctly.</p>
+<h2 id="bundling-the-numbers-face-state-data-structure">Bundling the Numbers: Face State Data Structure</h2>
+<p>Every function in this chapter takes several separate parameters — <code>eye_size</code>, <code>eye_spacing</code>, <code>eyebrow_angle</code>, <code>mouth_curvature</code>, and more. Passing each one as a separate function argument works for a single feature, but a whole face has a dozen or more of these values, and keeping them all straight as loose variables quickly gets unwieldy. A <strong>face state data structure</strong> solves this by bundling every current parameter value into one dictionary, the same dictionary data type Chapter 3 introduced for grouping related values together.</p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">One Dictionary, One Complete Expression</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../img/mascot/thinking.png" />
+Here's a way to picture a face state dictionary: it is a complete snapshot of exactly one expression, frozen as data. Change even one value inside it — <code>mouth_curvature</code> from 6 to -6 — and you have described an entirely different emotion, without touching a single line of drawing code. The dictionary is the expression; the drawing functions just turn it into pixels.</p>
+</div>
+<p>A bridge sentence before the code: this dictionary bundles every parameter this chapter has introduced into one face state, ready to be handed to a single drawing function.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">face_state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;eye_size&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">&quot;eye_spacing&quot;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="s2">&quot;eye_y&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="s2">&quot;pupil_size&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;gaze_offset_x&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;eyebrow_y&quot;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="s2">&quot;mouth_curvature&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="s2">&quot;mouth_y&quot;</span><span class="p">:</span> <span class="mi">46</span><span class="p">,</span>
+    <span class="s2">&quot;mouth_width&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Every key in <code>face_state</code> matches a parameter name from a function earlier in this chapter, and every value is just a plain number. Nothing about this dictionary is complicated — its power comes entirely from being one single object that represents a whole expression at once.</p>
+<h2 id="a-sensible-starting-point-default-face-parameters">A Sensible Starting Point: Default Face Parameters</h2>
+<p>An empty face state dictionary, or one with wildly random values, is not a useful starting point for a new expression. <strong>Default face parameters</strong> are a sensible, neutral, starting set of values — calm eyes, level eyebrows, a relaxed mouth — the same concept Chapter 4 introduced when default parameter values gave a function a sensible fallback if a caller left an argument out.</p>
+<p>A bridge sentence before the code: this function builds a default, neutral face state from just a target width and height, combining the scaling idea from earlier in this chapter with the default-values idea from Chapter 4.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">default_face_state</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">64</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;eye_size&quot;</span><span class="p">:</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s2">&quot;eye_spacing&quot;</span><span class="p">:</span> <span class="n">width</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;eye_y&quot;</span><span class="p">:</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="s2">&quot;pupil_size&quot;</span><span class="p">:</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="s2">&quot;gaze_offset_x&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;eyebrow_y&quot;</span><span class="p">:</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;mouth_curvature&quot;</span><span class="p">:</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s2">&quot;mouth_y&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">height</span> <span class="o">*</span> <span class="mf">0.75</span><span class="p">),</span>
+        <span class="s2">&quot;mouth_width&quot;</span><span class="p">:</span> <span class="n">width</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Because <code>width</code> and <code>height</code> themselves have default values — <code>128</code> and <code>64</code> — calling <code>default_face_state()</code> with no arguments at all still produces a complete, correctly scaled neutral face for the OLED. Every later chapter's expressions, from a small smile to a furrowed, worried brow, start from exactly this dictionary and then change just a few keys.</p>
+<h2 id="the-big-idea-parameterized-face-design">The Big Idea: Parameterized Face Design</h2>
+<p>Step back from the individual functions for a moment, because there is one idea this whole chapter has been building toward. <strong>Parameterized face design</strong> is the principle that a face is not a fixed picture at all — it is a set of numbers, bundled into a face state dictionary, that a function turns into pixels on demand.</p>
+<p>That reframing changes what "designing an expression" even means. Instead of drawing a new picture for every emotion a robot needs, you write the drawing code exactly once, then design an emotion by choosing a different set of numbers to feed it. A worried face and a happy face are not two different programs — they are the same <code>draw_face()</code> function, called with two different dictionaries.</p>
+<p>This is the concrete, buildable version of the idea that runs through this entire book: two eyes, two eyebrows, and a mouth, controlled by nothing but numbers, are enough to make a robot's face say something real to the person looking at it.</p>
+<h2 id="putting-every-piece-together-the-draw-face-function">Putting Every Piece Together: The Draw Face Function</h2>
+<div class="admonition mascot-encourage">
+<p class="admonition-title">This Function Is Big Because It's Doing a Lot</p>
+<p><img alt="Pixel cheers you on" class="mascot-admonition-img" src="../../img/mascot/encouraging.png" />
+The function coming up next is longer than anything earlier in this book, and that is completely expected — it is combining nine chapters' worth of ideas into one place. You do not need to memorize it. Read it feature by feature, in the same order this chapter taught them, and each piece will already feel familiar.</p>
+</div>
+<p>Every idea in this chapter converges here. The <strong>draw face function</strong>, <code>draw_face(fb, state)</code>, reads a face-state dictionary and calls each feature's drawing code in the correct order — background first, large shapes next, smallest details last, exactly the draw call order optimization Chapter 6 taught.</p>
+<p>A bridge sentence before the code: this function draws one complete neutral face, reading every parameter from a face-state dictionary and calling <code>ellipse()</code>, <code>poly()</code>, and the quadrant fill code in a deliberate background-to-foreground order.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">BLACK</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">WHITE</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">TOP_HALF</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="n">BOTTOM_HALF</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">8</span>
+
+<span class="k">def</span> <span class="nf">draw_face</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">64</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a face-state dictionary and draw one complete face, feature by feature.&quot;&quot;&quot;</span>
+    <span class="n">center_x</span> <span class="o">=</span> <span class="n">width</span> <span class="o">//</span> <span class="mi">2</span>
+
+    <span class="n">fb</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">BLACK</span><span class="p">)</span>                                                       <span class="c1"># 1. background first</span>
+
+    <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">width</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">)</span>   <span class="c1"># 2. face outline</span>
+
+    <span class="c1"># 3. eyebrows, mirrored around the centerline</span>
+    <span class="n">left_eyebrow_x</span> <span class="o">=</span> <span class="n">center_x</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eye_spacing&quot;</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">6</span>
+    <span class="n">right_eyebrow_x</span> <span class="o">=</span> <span class="n">mirror_x</span><span class="p">(</span><span class="n">left_eyebrow_x</span> <span class="o">+</span> <span class="mi">12</span><span class="p">,</span> <span class="n">center_x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">12</span>
+    <span class="n">draw_eyebrow</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">left_eyebrow_x</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eyebrow_y&quot;</span><span class="p">],</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">],</span> <span class="n">WHITE</span><span class="p">)</span>
+    <span class="n">draw_eyebrow</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">right_eyebrow_x</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eyebrow_y&quot;</span><span class="p">],</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;eyebrow_angle&quot;</span><span class="p">],</span> <span class="n">WHITE</span><span class="p">)</span>
+
+    <span class="c1"># 4. eyes, larger shapes drawn before their own smaller details</span>
+    <span class="n">left_eye_x</span> <span class="o">=</span> <span class="n">center_x</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eye_spacing&quot;</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">right_eye_x</span> <span class="o">=</span> <span class="n">center_x</span> <span class="o">+</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eye_spacing&quot;</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">left_eye_x</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eye_y&quot;</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eye_size&quot;</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eye_size&quot;</span><span class="p">],</span> <span class="n">WHITE</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">right_eye_x</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eye_y&quot;</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eye_size&quot;</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eye_size&quot;</span><span class="p">],</span> <span class="n">WHITE</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># 5. pupils, the smallest eye detail, drawn last within the eyes</span>
+    <span class="n">gaze</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;gaze_offset_x&quot;</span><span class="p">]</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">left_eye_x</span> <span class="o">+</span> <span class="n">gaze</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eye_y&quot;</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;pupil_size&quot;</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;pupil_size&quot;</span><span class="p">],</span> <span class="n">BLACK</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">right_eye_x</span> <span class="o">+</span> <span class="n">gaze</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eye_y&quot;</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;pupil_size&quot;</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;pupil_size&quot;</span><span class="p">],</span> <span class="n">BLACK</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># 6. mouth, a bottom-half ellipse curve</span>
+    <span class="n">fb</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;mouth_y&quot;</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;mouth_width&quot;</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;mouth_curvature&quot;</span><span class="p">],</span> <span class="n">WHITE</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">BOTTOM_HALF</span><span class="p">)</span>
+
+    <span class="n">fb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>                                                             <span class="c1"># 7. push the buffer to the screen</span>
+
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">default_face_state</span><span class="p">()</span>
+<span class="n">draw_face</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Read through that draw order one more time: background, face outline, eyebrows, eyes, pupils, mouth — largest and farthest-back shapes first, smallest and most detailed shapes last. That is not an arbitrary choice; it is the same overdraw-avoiding sequence Chapter 6 taught, now applied to a complete face instead of two shapes. Every helper function <code>draw_face()</code> calls — <code>mirror_x()</code>, <code>draw_eyebrow()</code>, <code>default_face_state()</code> — was built earlier in this chapter, each doing exactly one job and staying independent of the others.</p>
+<p>Turning sliders on live parameters and watching this exact function redraw a face in real time is the fastest way to feel how much expressive range a handful of numbers actually holds.</p>
+<h4 id="diagram-face-parameter-slider-playground">Diagram: Face Parameter Slider Playground</h4>
+<iframe src="../../sims/face-parameter-slider-playground/main.html" width="100%" height="500px" scrolling="no"></iframe>
+
+<details>
+<summary>Face Parameter Slider Playground</summary>
+<p>Type: microsim
+<strong>sim-id:</strong> face-parameter-slider-playground<br/>
+<strong>Library:</strong> p5.js<br/>
+<strong>Status:</strong> Specified</p>
+<p>Bloom Taxonomy Level: Create (L6)
+Bloom Taxonomy Verb: construct, design</p>
+<p>Learning objective: Construct a complete, original facial expression by designing values for the eye size, eye spacing, eyebrow angle, and mouth curvature parameters, observing how draw_face() turns that one set of numbers into a complete rendered face.</p>
+<p>Canvas layout:
+- Left 60% (responsive, roughly 420x320 at default width): a live-rendered face on a simulated frame buffer, redrawn every time a parameter changes
+- Right 40%: sliders for each parameter, a live face_state dictionary readout, and "Randomize" and "Reset to Default" buttons</p>
+<p>Visual elements:
+- A complete face — outline, mirrored eyebrows, eyes, pupils, and a mouth — rendered using the same ellipse, poly, and quadrant-mask techniques taught in this chapter
+- A live-updating code readout showing the current face_state dictionary as Python, e.g. <code>{"eye_size": 8, "eye_spacing": 40, "eyebrow_angle": 15, "mouth_curvature": -4, ...}</code>
+- A label beneath the face suggesting what the current combination "reads as" (e.g. "looks surprised," "looks upset") based on simple rule-of-thumb ranges, purely as a playful hint, not a graded judgment</p>
+<p>Interactive controls:
+- Slider: eye size (4-16)
+- Slider: eye spacing (20-60)
+- Slider: eyebrow angle (-30 to 30 degrees)
+- Slider: mouth curvature (-10 to 10)
+- "Randomize" button sets all four sliders to random valid values at once
+- "Reset to Default" button restores default_face_state() values</p>
+<p>Default parameters: default_face_state() values loaded on first render (eye_size 8, eye_spacing 40, eyebrow_angle 0, mouth_curvature 6)</p>
+<p>Behavior: moving any slider immediately redraws the entire face and updates the face_state dictionary readout; "Randomize" produces an instantly recognizable, often funny new expression from one click, reinforcing that a face is nothing more than this dictionary of numbers; "Reset to Default" returns every slider and the face to the neutral starting point.</p>
+<p>Instructional Rationale: A Create-level objective requires the learner to actively assemble a novel expression from independent design choices, which live slider-driven rendering supports far better than viewing fixed examples, since every adjustment is both a design decision and immediate visual proof of parameterized face design in action.</p>
+<p>Responsive design: control panel and dictionary readout move below the canvas on viewports narrower than 600 pixels; the face view scales to fill its container's width while preserving the OLED's 2:1 aspect ratio.</p>
+<p>Implementation: p5.js implementing draw_face(), mirror_x(), and draw_eyebrow() as JavaScript equivalents of the exact functions taught in this chapter, so the rendered result matches what the MicroPython code would actually produce on hardware.</p>
+</details>
+<h2 id="chapter-summary">Chapter Summary</h2>
+<p>You now know how to plan a face's layout and proportions, and how to combine every drawing tool from Chapters 6 and 7 into one complete, parameterized face.</p>
+<ul>
+<li>A face outline is the boundary containing a face's features — often free on a round display, optionally drawn as an outlined ellipse on a rectangular OLED.</li>
+<li>A face layout grid plans where features sit using simple horizontal bands across a display's height; facial proportion sets roughly how large each band should be, loosely adapted from classic portrait convention.</li>
+<li>Facial symmetry lets you compute one eye's position and mirror it for the other with a simple <code>mirror_x()</code> reflection, though expressions can deliberately break symmetry later.</li>
+<li>Eye placement, the eye size parameter, and eye spacing turn <code>ellipse()</code> calls into a reusable <code>draw_eyes()</code> function driven entirely by parameters, not fixed coordinates.</li>
+<li>A pupil is a smaller ellipse inside each eye; the pupil size parameter controls its size, and offsetting it with <code>gaze_offset_x</code> previews Chapter 12's gaze animation.</li>
+<li>Eyelid representation reuses Chapter 7's quadrant fill code directly, redrawing an eye's top half in the background color to simulate a lowered lid.</li>
+<li>Eyebrow shape uses Chapter 7's triangle <code>poly()</code> technique; the eyebrow angle parameter tilts that triangle so one function can draw a neutral, raised, or furrowed brow.</li>
+<li>Mouth shape is almost always a bottom-half mouth curve — a quadrant-masked ellipse; the mouth curvature parameter controls how deep that curve bulges, with a smile and frown built from the same technique inverted.</li>
+<li>Nose representation and cheek representation are small, optional marks that matter far less for emotional readability than eyes, eyebrows, and a mouth.</li>
+<li>Feature scaling for screen size computes every parameter as a fraction of display width and height, so one draw_face() works correctly on both the OLED and the round display; feature independence keeps each feature's code free of dependencies on any other feature's internals.</li>
+<li>A face state data structure bundles every current parameter into one dictionary; default face parameters give that dictionary a sensible, neutral starting point.</li>
+<li>Parameterized face design is the overall principle behind all of it: a face is not a fixed picture, but a set of numbers a function turns into pixels — and the draw face function, <code>draw_face(fb, state)</code>, is the concrete deliverable that makes that principle real.</li>
+</ul>
+<div class="admonition mascot-celebration">
+<p class="admonition-title">You Just Built a Complete, Reusable Face</p>
+<p><img alt="Pixel celebrates" class="mascot-admonition-img" src="../../img/mascot/celebration.png" />
+Look at what <code>draw_face()</code> really is: one function, reading one dictionary, producing a complete expression out of shapes you already knew how to draw. Change a handful of numbers and it becomes a different face entirely, without touching a single drawing call. Chapters 10 and 11 build directly on this foundation, turning real emotion theory into exactly the parameter values that belong inside that dictionary.</p>
+</div>
+<details class="question">
+<summary>Self-Check: You want the exact same draw_face() code to produce a correctly proportioned face on both the 128x64 OLED and the 240x240 round display, without editing any pixel numbers by hand. Which concept from this chapter makes that possible, and how? — Click to reveal</summary>
+<p>Feature scaling for screen size makes this possible. Instead of hardcoding pixel values like <code>eye_size = 8</code>, every parameter in <code>default_face_state(width, height)</code> is computed as a fraction of the display's actual <code>width</code> and <code>height</code> — for example, <code>eye_size = height // 8</code>. Calling that function with <code>(128, 64)</code> produces values scaled for the OLED, and calling it with <code>(240, 240)</code> produces proportionally larger values for the round display, all from the exact same function body. Combined with feature independence, this means <code>draw_face()</code> itself never needs to change at all — only the width and height passed into it do.</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
