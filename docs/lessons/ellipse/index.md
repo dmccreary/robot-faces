@@ -41,6 +41,10 @@ oled.ellipse(x, y, HORZ_RADIUS, VERT_RADIUS, COLOR)
 oled.show()
 ```
 
+Here's what that program draws on the display:
+
+![Sample output of the ellipse program](sample-output.png)
+
 ## Ellipse Parameters
 
 ![Ellipse Parameters](../../img/ellipse-parameters.png)
