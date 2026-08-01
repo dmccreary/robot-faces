@@ -51,7 +51,7 @@ const SKILLS = [
       'whatever abstraction hands them.',
     example: {
       id: 'ex-face-state',
-      label: 'Chapter 9\nface_state dictionary',
+      label: 'Ch 9\nface_state dict',
       tag: 'Chapter 9',
       what: 'The face_state dictionary.',
       detail: 'A feeling as rich as "surprised" was reduced to a handful of ' +
@@ -71,7 +71,7 @@ const SKILLS = [
       'decomposition chooses the parts.',
     example: {
       id: 'ex-face-parts',
-      label: 'Chapter 9\neyes / eyebrows / mouth',
+      label: 'Ch 9\neyes, brows, mouth',
       tag: 'Chapter 9',
       what: 'Splitting one face into three drawable parts.',
       detail: 'Because eyes, eyebrows, and a mouth were separate pieces, ' +
@@ -92,7 +92,7 @@ const SKILLS = [
       'the pieces; modularity packages them.',
     example: {
       id: 'ex-draw-face',
-      label: 'Chapter 9\ndraw_face()',
+      label: 'Ch 9\ndraw_face()',
       tag: 'Chapter 9',
       what: 'The single draw_face(fb, state) function.',
       detail: 'One function, called with a different state dictionary, draws ' +
@@ -114,7 +114,7 @@ const SKILLS = [
       'recognition tells you how far that one function reaches.',
     example: {
       id: 'ex-thirteen',
-      label: 'Chapter 10\n13-expression set',
+      label: 'Ch 10\n13 expressions',
       tag: 'Chapter 10',
       what: 'The thirteen core expressions.',
       detail: 'Happy, sad, angry, and surprised are not thirteen unrelated ' +
@@ -136,7 +136,7 @@ const SKILLS = [
       'still frame; this one sequences many of them.',
     example: {
       id: 'ex-timing',
-      label: 'Chapters 12-14\ntiming & state machines',
+      label: 'Ch 12-14\ntiming & states',
       tag: 'Chapters 12-14',
       what: 'Blink timing, gaze animation, and button state machines.',
       detail: 'The blink routine is a numbered list of steps long before it ' +
@@ -156,7 +156,7 @@ const SKILLS = [
       'reusing in the first place.',
     example: {
       id: 'ex-capstone',
-      label: 'Chapter 16\nyour capstone project',
+      label: 'Ch 16\nyour capstone',
       tag: 'Chapter 16',
       what: 'Your own capstone project.',
       detail: 'Your capstone does not need a new drawing engine. It reuses ' +
@@ -168,8 +168,8 @@ const SKILLS = [
   }
 ];
 
-const SKILL_RADIUS = 165;
-const EXAMPLE_RADIUS = 330;
+const SKILL_RADIUS = 130;
+const EXAMPLE_RADIUS = 250;
 
 const DEFAULT_PANEL_BODY =
   '<p>Click any node to learn what it connects to.</p>' +
@@ -225,7 +225,7 @@ function buildNodes() {
       border: HUB_COLOR.border,
       highlight: { background: HUB_COLOR.highlight, border: '#212121' }
     },
-    font: { color: 'white', size: 17, face: 'Arial', bold: { color: 'white' } },
+    font: { color: 'white', size: 23, face: 'Arial', bold: { color: 'white' } },
     margin: 16
   });
 
@@ -246,7 +246,7 @@ function buildNodes() {
         border: SKILL_COLOR.border,
         highlight: { background: SKILL_COLOR.highlight, border: '#212121' }
       },
-      font: { color: 'white', size: 14, face: 'Arial' }
+      font: { color: 'white', size: 19, face: 'Arial' }
     });
 
     list.push({
@@ -261,7 +261,7 @@ function buildNodes() {
         border: EXAMPLE_COLOR.border,
         highlight: { background: EXAMPLE_COLOR.highlight, border: '#212121' }
       },
-      font: { color: '#212121', size: 13, face: 'Arial' }
+      font: { color: '#212121', size: 17, face: 'Arial' }
     });
   }
 
@@ -401,13 +401,13 @@ function normalNodeColor(kind) {
 }
 
 function normalFont(kind) {
-  if (kind === 'hub') return { color: 'white', size: 17 };
-  if (kind === 'skill') return { color: 'white', size: 14 };
-  return { color: '#212121', size: 13 };
+  if (kind === 'hub') return { color: 'white', size: 23 };
+  if (kind === 'skill') return { color: 'white', size: 19 };
+  return { color: '#212121', size: 17 };
 }
 
 function dimFont(kind) {
-  const size = kind === 'hub' ? 17 : (kind === 'skill' ? 14 : 13);
+  const size = kind === 'hub' ? 23 : (kind === 'skill' ? 19 : 17);
   return { color: DIM_FONT, size: size };
 }
 
@@ -470,7 +470,7 @@ function fitIntoLeftArea() {
     minY = Math.min(minY, p.y);
     maxY = Math.max(maxY, p.y);
   }
-  const graphWidth = (maxX - minX) + 210;    // allow for the widest node boxes
+  const graphWidth = (maxX - minX) + 215;    // allow for the widest node boxes
   const graphHeight = (maxY - minY) + 130;
   const titleBand = 52;                      // height of the title overlay
 
@@ -519,9 +519,9 @@ function initializeNetwork() {
       enabled: true,
       solver: 'barnesHut',
       barnesHut: {
-        gravitationalConstant: -4200,
-        centralGravity: 0.35,
-        springLength: 150,
+        gravitationalConstant: -1600,
+        centralGravity: 0.55,
+        springLength: 100,
         springConstant: 0.05,
         damping: 0.6,
         avoidOverlap: 0.35

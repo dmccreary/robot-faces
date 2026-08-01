@@ -36,3 +36,4 @@ These eight lessons cover every drawing command the MicroPython framebuffer offe
 | [Eyebrows](eyebrows/index.md) | The single most expressive feature on a robot face |
 | [Emotion Types](emotion-types/index.md) | The core expression set and how to draw each one |
 | [Winking with a Smile](wink/index.md) | Combining a closed eye and a curved mouth |
+| [Sleeping Faces](sleeping-faces/index.md) | Closed eyes, drooping eyebrows, and a drifting `Zzz` |

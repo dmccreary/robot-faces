@@ -686,7 +686,7 @@ function drawInfoPanel(x, y, w, h, shown, compact) {
   cursorY += 22;
 
   // Tuning-mode indicator, plus an idle badge when the timeout has passed
-  fill(tuningMode ? '#2E7D32' : '#9E9E9E');
+  fill(tuningMode ? '#2E7D32' : '#616161');   // dark enough for white text
   rect(innerX, cursorY, 116, 22, 6);
   fill('white');
   textAlign(CENTER, CENTER);

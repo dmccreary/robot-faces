@@ -134,7 +134,9 @@ function windowResized() {
 }
 
 function positionControls() {
-  const sliderW = max(90, canvasWidth - sliderLeftMargin - margin);
+  // 2 * margin on the right keeps ~20px of white between the slider track and
+  // the canvas border, which a single margin left too tight to read as a gap.
+  const sliderW = max(90, canvasWidth - sliderLeftMargin - 2 * margin);
 
   // Rows 0 and 1: the 2x2 grid of quadrant toggles.
   for (let i = 0; i < quadrantButtons.length; i++) {

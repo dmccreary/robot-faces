@@ -372,3 +372,5 @@ You now know every physical component used in this book's robot-face projects, f
 
 ??? question "Self-Check: Which wire is which? — Click to reveal"
     On the SPI wiring diagram, the wire that tells the display driver whether an incoming byte is a command or pixel data is the Data Command (DC) pin — on this book's OLED wiring, that is Pico pin GP5.
+
+[See Annotated References](./references.md)

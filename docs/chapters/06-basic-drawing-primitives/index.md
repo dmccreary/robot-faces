@@ -441,3 +441,5 @@ You now know the core FrameBuf drawing methods, how they interact with each othe
 
 ??? question "Self-Check: You blit a round pupil sprite onto a background that already has a pattern drawn on it, and a faint square patch appears around the pupil. What went wrong, and how do you fix it? — Click to reveal"
     The `fb.blit()` call was missing its transparent color key argument, so FrameBuf copied the sprite's entire square bounding box — including its background color — instead of skipping the pixels around the circular pupil. Adding the color key as a fourth argument, such as `fb.blit(pupil_sprite, x, y, BLACK)`, tells FrameBuf to skip any source pixel matching `BLACK`, so only the pupil's actual pixels get copied and the existing background pattern shows through everywhere else.
+
+[See Annotated References](./references.md)

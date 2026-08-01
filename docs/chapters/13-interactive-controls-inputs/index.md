@@ -443,3 +443,5 @@ You now know how to read a button and a potentiometer in MicroPython, choose bet
 
 ??? question "Self-Check: Why would you choose a button interrupt handler over a polling input loop, and what is the trade-off? — Click to reveal"
     An interrupt handler, registered with `Pin.irq()`, is the better choice when a press must never be missed — for example, if it could be very brief or arrive while the main loop is busy with something slow. Unlike a polling input loop, which only notices a button change on its next pass through the loop, an interrupt handler runs the instant the pin's state changes, regardless of what else the program is doing at that moment. The trade-off is complexity: an interrupt handler can fire in the middle of any other code, so it must be kept extremely short — usually just setting a flag — and real button hardware needs debouncing to avoid one physical press firing the handler several times. A polling input loop, by contrast, is simple to read and reason about, and is completely adequate for most robot face projects where missing an occasional very brief press is not a serious problem.
+
+[See Annotated References](./references.md)

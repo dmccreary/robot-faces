@@ -233,9 +233,10 @@ function draw() {
 
   noStroke();
   fill('black');
-  textAlign(LEFT, TOP);
+  textAlign(CENTER, TOP);
   textSize(isNarrow ? 15 : 19);
-  text('Valence-Arousal Quadrant Plotter', margin, 5, canvasWidth - 20, 24);
+  text('Valence-Arousal Quadrant Plotter', margin, 5, canvasWidth - 2 * margin, 24);
+  textAlign(LEFT, TOP);
   textSize(defaultTextSize);
 
   drawGrid();
@@ -259,11 +260,13 @@ function drawGrid() {
   fill('#90A4AE');
   textSize(isNarrow ? 10 : 12);
   textAlign(LEFT, TOP);
-  // The top labels sit a little lower so the surprised marker clears them.
-  text('Unpleasant/Energetic', gridX + 6, gridY + 24);
+  // The top labels hug the top edge: the highest-arousal markers (surprised,
+  // excited) sit just below it, and their own labels drop lower still, so this
+  // row is the only band across the top that stays free of marker text.
+  text('Unpleasant/Energetic', gridX + 6, gridY + 4);
   text('Unpleasant/Calm', gridX + 6, gridY + gridSize - 18);
   textAlign(RIGHT, TOP);
-  text('Pleasant/Energetic', gridX + gridSize - 6, gridY + 24);
+  text('Pleasant/Energetic', gridX + gridSize - 6, gridY + 4);
   text('Pleasant/Calm', gridX + gridSize - 6, gridY + gridSize - 18);
   textAlign(LEFT, TOP);
 

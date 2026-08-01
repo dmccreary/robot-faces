@@ -318,3 +318,5 @@ A single feature's journey — from missing, to merged, to shipped, to refined �
 
 ??? question "Self-Check: Why couldn't a MicroPython tutorial from early 2022 use ellipse()? — Click to reveal"
     In early 2022, ellipse() and poly() did not exist in any MicroPython release yet — the pull request adding them was not merged into the development branch until August 2022, and it did not reach a stable, official release until v1.20.0 in April 2023. Before that, framebuf only had fill(), pixel(), hline(), vline(), line(), rect(), scroll(), blit(), and text(), so a 2022 tutorial drawing a circle would have had to approximate it with many short line() calls in a loop, the same pre-2023 curve workaround described in this chapter.
+
+[See Annotated References](./references.md)

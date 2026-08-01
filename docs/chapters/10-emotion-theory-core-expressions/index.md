@@ -429,3 +429,5 @@ You now know the psychology research behind facial expression design, and you ha
 
 ??? question "Self-Check: Your robot needs to clearly show 'sad' in one demo and 'angry' in another, but both expressions use a negative eyebrow_angle. Which other parameters would you change to keep the two visibly distinct, and why? — Click to reveal"
     Sad and angry do share the same negative eyebrow direction — outer edges tilted down — but they differ in magnitude and in two other parameters. Sad uses a milder eyebrow_angle, a normal eye_size with a light eyelid overlay for a slumped look, and a clearly negative mouth_curvature for a visible frown. Angry uses a much sharper, steeper eyebrow_angle, a reduced eye_size for a narrowed, intense stare, and keeps mouth_curvature close to flat rather than deeply frowning, since anger reads mainly through the eyebrows and eyes. Changing eye_size and mouth_curvature together, not just the eyebrow angle, is what keeps the two expressions from reading as the same face.
+
+[See Annotated References](./references.md)

@@ -1,9 +1,9 @@
 ---
-title: "About This Book"
+title: "About This Interactive Intelligent Textbook"
 description: "About Robot Faces: Drawing Expressive Displays for STEM Robots — its origin story, purpose, audience, design, and the author behind it."
 ---
 
-# About This Book
+# About This Interactive Intelligent Textbook
 
 !!! mascot-welcome "Hi again — I'm Pixel!"
     ![Pixel waving welcome](./img/mascot/welcome.png){ class="mascot-admonition-img" }
@@ -17,7 +17,7 @@ description: "About Robot Faces: Drawing Expressive Displays for STEM Robots —
 This book started as a distraction.
 
 Dan McCreary has spent years teaching robotics in coding clubs, where students
-build small wheeled robots from a Raspberry Pi Pico, a handful of sensors, and
+build small three wheeled [STEM robots](https://dmccreary.github.io/stem-robots/) using a Raspberry Pi Microcontroller, a handful of sensors, and
 a breadboard. The lesson plans were about motors, distance sensors, and
 navigation. But something kept happening: the moment a student got a tiny OLED
 display working, everything else stopped. Kids would spend hours — not minutes,

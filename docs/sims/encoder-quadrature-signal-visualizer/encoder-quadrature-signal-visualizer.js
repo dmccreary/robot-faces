@@ -491,7 +491,9 @@ function drawDirectionBadge(rightX, y) {
   noStroke();
   fill(badgeColor);
   rect(rightX - badgeW, y, badgeW, 22, 5);
-  fill(flashing || lastDirection === 0 ? 'white' : '#263238');
+  // Only the flashing badges are dark enough to carry white text; the pale
+  // idle and resting fills need dark ink to stay readable.
+  fill(flashing ? 'white' : '#263238');
   textSize(13);
   textAlign(CENTER, CENTER);
   text(label, rightX - badgeW / 2, y + 11);

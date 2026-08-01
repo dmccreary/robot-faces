@@ -455,3 +455,5 @@ You now know the two curved-and-angled drawing methods behind nearly every expre
 
 ??? question "Self-Check: You want to draw only the left half of an eye ellipse — both the upper-left and lower-left quadrants. What mask value do you pass as the quadrant fill code, and why? — Click to reveal"
     The upper-left quadrant has a bit value of 2 and the lower-left quadrant has a bit value of 4, so the correct mask is 2 + 4 = 6. Passing `fb.ellipse(x, y, xradius, yradius, WHITE, True, 6)` draws only those two left-side quadrants, leaving the upper-right (1) and lower-right (8) quadrants blank. A common mistake is guessing 1 + 4 or 2 + 8 by picturing "left" incorrectly — always check each quadrant's bit value against its actual screen position rather than guessing from memory.
+
+[See Annotated References](./references.md)

@@ -6,7 +6,7 @@ repo_url: 'https://github.com/dmccreary/robot-faces'
 
 nav:
   - Home: index.md
-  - About This Project: about.md
+  - About This Book: about.md
   - Course Description: course-description.md
   - Getting Started: getting-started.md
   - Chapters:
@@ -14,51 +14,67 @@ nav:
     - 1. Hardware & Electronics Foundations:
       - Content: chapters/01-hardware-electronics-foundations/index.md
       - Quiz: chapters/01-hardware-electronics-foundations/quiz.md
+      - Annotated References: chapters/01-hardware-electronics-foundations/references.md
     - 2. A History of Screen-Based Robot Faces:
       - Content: chapters/02-history-of-robot-faces/index.md
       - Quiz: chapters/02-history-of-robot-faces/quiz.md
+      - Annotated References: chapters/02-history-of-robot-faces/references.md
     - "3. MicroPython Fundamentals I: Syntax, Data & Loops":
       - Content: chapters/03-micropython-fundamentals-1/index.md
       - Quiz: chapters/03-micropython-fundamentals-1/quiz.md
+      - Annotated References: chapters/03-micropython-fundamentals-1/references.md
     - "4. MicroPython Fundamentals II: Functions & the FrameBuf Module":
       - Content: chapters/04-micropython-fundamentals-2/index.md
       - Quiz: chapters/04-micropython-fundamentals-2/quiz.md
+      - Annotated References: chapters/04-micropython-fundamentals-2/references.md
     - 5. Display & Coordinate Systems:
       - Content: chapters/05-display-coordinate-systems/index.md
       - Quiz: chapters/05-display-coordinate-systems/quiz.md
+      - Annotated References: chapters/05-display-coordinate-systems/references.md
     - 6. Basic Drawing Primitives:
       - Content: chapters/06-basic-drawing-primitives/index.md
       - Quiz: chapters/06-basic-drawing-primitives/quiz.md
+      - Annotated References: chapters/06-basic-drawing-primitives/references.md
     - 7. Ellipse & Polygon Drawing:
       - Content: chapters/07-ellipse-polygon-drawing/index.md
       - Quiz: chapters/07-ellipse-polygon-drawing/quiz.md
+      - Annotated References: chapters/07-ellipse-polygon-drawing/references.md
     - 8. A History of MicroPython's FrameBuf Drawing Support:
       - Content: chapters/08-framebuf-version-history/index.md
       - Quiz: chapters/08-framebuf-version-history/quiz.md
+      - Annotated References: chapters/08-framebuf-version-history/references.md
     - 9. Facial Anatomy & Layout Design:
       - Content: chapters/09-facial-anatomy-layout-design/index.md
       - Quiz: chapters/09-facial-anatomy-layout-design/quiz.md
+      - Annotated References: chapters/09-facial-anatomy-layout-design/references.md
     - 10. Emotion Theory & the Core Expression Set:
       - Content: chapters/10-emotion-theory-core-expressions/index.md
       - Quiz: chapters/10-emotion-theory-core-expressions/quiz.md
+      - Annotated References: chapters/10-emotion-theory-core-expressions/references.md
     - 11. Expression Design, Readability & Human-Robot Interaction:
       - Content: chapters/11-expression-design-readability-hri/index.md
       - Quiz: chapters/11-expression-design-readability-hri/quiz.md
+      - Annotated References: chapters/11-expression-design-readability-hri/references.md
     - "12. Animating Expressions: Timing & Motion":
       - Content: chapters/12-animating-expressions/index.md
       - Quiz: chapters/12-animating-expressions/quiz.md
+      - Annotated References: chapters/12-animating-expressions/references.md
     - "13. Interactive Controls: Inputs & Concurrency":
       - Content: chapters/13-interactive-controls-inputs/index.md
       - Quiz: chapters/13-interactive-controls-inputs/quiz.md
+      - Annotated References: chapters/13-interactive-controls-inputs/references.md
     - 14. Building an Expression Menu & Live Controls:
       - Content: chapters/14-expression-menu-live-controls/index.md
       - Quiz: chapters/14-expression-menu-live-controls/quiz.md
+      - Annotated References: chapters/14-expression-menu-live-controls/references.md
     - 15. Porting Faces to a Color Display:
       - Content: chapters/15-porting-faces-color-display/index.md
       - Quiz: chapters/15-porting-faces-color-display/quiz.md
+      - Annotated References: chapters/15-porting-faces-color-display/references.md
     - 16. Computational Thinking & Capstone Design:
       - Content: chapters/16-computational-thinking-capstone/index.md
       - Quiz: chapters/16-computational-thinking-capstone/quiz.md
+      - Annotated References: chapters/16-computational-thinking-capstone/references.md
   
   - Lessons:
     - Introduction: lessons/index.md
@@ -80,6 +96,7 @@ nav:
     - Eyebrows: lessons/eyebrows/index.md
     - Emotion Types: lessons/emotion-types/index.md
     - Winking with a Smile: lessons/wink/index.md
+    - Sleeping Faces: lessons/sleeping-faces/index.md
     # - lessons/multiple-threads/index.md
   
   - MicroSims:
@@ -133,7 +150,7 @@ nav:
     - Valence-Arousal Quadrant Plotter: sims/valence-arousal-quadrant-plotter/index.md
 
 
-  - parts-lists.md
+  - Parts List: parts-list.md
   - Learning Graph:
     - Introduction: learning-graph/index.md
     - Starting Concept List: learning-graph/starting-concept-list.md
@@ -147,6 +164,7 @@ nav:
   - Stories:
     - Overview: stories/index.md
     - "Bright Eyes, Closed Doors: Cozmo and Vector": stories/anki-cozmo-vector/index.md
+  - Teachers Guide: teachers-guide/index.md
   - Contact: contact.md
   - Glossary: glossary.md
   - References: references.md

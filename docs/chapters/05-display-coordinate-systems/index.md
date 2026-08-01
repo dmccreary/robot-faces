@@ -380,3 +380,5 @@ You now know exactly how a screen's pixels map to coordinates, how those coordin
 
 ??? question "Self-Check: Why does the OLED buffer take so much less memory than the color display's buffer, even though the color display only has about seven times as many pixels? — Click to reveal"
     Memory footprint depends on bit depth as well as pixel count. The OLED uses 1 bit per pixel (128 x 64 x 1 / 8 = 1,024 bytes), while the color display uses 16 bits per pixel for RGB565 color (240 x 240 x 16 / 8 = 115,200 bytes). Multiplying by 16 instead of 1 accounts for most of the roughly 112x difference, even though the color display's pixel count is only about seven times larger.
+
+[See Annotated References](./references.md)

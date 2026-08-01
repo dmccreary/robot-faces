@@ -332,3 +332,5 @@ Four companies bet that a screen could stand in for a face, and their outcomes t
 
 ??? question "Self-Check: Which robot kept shipping? — Click to reveal"
     Emotix's Miko is the robot from this chapter that has remained in active production, releasing newer models into the educational robotics market, while Cozmo and Vector were discontinued when Anki shut down in 2019 and Buddy was delayed for years past its original crowdfunded ship date.
+
+[See Annotated References](./references.md)

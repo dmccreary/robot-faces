@@ -483,3 +483,5 @@ You now know how to make a MicroPython program branch, reuse logic through funct
 
 ??? question "Self-Check: Why didn't the global variable change? — Click to reveal"
     Assigning to `eye_size` inside `grow_eyes()` without a `global eye_size` declaration creates a brand-new local variable that only exists while the function runs, leaving the global `eye_size` completely untouched. Adding `global eye_size` as the first line of the function tells MicroPython to modify the existing global variable instead of shadowing it with a local one.
+
+[See Annotated References](./references.md)

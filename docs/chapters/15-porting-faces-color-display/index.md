@@ -500,3 +500,5 @@ You now know how to describe a color as hue, saturation, and brightness; how a d
 
 ??? question "Self-Check: Why does color565(r, g, b) shift the red channel left by 11 and the green channel left by 5, but leave the blue channel unshifted? — Click to reveal"
     RGB565 packs a 16-bit number as 5 bits of red, then 6 bits of green, then 5 bits of blue, read from the most significant bit down to the least significant bit. Red occupies bit positions 15 down to 11, so its 5-bit value must be shifted left by 11 places to land there. Green occupies positions 10 down to 5, so it needs a left shift of 5. Blue occupies positions 4 down to 0 — the very bottom of the number — so it needs no shift at all before being combined with `|`.
+
+[See Annotated References](./references.md)

@@ -39,7 +39,7 @@ const modeData = [
   {
     id: 'GAZE_MODE',
     label: 'GAZE_MODE\n(1)',
-    x: 18, y: 65,
+    x: -7, y: 65,
     value: 1,
     behavior: 'The pupils track a simulated target, so the eyes sweep back and ' +
       'forth across the display.',
@@ -48,7 +48,7 @@ const modeData = [
   {
     id: 'ADJUST_MODE',
     label: 'ADJUST_MODE\n(2)',
-    x: -258, y: 65,
+    x: -233, y: 65,
     value: 2,
     behavior: 'The potentiometer drives eyebrow_angle live, so turning the knob ' +
       'reshapes the eyebrows as you watch.',
@@ -192,8 +192,16 @@ function buildNodes() {
 }
 
 function buildEdges() {
+  const yOf = {};
+  modeData.forEach(function (mode) { yOf[mode.id] = mode.y; });
+
   return transitionData.map(function (transition) {
-    return {
+    // A horizontal edge puts its label on the midpoint of the line joining two
+    // boxes that sit at the same height, where the box bodies leave too little
+    // clear space. Drop that one label below both boxes so it stays readable.
+    const isHorizontal = yOf[transition.from] === yOf[transition.to];
+
+    const edge = {
       id: transition.id,
       from: transition.from,
       to: transition.to,
@@ -201,6 +209,8 @@ function buildEdges() {
       title: 'Button press: ' + transition.from + ' to ' + transition.to,
       color: { color: EDGE_COLOR, highlight: EDGE_HIGHLIGHT }
     };
+    if (isHorizontal) edge.font = { vadjust: 34 };
+    return edge;
   });
 }
 

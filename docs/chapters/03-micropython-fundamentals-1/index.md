@@ -437,3 +437,5 @@ You now have the full MicroPython vocabulary this book's drawing code is built f
 
 ??? question "Self-Check: Which collection type would you choose? — Click to reveal"
     A fixed RGB565 color value that should never accidentally change belongs in a tuple, written with parentheses, because tuples are unchangeable once created — unlike a list, which is meant for values like a set of expression names that can grow or be edited, or a dictionary, which is meant for named settings looked up by key rather than by position.
+
+[See Annotated References](./references.md)

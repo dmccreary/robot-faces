@@ -541,3 +541,5 @@ You now know how to plan a face's layout and proportions, and how to combine eve
 
 ??? question "Self-Check: You want the exact same draw_face() code to produce a correctly proportioned face on both the 128x64 OLED and the 240x240 round display, without editing any pixel numbers by hand. Which concept from this chapter makes that possible, and how? — Click to reveal"
     Feature scaling for screen size makes this possible. Instead of hardcoding pixel values like `eye_size = 8`, every parameter in `default_face_state(width, height)` is computed as a fraction of the display's actual `width` and `height` — for example, `eye_size = height // 8`. Calling that function with `(128, 64)` produces values scaled for the OLED, and calling it with `(240, 240)` produces proportionally larger values for the round display, all from the exact same function body. Combined with feature independence, this means `draw_face()` itself never needs to change at all — only the width and height passed into it do.
+
+[See Annotated References](./references.md)

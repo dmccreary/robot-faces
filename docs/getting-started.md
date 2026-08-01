@@ -7,10 +7,10 @@ Here are the steps you can use to get started drawing your own robot faces.
 You can order the parts online or work with one of our programs that supply parts for classrooms.
 The minimal drawing kit contains:
 
-1. A [Raspberry Pi Pico](../docs/parts-lists/#raspberry-pi-pico)
-2. A mini solderless [Breadboard](../docs/parts-lists/#solderless-breadboard)
-3. A [128x64 OLED display](../docs/parts-lists.md#128x64-oleds)
-4. M-F jumper wires - either 20cm or 40cm lengths both will work
+1. A [Raspberry Pi Pico](parts-list.md#raspberry-pi-pico)
+2. A mini solderless [Breadboard](parts-list.md#solderless-breadboard)
+3. A [128x64 OLED display](parts-list.md#128x64-oleds)
+4. M-F [jumper wires](parts-list.md#jumper-wires) - either 20cm or 40cm lengths both will work
 
 ## Step 2: Installing Software
 
