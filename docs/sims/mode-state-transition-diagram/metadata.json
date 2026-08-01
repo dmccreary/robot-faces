@@ -1,0 +1,45 @@
+{
+  "title": "Mode State Transition Diagram",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Explain the mode state machine's states and transitions by clicking each mode and each transition arrow to interpret what button action triggers it, what the global state variable's value becomes, and what the face does in that mode.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Mode State Transition Diagram",
+    "learningObjectives": [
+      "Explain the mode state machine's states and transitions by clicking each mode and each transition arrow to interpret what button action triggers it, what the global state variable's value becomes, and what the face does in that mode."
+    ],
+    "bloomsTaxonomy": "Understand (L2)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "vis-network",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 480
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "13-interactive-controls-inputs"
+}

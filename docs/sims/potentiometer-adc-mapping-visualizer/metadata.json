@@ -1,0 +1,45 @@
+{
+  "title": "Potentiometer ADC Mapping Visualizer",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Calculate a mapped face-parameter value from a raw ADC reading using the linear mapping formula, and demonstrate how turning a simulated potentiometer knob changes the raw value, the mapped value, and the live arithmetic together.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Potentiometer ADC Mapping Visualizer",
+    "learningObjectives": [
+      "Calculate a mapped face-parameter value from a raw ADC reading using the linear mapping formula, and demonstrate how turning a simulated potentiometer knob changes the raw value, the mapped value, and the live arithmetic together."
+    ],
+    "bloomsTaxonomy": "Apply (L3)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 425
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "13-interactive-controls-inputs"
+}

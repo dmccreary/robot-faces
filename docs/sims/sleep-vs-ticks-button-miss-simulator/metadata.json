@@ -1,0 +1,45 @@
+{
+  "title": "Sleep vs Ticks Button Miss Simulator",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Differentiate blocking sleep()-based timing from non-blocking ticks_ms()-based timing by examining whether a simulated button press is detected during an animation delay under each approach.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Sleep vs Ticks Button Miss Simulator",
+    "learningObjectives": [
+      "Differentiate blocking sleep()-based timing from non-blocking ticks_ms()-based timing by examining whether a simulated button press is detected during an animation delay under each approach."
+    ],
+    "bloomsTaxonomy": "Analyze (L4)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 405
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "12-animating-expressions"
+}

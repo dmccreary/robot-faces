@@ -1,0 +1,45 @@
+{
+  "title": "Rubric Rater \u2014 Score This Expression",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Given a rendered face and its underlying face_state parameters, assess it against each criterion of the Emotional Design Rubric, assigning a rating per criterion with a written justification and an overall recommendation \u2014 directly rehearsing the course's Evaluate-level outcome of critiquing a classmate's design.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Rubric Rater \u2014 Score This Expression",
+    "learningObjectives": [
+      "Given a rendered face and its underlying face_state parameters, assess it against each criterion of the Emotional Design Rubric, assigning a rating per criterion with a written justification and an overall recommendation \u2014 directly rehearsing the course's Evaluate-level outcome of critiquing a classmate's design."
+    ],
+    "bloomsTaxonomy": "Evaluate (L5)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 700
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "11-expression-design-readability-hri"
+}

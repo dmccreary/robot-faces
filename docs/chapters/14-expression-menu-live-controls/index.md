@@ -126,7 +126,7 @@ Watching a real bounce pattern next to its cleaned-up debounced output makes the
 
 #### Diagram: Button Bounce Timeline Visualizer
 
-<iframe src="../../sims/button-bounce-timeline-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/button-bounce-timeline-visualizer/main.html" width="100%" height="490px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Button Bounce Timeline Visualizer</summary>
@@ -285,7 +285,7 @@ Watching two square waves scroll by, one step at a time, makes the phase relatio
 
 #### Diagram: Encoder Quadrature Signal Visualizer
 
-<iframe src="../../sims/encoder-quadrature-signal-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/encoder-quadrature-signal-visualizer/main.html" width="100%" height="402px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Encoder Quadrature Signal Visualizer</summary>
@@ -450,7 +450,7 @@ Clicking through a simulated version of this exact menu, rather than only readin
 
 #### Diagram: Expression Menu Live Simulator
 
-<iframe src="../../sims/expression-menu-live-simulator/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/expression-menu-live-simulator/main.html" width="100%" height="682px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Expression Menu Live Simulator</summary>

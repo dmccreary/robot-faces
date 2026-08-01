@@ -1,0 +1,45 @@
+{
+  "title": "Ekman Emotion Feature Map",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Explain how each of Ekman's universal emotions (happiness, sadness, anger, fear, surprise, disgust, contempt) maps onto a characteristic eyebrow, eye, and mouth feature combination, by clicking each emotion and interpreting the resulting infobox.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Ekman Emotion Feature Map",
+    "learningObjectives": [
+      "Explain how each of Ekman's universal emotions (happiness, sadness, anger, fear, surprise, disgust, contempt) maps onto a characteristic eyebrow, eye, and mouth feature combination, by clicking each emotion and interpreting the resulting infobox."
+    ],
+    "bloomsTaxonomy": "Understand (L2)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 550
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "10-emotion-theory-core-expressions"
+}

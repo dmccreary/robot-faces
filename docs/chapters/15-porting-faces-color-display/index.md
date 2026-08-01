@@ -146,7 +146,7 @@ The interactive tool below lets you build this same packed value yourself, one c
 
 #### Diagram: RGB565 Bit-Packing Visualizer
 
-<iframe src="../../sims/rgb565-bit-packing-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/rgb565-bit-packing-visualizer/main.html" width="100%" height="582px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>RGB565 Bit-Packing Visualizer</summary>
@@ -272,7 +272,7 @@ Seeing hue mapped around an actual wheel, alongside the emotional associations f
 
 #### Diagram: Color Wheel Emotion Picker
 
-<iframe src="../../sims/color-wheel-emotion-picker/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/color-wheel-emotion-picker/main.html" width="100%" height="562px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Color Wheel Emotion Picker</summary>
@@ -360,7 +360,7 @@ A reliable habit is to keep every feature's bounding box within a **safe area** 
 
 #### Diagram: Round Display Safe-Area Layout Planner
 
-<iframe src="../../sims/round-display-safe-area-planner/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/round-display-safe-area-planner/main.html" width="100%" height="562px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Round Display Safe-Area Layout Planner</summary>

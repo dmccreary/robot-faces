@@ -83,7 +83,7 @@ These four robots also did not appear by accident. Interest in home robotics gre
 
 #### Diagram: Screen-Based Robot Face Timeline
 
-<iframe src="../../sims/robot-face-timeline-explorer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/robot-face-timeline-explorer/main.html" width="100%" height="582px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Screen-Based Robot Face Timeline</summary>
@@ -208,7 +208,7 @@ Reading price and funding numbers side by side raises an obvious question worth 
 
 #### Diagram: Robot Price and Funding Comparison Chart
 
-<iframe src="../../sims/robot-funding-price-outcome-chart/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/robot-funding-price-outcome-chart/main.html" width="100%" height="542px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Robot Price and Funding Comparison Chart</summary>
@@ -263,7 +263,7 @@ Money alone does not explain these outcomes, so it helps to compare the robots' 
 
 #### Diagram: Four Robots, Four Bets on a Screen Face
 
-<iframe src="../../sims/robot-design-approach-infographic/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/robot-design-approach-infographic/main.html" width="100%" height="812px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Four Robots, Four Bets on a Screen Face</summary>

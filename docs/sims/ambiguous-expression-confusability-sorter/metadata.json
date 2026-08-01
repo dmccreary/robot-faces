@@ -1,0 +1,45 @@
+{
+  "title": "Ambiguous Expression Confusability Sorter",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Given a rendered face built from a deliberately ambiguous parameter set, judge which two named emotions it could plausibly be read as, and justify that judgment by citing the specific overlapping eyebrow, eye, and mouth features responsible.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Ambiguous Expression Confusability Sorter",
+    "learningObjectives": [
+      "Given a rendered face built from a deliberately ambiguous parameter set, judge which two named emotions it could plausibly be read as, and justify that judgment by citing the specific overlapping eyebrow, eye, and mouth features responsible."
+    ],
+    "bloomsTaxonomy": "Evaluate (L5)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 540
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "11-expression-design-readability-hri"
+}

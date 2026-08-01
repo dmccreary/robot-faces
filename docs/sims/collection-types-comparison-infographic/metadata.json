@@ -1,0 +1,45 @@
+{
+  "title": "List vs Tuple vs Dictionary Comparison",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Differentiate lists, tuples, and dictionaries by mutability, syntax, and access method, and distinguish which collection type best fits a short scenario describing robot-face data.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "List vs Tuple vs Dictionary Comparison",
+    "learningObjectives": [
+      "Differentiate lists, tuples, and dictionaries by mutability, syntax, and access method, and distinguish which collection type best fits a short scenario describing robot-face data."
+    ],
+    "bloomsTaxonomy": "Analyze (L4)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "HTML/CSS/JS",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 570
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "03-micropython-fundamentals-1"
+}

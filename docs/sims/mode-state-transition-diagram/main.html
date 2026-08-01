@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="schema" content="https://dmccreary.github.io/intelligent-textbooks/ns/microsim/v1">
+    <title>Mode State Transition Diagram using vis-network</title>
+    <style>
+        body {
+            margin: 0px; padding: 0px; font-family: Arial, Helvetica, sans-serif;
+            background: white; color: #212121; color-scheme: light;
+        }
+
+        /* The network canvas fills the container. Every other element here is
+           an absolutely positioned SIBLING of #network, never a child of it:
+           vis-network replaces the whole innerHTML of its own container. */
+        .container { position: relative; width: 100%; height: 420px; }
+        #network { width: 100%; height: 100%; background-color: aliceblue; }
+
+        .title {
+            position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+            font-size: 17px; font-weight: bold; color: black;
+            background-color: aliceblue; padding: 0 6px; z-index: 10;
+            white-space: nowrap;
+        }
+
+        .legend {
+            position: absolute; top: 36px; left: 8px;
+            padding: 6px 8px; background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+            z-index: 10; font-size: 12px; max-width: 200px;
+        }
+        .legend-item { display: flex; align-items: center; margin: 3px 0; gap: 6px; }
+        .legend-box {
+            width: 20px; height: 13px; border-radius: 4px;
+            border: 2px solid #37474F; flex: none;
+        }
+        .legend-arrow { width: 20px; text-align: center; font-size: 15px; flex: none; }
+
+        .right-panel {
+            position: absolute; top: 36px; right: 8px; width: 262px;
+            max-height: 372px; overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.97);
+            border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+            padding: 10px; z-index: 10;
+        }
+        .panel-title {
+            font-size: 14px; font-weight: bold; margin-bottom: 6px;
+            border-left: 5px solid #B0BEC5; padding-left: 7px;
+        }
+        .panel-body { font-size: 12.5px; line-height: 1.5; }
+        .panel-body p { margin: 0 0 7px 0; }
+        .panel-label { color: #607D8B; font-size: 11.5px; text-transform: uppercase; }
+        .panel-body pre {
+            margin: 2px 0 8px 0; padding: 6px 8px; background: #ECEFF1;
+            border-radius: 5px; font-size: 11.5px; line-height: 1.45;
+            white-space: pre-wrap; overflow-wrap: anywhere;
+        }
+
+        @media (max-width: 620px) {
+            .title { font-size: 13px; }
+            .right-panel { width: 186px; padding: 8px; }
+            .panel-body, .panel-body pre { font-size: 11px; }
+            .legend { max-width: 145px; font-size: 11px; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/styles/vis-network.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+    <script src="mode-state-transition-diagram.js"></script>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div id="network"></div>
+
+            <div class="title">The Three-Mode Cycle: One Button, One Variable</div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <span class="legend-box" style="background-color:#00897B"></span>
+                    <span>Box = one mode</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-arrow">&#8594;</span>
+                    <span>Arrow = a button-triggered transition</span>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="panel-title" id="panel-title">Explore the state machine</div>
+                <div class="panel-body" id="panel-body"></div>
+            </div>
+        </div>
+    </main>
+    <br/>
+    <a href=".">Back to Lesson Plan</a>
+</body>
+</html>

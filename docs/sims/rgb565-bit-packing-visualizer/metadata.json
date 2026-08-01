@@ -1,0 +1,45 @@
+{
+  "title": "RGB565 Bit-Packing Visualizer",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Apply the color565() bit-shifting process by adjusting red, green, and blue channel sliders (0-255 each) and calculating the resulting 16-bit RGB565 binary layout, packed hex value, and packed integer value.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "RGB565 Bit-Packing Visualizer",
+    "learningObjectives": [
+      "Apply the color565() bit-shifting process by adjusting red, green, and blue channel sliders (0-255 each) and calculating the resulting 16-bit RGB565 binary layout, packed hex value, and packed integer value."
+    ],
+    "bloomsTaxonomy": "Apply (L3)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 580
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "15-porting-faces-color-display"
+}

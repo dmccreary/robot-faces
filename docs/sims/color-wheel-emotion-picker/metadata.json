@@ -1,0 +1,45 @@
+{
+  "title": "Color Wheel Emotion Picker",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Interpret a color's hue, saturation, and brightness by selecting a point on a circular color wheel, and classify the resulting color as warm or cool while exploring its common emotion association.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Color Wheel Emotion Picker",
+    "learningObjectives": [
+      "Interpret a color's hue, saturation, and brightness by selecting a point on a circular color wheel, and classify the resulting color as warm or cool while exploring its common emotion association."
+    ],
+    "bloomsTaxonomy": "Understand (L2)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 560
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "15-porting-faces-color-display"
+}

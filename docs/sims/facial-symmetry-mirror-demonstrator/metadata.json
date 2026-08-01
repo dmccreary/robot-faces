@@ -1,0 +1,45 @@
+{
+  "title": "Facial Symmetry Mirror Demonstrator",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Demonstrate facial symmetry by adjusting one eye's x-position and size, and apply the mirroring rule to predict and verify how the opposite eye updates automatically around the vertical centerline.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Facial Symmetry Mirror Demonstrator",
+    "learningObjectives": [
+      "Demonstrate facial symmetry by adjusting one eye's x-position and size, and apply the mirroring rule to predict and verify how the opposite eye updates automatically around the vertical centerline."
+    ],
+    "bloomsTaxonomy": "Apply (L3)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 505
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "09-facial-anatomy-layout-design"
+}

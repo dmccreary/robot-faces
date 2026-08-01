@@ -1,0 +1,45 @@
+{
+  "title": "Expression Interpolation Keyframe Stepper",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Interpret how expression interpolation computes intermediate face-state parameter values between two keyframes by stepping through individual frames with concrete numbers, and exemplify how an easing curve changes those values compared to plain linear interpolation.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Expression Interpolation Keyframe Stepper",
+    "learningObjectives": [
+      "Interpret how expression interpolation computes intermediate face-state parameter values between two keyframes by stepping through individual frames with concrete numbers, and exemplify how an easing curve changes those values compared to plain linear interpolation."
+    ],
+    "bloomsTaxonomy": "Understand (L2)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 520
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "12-animating-expressions"
+}

@@ -1,0 +1,45 @@
+{
+  "title": "Face Parameter Slider Playground",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Construct a complete, original facial expression by designing values for the eye size, eye spacing, eyebrow angle, and mouth curvature parameters, observing how draw_face() turns that one set of numbers into a complete rendered face.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Face Parameter Slider Playground",
+    "learningObjectives": [
+      "Construct a complete, original facial expression by designing values for the eye size, eye spacing, eyebrow angle, and mouth curvature parameters, observing how draw_face() turns that one set of numbers into a complete rendered face."
+    ],
+    "bloomsTaxonomy": "Create (L6)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 545
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "09-facial-anatomy-layout-design"
+}

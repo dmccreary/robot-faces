@@ -1,0 +1,45 @@
+{
+  "title": "Poly Point Array Builder",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Construct a custom polygon by placing vertices on a simulated frame buffer grid, and design the resulting point array and matching `fb.poly()` call needed to reproduce it in code.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Poly Point Array Builder",
+    "learningObjectives": [
+      "Construct a custom polygon by placing vertices on a simulated frame buffer grid, and design the resulting point array and matching `fb.poly()` call needed to reproduce it in code."
+    ],
+    "bloomsTaxonomy": "Create (L6)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 450
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "07-ellipse-polygon-drawing"
+}

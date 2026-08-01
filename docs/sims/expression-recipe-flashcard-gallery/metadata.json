@@ -1,0 +1,45 @@
+{
+  "title": "Expression Recipe Flashcard Gallery",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Given a parameter recipe (eyebrow angle, eye size, pupil position, mouth curvature), predict which of the thirteen named expressions it produces, and given a named expression, infer its parameter recipe \u2014 reinforcing the vocabulary just taught in the chapter walkthrough.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Expression Recipe Flashcard Gallery",
+    "learningObjectives": [
+      "Given a parameter recipe (eyebrow angle, eye size, pupil position, mouth curvature), predict which of the thirteen named expressions it produces, and given a named expression, infer its parameter recipe \u2014 reinforcing the vocabulary just taught in the chapter walkthrough."
+    ],
+    "bloomsTaxonomy": "Understand (L2)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 520
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "10-emotion-theory-core-expressions"
+}

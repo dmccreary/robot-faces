@@ -117,7 +117,7 @@ Seeing exactly which Ekman emotions map onto which robot-face features, side by 
 
 #### Diagram: Ekman Emotion Feature Map
 
-<iframe src="../../sims/ekman-emotion-feature-map/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/ekman-emotion-feature-map/main.html" width="100%" height="552px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Ekman Emotion Feature Map</summary>
@@ -297,7 +297,7 @@ Turning a written recipe into an instant guess, or an expression into an instant
 
 #### Diagram: Expression Recipe Flashcard Gallery
 
-<iframe src="../../sims/expression-recipe-flashcard-gallery/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/expression-recipe-flashcard-gallery/main.html" width="100%" height="522px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Expression Recipe Flashcard Gallery</summary>
@@ -363,7 +363,7 @@ Predicting a parameter recipe was one thing — now try assembling one yourself 
 
 #### Diagram: Build This Expression Challenge
 
-<iframe src="../../sims/expression-parameter-matching-challenge/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/expression-parameter-matching-challenge/main.html" width="100%" height="547px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Build This Expression Challenge</summary>

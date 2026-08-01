@@ -1,0 +1,45 @@
+{
+  "title": "Blit Transparency Key Visualizer",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Differentiate a transparent blit from an opaque blit by examining how a circular sprite overlaps existing background content with and without a transparent color key.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Blit Transparency Key Visualizer",
+    "learningObjectives": [
+      "Differentiate a transparent blit from an opaque blit by examining how a circular sprite overlaps existing background content with and without a transparent color key."
+    ],
+    "bloomsTaxonomy": "Analyze (L4)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 470
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "06-basic-drawing-primitives"
+}

@@ -130,7 +130,7 @@ Watching a simulated press land at different moments makes the trade-off in that
 
 #### Diagram: Polling vs Interrupt Response Simulator
 
-<iframe src="../../sims/polling-vs-interrupt-response-simulator/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/polling-vs-interrupt-response-simulator/main.html" width="100%" height="452px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Polling vs Interrupt Response Simulator</summary>
@@ -224,7 +224,7 @@ Turning a simulated knob and watching both the raw ADC number and the mapped out
 
 #### Diagram: Potentiometer ADC Mapping Visualizer
 
-<iframe src="../../sims/potentiometer-adc-mapping-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/potentiometer-adc-mapping-visualizer/main.html" width="100%" height="427px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Potentiometer ADC Mapping Visualizer</summary>
@@ -298,7 +298,7 @@ Clicking through the same three modes and transitions on an interactive diagram,
 
 #### Diagram: Mode State Transition Diagram
 
-<iframe src="../../sims/mode-state-transition-diagram/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/mode-state-transition-diagram/main.html" width="100%" height="482px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Mode State Transition Diagram</summary>

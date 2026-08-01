@@ -1,0 +1,45 @@
+{
+  "title": "Button Bounce Timeline Visualizer",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Differentiate a raw, bouncing button signal from a properly debounced signal by examining a shared timeline, and identify how the debounce time constant determines which transitions get accepted as a single press.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Button Bounce Timeline Visualizer",
+    "learningObjectives": [
+      "Differentiate a raw, bouncing button signal from a properly debounced signal by examining a shared timeline, and identify how the debounce time constant determines which transitions get accepted as a single press."
+    ],
+    "bloomsTaxonomy": "Analyze (L4)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 488
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "14-expression-menu-live-controls"
+}

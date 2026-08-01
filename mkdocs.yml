@@ -6,42 +6,134 @@ repo_url: 'https://github.com/dmccreary/robot-faces'
 
 nav:
   - Home: index.md
+  - About This Project: about.md
+  - Course Description: course-description.md
   - Getting Started: getting-started.md
   - Chapters:
     - List of Chapters: chapters/index.md
-    - 1. Hardware & Electronics Foundations: chapters/01-hardware-electronics-foundations/index.md
-    - 2. A History of Screen-Based Robot Faces: chapters/02-history-of-robot-faces/index.md
-    - "3. MicroPython Fundamentals I: Syntax, Data & Loops": chapters/03-micropython-fundamentals-1/index.md
-    - "4. MicroPython Fundamentals II: Functions & the FrameBuf Module": chapters/04-micropython-fundamentals-2/index.md
-    - 5. Display & Coordinate Systems: chapters/05-display-coordinate-systems/index.md
-    - 6. Basic Drawing Primitives: chapters/06-basic-drawing-primitives/index.md
-    - 7. Ellipse & Polygon Drawing: chapters/07-ellipse-polygon-drawing/index.md
-    - 8. A History of MicroPython's FrameBuf Drawing Support: chapters/08-framebuf-version-history/index.md
-    - 9. Facial Anatomy & Layout Design: chapters/09-facial-anatomy-layout-design/index.md
-    - 10. Emotion Theory & the Core Expression Set: chapters/10-emotion-theory-core-expressions/index.md
-    - 11. Expression Design, Readability & Human-Robot Interaction: chapters/11-expression-design-readability-hri/index.md
-    - "12. Animating Expressions: Timing & Motion": chapters/12-animating-expressions/index.md
-    - "13. Interactive Controls: Inputs & Concurrency": chapters/13-interactive-controls-inputs/index.md
-    - 14. Building an Expression Menu & Live Controls: chapters/14-expression-menu-live-controls/index.md
-    - 15. Porting Faces to a Color Display: chapters/15-porting-faces-color-display/index.md
-    - 16. Computational Thinking & Capstone Design: chapters/16-computational-thinking-capstone/index.md
+    - 1. Hardware & Electronics Foundations:
+      - Content: chapters/01-hardware-electronics-foundations/index.md
+      - Quiz: chapters/01-hardware-electronics-foundations/quiz.md
+    - 2. A History of Screen-Based Robot Faces:
+      - Content: chapters/02-history-of-robot-faces/index.md
+      - Quiz: chapters/02-history-of-robot-faces/quiz.md
+    - "3. MicroPython Fundamentals I: Syntax, Data & Loops":
+      - Content: chapters/03-micropython-fundamentals-1/index.md
+      - Quiz: chapters/03-micropython-fundamentals-1/quiz.md
+    - "4. MicroPython Fundamentals II: Functions & the FrameBuf Module":
+      - Content: chapters/04-micropython-fundamentals-2/index.md
+      - Quiz: chapters/04-micropython-fundamentals-2/quiz.md
+    - 5. Display & Coordinate Systems:
+      - Content: chapters/05-display-coordinate-systems/index.md
+      - Quiz: chapters/05-display-coordinate-systems/quiz.md
+    - 6. Basic Drawing Primitives:
+      - Content: chapters/06-basic-drawing-primitives/index.md
+      - Quiz: chapters/06-basic-drawing-primitives/quiz.md
+    - 7. Ellipse & Polygon Drawing:
+      - Content: chapters/07-ellipse-polygon-drawing/index.md
+      - Quiz: chapters/07-ellipse-polygon-drawing/quiz.md
+    - 8. A History of MicroPython's FrameBuf Drawing Support:
+      - Content: chapters/08-framebuf-version-history/index.md
+      - Quiz: chapters/08-framebuf-version-history/quiz.md
+    - 9. Facial Anatomy & Layout Design:
+      - Content: chapters/09-facial-anatomy-layout-design/index.md
+      - Quiz: chapters/09-facial-anatomy-layout-design/quiz.md
+    - 10. Emotion Theory & the Core Expression Set:
+      - Content: chapters/10-emotion-theory-core-expressions/index.md
+      - Quiz: chapters/10-emotion-theory-core-expressions/quiz.md
+    - 11. Expression Design, Readability & Human-Robot Interaction:
+      - Content: chapters/11-expression-design-readability-hri/index.md
+      - Quiz: chapters/11-expression-design-readability-hri/quiz.md
+    - "12. Animating Expressions: Timing & Motion":
+      - Content: chapters/12-animating-expressions/index.md
+      - Quiz: chapters/12-animating-expressions/quiz.md
+    - "13. Interactive Controls: Inputs & Concurrency":
+      - Content: chapters/13-interactive-controls-inputs/index.md
+      - Quiz: chapters/13-interactive-controls-inputs/quiz.md
+    - 14. Building an Expression Menu & Live Controls:
+      - Content: chapters/14-expression-menu-live-controls/index.md
+      - Quiz: chapters/14-expression-menu-live-controls/quiz.md
+    - 15. Porting Faces to a Color Display:
+      - Content: chapters/15-porting-faces-color-display/index.md
+      - Quiz: chapters/15-porting-faces-color-display/quiz.md
+    - 16. Computational Thinking & Capstone Design:
+      - Content: chapters/16-computational-thinking-capstone/index.md
+      - Quiz: chapters/16-computational-thinking-capstone/quiz.md
+  
   - Lessons:
     - Introduction: lessons/index.md
     - History of Robot Faces: lessons/history-of-robot-faces/index.md
     - Screen Coordinates: lessons/screen-coordinates/index.md
     - Basic Drawing Commands: lessons/drawing-commands/index.md
+    - Pixel: lessons/pixel/index.md
+    - Line: lessons/line/index.md
+    - Rectangle: lessons/rectangle/index.md
     - Ellipse: lessons/ellipse/index.md
+    - Circle: lessons/circle/index.md
     - Polygon: lessons/polygon/index.md
+    - Text: lessons/text/index.md
+    - Scroll: lessons/scroll/index.md
+    - Blit: lessons/blit-commands/index.md
     - Basic Face Layouts: lessons/basic-face-layouts/index.md
     - Eye Scanner: lessons/eye-scanner/index.md
     - Interactions: lessons/interactions/index.md
     - Eyebrows: lessons/eyebrows/index.md
     - Emotion Types: lessons/emotion-types/index.md
-    # - lessons/blit-commands/index.md
+    - Winking with a Smile: lessons/wink/index.md
     # - lessons/multiple-threads/index.md
+  
+  - MicroSims:
+    - List of MicroSims: sims/index.md
+    - Ambiguous Expression Confusability Sorter: sims/ambiguous-expression-confusability-sorter/index.md
+    - Bitwise Operator and Shift Visualizer: sims/bitwise-shift-visualizer/index.md
+    - Blit Transparency Key Visualizer: sims/blit-transparency-key-visualizer/index.md
+    - Build This Expression Challenge: sims/expression-parameter-matching-challenge/index.md
+    - Button Bounce Timeline Visualizer: sims/button-bounce-timeline-visualizer/index.md
+    - Capstone Planning Worksheet: sims/capstone-planning-worksheet/index.md
+    - Capstone Rubric Scoring Tool: sims/capstone-rubric-scoring-tool/index.md
+    - Circular Buffer Waste Visualizer: sims/circular-buffer-waste-visualizer/index.md
+    - Color Wheel Emotion Picker: sims/color-wheel-emotion-picker/index.md
+    - Computational Thinking Concept Map: sims/computational-thinking-concept-map/index.md
+    - Convex vs Concave Shape Classifier: sims/convex-concave-shape-classifier/index.md
+    - Coordinate Grid Explorer: sims/coordinate-grid-explorer/index.md
+    - Draw Call Benchmark Chart: sims/draw-call-benchmark-chart/index.md
+    - Draw Order and Overdraw Stepper: sims/draw-order-overdraw-stepper/index.md
+    - Ekman Emotion Feature Map: sims/ekman-emotion-feature-map/index.md
+    - Encoder Quadrature Signal Visualizer: sims/encoder-quadrature-signal-visualizer/index.md
+    - Expression Interpolation Keyframe Stepper: sims/expression-interpolation-keyframe-stepper/index.md
+    - Expression Menu Live Simulator: sims/expression-menu-live-simulator/index.md
+    - Expression Recipe Flashcard Gallery: sims/expression-recipe-flashcard-gallery/index.md
+    - Face Layout Grid Visualizer: sims/face-layout-grid-visualizer/index.md
+    - Face Parameter Slider Playground: sims/face-parameter-slider-playground/index.md
+    - Facial Symmetry Mirror Demonstrator: sims/facial-symmetry-mirror-demonstrator/index.md
+    - Four Robots, Four Bets on a Screen Face: sims/robot-design-approach-infographic/index.md
+    - Frame Buffer Size Calculator: sims/buffer-size-calculator/index.md
+    - FrameBuf Version Timeline: sims/framebuf-version-timeline-explorer/index.md
+    - Global vs Local Scope Call Stack Explorer: sims/scope-call-stack-explorer/index.md
+    - Indentation Error Visualizer: sims/indentation-error-visualizer/index.md
+    - Interactive Breadboard Wiring Diagram: sims/breadboard-wiring-diagram/index.md
+    - List vs Tuple vs Dictionary Comparison: sims/collection-types-comparison-infographic/index.md
+    - MicroPython Loop Tracer: sims/micropython-loop-tracer/index.md
+    - Mode State Transition Diagram: sims/mode-state-transition-diagram/index.md
+    - Old Workaround vs. New ellipse() Call: sims/ellipse-workaround-before-after-toggle/index.md
+    - Pixel Drawing Sandbox: sims/pixel-drawing-sandbox/index.md
+    - Polling vs Interrupt Response Simulator: sims/polling-vs-interrupt-response-simulator/index.md
+    - Poly Point Array Builder: sims/poly-point-array-builder/index.md
+    - Potentiometer ADC Mapping Visualizer: sims/potentiometer-adc-mapping-visualizer/index.md
+    - Predict the Return Value Tracer: sims/predict-return-value-tracer/index.md
+    - Pull-Up Resistor and Button Simulator: sims/pull-up-resistor-simulator/index.md
+    - Quadrant Fill Code Explorer: sims/quadrant-fill-code-explorer/index.md
+    - RGB565 Bit-Packing Visualizer: sims/rgb565-bit-packing-visualizer/index.md
+    - Robot Price and Funding Comparison Chart: sims/robot-funding-price-outcome-chart/index.md
+    - Round Display Safe-Area Layout Planner: sims/round-display-safe-area-planner/index.md
+    - Rubric Rater — Score This Expression: sims/expression-rubric-rater/index.md
+    - Screen-Based Robot Face Timeline: sims/robot-face-timeline-explorer/index.md
+    - Sleep vs Ticks Button Miss Simulator: sims/sleep-vs-ticks-button-miss-simulator/index.md
+    - SPI vs I2C Bus Explorer: sims/spi-i2c-bus-explorer/index.md
+    - Valence-Arousal Quadrant Plotter: sims/valence-arousal-quadrant-plotter/index.md
+
+
   - parts-lists.md
-  - about.md
-  - Course Description: course-description.md
   - Learning Graph:
     - Introduction: learning-graph/index.md
     - Starting Concept List: learning-graph/starting-concept-list.md
@@ -51,17 +143,19 @@ nav:
     - Concept Taxonomy: learning-graph/concept-taxonomy.md
     - Taxonomy Distribution: learning-graph/taxonomy-distribution.md
     - Mascot Test: learning-graph/mascot-test.md
+    - Quiz Generation Report: learning-graph/quiz-generation-report.md
   - Stories:
     - Overview: stories/index.md
     - "Bright Eyes, Closed Doors: Cozmo and Vector": stories/anki-cozmo-vector/index.md
   - Contact: contact.md
   - Glossary: glossary.md
+  - References: references.md
 # CoderDojo Microsite Standards from here down
 edit_uri: 'blob/master/docs'
 theme:
-  # should be name: material
   name: material
-  logo: img/coderdojo-logo.jpg
+  logo: img/mascot/welcome.png
+  favicon: img/favicon.ico
   palette:
     primary: '#642580'
     accent: '#41BAC1'
@@ -71,13 +165,20 @@ theme:
 plugins:
   - search
 extra_css:
+  - css/extra.css
   - css/mascot.css
+extra_javascript:
+  - js/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 markdown_extensions:
   - admonition
+  - footnotes
   - md_in_html
   - pymdownx.details
   - pymdownx.superfences
   - attr_list
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.highlight:
       linenums: true
 

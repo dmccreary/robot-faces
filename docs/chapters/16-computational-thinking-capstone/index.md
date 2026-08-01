@@ -136,7 +136,7 @@ Reading that table is one thing — tracing the actual connections yourself, cha
 
 #### Diagram: Computational Thinking Concept Map
 
-<iframe src="../../sims/computational-thinking-concept-map/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/computational-thinking-concept-map/main.html" width="100%" height="602px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Computational Thinking Concept Map</summary>
@@ -250,7 +250,7 @@ Reading a rubric is very different from actually using one on somebody else's re
 
 #### Diagram: Capstone Rubric Scoring Tool
 
-<iframe src="../../sims/capstone-rubric-scoring-tool/main.html" width="100%" height="520px" scrolling="no"></iframe>
+<iframe src="../../sims/capstone-rubric-scoring-tool/main.html" width="100%" height="722px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Capstone Rubric Scoring Tool</summary>
@@ -351,7 +351,7 @@ Everything from this chapter — minimum viable feature set, expression set plan
 
 #### Diagram: Capstone Planning Worksheet
 
-<iframe src="../../sims/capstone-planning-worksheet/main.html" width="100%" height="560px" scrolling="no"></iframe>
+<iframe src="../../sims/capstone-planning-worksheet/main.html" width="100%" height="702px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Capstone Planning Worksheet</summary>

@@ -1,0 +1,45 @@
+{
+  "title": "Computational Thinking Concept Map",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Explain each computational-thinking skill in plain language and relate it to the specific earlier chapter and code example where the student already practiced it, differentiating the five skills from one another by the distinct role each one plays.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Computational Thinking Concept Map",
+    "learningObjectives": [
+      "Explain each computational-thinking skill in plain language and relate it to the specific earlier chapter and code example where the student already practiced it, differentiating the five skills from one another by the distinct role each one plays."
+    ],
+    "bloomsTaxonomy": "Understand (L2) / Analyze (L4)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "vis-network",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 600
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "16-computational-thinking-capstone"
+}

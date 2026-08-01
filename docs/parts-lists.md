@@ -2,22 +2,26 @@
 
 ## Microcontrollers
 
-You can use any microcontroller that supports an SPI interface and has a MicroPython driver.  Here are some of our favorites.
+You can use almost any modern microcontroller that supports an SPI interface and has a MicroPython driver.  Here are some of our favorites.  They sell for as little as $3.99 USD at stores like MicroCenter.
 
 ### Raspberry Pi Pico
 
-The Raspberry Pi Pico is a $4 microcontroller that supports SPI.  This allows you to test your
-face drawing for under $25.
-
 ![](./img/raspberry-pi-pico.png)
 
-### Cytron Maker Pi RP2040
+The Raspberry Pi Pico is a $3.99 microcontroller that supports SPI.  This allows you to test your
+face drawing for under $25.  It has 260KB RAM which is more than enough for most displays, even color 240x240 color displays.
+
+You can also use the popular ESP-32 MicroControllers that also run Python.  Just make sure that the Thonny (or similar) can be used to control the devices.
 
 ## Displays
 
 ### 128X64 OLEDs
 
-We love the $20 128x64 OLED displays.  These displays have fast [SPI](./glossary.md#spi) drivers that will update the display in around 2 milliseconds.
+![](./img/oled-display-aliexpress.png)
+
+We love the under $20 128x64 OLED displays.  These displays have fast [SPI](./glossary.md#spi) drivers that will update the display in around 2 milliseconds.
+
+[AliExpress 2.42 inch 2.42" OLED Display Module 128x64 LCD HD Screen Module SSD1309 7 Pin SPI/IIC I2C Serial Interface](https://www.aliexpress.us/item/3256806159669161.html)
 
 ## Robot Chassis
 

@@ -1,0 +1,45 @@
+{
+  "title": "Convex vs Concave Shape Classifier",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Differentiate convex polygons from concave polygons by examining a series of shapes and classifying each based on whether any vertex dents inward toward the shape's interior.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Convex vs Concave Shape Classifier",
+    "learningObjectives": [
+      "Differentiate convex polygons from concave polygons by examining a series of shapes and classifying each based on whether any vertex dents inward toward the shape's interior."
+    ],
+    "bloomsTaxonomy": "Analyze (L4)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 500
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "07-ellipse-polygon-drawing"
+}

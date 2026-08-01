@@ -129,7 +129,7 @@ Now that you can see exactly what changed, it helps to compare both approaches s
 
 #### Diagram: Old Workaround vs. New ellipse() Call
 
-<iframe src="../../sims/ellipse-workaround-before-after-toggle/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/ellipse-workaround-before-after-toggle/main.html" width="100%" height="712px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Old Workaround vs. New ellipse() Call</summary>
@@ -253,7 +253,7 @@ Now explore the same story as an interactive timeline. Click any milestone to se
 
 #### Diagram: FrameBuf Version Timeline
 
-<iframe src="../../sims/framebuf-version-timeline-explorer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/framebuf-version-timeline-explorer/main.html" width="100%" height="612px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>FrameBuf Version Timeline</summary>

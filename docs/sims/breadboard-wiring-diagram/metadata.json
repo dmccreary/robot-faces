@@ -1,0 +1,45 @@
+{
+  "title": "Interactive Breadboard Wiring Diagram",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Examine a complete breadboard wiring diagram, distinguish power wires from signal wires, and correctly identify which Pico pin each display wire connects to.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Interactive Breadboard Wiring Diagram",
+    "learningObjectives": [
+      "Examine a complete breadboard wiring diagram, distinguish power wires from signal wires, and correctly identify which Pico pin each display wire connects to."
+    ],
+    "bloomsTaxonomy": "Analyze (L4)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 560
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "01-hardware-electronics-foundations"
+}

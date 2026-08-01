@@ -1,0 +1,45 @@
+{
+  "title": "Coordinate Grid Explorer",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Demonstrate the mapping between a screen position and its (x, y) coordinate pair by clicking anywhere on a simulated pixel grid, and identify the origin, X axis direction, and Y axis direction when they are toggled into view.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Coordinate Grid Explorer",
+    "learningObjectives": [
+      "Demonstrate the mapping between a screen position and its (x, y) coordinate pair by clicking anywhere on a simulated pixel grid, and identify the origin, X axis direction, and Y axis direction when they are toggled into view."
+    ],
+    "bloomsTaxonomy": "Apply (L3)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 480
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "05-display-coordinate-systems"
+}

@@ -445,3 +445,4 @@ teacher ever used the robot successfully.
 8. [Axios: Anki shuts down despite $200 million in funding](https://www.axios.com/2019/04/29/robotics-startup-anki-shutting-down-despite-200m-in-funding) - Contemporary report on the 2019 shutdown and financing failure
 9. [Digital Dream Labs: Vector developer tools](https://support.anki.bot/article/361-vector-developer-tools) - Documentation of later OSKR, Escape Pod, and developer-tool efforts
 10. [Wire-pod project](https://github.com/kercre123/wire-pod) - Independent open-source local voice server created by the Vector community
+11. [Vector Robot Review 2025: Should You Buy It Now, and What Happens If You Skip the Subscription?](https://keyirobot.com/blogs/buying-guide/vector-robot-review-2025-should-you-buy-it-now-and-what-happens-if-you-skip-the-subscription?srsltid=AfmBOor4ZK85rnRl-9kC_cfYYfF2p1DsPJ1qUB0XNnPGQXSegBEKFXUX)

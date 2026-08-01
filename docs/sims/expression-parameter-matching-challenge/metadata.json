@@ -1,0 +1,45 @@
+{
+  "title": "Build This Expression Challenge",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Given a target named expression from this chapter's core set, demonstrate mastery of its parameter recipe by constructing it with sliders \u2014 adjusting eyebrow angle, eye size, pupil position, and mouth curvature until the rendered face matches the target's defining features.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Build This Expression Challenge",
+    "learningObjectives": [
+      "Given a target named expression from this chapter's core set, demonstrate mastery of its parameter recipe by constructing it with sliders \u2014 adjusting eyebrow angle, eye size, pupil position, and mouth curvature until the rendered face matches the target's defining features."
+    ],
+    "bloomsTaxonomy": "Apply (L3)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 545
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "10-emotion-theory-core-expressions"
+}

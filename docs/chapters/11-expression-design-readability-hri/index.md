@@ -128,7 +128,7 @@ Placing your own expressions on this same grid, instead of just reading about wh
 
 #### Diagram: Valence-Arousal Quadrant Plotter
 
-<iframe src="../../sims/valence-arousal-quadrant-plotter/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/valence-arousal-quadrant-plotter/main.html" width="100%" height="502px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Valence-Arousal Quadrant Plotter</summary>
@@ -173,7 +173,7 @@ Reading about the afraid/surprised overlap is one thing — now try spotting a g
 
 #### Diagram: Ambiguous Expression Confusability Sorter
 
-<iframe src="../../sims/ambiguous-expression-confusability-sorter/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/ambiguous-expression-confusability-sorter/main.html" width="100%" height="542px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Ambiguous Expression Confusability Sorter</summary>
@@ -293,7 +293,7 @@ Rating a real design against every one of these criteria, with a required reason
 
 #### Diagram: Rubric Rater — Score This Expression
 
-<iframe src="../../sims/expression-rubric-rater/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/expression-rubric-rater/main.html" width="100%" height="702px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Rubric Rater — Score This Expression</summary>

@@ -142,7 +142,7 @@ Watching an ellipse redraw live as each quadrant bit toggles on and off makes th
 
 #### Diagram: Quadrant Fill Code Explorer
 
-<iframe src="../../sims/quadrant-fill-code-explorer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/quadrant-fill-code-explorer/main.html" width="100%" height="587px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Quadrant Fill Code Explorer</summary>
@@ -316,7 +316,7 @@ Building a polygon vertex by vertex, watching the point array and the resulting 
 
 #### Diagram: Poly Point Array Builder
 
-<iframe src="../../sims/poly-point-array-builder/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/poly-point-array-builder/main.html" width="100%" height="452px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Poly Point Array Builder</summary>
@@ -363,7 +363,7 @@ Classifying a shape as convex or concave is a skill that improves with practice 
 
 #### Diagram: Convex vs Concave Shape Classifier
 
-<iframe src="../../sims/convex-concave-shape-classifier/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/convex-concave-shape-classifier/main.html" width="100%" height="502px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Convex vs Concave Shape Classifier</summary>

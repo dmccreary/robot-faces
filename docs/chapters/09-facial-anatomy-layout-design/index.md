@@ -91,7 +91,7 @@ Seeing a grid overlaid on a real face, with each band's purpose labeled, makes t
 
 #### Diagram: Face Layout Grid Visualizer
 
-<iframe src="../../sims/face-layout-grid-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/face-layout-grid-visualizer/main.html" width="100%" height="492px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Face Layout Grid Visualizer</summary>
@@ -172,7 +172,7 @@ Dragging one eye and watching its mirror image update automatically makes the re
 
 #### Diagram: Facial Symmetry Mirror Demonstrator
 
-<iframe src="../../sims/facial-symmetry-mirror-demonstrator/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/facial-symmetry-mirror-demonstrator/main.html" width="100%" height="507px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Facial Symmetry Mirror Demonstrator</summary>
@@ -476,7 +476,7 @@ Turning sliders on live parameters and watching this exact function redraw a fac
 
 #### Diagram: Face Parameter Slider Playground
 
-<iframe src="../../sims/face-parameter-slider-playground/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/face-parameter-slider-playground/main.html" width="100%" height="547px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Face Parameter Slider Playground</summary>

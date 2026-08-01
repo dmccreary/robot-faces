@@ -128,7 +128,7 @@ Now that you have four different ways to lay down straight lines — one pixel a
 
 #### Diagram: Pixel Drawing Sandbox
 
-<iframe src="../../sims/pixel-drawing-sandbox/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/pixel-drawing-sandbox/main.html" width="100%" height="452px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Pixel Drawing Sandbox</summary>
@@ -257,7 +257,7 @@ Seeing a sprite blitted with and without a transparency key, side by side, makes
 
 #### Diagram: Blit Transparency Key Visualizer
 
-<iframe src="../../sims/blit-transparency-key-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/blit-transparency-key-visualizer/main.html" width="100%" height="472px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Blit Transparency Key Visualizer</summary>
@@ -354,7 +354,7 @@ Stepping through a sequence of draw calls one at a time, watching exactly which 
 
 #### Diagram: Draw Order and Overdraw Stepper
 
-<iframe src="../../sims/draw-order-overdraw-stepper/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/draw-order-overdraw-stepper/main.html" width="100%" height="502px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Draw Order and Overdraw Stepper</summary>

@@ -1,0 +1,45 @@
+{
+  "title": "Frame Buffer Size Calculator",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Calculate the number of bytes a frame buffer requires given width, height, and bit depth, and demonstrate how independently changing each parameter changes the total memory footprint.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Frame Buffer Size Calculator",
+    "learningObjectives": [
+      "Calculate the number of bytes a frame buffer requires given width, height, and bit depth, and demonstrate how independently changing each parameter changes the total memory footprint."
+    ],
+    "bloomsTaxonomy": "Apply (L3)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 490
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "05-display-coordinate-systems"
+}

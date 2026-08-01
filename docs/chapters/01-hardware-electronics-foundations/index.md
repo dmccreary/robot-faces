@@ -128,7 +128,7 @@ The floating-pin problem described above is easier to understand by watching it 
 
 #### Diagram: Pull-Up Resistor and Button Simulator
 
-<iframe src="../../sims/pull-up-resistor-simulator/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/pull-up-resistor-simulator/main.html" width="100%" height="482px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Pull-Up Resistor and Button Simulator</summary>
@@ -190,7 +190,7 @@ Because wire count is the clearest practical difference between the two buses, t
 
 #### Diagram: SPI vs I2C Bus Explorer
 
-<iframe src="../../sims/spi-i2c-bus-explorer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/spi-i2c-bus-explorer/main.html" width="100%" height="482px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>SPI vs I2C Bus Explorer</summary>
@@ -299,7 +299,7 @@ The interactive version below lets you explore the full wiring for the 128x64 OL
 
 #### Diagram: Interactive Breadboard Wiring Diagram
 
-<iframe src="../../sims/breadboard-wiring-diagram/main.html" width="100%" height="550px" scrolling="no"></iframe>
+<iframe src="../../sims/breadboard-wiring-diagram/main.html" width="100%" height="562px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Interactive Breadboard Wiring Diagram</summary>

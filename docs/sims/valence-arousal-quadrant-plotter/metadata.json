@@ -1,0 +1,45 @@
+{
+  "title": "Valence-Arousal Quadrant Plotter",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Apply the valence-arousal model by placing a point on a two-axis valence/arousal grid and classifying which quadrant it falls into, demonstrating why expressions that land near each other on the grid \u2014 such as afraid and surprised, both high-arousal \u2014 are more likely to be visually confused.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Valence-Arousal Quadrant Plotter",
+    "learningObjectives": [
+      "Apply the valence-arousal model by placing a point on a two-axis valence/arousal grid and classifying which quadrant it falls into, demonstrating why expressions that land near each other on the grid \u2014 such as afraid and surprised, both high-arousal \u2014 are more likely to be visually confused."
+    ],
+    "bloomsTaxonomy": "Apply (L3)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 500
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "11-expression-design-readability-hri"
+}

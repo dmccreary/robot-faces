@@ -165,7 +165,7 @@ Now that functions, parameters, defaults, and multiple return values have all be
 
 #### Diagram: Predict the Return Value Tracer
 
-<iframe src="../../sims/predict-return-value-tracer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/predict-return-value-tracer/main.html" width="100%" height="66px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Predict the Return Value Tracer</summary>
@@ -264,7 +264,7 @@ Watching a function's local variables appear and disappear, separately from a pr
 
 #### Diagram: Global vs Local Scope Call Stack Explorer
 
-<iframe src="../../sims/scope-call-stack-explorer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/scope-call-stack-explorer/main.html" width="100%" height="502px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Global vs Local Scope Call Stack Explorer</summary>
@@ -370,7 +370,7 @@ Watching individual bits slide left and right is far easier to follow than readi
 
 #### Diagram: Bitwise Operator and Shift Visualizer
 
-<iframe src="../../sims/bitwise-shift-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/bitwise-shift-visualizer/main.html" width="100%" height="472px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Bitwise Operator and Shift Visualizer</summary>

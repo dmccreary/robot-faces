@@ -1,0 +1,45 @@
+{
+  "title": "Predict the Return Value Tracer",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Execute a short MicroPython function definition mentally, given specific argument values, and demonstrate correct prediction of its return value, including cases using a default parameter value or multiple return values.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Predict the Return Value Tracer",
+    "learningObjectives": [
+      "Execute a short MicroPython function definition mentally, given specific argument values, and demonstrate correct prediction of its return value, including cases using a default parameter value or multiple return values."
+    ],
+    "bloomsTaxonomy": "Apply (L3)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 530
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "04-micropython-fundamentals-2"
+}

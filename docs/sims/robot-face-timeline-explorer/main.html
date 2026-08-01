@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="schema" content="https://dmccreary.github.io/intelligent-textbooks/ns/microsim/v1">
+    <title>Screen-Based Robot Face Timeline using vis-timeline</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-timeline@7.7.3/styles/vis-timeline-graph2d.min.css">
+    <style>
+        body {
+            margin: 0px; padding: 8px; font-family: Arial, Helvetica, sans-serif;
+            background: white; color: #212121; color-scheme: light;
+        }
+
+        /* --- control rows --- */
+        .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 6px; }
+        .row button {
+            font-family: inherit; font-size: 14px; padding: 5px 10px;
+            border: 1px solid silver; border-radius: 6px; background: white; cursor: pointer;
+        }
+        .row button:hover { background: aliceblue; }
+        #filters button.active { color: white; border-color: transparent; }
+        #filters button[data-company="all"].active      { background: #455A64; }
+        #filters button[data-company="anki"].active     { background: #00BFA5; }
+        #filters button[data-company="emotix"].active   { background: #FF7043; }
+        #filters button[data-company="bluefrog"].active { background: #7E57C2; }
+        .row .hint { font-size: 13px; color: #546E7A; }
+
+        /* --- timeline container --- */
+        #timeline { padding-left: 40px; padding-right: 40px; overflow: hidden; }
+        .vis-timeline { overflow: visible !important; border: 1px solid silver; }
+        .vis-panel.vis-center { overflow: visible !important; }
+        .vis-item .vis-item-overflow { overflow: visible !important; }
+        .vis-item .vis-item-content { white-space: nowrap !important; padding: 4px 8px !important; }
+        .vis-item.vis-range, .vis-item.vis-box { min-width: fit-content !important; }
+
+        /* --- one color per company --- */
+        .vis-item.anki     { background-color: #00BFA5; border-color: #00897B; color: white; }
+        .vis-item.emotix   { background-color: #FF7043; border-color: #E64A19; color: white; }
+        .vis-item.bluefrog { background-color: #7E57C2; border-color: #5E35B1; color: white; }
+        /* Keep the company color when an item is selected; vis-timeline would
+           otherwise paint the whole box yellow and hide the label. */
+        .vis-item.vis-selected { box-shadow: 0 0 0 3px #FFC107; }
+        .vis-item.anki.vis-selected     { background-color: #00BFA5; border-color: #00695C; }
+        .vis-item.emotix.vis-selected   { background-color: #FF7043; border-color: #BF360C; }
+        .vis-item.bluefrog.vis-selected { background-color: #7E57C2; border-color: #4527A0; }
+
+        .vis-tooltip {
+            background: #2c3e50 !important; color: white !important;
+            padding: 10px 15px !important; border-radius: 8px !important;
+            font-size: 13px !important; max-width: 300px !important; line-height: 1.4 !important;
+            word-wrap: break-word !important; white-space: normal !important;
+        }
+
+        /* --- detail panel --- */
+        .details {
+            margin-top: 8px; min-height: 130px; padding: 8px 12px;
+            border: 1px solid silver; border-left: 8px solid silver; border-radius: 6px;
+            background: aliceblue; font-size: 14px; line-height: 1.4;
+        }
+        .details.anki     { border-left-color: #00BFA5; }
+        .details.emotix   { border-left-color: #FF7043; }
+        .details.bluefrog { border-left-color: #7E57C2; }
+        .details h3 { margin: 0 0 4px 0; font-size: 16px; }
+        .details p { margin: 4px 0; }
+        .details .company { color: #546E7A; font-size: 13px; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vis-timeline@7.7.3/standalone/umd/vis-timeline-graph2d.min.js"></script>
+    <script src="robot-face-timeline-explorer.js"></script>
+</head>
+<body>
+    <main>
+        <div class="row" id="filters">
+            <button data-company="all" class="active">Show All</button>
+            <button data-company="anki">Anki: Cozmo and Vector</button>
+            <button data-company="emotix">Emotix: Miko</button>
+            <button data-company="bluefrog">Blue Frog: Buddy</button>
+        </div>
+        <div class="row" id="nav">
+            <button id="pan-left" title="Pan left">&#9664;</button>
+            <button id="pan-right" title="Pan right">&#9654;</button>
+            <button id="zoom-in" title="Zoom in">+</button>
+            <button id="zoom-out" title="Zoom out">&minus;</button>
+            <button id="fit-all">Fit All</button>
+            <span class="hint">Drag to pan. Hover an event for a preview, click it for the full story.</span>
+        </div>
+        <div id="timeline"></div>
+        <div class="details" id="details"></div>
+    </main>
+    <br/>
+    <a href=".">Back to Lesson Plan</a>
+</body>
+</html>

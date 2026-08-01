@@ -1,0 +1,45 @@
+{
+  "title": "Four Robots, Four Bets on a Screen Face",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Differentiate the four robots' design approaches \u2014 face style, mobility, target buyer, and primary interaction mode \u2014 and contrast which choices coincided with which business outcome.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Four Robots, Four Bets on a Screen Face",
+    "learningObjectives": [
+      "Differentiate the four robots' design approaches \u2014 face style, mobility, target buyer, and primary interaction mode \u2014 and contrast which choices coincided with which business outcome."
+    ],
+    "bloomsTaxonomy": "Analyze (L4)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "HTML/CSS/JS",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 810
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "02-history-of-robot-faces"
+}

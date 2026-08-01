@@ -1,0 +1,45 @@
+{
+  "title": "Capstone Planning Worksheet",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Design an original capstone plan by formulating a minimum viable expression set of at least eight named expressions with rough parameter notes, selecting a target display and control scheme, and describing an idle animation \u2014 producing a complete, personally-authored project plan that satisfies every capstone requirement before any drawing code is written.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Capstone Planning Worksheet",
+    "learningObjectives": [
+      "Design an original capstone plan by formulating a minimum viable expression set of at least eight named expressions with rough parameter notes, selecting a target display and control scheme, and describing an idle animation \u2014 producing a complete, personally-authored project plan that satisfies every capstone requirement before any drawing code is written."
+    ],
+    "bloomsTaxonomy": "Create (L6)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 700
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "16-computational-thinking-capstone"
+}

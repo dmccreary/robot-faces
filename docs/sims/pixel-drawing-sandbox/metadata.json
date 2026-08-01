@@ -1,0 +1,45 @@
+{
+  "title": "Pixel Drawing Sandbox",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Demonstrate the effect of `pixel()`, `hline()`, and `vline()` calls by drawing directly on a simulated frame buffer, and execute the correct tool choice for horizontal, vertical, and single-dot marks.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Pixel Drawing Sandbox",
+    "learningObjectives": [
+      "Demonstrate the effect of `pixel()`, `hline()`, and `vline()` calls by drawing directly on a simulated frame buffer, and execute the correct tool choice for horizontal, vertical, and single-dot marks."
+    ],
+    "bloomsTaxonomy": "Apply (L3)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 450
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "06-basic-drawing-primitives"
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="schema" content="https://dmccreary.github.io/intelligent-textbooks/ns/microsim/v1">
+    <title>Old Workaround vs. New ellipse() Call using HTML/CSS/JS</title>
+    <style>
+        body {
+            margin: 0px; padding: 8px; font-family: Arial, Helvetica, sans-serif;
+            background: white; color: #212121; color-scheme: light;
+        }
+
+        /* ---- the toggle bar across the top ---- */
+        #toggle-bar {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+            margin-bottom: 10px;
+        }
+        #switch {
+            display: inline-flex; border: 2px solid #B0BEC5; border-radius: 8px;
+            overflow: hidden;
+        }
+        .seg {
+            font-family: inherit; font-size: 15px; padding: 8px 16px;
+            border: none; background: white; color: #37474F; cursor: pointer;
+        }
+        .seg:hover { background: #ECEFF1; }
+        .seg.active { color: white; font-weight: bold; }
+        #btn-old.active { background: #B26A00; }
+        #btn-new.active { background: #00897B; }
+
+        #counter {
+            font-size: 15px; color: #37474F; padding: 6px 12px;
+            border-radius: 8px; background: #ECEFF1; border: 1px solid #CFD8DC;
+        }
+        #count-number { font-size: 24px; font-weight: bold; }
+
+        /* ---- the two matched panels ---- */
+        #panels { display: grid; grid-template-columns: 5fr 7fr; gap: 10px; align-items: start; }
+        section {
+            border: 2px solid silver; border-radius: 8px; padding: 8px 10px;
+            background: white;
+        }
+        section h2 { margin: 0 0 6px 0; font-size: 15px; }
+        #screen-wrap { max-width: 360px; margin: 0 auto; }
+        #screen { display: block; width: 100%; height: auto; background: #101418; border-radius: 4px; }
+        .caption { font-size: 12px; color: #546E7A; margin: 6px 0 0 0; text-align: center; }
+
+        #code {
+            font-family: monospace; font-size: 12.5px; line-height: 1.35;
+            margin: 0; padding: 6px; border-radius: 4px;
+            white-space: pre-wrap; word-break: break-word;
+            /* Both states reserve the same block height, so the panels never
+               jump and the empty space in the new state carries the message. */
+            min-height: 188px;
+        }
+        #code .ln { display: block; padding: 0 3px; border-radius: 3px; }
+        /* Hovering the code panel calls out the one line that draws the edge. */
+        #code:hover .edge-line { background: #FFF176; box-shadow: 0 0 0 2px #FBC02D; }
+        .hover-hint { font-size: 12px; color: #546E7A; margin: 6px 0 0 0; }
+        #badge {
+            margin-top: 8px; font-size: 13px; padding: 6px 9px;
+            border-radius: 6px; border: 1px solid; line-height: 1.35;
+        }
+
+        /* ---- amber for the legacy approach, teal for the current one ---- */
+        body.old #code-panel { border-color: #FFB300; }
+        body.old #code { background: #FFF8E1; }
+        body.old #badge { background: #FFF8E1; border-color: #FFB300; color: #7A4B00; }
+        body.new #code-panel { border-color: #00BFA5; }
+        body.new #code { background: #E0F2F1; }
+        body.new #badge { background: #E0F2F1; border-color: #00BFA5; color: #00554A; }
+
+        /* ---- the "why does this matter" reveal ---- */
+        #why-row { margin-top: 10px; }
+        #why-btn {
+            font-family: inherit; font-size: 14px; padding: 7px 14px;
+            border: 1px solid silver; border-radius: 6px; background: white; cursor: pointer;
+        }
+        #why-btn:hover { background: aliceblue; }
+        #why-text {
+            margin: 8px 0 0 0; font-size: 14px; line-height: 1.45; min-height: 44px;
+            color: #263238;
+        }
+        #why-text.shown {
+            background: aliceblue; border-left: 6px solid #00BFA5;
+            border-radius: 6px; padding: 8px 10px;
+        }
+
+        /* ---- panels stack on narrow containers ---- */
+        @media (max-width: 700px) {
+            #panels { grid-template-columns: 1fr; }
+        }
+    </style>
+    <script src="ellipse-workaround-before-after-toggle.js"></script>
+</head>
+<body class="old">
+    <main>
+        <div id="toggle-bar">
+            <div id="switch">
+                <button id="btn-old" class="seg active">Old Workaround</button>
+                <button id="btn-new" class="seg">New ellipse() Call</button>
+            </div>
+            <div id="counter"><span id="count-number">11</span> <span id="count-label">lines of code</span></div>
+        </div>
+
+        <div id="panels">
+            <section id="display-panel">
+                <h2>What the display shows</h2>
+                <div id="screen-wrap">
+                    <svg id="screen" viewBox="0 0 128 64" shape-rendering="crispEdges"
+                         role="img" aria-label="A simulated 128 by 64 display showing one outlined circle"></svg>
+                </div>
+                <p class="caption">128 x 64 display &mdash; circle outline at (64, 32), radius 20</p>
+            </section>
+
+            <section id="code-panel">
+                <h2 id="code-title">Old Workaround &mdash; before v1.20.0</h2>
+                <pre id="code"></pre>
+                <p class="hover-hint">Hover the code to highlight the line that draws the circle's edge.</p>
+                <div id="badge"></div>
+            </section>
+        </div>
+
+        <div id="why-row">
+            <button id="why-btn">Why does this matter?</button>
+            <p id="why-text"></p>
+        </div>
+    </main>
+    <br/>
+    <a href=".">Back to Lesson Plan</a>
+</body>
+</html>

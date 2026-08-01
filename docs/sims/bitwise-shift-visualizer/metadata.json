@@ -1,0 +1,45 @@
+{
+  "title": "Bitwise Operator and Shift Visualizer",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Calculate the result of applying AND, OR, XOR, left-shift, or right-shift to an 8-bit value, and demonstrate how each bit position changes by adjusting operand values directly.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Bitwise Operator and Shift Visualizer",
+    "learningObjectives": [
+      "Calculate the result of applying AND, OR, XOR, left-shift, or right-shift to an 8-bit value, and demonstrate how each bit position changes by adjusting operand values directly."
+    ],
+    "bloomsTaxonomy": "Apply (L3)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 470
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "04-micropython-fundamentals-2"
+}

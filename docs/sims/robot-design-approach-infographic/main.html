@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="schema" content="https://dmccreary.github.io/intelligent-textbooks/ns/microsim/v1">
+    <title>Four Robots, Four Bets on a Screen Face using HTML/CSS/JS</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: aliceblue;
+            color: #202020;
+        }
+        main {
+            height: 100%;
+            overflow-y: auto;
+            box-sizing: border-box;
+            padding: 8px 12px 12px 12px;
+        }
+        h1 {
+            font-size: 19px;
+            margin: 2px 0 2px 0;
+            text-align: center;
+        }
+        .subhead {
+            font-size: 13px;
+            text-align: center;
+            color: #555;
+            margin: 0 0 6px 0;
+        }
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .toolbar button {
+            font-size: 14px;
+            font-family: inherit;
+            padding: 6px 12px;
+            border: 1px solid #9e9e9e;
+            border-radius: 6px;
+            background-color: #ececec;
+            cursor: pointer;
+        }
+        .toolbar button.active {
+            background-color: #1f7a4d;
+            border-color: #1f7a4d;
+            color: white;
+        }
+        #board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            align-items: start;
+        }
+        .card {
+            background-color: white;
+            border: 3px solid #d0d0d0;
+            border-radius: 10px;
+            padding: 8px;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .card:hover, .card:focus {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+            outline: none;
+        }
+        .face {
+            position: relative;
+            text-align: center;
+        }
+        .face svg {
+            width: 100%;
+            max-width: 118px;
+            height: 76px;
+        }
+        .face-cap {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(20, 20, 20, 0.88);
+            color: white;
+            font-size: 11px;
+            line-height: 1.25;
+            padding: 4px 5px;
+            border-radius: 5px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s;
+        }
+        .face:hover .face-cap,
+        .card:focus .face-cap {
+            opacity: 1;
+        }
+        .robot-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 3px 0 0 0;
+        }
+        .maker {
+            font-size: 12px;
+            margin: 1px 0 4px 0;
+            font-weight: bold;
+        }
+        .bet {
+            font-size: 12px;
+            line-height: 1.3;
+            margin: 0 0 6px 0;
+            color: #333;
+        }
+        .strip {
+            font-size: 12px;
+            line-height: 1.3;
+            border-radius: 5px;
+            padding: 3px 6px;
+            margin-bottom: 4px;
+            background-color: #fff3cd;
+            border-left: 4px solid #e0a800;
+        }
+        .strip .strip-label {
+            display: block;
+            font-size: 10px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #6b5200;
+        }
+        .detail {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 5px;
+            margin-top: 2px;
+        }
+        .detail dl {
+            margin: 0;
+        }
+        .detail dt {
+            font-size: 10px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #666;
+            margin-top: 3px;
+        }
+        .detail dd {
+            font-size: 12px;
+            line-height: 1.25;
+            margin: 0;
+        }
+        .hint {
+            font-size: 11px;
+            color: #777;
+            margin: 4px 0 0 0;
+        }
+        .legend {
+            display: none;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+        .legend.visible {
+            display: flex;
+        }
+        .legend span.key {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            vertical-align: -2px;
+            margin-right: 4px;
+        }
+        .backlink {
+            display: block;
+            margin-top: 12px;
+            font-size: 13px;
+            text-align: center;
+        }
+        @media (max-width: 899px) {
+            #board { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 599px) {
+            #board { grid-template-columns: 1fr; }
+        }
+    </style>
+    <script src="robot-design-approach-infographic.js" defer></script>
+</head>
+<body>
+    <main>
+        <h1>Four Robots, Four Bets on a Screen Face</h1>
+        <p class="subhead">All four chose a screen for a face. Every other
+            design decision went a different way.</p>
+        <div class="toolbar">
+            <button id="mobilityToggle" type="button">Compare Mobility</button>
+            <button id="outcomeToggle" type="button">Compare Outcome</button>
+            <button id="resetButton" type="button">Reset</button>
+        </div>
+        <div id="board"></div>
+        <div class="legend" id="legend"></div>
+        <a class="backlink" href=".">Back to Lesson Plan</a>
+    </main>
+</body>
+</html>

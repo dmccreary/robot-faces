@@ -178,7 +178,7 @@ Seeing an indentation mistake happen, rather than just reading about it, makes t
 
 #### Diagram: Indentation Error Visualizer
 
-<iframe src="../../sims/indentation-error-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/indentation-error-visualizer/main.html" width="100%" height="482px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Indentation Error Visualizer</summary>
@@ -264,7 +264,7 @@ Predicting exactly what a loop will print, before running it, is one of the fast
 
 #### Diagram: MicroPython Loop Tracer
 
-<iframe src="../../sims/micropython-loop-tracer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/micropython-loop-tracer/main.html" width="100%" height="542px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>MicroPython Loop Tracer</summary>
@@ -378,7 +378,7 @@ Choosing the right collection is itself a small design decision, and it is one w
 
 #### Diagram: List vs Tuple vs Dictionary Comparison
 
-<iframe src="../../sims/collection-types-comparison-infographic/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/collection-types-comparison-infographic/main.html" width="100%" height="772px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>List vs Tuple vs Dictionary Comparison</summary>

@@ -1,0 +1,45 @@
+{
+  "title": "Indentation Error Visualizer",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Explain why consistent indentation is required for a MicroPython code block to run, and classify a given indented line as correct, under-indented, or mixed-tabs-and-spaces.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Indentation Error Visualizer",
+    "learningObjectives": [
+      "Explain why consistent indentation is required for a MicroPython code block to run, and classify a given indented line as correct, under-indented, or mixed-tabs-and-spaces."
+    ],
+    "bloomsTaxonomy": "Understand (L2)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 480
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "03-micropython-fundamentals-1"
+}

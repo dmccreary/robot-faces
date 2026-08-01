@@ -2,8 +2,8 @@
 title: Animating Expressions: Timing & Motion
 description: How to make a robot face move without ever freezing — pacing a blinking, gazing animation with ticks_ms() instead of sleep(), then smoothing transitions between expressions.
 generated_by: claude skill chapter-content-generator
-date: 2026-07-27 15:55:57
-version: 0.09
+date: 2026-07-31
+version: 0.10
 ---
 
 # Animating Expressions: Timing & Motion
@@ -180,7 +180,7 @@ Both versions update the animation about every 300 milliseconds. The difference 
 
 #### Diagram: Sleep vs Ticks Button Miss Simulator
 
-<iframe src="../../sims/sleep-vs-ticks-button-miss-simulator/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/sleep-vs-ticks-button-miss-simulator/main.html" width="100%" height="407px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Sleep vs Ticks Button Miss Simulator</summary>
@@ -383,7 +383,7 @@ Stepping through the exact intermediate values an interpolation produces, frame 
 
 #### Diagram: Expression Interpolation Keyframe Stepper
 
-<iframe src="../../sims/expression-interpolation-keyframe-stepper/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/expression-interpolation-keyframe-stepper/main.html" width="100%" height="522px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Expression Interpolation Keyframe Stepper</summary>
@@ -479,7 +479,7 @@ That single measurement is useful on its own, but it becomes genuinely informati
 
 #### Diagram: Draw Call Benchmark Chart
 
-<iframe src="../../sims/draw-call-benchmark-chart/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/draw-call-benchmark-chart/main.html" width="100%" height="522px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Draw Call Benchmark Chart</summary>
@@ -526,6 +526,129 @@ Color scheme: teal bars for primitive-based techniques, coral bars for blit-base
 
 Implementation: Chart.js bar chart with a custom tooltip callback for the FPS-equivalent conversion and a click handler that updates a side-panel explanation element
 </details>
+
+## Making the Push Faster: SPI Bus Speed and Partial Updates
+
+Draw time benchmarking measures how long the drawing calls take, but every frame has a second half that the benchmark above quietly includes: actually shipping the finished buffer down the wire to the display. That push has its own speed limit, set by a number most programs never think about — and turning that number up is the single easiest performance change in this entire book.
+
+The **baud rate** is the speed of an SPI bus's clock line, measured in bits per second, and it is set once when a program creates its `SPI` object. Chapter 1 described SPI as "the faster of the two buses," and this is where that claim turns into real arithmetic. A 128x64 monochrome frame buffer holds one bit per pixel, which works out to 1,024 bytes, or 8,192 bits, for one complete frame. Divide those bits by the bus speed and you get the time it takes to push a whole face to the screen.
+
+Those numbers are worth seeing side by side, because the jump from I2C to SPI is much larger than most people expect.
+
+| Bus and speed | Time to push one full 128x64 frame | Frames per second the bus alone allows |
+|---|---|---|
+| I2C at 400 kHz (the common default) | about 23 milliseconds | roughly 43 |
+| I2C at 1 MHz (fast mode plus) | about 9 milliseconds | roughly 110 |
+| SPI at 1 MHz | about 8.2 milliseconds | roughly 120 |
+| SPI at 10 MHz | about 0.8 milliseconds | roughly 1,200 |
+| SPI at 20 MHz | about 0.4 milliseconds | roughly 2,400 |
+| SPI at 62.5 MHz (a Pico's maximum) | about 0.13 milliseconds | roughly 7,600 |
+
+Read the I2C row first, because it is the one that actually matters. At 400 kHz, pushing a frame costs 23 milliseconds all by itself, which caps a face at roughly 43 FPS before a single `ellipse()` has been drawn — and Chapter 6's benchmark showed the drawing calls adding several more milliseconds on top. That is uncomfortably close to this chapter's 10-30 FPS target. Move to SPI at 10 MHz and the same push costs 0.8 milliseconds, about 1/28th as long, and the bus stops being part of the conversation entirely.
+
+A bridge sentence before the code: this snippet creates an SPI bus at 20 MHz on the same GP2-GP6 pins Chapter 1 wired, then prints the object so you can confirm what speed the hardware actually settled on.
+
+```python
+from machine import Pin, SPI
+import ssd1306
+
+spi = SPI(0, baudrate=20_000_000, sck=Pin(2), mosi=Pin(3))
+oled = ssd1306.SSD1306_SPI(128, 64, spi, Pin(5), Pin(4), Pin(6))
+
+print(spi)   # prints the REAL baudrate, which is often not the one you asked for
+```
+
+That `print(spi)` line is not decoration. A microcontroller can only divide its system clock by whole numbers, so it rounds any requested baud rate down to the nearest speed it can actually produce. Ask a Pico for 20 MHz and it will hand back 20,833,333 Hz or 15,625,000 Hz depending on the divider it picks — printing the object is how you find out which.
+
+!!! mascot-thinking "The Wire Stopped Being the Problem"
+    ![Pixel thinks it through](../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    Once you're above about 10 MHz, going faster on the bus saves microseconds you'll never see. Your frame time is now almost entirely Python doing arithmetic and calling `ellipse()` — which means blitting and partial redraws, not a bigger baud rate, are where the remaining speed lives.
+
+### Three Different Ceilings
+
+You cannot simply request an enormous number and expect it to work, because the usable speed is whichever of three separate limits is lowest: what the display's driver chip accepts, what the microcontroller's SPI hardware can generate, and what your wiring can carry cleanly.
+
+The first ceiling belongs to the display. Every driver chip publishes a maximum clock speed in its datasheet, and most of them also work well above that number in practice — a very common piece of hardware folklore that is worth knowing and worth testing rather than trusting.
+
+| Display driver chip | Datasheet maximum | Commonly works at |
+|---|---|---|
+| SSD1306 (this book's 128x64 mono OLED) | 10 MHz | 20-40 MHz |
+| SSD1309 (the 2.42-inch mono OLED) | 10 MHz | 20-40 MHz |
+| SH1106 (a common SSD1306 look-alike) | 4 MHz | 8-20 MHz |
+| ST7789 (240x240 color) | 62.5 MHz | 40-80 MHz |
+| ILI9341 (320x240 color) | 10 MHz | 40-80 MHz |
+
+The second ceiling belongs to the microcontroller, and it differs enough between boards to be worth checking before you write a number into your code.
+
+| Microcontroller | Maximum SPI speed | What to watch for |
+|---|---|---|
+| Raspberry Pi Pico (RP2040) | 62.5 MHz | Exactly half the 125 MHz system clock; only a handful of divided speeds are reachable |
+| Pico 2 (RP2350) | 75 MHz | Half of its faster 150 MHz system clock |
+| ESP32 and ESP32-S3 | 80 MHz | Only on the chip's dedicated SPI pins — routing SPI to any other pin silently caps you at 40 MHz |
+| Any board, using `SoftSPI` | roughly 0.3 MHz | Bit-banged one pulse at a time in Python; far too slow for a display |
+
+That ESP32 note is the sneakiest item in either table. An ESP32 can route SPI to almost any pin, but doing so sends the signal through an internal switching matrix that halves the top speed. Sticking to the default SPI pins for your board is free performance.
+
+!!! mascot-warning "Jumper Wires Are the Real Speed Limit"
+    ![Pixel warns you](../../img/mascot/warning.png){ class="mascot-admonition-img" }
+    Above roughly 20 MHz, the thing that breaks is usually your breadboard, not your chip. Long jumper wires blur fast clock pulses into mush, and the symptom is a screen full of scrambled garbage. Keep the clock and data wires short, run a ground wire right alongside them, and drop the baud rate back down the moment a display starts misbehaving.
+
+### Sending Fewer Bytes Instead of Sending Them Faster
+
+There is a smarter move than turning the speed up, and it is the same idea as the partial redraw bars in the benchmark chart above: send only the part of the screen that actually changed. A **partial update** pushes one horizontal band of the frame buffer to the display instead of all 1,024 bytes, which is a real win during a blink, when nothing outside the eyes has moved at all.
+
+The SSD1306 organizes its memory into eight **pages**, each one an 8-pixel-tall horizontal band across the full width of the screen. Two commands, `0x21` and `0x22`, tell the chip which columns and which pages the next batch of data is meant to fill. The standard `ssd1306.py` driver already sends both commands inside `show()` — it just always asks for every page.
+
+A bridge sentence before the code: this helper takes a top and bottom pixel row, converts them to page numbers, tells the display to expect only those pages, and then sends just that slice of the buffer.
+
+```python
+SET_COL_ADDR = 0x21
+SET_PAGE_ADDR = 0x22
+
+def show_rows(oled, y0, y1):
+    """Push only the horizontal band containing pixel rows y0 through y1."""
+    page0 = y0 // 8              # each page is 8 pixel rows tall
+    page1 = y1 // 8
+
+    oled.write_cmd(SET_COL_ADDR)    # full width, every column
+    oled.write_cmd(0)
+    oled.write_cmd(oled.width - 1)
+    oled.write_cmd(SET_PAGE_ADDR)   # but only the pages we care about
+    oled.write_cmd(page0)
+    oled.write_cmd(page1)
+
+    start = page0 * oled.width
+    end = (page1 + 1) * oled.width
+    oled.write_data(memoryview(oled.buffer)[start:end])
+```
+
+Now compare the two calls in a real blink. Eyes centered around row 24 with a size of 12 pixels occupy roughly rows 18 through 30, which lands in pages 2 through 3:
+
+```python
+draw_eyelid(fb, left_eye_x, state["eye_y"], state["eye_size"], BLACK)
+draw_eyelid(fb, right_eye_x, state["eye_y"], state["eye_size"], BLACK)
+
+show_rows(oled, 18, 30)   # sends 256 bytes instead of 1024
+```
+
+That `memoryview()` call is doing quiet but important work. Slicing a `bytearray` normally copies the slice into a brand-new object, which on a microcontroller means allocating memory in the middle of an animation loop. A `memoryview` hands out a window onto the original buffer instead, so `write_data()` reads the bytes it needs without a single byte being copied.
+
+The trade-off is honest and worth stating: `show_rows()` is faster, but it is also a promise that nothing outside those rows changed. Forget that promise and you get a face with a stale mouth that never updates. A reasonable pattern is to call `show_rows()` for blinks and full `oled.show()` for anything that repositions a feature.
+
+### Everything Else on the Speed Menu
+
+If a face ever does run slower than its target frame rate, this is roughly the order worth trying things in — cheapest and most effective first.
+
+| Technique | What it does | Typical payoff |
+|---|---|---|
+| Switch from I2C to SPI | Removes the 23-millisecond bus cost from every frame | Enormous, and usually just a rewiring |
+| Raise the baud rate to 10-20 MHz | Shortens the push itself | Large from I2C, small above 10 MHz |
+| Blit pre-rendered sprites | Replaces per-frame `ellipse()` math with a memory copy | Large — see the benchmark chart above |
+| Partial updates with `show_rows()` | Sends a quarter of the bytes during a blink | Moderate, and it stacks with blitting |
+| `machine.freq(250_000_000)` | Overclocks a Pico, roughly doubling Python's speed | Large, and one line of code |
+| `@micropython.native` on tight loops | Compiles a function to machine code instead of bytecode | Large on hand-written pixel loops, nothing on `framebuf` calls |
+
+The last two are worth a sentence of caution and a sentence of encouragement. Overclocking a Pico to 250 MHz is well-trodden, widely done, and easy to undo — but it is still running the chip beyond its rated speed, so test it before relying on it. Beyond that list sit two genuinely advanced tools, DMA and the Pico's second processor core, both of which let pixels move to the screen while Python computes the next frame. Neither is needed for a 128x64 face, and both become genuinely useful the moment Chapter 15 swaps in a color display, where one frame is 115,200 bytes instead of 1,024 — more than a hundred times the data, on the same wire.
 
 ## Why the Screen Doesn't Flicker: Flicker Reduction and Double Buffering
 
@@ -607,6 +730,9 @@ You now know how to turn a static, parameterized face into a moving one, without
 - An animation keyframe is a named, specific state, like "eyes open" or "eyes closed"; expression interpolation computes intermediate values between two keyframes over several frames, with linear interpolation as the simple baseline and easing functions as an optional way to shape that motion's pacing.
 - Smooth transition design is the practice of choosing which changes should be instant (a blink, an alert) versus gradual (a mood shift, a gaze drift); idle animation combines subtle blinking and gaze drift into continuous motion that plays whenever a robot is not doing anything else.
 - Draw time benchmarking uses `ticks_us()` to measure how long a frame's drawing calls actually take, revealing a face's real frame buffer redraw rate rather than just its intended frame rate.
+- The SPI baud rate sets how fast a finished frame reaches the display: I2C at 400 kHz spends about 23 milliseconds per frame, while SPI at 10 MHz spends about 0.8 milliseconds, which is why every wiring diagram in this book uses SPI.
+- Usable bus speed is the lowest of three ceilings — the display driver chip's rating, the microcontroller's SPI hardware, and the wiring — and short jumper wires matter more than a big number above about 20 MHz.
+- A partial update sends only the pages of the frame buffer that changed, cutting a blink's push from 1,024 bytes to 256, and it stacks with blitting for further savings.
 - Flicker reduction is achieved through double buffering — finishing a frame entirely off-screen before showing it — which the `framebuf` module and its `.show()` method already provide by default, a pattern first introduced back in Chapter 5.
 
 !!! mascot-celebration "This Face Is Officially Alive"

@@ -1,0 +1,45 @@
+{
+  "title": "Draw Order and Overdraw Stepper",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Examine a sequence of FrameBuf draw calls step by step to differentiate which pixels remain visible in the final image from which pixels were drawn and then overdrawn by a later call.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Draw Order and Overdraw Stepper",
+    "learningObjectives": [
+      "Examine a sequence of FrameBuf draw calls step by step to differentiate which pixels remain visible in the final image from which pixels were drawn and then overdrawn by a later call."
+    ],
+    "bloomsTaxonomy": "Analyze (L4)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 500
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "06-basic-drawing-primitives"
+}

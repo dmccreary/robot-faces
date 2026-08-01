@@ -8,9 +8,9 @@ You can order the parts online or work with one of our programs that supply part
 The minimal drawing kit contains:
 
 1. A [Raspberry Pi Pico](../docs/parts-lists/#raspberry-pi-pico)
-2. A mini solderless [Breadboard]../docs/parts-lists/#solderless-breadboard)
-3. An OLED display
-4. M-F jumper wires
+2. A mini solderless [Breadboard](../docs/parts-lists/#solderless-breadboard)
+3. A [128x64 OLED display](../docs/parts-lists.md#128x64-oleds)
+4. M-F jumper wires - either 20cm or 40cm lengths both will work
 
 ## Step 2: Installing Software
 

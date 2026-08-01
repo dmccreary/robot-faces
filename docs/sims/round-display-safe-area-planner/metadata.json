@@ -1,0 +1,45 @@
+{
+  "title": "Round Display Safe-Area Layout Planner",
+  "creator": "Dan McCreary",
+  "subject": "Robot Faces",
+  "description": "Examine candidate feature bounding boxes placed on a 240x240 round display buffer, and distinguish safe placements (fully inside the visible circle) from unsafe placements (clipped by the circular boundary), in order to plan facial feature layout.",
+  "date": "2026-07-31",
+  "educational": {
+    "gradeLevel": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "subjectArea": "Computer Science",
+    "topic": "Round Display Safe-Area Layout Planner",
+    "learningObjectives": [
+      "Examine candidate feature bounding boxes placed on a 240x240 round display buffer, and distinguish safe placements (fully inside the visible circle) from unsafe placements (clipped by the circular boundary), in order to plan facial feature layout."
+    ],
+    "bloomsTaxonomy": "Analyze (L4)",
+    "duration": "10-15 minutes",
+    "prerequisites": [],
+    "standards": []
+  },
+  "technical": {
+    "framework": "p5.js",
+    "version": "1.0",
+    "canvasDimensions": {
+      "width": "responsive",
+      "height": 560
+    },
+    "responsive": true,
+    "dependencies": [],
+    "accessibility": {
+      "hasAltText": false,
+      "keyboardNavigable": false
+    }
+  },
+  "pedagogical": {
+    "teachingStrategy": "Interactive exploration",
+    "keyQuestions": [],
+    "commonMisconceptions": [],
+    "assessmentOpportunities": []
+  },
+  "chapter": "15-porting-faces-color-display"
+}

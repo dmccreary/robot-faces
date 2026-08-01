@@ -99,7 +99,7 @@ Now that the origin, both axes, and the bounding box idea are all defined, the i
 
 #### Diagram: Coordinate Grid Explorer
 
-<iframe src="../../sims/coordinate-grid-explorer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/coordinate-grid-explorer/main.html" width="100%" height="482px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Coordinate Grid Explorer</summary>
@@ -195,7 +195,7 @@ Running that code prints `1024` for the OLED and `115200` for the color display 
 
 #### Diagram: Frame Buffer Size Calculator
 
-<iframe src="../../sims/buffer-size-calculator/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/buffer-size-calculator/main.html" width="100%" height="492px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Frame Buffer Size Calculator</summary>
@@ -271,7 +271,7 @@ Seeing exactly which buffer pixels fall inside the visible circle, and which one
 
 #### Diagram: Circular Buffer Waste Visualizer
 
-<iframe src="../../sims/circular-buffer-waste-visualizer/main.html" width="100%" height="500px" scrolling="no"></iframe>
+<iframe src="../../sims/circular-buffer-waste-visualizer/main.html" width="100%" height="502px" scrolling="no"></iframe>
 
 <details markdown="1">
 <summary>Circular Buffer Waste Visualizer</summary>
