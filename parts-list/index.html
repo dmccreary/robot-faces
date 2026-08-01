@@ -2621,29 +2621,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../lessons/blinking/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Blinking
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../lessons/eyebrows/" class="md-nav__link">
         
   
@@ -2667,12 +2644,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../lessons/emotion-types/" class="md-nav__link">
+      <a href="../lessons/wink/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Emotion Types
+    Winking with a Smile
     
   </span>
   
@@ -2690,12 +2667,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../lessons/wink/" class="md-nav__link">
+      <a href="../lessons/blinking/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Winking with a Smile
+    Blinking
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lessons/emotion-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emotion Types
     
   </span>
   
@@ -3942,6 +3942,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#buying-in-bulk-for-a-classroom-10-30-students" class="md-nav__link">
+    <span class="md-ellipsis">
+      Buying in Bulk for a Classroom (10-30 Students)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#microcontrollers" class="md-nav__link">
     <span class="md-ellipsis">
       Microcontrollers
@@ -3976,9 +3985,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#128x64-oleds" class="md-nav__link">
+  <a href="#128x64-spi-oleds" class="md-nav__link">
     <span class="md-ellipsis">
-      128X64 OLEDs
+      128X64 SPI OLEDs
     </span>
   </a>
   
@@ -4059,9 +4068,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#solderless-breadboard_1" class="md-nav__link">
+  <a href="#sample-per-student-kit-budget" class="md-nav__link">
     <span class="md-ellipsis">
-      Solderless Breadboard
+      Sample Per-Student Kit Budget
     </span>
   </a>
   
@@ -4533,6 +4542,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#buying-in-bulk-for-a-classroom-10-30-students" class="md-nav__link">
+    <span class="md-ellipsis">
+      Buying in Bulk for a Classroom (10-30 Students)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#microcontrollers" class="md-nav__link">
     <span class="md-ellipsis">
       Microcontrollers
@@ -4567,9 +4585,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#128x64-oleds" class="md-nav__link">
+  <a href="#128x64-spi-oleds" class="md-nav__link">
     <span class="md-ellipsis">
-      128X64 OLEDs
+      128X64 SPI OLEDs
     </span>
   </a>
   
@@ -4650,9 +4668,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#solderless-breadboard_1" class="md-nav__link">
+  <a href="#sample-per-student-kit-budget" class="md-nav__link">
     <span class="md-ellipsis">
-      Solderless Breadboard
+      Sample Per-Student Kit Budget
     </span>
   </a>
   
@@ -4682,6 +4700,47 @@
 You can get a detailed list of sensors and how to use them in the
 full <a href="https://dmccreary.github.io/learning-micropython/">Learning MicroPython</a>.
 Remember to use the search function of that site to get example code.</p>
+<h2 id="buying-in-bulk-for-a-classroom-10-30-students">Buying in Bulk for a Classroom (10-30 Students)</h2>
+<p>If you are outfitting a whole class where every student builds and keeps
+their own robot face, a little bit of planning saves a lot of money and
+class time. Here are the strategies that have worked best for us.</p>
+<ul>
+<li><strong>Standardize on one exact part number.</strong> Different sellers of "the same"
+  128x64 OLED often ship different driver chips (SSD1306 vs. SSD1309), and
+  the MicroPython driver code is not identical between them. Pick one
+  listing, buy every unit from that same listing, and your example code
+  will work for the whole class without per-student debugging.</li>
+<li><strong>Order 10-20% spares.</strong> Small SPI displays and jumper wires are the parts
+  most likely to arrive DOA or get damaged by a reversed connector. For a
+  class of 20, order enough for 22-24 students so a bad unit does not stop
+  a lab.</li>
+<li><strong>Plan around shipping time, not just price.</strong> AliExpress and eBay
+  overseas listings are usually the cheapest per unit but can take 3-5
+  weeks to arrive. Amazon and MicroCenter cost a bit more but ship in days,
+  which matters if you are ordering the week before the unit starts.
+  A common pattern: order the bulk of the kits from AliExpress 4-6 weeks
+  ahead, and buy a handful of Amazon or MicroCenter units as fast-arriving
+  spares/backups.</li>
+<li><strong>Look for multi-packs ("lots").</strong> Search for listings like "10 pcs" or
+  "lot of 20" rather than adding one item to your cart N times — sellers on
+  AliExpress and eBay frequently price these lots noticeably lower per unit
+  than the single-unit listing, and it is one shipment to track instead of
+  many.</li>
+<li><strong>Buy heavy/bulky items locally when you can.</strong> Breadboards and chassis
+  kits are cheap but bulky to ship; a local MicroCenter or electronics
+  supplier can be cheaper once shipping is factored in, and you avoid
+  waiting on freight.</li>
+<li><strong>Check for educator/STEM discounts and grants.</strong> Sites like
+  <a href="https://www.adafruit.com">Adafruit</a>, <a href="https://www.sparkfun.com">SparkFun</a>,
+  and <a href="https://www.pishop.us">PiShop.us</a> sometimes offer classroom or bulk
+  educator pricing on request. If your budget is tight, <a href="https://www.donorschoose.org">DonorsChoose</a>
+  and school PTA/STEM grants are common funding sources for a first-time
+  class set of parts.</li>
+<li><strong>Organize kits before class starts.</strong> Pre-bag one Pico, one display, one
+  breadboard, jumper wires, and two buttons per student in a labeled
+  snack-size bag or small parts bin. Handing out a finished kit takes
+  seconds; handing out loose parts from a box takes the whole period.</li>
+</ul>
 <h2 id="microcontrollers">Microcontrollers</h2>
 <p>You can use almost any modern microcontroller that supports an SPI interface and has a MicroPython driver.  Here are some of our favorites.  They sell for as little as $3.99 USD at stores like MicroCenter.</p>
 <h3 id="raspberry-pi-pico">Raspberry Pi Pico</h3>
@@ -4689,16 +4748,47 @@ Remember to use the search function of that site to get example code.</p>
 <p>The Raspberry Pi Pico is a $3.99 microcontroller that supports SPI.  This allows you to test your
 face drawing for under $25.  It has 260KB RAM which is more than enough for most displays, even color 240x240 color displays.</p>
 <p>You can also use the popular ESP-32 MicroControllers that also run Python.  Just make sure that the Thonny (or similar) can be used to control the devices.</p>
+<p>For a class set, <a href="https://www.microcenter.com">MicroCenter</a> and <a href="https://www.pishop.us">PiShop.us</a>
+both regularly stock the Pico and often give a per-unit discount at
+quantities of 10+. Buying from a single source for the whole class also
+means every student's board has the same silkscreen labeling, which makes
+giving wiring instructions much easier.</p>
 <h2 id="displays">Displays</h2>
-<h3 id="128x64-oleds">128X64 OLEDs</h3>
-<p><img alt="" src="../img/oled-display-aliexpress.png" /></p>
-<p>We love the under $20 128x64 OLED displays.  These displays have fast <a href="../glossary/#spi">SPI</a> drivers that will update the display in around 2 milliseconds.</p>
+<h3 id="128x64-spi-oleds">128X64 SPI OLEDs</h3>
+<p>Sample listing on AliExpress and eBay
+<img alt="" src="../img/oled-display-aliexpress.png" />
+<img alt="" src="../img/oled-display-ebay.png" />
+<img alt="" src="../img/oled-display-amazon.png" /></p>
+<p>We love the under $20 128x64 OLED displays.  These displays have fast <a href="../glossary/#spi">SPI</a> drivers that will update the display in around 2 milliseconds.  The price vary from around $10 to $20 depending on the current tariffs and quantity.  The displays come in four colors:</p>
+<ol>
+<li>White</li>
+<li>Amber (Yellow)</li>
+<li>Green</li>
+<li>Blue (a favorite)</li>
+</ol>
+<p>Here are some sample search links:</p>
+<ul>
+<li><a href="https://www.ebay.com/sch/i.html?_nkw=2.42+inch+OLED+display+128x64+SSD1309+SPI">eBay search: 2.42 inch OLED 128x64 SSD1309 SPI</a></li>
+<li><a href="https://www.aliexpress.us/wholesale?SearchText=2.42+inch+OLED+display+128x64+SSD1309+SPI">AliExpress search: 2.42 inch OLED 128x64 SSD1309 SPI</a></li>
+<li><a href="https://www.amazon.com/s?k=2.42+inch+OLED+display+128x64+SPI">Amazon search: 2.42 inch OLED 128x64 SPI</a></li>
+</ul>
 <p><a href="https://www.aliexpress.us/item/3256806159669161.html">AliExpress 2.42 inch 2.42" OLED Display Module 128x64 LCD HD Screen Module SSD1309 7 Pin SPI/IIC I2C Serial Interface</a></p>
+<p>Note that you can also get smaller 1" OLEDs and displays that use the slower I2C.  We like the larger 2.42" displays and the faster SPI bus.</p>
+<p><strong>Buying tip:</strong> search for "lot of 10" or "lot of 20" instead of adding a
+single-unit listing to your cart multiple times — sellers usually price
+these bulk lots lower per display, and you only have to track one shipment.
+Since driver code differs slightly between the SSD1306 and SSD1309 chips,
+buy every display for the class from the exact same listing so all
+students run the same driver.</p>
 <h2 id="solderless-breadboard">Solderless Breadboard</h2>
 <p>We use a 400-tie 1/2 size breadboard for many of our robot faces labs.  There is also
 room on these breadboards for two momentary press buttons for changing the mode or
-a parameter.</p>
-<p><a href="../img/solderless-mini-breadboard.jpg"></a></p>
+a parameter.  We use $2 solderless mini breadboards to test our displays.</p>
+<p><img alt="" src="../img/solderless-mini-breadboard.jpg" />
+<img alt="" src="../img/solderless-breadboard.png" /></p>
+<ul>
+<li><a href="https://www.ebay.com/sch/i.html?_nkw=QTY+400+tie+solderless+breadboard+lot+of+10">eBay search: QTY 400 tie solderless breadboard lot of 10</a></li>
+</ul>
 <h2 id="jumper-wires">Jumper Wires</h2>
 <p>We use M-F 20cm or 40cm jumper wires. The female ends connect to the display and the
 male ends connect to the breadboard.  See the <a href="https://dmccreary.github.io/clocks-and-watches/setup/03-display-cable-harness/">Display Cable Harness</a> for a guide to creating display cables
@@ -4717,8 +4807,61 @@ purchased for about 10 cents in quantity 10.</p>
 of a smile.</p>
 <h3 id="rotary-encoders">Rotary Encoders</h3>
 <p>A rotary encoder is a nice way to cycle through modes or change parameters.</p>
-<h2 id="solderless-breadboard_1">Solderless Breadboard</h2>
-<p>We use $2 solderless mini breadboards to test our displays.</p>
+<h2 id="sample-per-student-kit-budget">Sample Per-Student Kit Budget</h2>
+<p>These are rough per-unit prices when buying in classroom quantities (10-30
+units), so you can estimate a total budget before ordering. Actual prices
+vary with tariffs, shipping method, and how many "lot" discounts you can
+find.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Est. cost/student (bulk)</th>
+<th>Qty for 20 students</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microcontroller (Pico)</td>
+<td>$4</td>
+<td>20 (+2 spare)</td>
+</tr>
+<tr>
+<td>OLED display (128x64 SPI)</td>
+<td>$10-15</td>
+<td>20 (+3 spare)</td>
+</tr>
+<tr>
+<td>Solderless breadboard</td>
+<td>$2</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Jumper wires (set of ~10)</td>
+<td>$1</td>
+<td>20 sets</td>
+</tr>
+<tr>
+<td>Momentary push buttons (x2)</td>
+<td>$0.20</td>
+<td>40</td>
+</tr>
+<tr>
+<td>Potentiometer</td>
+<td>$0.50</td>
+<td>20</td>
+</tr>
+<tr>
+<td><strong>Total per student</strong></td>
+<td><strong>~$18-23</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>For 20 students that is roughly <strong>$360-460</strong> total, plus a few dollars for
+spares. Ordering the displays and Picos from AliExpress in bulk lots
+typically lands at the low end of that range; sourcing everything from
+Amazon or MicroCenter for fast shipping lands closer to the high end.</p>
 
 
 
