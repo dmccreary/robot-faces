@@ -174,7 +174,7 @@ The long pause between winks is doing real work too. A robot that winks constant
 2. **Change the mask from 3 to 12** on the winking eye. The arc now curves down, and your playful wink turns into something much more suspicious.
 3. **Adjust `WINK_RADIUS_Y`** from 6 up to 10. A taller arc reads as a squint; a flatter one reads as a fully shut eye.
 4. **Add a wink to the smile.** Raise one end of the mouth by drawing the bottom-right quadrant (mask 8) one pixel higher than the bottom-left quadrant (mask 4), for a lopsided smirk.
-5. **Trigger the wink from a button** using what you learned in the [Interactions](../interactions/index.md) lesson, so your robot winks when someone presses it.
+5. **Trigger the wink from a button** using what you learned in the [Blinking](../blinking/index.md) lesson, so your robot winks when someone presses it.
 
 !!! mascot-celebration "You just built a personality"
     ![Pixel celebrating](../../img/mascot/celebration.png){ class="mascot-admonition-img" }

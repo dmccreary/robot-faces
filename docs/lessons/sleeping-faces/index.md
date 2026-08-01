@@ -190,7 +190,7 @@ while True:
 1. **Change `SLEEP_RADIUS_Y` from 6 to 3.** A flatter arc reads as an even deeper, heavier sleep.
 2. **Set `EYEBROW_DROOP` to 0.** Flat, level eyebrows on closed eyes read as calm rest rather than a heavy, sleepy sag — compare the two side by side.
 3. **Add a fourth, smaller `z`** further up and to the right of the existing three, and see how much farther the drift can travel before it starts to feel cluttered.
-4. **Wake the robot up** by wiring a button, as in the [Interactions](../interactions/index.md) lesson, so pressing it swaps `draw_face()` for the wide-awake face from [Basic Face Layouts](../basic-face-layouts/index.md).
+4. **Wake the robot up** by wiring a button, as in the [Blinking](../blinking/index.md) lesson, so pressing it swaps `draw_face()` for the wide-awake face from [Basic Face Layouts](../basic-face-layouts/index.md).
 5. **Combine sleepy eyebrows with an open eye** from the [Ellipse](../ellipse/index.md) lesson to build a "fighting to stay awake" expression, where one eye keeps drooping shut.
 
 !!! mascot-celebration "You just built a whole mood"

@@ -429,7 +429,7 @@ while True:
 2. **Swap disgusted's asymmetric eyebrows onto contempt.** Contempt is supposed to stay almost neutral everywhere except the mouth — see how much that one change breaks the subtlety that makes contempt read as contempt.
 3. **Make angry even angrier.** Push its `tilt` from 5 to 10 and drop `lift` further negative, and see how much more intense the same three function calls can look.
 4. **Change how long each expression holds** in the `EXPRESSIONS` loop, from 2 seconds down to 0.5. Notice how a face that changes too quickly stops reading as an emotion and starts reading as a glitch — the same lesson [Winking with a Smile](../wink/index.md) taught about timing a wink.
-5. **Trigger an expression from a button** using what you learned in [Interactions](../interactions/index.md), so your robot shows "surprised" only when someone actually startles it.
+5. **Trigger an expression from a button** using what you learned in [Blinking](../blinking/index.md), so your robot shows "surprised" only when someone actually startles it.
 
 !!! mascot-celebration "Seven Feelings, Three Functions"
     ![Pixel celebrating](../../img/mascot/celebration.png){ class="mascot-admonition-img" }
