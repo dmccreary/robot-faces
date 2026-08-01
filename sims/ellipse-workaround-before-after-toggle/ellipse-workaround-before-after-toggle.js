@@ -2,7 +2,7 @@
 // Chapter 8: A History of MicroPython's FrameBuf Drawing Support
 // Bloom level: Analyze (L4) - contrast, differentiate
 //
-// CANVAS_HEIGHT: 555
+// CANVAS_HEIGHT: 710
 //
 // The toggle swaps only the code panel. The rendered circle never changes, so
 // the learner can isolate the one thing that did change between MicroPython

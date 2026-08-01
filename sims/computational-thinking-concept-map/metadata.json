@@ -1,8 +1,8 @@
 {
   "title": "Computational Thinking Concept Map",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for computational thinking concept map",
+  "subject": "Robot Faces",
+  "description": "Explain each computational-thinking skill in plain language and relate it to the specific earlier chapter and code example where the student already practiced it, differentiating the five skills from one another by the distinct role each one plays.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Computational Thinking Concept Map",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Explain each computational-thinking skill in plain language and relate it to the specific earlier chapter and code example where the student already practiced it, differentiating the five skills from one another by the distinct role each one plays."
     ],
     "bloomsTaxonomy": "Understand (L2) / Analyze (L4)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 600
     },
     "responsive": true,
     "dependencies": [],

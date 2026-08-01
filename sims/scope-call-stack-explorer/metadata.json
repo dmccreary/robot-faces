@@ -1,8 +1,8 @@
 {
   "title": "Global vs Local Scope Call Stack Explorer",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for global vs local scope call stack explorer",
+  "subject": "Robot Faces",
+  "description": "Differentiate global variables from local variables by examining, step by step, which variable a given assignment inside a function actually modifies, including the case where a local variable shadows a global one of the same name.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Global vs Local Scope Call Stack Explorer",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Differentiate global variables from local variables by examining, step by step, which variable a given assignment inside a function actually modifies, including the case where a local variable shadows a global one of the same name."
     ],
     "bloomsTaxonomy": "Analyze (L4)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 500
     },
     "responsive": true,
     "dependencies": [],

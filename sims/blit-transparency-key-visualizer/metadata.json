@@ -1,8 +1,8 @@
 {
   "title": "Blit Transparency Key Visualizer",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for blit transparency key visualizer",
+  "subject": "Robot Faces",
+  "description": "Differentiate a transparent blit from an opaque blit by examining how a circular sprite overlaps existing background content with and without a transparent color key.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Blit Transparency Key Visualizer",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Differentiate a transparent blit from an opaque blit by examining how a circular sprite overlaps existing background content with and without a transparent color key."
     ],
     "bloomsTaxonomy": "Analyze (L4)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 470
     },
     "responsive": true,
     "dependencies": [],

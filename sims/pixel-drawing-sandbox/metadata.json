@@ -1,8 +1,8 @@
 {
   "title": "Pixel Drawing Sandbox",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for pixel drawing sandbox",
+  "subject": "Robot Faces",
+  "description": "Demonstrate the effect of `pixel()`, `hline()`, and `vline()` calls by drawing directly on a simulated frame buffer, and execute the correct tool choice for horizontal, vertical, and single-dot marks.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Pixel Drawing Sandbox",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Demonstrate the effect of `pixel()`, `hline()`, and `vline()` calls by drawing directly on a simulated frame buffer, and execute the correct tool choice for horizontal, vertical, and single-dot marks."
     ],
     "bloomsTaxonomy": "Apply (L3)",
     "duration": "10-15 minutes",

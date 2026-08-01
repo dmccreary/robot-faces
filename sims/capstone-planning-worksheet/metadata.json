@@ -1,8 +1,8 @@
 {
   "title": "Capstone Planning Worksheet",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for capstone planning worksheet",
+  "subject": "Robot Faces",
+  "description": "Design an original capstone plan by formulating a minimum viable expression set of at least eight named expressions with rough parameter notes, selecting a target display and control scheme, and describing an idle animation \u2014 producing a complete, personally-authored project plan that satisfies every capstone requirement before any drawing code is written.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Capstone Planning Worksheet",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Design an original capstone plan by formulating a minimum viable expression set of at least eight named expressions with rough parameter notes, selecting a target display and control scheme, and describing an idle animation \u2014 producing a complete, personally-authored project plan that satisfies every capstone requirement before any drawing code is written."
     ],
     "bloomsTaxonomy": "Create (L6)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 700
     },
     "responsive": true,
     "dependencies": [],

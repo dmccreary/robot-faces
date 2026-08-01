@@ -1,8 +1,8 @@
 {
   "title": "Encoder Quadrature Signal Visualizer",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for encoder quadrature signal visualizer",
+  "subject": "Robot Faces",
+  "description": "Explain how a quadrature encoder's two out-of-phase square-wave signals encode rotation, and differentiate clockwise from counter-clockwise rotation by examining which of the two signals changes first on each step.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Encoder Quadrature Signal Visualizer",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Explain how a quadrature encoder's two out-of-phase square-wave signals encode rotation, and differentiate clockwise from counter-clockwise rotation by examining which of the two signals changes first on each step."
     ],
     "bloomsTaxonomy": "Understand (L2) / Analyze (L4)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 400
     },
     "responsive": true,
     "dependencies": [],

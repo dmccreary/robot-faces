@@ -1,8 +1,8 @@
 {
   "title": "Indentation Error Visualizer",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for indentation error visualizer",
+  "subject": "Robot Faces",
+  "description": "Explain why consistent indentation is required for a MicroPython code block to run, and classify a given indented line as correct, under-indented, or mixed-tabs-and-spaces.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Indentation Error Visualizer",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Explain why consistent indentation is required for a MicroPython code block to run, and classify a given indented line as correct, under-indented, or mixed-tabs-and-spaces."
     ],
     "bloomsTaxonomy": "Understand (L2)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 480
     },
     "responsive": true,
     "dependencies": [],

@@ -1,8 +1,8 @@
 {
   "title": "Polling vs Interrupt Response Simulator",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for polling vs interrupt response simulator",
+  "subject": "Robot Faces",
+  "description": "Differentiate polling-based button reading from interrupt-driven button reading by examining, for presses of varying length and timing, whether each approach detects a simulated button press.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Polling vs Interrupt Response Simulator",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Differentiate polling-based button reading from interrupt-driven button reading by examining, for presses of varying length and timing, whether each approach detects a simulated button press."
     ],
     "bloomsTaxonomy": "Analyze (L4)",
     "duration": "10-15 minutes",

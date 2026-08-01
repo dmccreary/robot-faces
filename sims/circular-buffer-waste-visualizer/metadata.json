@@ -1,8 +1,8 @@
 {
   "title": "Circular Buffer Waste Visualizer",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for circular buffer waste visualizer",
+  "subject": "Robot Faces",
+  "description": "Analyze the relationship between the 240x240 square frame buffer and the circular physical display by examining which buffer pixels fall inside versus outside the visible circle, and differentiate \"visible\" pixels from \"wasted\" pixels.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Circular Buffer Waste Visualizer",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Analyze the relationship between the 240x240 square frame buffer and the circular physical display by examining which buffer pixels fall inside versus outside the visible circle, and differentiate \"visible\" pixels from \"wasted\" pixels."
     ],
     "bloomsTaxonomy": "Analyze (L4)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 500
     },
     "responsive": true,
     "dependencies": [],

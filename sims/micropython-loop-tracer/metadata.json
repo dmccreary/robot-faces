@@ -1,8 +1,8 @@
 {
   "title": "MicroPython Loop Tracer",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for micropython loop tracer",
+  "subject": "Robot Faces",
+  "description": "Execute a short for loop or while loop mentally, one iteration at a time, and demonstrate correct prediction of each variable's value and each line printed before revealing the actual result.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "MicroPython Loop Tracer",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Execute a short for loop or while loop mentally, one iteration at a time, and demonstrate correct prediction of each variable's value and each line printed before revealing the actual result."
     ],
     "bloomsTaxonomy": "Apply (L3)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 540
     },
     "responsive": true,
     "dependencies": [],

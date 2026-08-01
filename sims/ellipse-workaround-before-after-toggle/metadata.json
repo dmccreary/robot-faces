@@ -1,8 +1,8 @@
 {
   "title": "Old Workaround vs. New ellipse() Call",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for old workaround vs. new ellipse() call",
+  "subject": "Robot Faces",
+  "description": "Contrast the pre-2023 line-loop workaround for drawing a circle with the one-line ellipse() call available since v1.20.0, and differentiate what each approach requires in terms of code, memory, and mental effort.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Old Workaround vs. New ellipse() Call",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Contrast the pre-2023 line-loop workaround for drawing a circle with the one-line ellipse() call available since v1.20.0, and differentiate what each approach requires in terms of code, memory, and mental effort."
     ],
     "bloomsTaxonomy": "Analyze (L4)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 555
     },
     "responsive": true,
     "dependencies": [],

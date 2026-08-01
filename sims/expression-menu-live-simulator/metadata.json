@@ -1,8 +1,8 @@
 {
   "title": "Expression Menu Live Simulator",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for expression menu live simulator",
+  "subject": "Robot Faces",
+  "description": "Demonstrate a complete expression-menu program's behavior by operating simulated buttons and a knob to cycle expressions, trigger a state-based animation, and live-tune a parameter; optionally construct a custom control mapping by reassigning which control performs which function.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Expression Menu Live Simulator",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Demonstrate a complete expression-menu program's behavior by operating simulated buttons and a knob to cycle expressions, trigger a state-based animation, and live-tune a parameter; optionally construct a custom control mapping by reassigning which control performs which function."
     ],
     "bloomsTaxonomy": "Apply (L3) / Create (L6)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 680
     },
     "responsive": true,
     "dependencies": [],

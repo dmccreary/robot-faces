@@ -1,8 +1,8 @@
 {
   "title": "SPI vs I2C Bus Explorer",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for spi vs i2c bus explorer",
+  "subject": "Robot Faces",
+  "description": "Differentiate SPI and I2C wiring by comparing wire count, addressing scheme, and typical speed, and identify which bus a given wiring diagram uses.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "SPI vs I2C Bus Explorer",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Differentiate SPI and I2C wiring by comparing wire count, addressing scheme, and typical speed, and identify which bus a given wiring diagram uses."
     ],
     "bloomsTaxonomy": "Analyze (L4)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 480
     },
     "responsive": true,
     "dependencies": [],

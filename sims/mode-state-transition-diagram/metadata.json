@@ -1,8 +1,8 @@
 {
   "title": "Mode State Transition Diagram",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for mode state transition diagram",
+  "subject": "Robot Faces",
+  "description": "Explain the mode state machine's states and transitions by clicking each mode and each transition arrow to interpret what button action triggers it, what the global state variable's value becomes, and what the face does in that mode.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Mode State Transition Diagram",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Explain the mode state machine's states and transitions by clicking each mode and each transition arrow to interpret what button action triggers it, what the global state variable's value becomes, and what the face does in that mode."
     ],
     "bloomsTaxonomy": "Understand (L2)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 480
     },
     "responsive": true,
     "dependencies": [],

@@ -195,6 +195,7 @@ function computeLayout() {
     legendX = panelX;
     legendW = panelW;
     infoX = panelX;
+    infoW = panelW;
     infoY = panelY + legendH + 8;
     infoH = 118;
   }

@@ -1,8 +1,8 @@
 {
   "title": "Round Display Safe-Area Layout Planner",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for round display safe-area layout planner",
+  "subject": "Robot Faces",
+  "description": "Examine candidate feature bounding boxes placed on a 240x240 round display buffer, and distinguish safe placements (fully inside the visible circle) from unsafe placements (clipped by the circular boundary), in order to plan facial feature layout.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Round Display Safe-Area Layout Planner",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Examine candidate feature bounding boxes placed on a 240x240 round display buffer, and distinguish safe placements (fully inside the visible circle) from unsafe placements (clipped by the circular boundary), in order to plan facial feature layout."
     ],
     "bloomsTaxonomy": "Analyze (L4)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 560
     },
     "responsive": true,
     "dependencies": [],

@@ -175,10 +175,10 @@ function computeLayout() {
   let panelX, panelY, panelW, panelH;
 
   if (isNarrow) {
-    const faceW = min(canvasWidth - 2 * margin, 320);
+    const faceW = min(canvasWidth - 2 * margin, 260);
     faceBox = { x: (canvasWidth - faceW) / 2, y: titleH, w: faceW, h: faceW / 2 };
     panelX = margin;
-    panelY = titleH + faceBox.h + 8;
+    panelY = titleH + faceBox.h + 32;      // room for the parameter caption
     panelW = canvasWidth - 2 * margin;
     panelH = drawHeight - panelY - 8;
   } else {
@@ -207,30 +207,31 @@ function computeLayout() {
   ];
 
   // Chip bank: as many columns as the panel can hold.
-  const chipCols = isNarrow ? (canvasWidth < 420 ? 2 : 3) : 2;
+  const chipCols = isNarrow ? (canvasWidth < 380 ? 2 : 3) : 2;
   const chipW = (panelW - (chipCols - 1) * 6) / chipCols;
-  const chipH = 24;
-  const chipTop = answerBox.y + slotH + 26;
+  const chipH = isNarrow ? 22 : 24;
+  const chipGap = isNarrow ? 3 : 4;
+  const chipTop = answerBox.y + slotH + 24;
   chipRects = [];
   for (let i = 0; i < CHIP_NAMES.length; i++) {
     const col = i % chipCols;
     const row = floor(i / chipCols);
     chipRects.push({
       x: panelX + col * (chipW + 6),
-      y: chipTop + row * (chipH + 4),
+      y: chipTop + row * (chipH + chipGap),
       w: chipW,
       h: chipH,
       name: CHIP_NAMES[i]
     });
   }
   const chipRows = ceil(CHIP_NAMES.length / chipCols);
-  const chipBottom = chipTop + chipRows * (chipH + 4);
+  const chipBottom = chipTop + chipRows * (chipH + chipGap);
 
   feedbackBox = {
     x: panelX,
     y: chipBottom + 6,
     w: panelW,
-    h: max(60, panelY + panelH - chipBottom - 6)
+    h: max(52, panelY + panelH - chipBottom - 6)
   };
 }
 
@@ -481,7 +482,7 @@ function drawAnswerZone() {
     textAlign(CENTER, CENTER);
     textSize(13);
     fill(name ? '#0D47A1' : '#90A4AE');
-    text(name ? name : 'empty slot ' + (i + 1), r.x, r.y + r.h / 2, r.w, 18);
+    text(name ? name : 'empty slot ' + (i + 1), r.x, r.y, r.w, r.h);
   }
   textAlign(LEFT, TOP);
   textSize(defaultTextSize);
@@ -507,7 +508,7 @@ function drawChipBank() {
     fill(submitted ? '#78909C' : '#263238');
     textAlign(CENTER, CENTER);
     textSize(12);
-    text(r.name, r.x, r.y + r.h / 2, r.w, 16);
+    text(r.name, r.x, r.y, r.w, r.h);
   }
   textAlign(LEFT, TOP);
   textSize(defaultTextSize);

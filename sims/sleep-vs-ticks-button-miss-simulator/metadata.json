@@ -1,8 +1,8 @@
 {
   "title": "Sleep vs Ticks Button Miss Simulator",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for sleep vs ticks button miss simulator",
+  "subject": "Robot Faces",
+  "description": "Differentiate blocking sleep()-based timing from non-blocking ticks_ms()-based timing by examining whether a simulated button press is detected during an animation delay under each approach.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Sleep vs Ticks Button Miss Simulator",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Differentiate blocking sleep()-based timing from non-blocking ticks_ms()-based timing by examining whether a simulated button press is detected during an animation delay under each approach."
     ],
     "bloomsTaxonomy": "Analyze (L4)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 405
     },
     "responsive": true,
     "dependencies": [],

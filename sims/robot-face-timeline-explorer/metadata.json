@@ -1,8 +1,8 @@
 {
   "title": "Screen-Based Robot Face Timeline",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for screen-based robot face timeline",
+  "subject": "Robot Faces",
+  "description": "Interpret the sequence of milestones across four commercial screen-faced robots and summarize how one company's outcome (Anki's shutdown) relates in time to the releases of the other robots.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Screen-Based Robot Face Timeline",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Interpret the sequence of milestones across four commercial screen-faced robots and summarize how one company's outcome (Anki's shutdown) relates in time to the releases of the other robots."
     ],
     "bloomsTaxonomy": "Understand (L2)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 580
     },
     "responsive": true,
     "dependencies": [],

@@ -1,8 +1,8 @@
 {
   "title": "Draw Call Benchmark Chart",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for draw call benchmark chart",
+  "subject": "Robot Faces",
+  "description": "Analyze draw-time benchmarking data comparing full-primitive redraws against blitted-sprite redraws for a complete face frame, to differentiate which technique costs more microseconds per frame and examine why.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Draw Call Benchmark Chart",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Analyze draw-time benchmarking data comparing full-primitive redraws against blitted-sprite redraws for a complete face frame, to differentiate which technique costs more microseconds per frame and examine why."
     ],
     "bloomsTaxonomy": "Analyze (L4)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 520
     },
     "responsive": true,
     "dependencies": [],

@@ -444,14 +444,14 @@ function drawVarsPanel(x, y, w, ex, inline) {
   fill('dimgray');
   textSize(13);
   text('Variable', x + 10, boxY + 7);
-  text('Value', x + w * 0.55, boxY + 7);
+  text('Value', x + w * 0.45, boxY + 7);
 
   textFont('monospace');
   textSize(16);
   fill('black');
   text(ex.varName, x + 10, boxY + 27);
   fill(confirmedVars ? 'darkgreen' : 'gray');
-  text(confirmedVars ? confirmedVars[ex.varName] : 'not defined yet', x + w * 0.55, boxY + 27);
+  text(confirmedVars ? confirmedVars[ex.varName] : 'not defined yet', x + w * 0.45, boxY + 27);
   textFont('sans-serif');
   textSize(defaultTextSize);
 }

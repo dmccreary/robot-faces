@@ -1,8 +1,8 @@
 {
   "title": "Pull-Up Resistor and Button Simulator",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for pull-up resistor and button simulator",
+  "subject": "Robot Faces",
+  "description": "Explain why a floating GPIO pin needs a pull-up resistor, and demonstrate how enabling one produces a stable HIGH/LOW reading when a momentary push button is pressed and released.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Pull-Up Resistor and Button Simulator",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Explain why a floating GPIO pin needs a pull-up resistor, and demonstrate how enabling one produces a stable HIGH/LOW reading when a momentary push button is pressed and released."
     ],
     "bloomsTaxonomy": "Understand (L2) / Apply (L3)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 480
     },
     "responsive": true,
     "dependencies": [],

@@ -1,8 +1,8 @@
 {
   "title": "FrameBuf Version Timeline",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for framebuf version timeline",
+  "subject": "Robot Faces",
+  "description": "Interpret the sequence of framebuf drawing-support milestones from before v1.17 through v1.24.1, and summarize why the gap between the development-branch merge and the stable release matters to a programmer choosing which MicroPython version to install.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "FrameBuf Version Timeline",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Interpret the sequence of framebuf drawing-support milestones from before v1.17 through v1.24.1, and summarize why the gap between the development-branch merge and the stable release matters to a programmer choosing which MicroPython version to install."
     ],
     "bloomsTaxonomy": "Understand (L2)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 610
     },
     "responsive": true,
     "dependencies": [],

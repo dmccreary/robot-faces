@@ -460,10 +460,12 @@ function drawCodeListing(x, y, w, fontSize, lineH) {
     noStroke();
     textSize(fontSize);
     // Calls not yet applied stay gray so the learner can see what is coming.
+    // Pending lines use a slate gray, not silver: silver on white is far
+    // below the readable contrast floor, and the learner has to read ahead.
     const applied = (i < stepIdx);
-    fill(applied ? 'gray' : 'silver');
+    fill(applied ? 'gray' : '#546E7A');
     text(i + 1, x + 8, lineY + 3);
-    fill(applied ? 'black' : 'silver');
+    fill(applied ? 'black' : '#546E7A');
     textFont('monospace');
     text(calls[seq[i]].code, x + 28, lineY + 3);
     textFont('sans-serif');

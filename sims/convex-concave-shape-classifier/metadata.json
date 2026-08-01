@@ -1,8 +1,8 @@
 {
   "title": "Convex vs Concave Shape Classifier",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for convex vs concave shape classifier",
+  "subject": "Robot Faces",
+  "description": "Differentiate convex polygons from concave polygons by examining a series of shapes and classifying each based on whether any vertex dents inward toward the shape's interior.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Convex vs Concave Shape Classifier",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Differentiate convex polygons from concave polygons by examining a series of shapes and classifying each based on whether any vertex dents inward toward the shape's interior."
     ],
     "bloomsTaxonomy": "Analyze (L4)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 500
     },
     "responsive": true,
     "dependencies": [],

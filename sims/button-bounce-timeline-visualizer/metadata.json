@@ -1,8 +1,8 @@
 {
   "title": "Button Bounce Timeline Visualizer",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for button bounce timeline visualizer",
+  "subject": "Robot Faces",
+  "description": "Differentiate a raw, bouncing button signal from a properly debounced signal by examining a shared timeline, and identify how the debounce time constant determines which transitions get accepted as a single press.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Button Bounce Timeline Visualizer",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Differentiate a raw, bouncing button signal from a properly debounced signal by examining a shared timeline, and identify how the debounce time constant determines which transitions get accepted as a single press."
     ],
     "bloomsTaxonomy": "Analyze (L4)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 488
     },
     "responsive": true,
     "dependencies": [],

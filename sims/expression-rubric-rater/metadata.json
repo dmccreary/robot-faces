@@ -1,8 +1,8 @@
 {
   "title": "Rubric Rater \u2014 Score This Expression",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for rubric rater \u2014 score this expression",
+  "subject": "Robot Faces",
+  "description": "Given a rendered face and its underlying face_state parameters, assess it against each criterion of the Emotional Design Rubric, assigning a rating per criterion with a written justification and an overall recommendation \u2014 directly rehearsing the course's Evaluate-level outcome of critiquing a classmate's design.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Rubric Rater \u2014 Score This Expression",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Given a rendered face and its underlying face_state parameters, assess it against each criterion of the Emotional Design Rubric, assigning a rating per criterion with a written justification and an overall recommendation \u2014 directly rehearsing the course's Evaluate-level outcome of critiquing a classmate's design."
     ],
     "bloomsTaxonomy": "Evaluate (L5)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 700
     },
     "responsive": true,
     "dependencies": [],

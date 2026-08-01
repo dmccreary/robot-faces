@@ -572,7 +572,11 @@ function drawDesignPanel() {
   textSize(11);
   textAlign(CENTER, TOP);
   text('Close up', margin, top + bigH + 4, bigW, 16);
-  text('At classroom distance', thumbX - 14, top + bigH + 4, thumbW + 90, 16);
+  // Keep the caption inside the left column so it never slides under the
+  // right-hand instruction panel, which starts at margin + leftW + 6.
+  const capX = thumbX - 30;
+  text('At classroom distance', capX, top + bigH + 4,
+    margin + leftW - capX, 16);
   textAlign(LEFT, TOP);
 
   const done = rowsComplete();

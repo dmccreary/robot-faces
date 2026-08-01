@@ -1,8 +1,8 @@
 {
   "title": "Frame Buffer Size Calculator",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for frame buffer size calculator",
+  "subject": "Robot Faces",
+  "description": "Calculate the number of bytes a frame buffer requires given width, height, and bit depth, and demonstrate how independently changing each parameter changes the total memory footprint.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Frame Buffer Size Calculator",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Calculate the number of bytes a frame buffer requires given width, height, and bit depth, and demonstrate how independently changing each parameter changes the total memory footprint."
     ],
     "bloomsTaxonomy": "Apply (L3)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 490
     },
     "responsive": true,
     "dependencies": [],

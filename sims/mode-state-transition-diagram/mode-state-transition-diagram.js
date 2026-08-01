@@ -192,8 +192,16 @@ function buildNodes() {
 }
 
 function buildEdges() {
+  const yOf = {};
+  modeData.forEach(function (mode) { yOf[mode.id] = mode.y; });
+
   return transitionData.map(function (transition) {
-    return {
+    // A horizontal edge puts its label on the midpoint of the line joining two
+    // boxes that sit at the same height, where the box bodies leave too little
+    // clear space. Drop that one label below both boxes so it stays readable.
+    const isHorizontal = yOf[transition.from] === yOf[transition.to];
+
+    const edge = {
       id: transition.id,
       from: transition.from,
       to: transition.to,
@@ -201,6 +209,8 @@ function buildEdges() {
       title: 'Button press: ' + transition.from + ' to ' + transition.to,
       color: { color: EDGE_COLOR, highlight: EDGE_HIGHLIGHT }
     };
+    if (isHorizontal) edge.font = { vadjust: 34 };
+    return edge;
   });
 }
 

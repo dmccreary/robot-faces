@@ -1,8 +1,8 @@
 {
   "title": "Ambiguous Expression Confusability Sorter",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for ambiguous expression confusability sorter",
+  "subject": "Robot Faces",
+  "description": "Given a rendered face built from a deliberately ambiguous parameter set, judge which two named emotions it could plausibly be read as, and justify that judgment by citing the specific overlapping eyebrow, eye, and mouth features responsible.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Ambiguous Expression Confusability Sorter",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Given a rendered face built from a deliberately ambiguous parameter set, judge which two named emotions it could plausibly be read as, and justify that judgment by citing the specific overlapping eyebrow, eye, and mouth features responsible."
     ],
     "bloomsTaxonomy": "Evaluate (L5)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 540
     },
     "responsive": true,
     "dependencies": [],

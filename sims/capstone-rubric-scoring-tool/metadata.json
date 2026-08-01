@@ -1,8 +1,8 @@
 {
   "title": "Capstone Rubric Scoring Tool",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for capstone rubric scoring tool",
+  "subject": "Robot Faces",
+  "description": "Given a summary of a sample classmate's capstone plan (expression list, chosen display, control scheme, and idle animation description), assess it against an extended capstone rubric that builds on Chapter 11's Emotional Design Rubric, assigning a rating and a required written justification per criterion, and compose that feedback into a peer-review summary ready to hand to the presenter.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Capstone Rubric Scoring Tool",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Given a summary of a sample classmate's capstone plan (expression list, chosen display, control scheme, and idle animation description), assess it against an extended capstone rubric that builds on Chapter 11's Emotional Design Rubric, assigning a rating and a required written justification per criterion, and compose that feedback into a peer-review summary ready to hand to the presenter."
     ],
     "bloomsTaxonomy": "Evaluate (L5)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 720
     },
     "responsive": true,
     "dependencies": [],

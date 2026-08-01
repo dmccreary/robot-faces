@@ -239,7 +239,7 @@ function initTimeline() {
 
   const options = {
     width: '100%',
-    height: '265px',
+    height: '295px',
     margin: { item: { horizontal: 12, vertical: 6 }, axis: 26 },
     orientation: 'top',
     zoomMin: 1000 * 60 * 60 * 24 * 365 * 3,    // do not zoom closer than 3 years

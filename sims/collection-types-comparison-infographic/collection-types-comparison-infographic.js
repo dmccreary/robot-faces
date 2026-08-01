@@ -2,7 +2,7 @@
 // An interactive HTML/CSS/JS infographic for the Robot Faces intelligent textbook.
 // Bloom level: Analyze (L4) - differentiate, distinguish
 //
-// CANVAS_HEIGHT: 570
+// CANVAS_HEIGHT: 770
 //
 // The three columns let a learner compare mutability, syntax, and access method.
 // The scenario panel then asks them to apply that comparison to new cases, which

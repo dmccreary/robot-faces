@@ -1,8 +1,8 @@
 {
   "title": "Ekman Emotion Feature Map",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for ekman emotion feature map",
+  "subject": "Robot Faces",
+  "description": "Explain how each of Ekman's universal emotions (happiness, sadness, anger, fear, surprise, disgust, contempt) maps onto a characteristic eyebrow, eye, and mouth feature combination, by clicking each emotion and interpreting the resulting infobox.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Ekman Emotion Feature Map",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Explain how each of Ekman's universal emotions (happiness, sadness, anger, fear, surprise, disgust, contempt) maps onto a characteristic eyebrow, eye, and mouth feature combination, by clicking each emotion and interpreting the resulting infobox."
     ],
     "bloomsTaxonomy": "Understand (L2)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 550
     },
     "responsive": true,
     "dependencies": [],

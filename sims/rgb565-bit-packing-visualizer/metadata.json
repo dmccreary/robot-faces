@@ -1,8 +1,8 @@
 {
   "title": "RGB565 Bit-Packing Visualizer",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for rgb565 bit-packing visualizer",
+  "subject": "Robot Faces",
+  "description": "Apply the color565() bit-shifting process by adjusting red, green, and blue channel sliders (0-255 each) and calculating the resulting 16-bit RGB565 binary layout, packed hex value, and packed integer value.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "RGB565 Bit-Packing Visualizer",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Apply the color565() bit-shifting process by adjusting red, green, and blue channel sliders (0-255 each) and calculating the resulting 16-bit RGB565 binary layout, packed hex value, and packed integer value."
     ],
     "bloomsTaxonomy": "Apply (L3)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 580
     },
     "responsive": true,
     "dependencies": [],

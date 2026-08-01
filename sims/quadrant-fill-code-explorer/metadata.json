@@ -1,8 +1,8 @@
 {
   "title": "Quadrant Fill Code Explorer",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for quadrant fill code explorer",
+  "subject": "Robot Faces",
+  "description": "Apply the quadrant fill code bitmask by toggling individual quadrant bits and demonstrating how each combination changes which portion of an ellipse is drawn on a simulated frame buffer.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Quadrant Fill Code Explorer",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Apply the quadrant fill code bitmask by toggling individual quadrant bits and demonstrating how each combination changes which portion of an ellipse is drawn on a simulated frame buffer."
     ],
     "bloomsTaxonomy": "Apply (L3)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 585
     },
     "responsive": true,
     "dependencies": [],

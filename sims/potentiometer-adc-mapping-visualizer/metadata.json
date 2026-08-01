@@ -1,8 +1,8 @@
 {
   "title": "Potentiometer ADC Mapping Visualizer",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for potentiometer adc mapping visualizer",
+  "subject": "Robot Faces",
+  "description": "Calculate a mapped face-parameter value from a raw ADC reading using the linear mapping formula, and demonstrate how turning a simulated potentiometer knob changes the raw value, the mapped value, and the live arithmetic together.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Potentiometer ADC Mapping Visualizer",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Calculate a mapped face-parameter value from a raw ADC reading using the linear mapping formula, and demonstrate how turning a simulated potentiometer knob changes the raw value, the mapped value, and the live arithmetic together."
     ],
     "bloomsTaxonomy": "Apply (L3)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 425
     },
     "responsive": true,
     "dependencies": [],

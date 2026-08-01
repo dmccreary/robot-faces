@@ -1,8 +1,8 @@
 {
   "title": "Bitwise Operator and Shift Visualizer",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for bitwise operator and shift visualizer",
+  "subject": "Robot Faces",
+  "description": "Calculate the result of applying AND, OR, XOR, left-shift, or right-shift to an 8-bit value, and demonstrate how each bit position changes by adjusting operand values directly.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Bitwise Operator and Shift Visualizer",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Calculate the result of applying AND, OR, XOR, left-shift, or right-shift to an 8-bit value, and demonstrate how each bit position changes by adjusting operand values directly."
     ],
     "bloomsTaxonomy": "Apply (L3)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 470
     },
     "responsive": true,
     "dependencies": [],

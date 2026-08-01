@@ -1,8 +1,8 @@
 {
   "title": "List vs Tuple vs Dictionary Comparison",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for list vs tuple vs dictionary comparison",
+  "subject": "Robot Faces",
+  "description": "Differentiate lists, tuples, and dictionaries by mutability, syntax, and access method, and distinguish which collection type best fits a short scenario describing robot-face data.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "List vs Tuple vs Dictionary Comparison",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Differentiate lists, tuples, and dictionaries by mutability, syntax, and access method, and distinguish which collection type best fits a short scenario describing robot-face data."
     ],
     "bloomsTaxonomy": "Analyze (L4)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 570
     },
     "responsive": true,
     "dependencies": [],

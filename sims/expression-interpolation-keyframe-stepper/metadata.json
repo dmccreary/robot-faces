@@ -1,8 +1,8 @@
 {
   "title": "Expression Interpolation Keyframe Stepper",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for expression interpolation keyframe stepper",
+  "subject": "Robot Faces",
+  "description": "Interpret how expression interpolation computes intermediate face-state parameter values between two keyframes by stepping through individual frames with concrete numbers, and exemplify how an easing curve changes those values compared to plain linear interpolation.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Expression Interpolation Keyframe Stepper",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Interpret how expression interpolation computes intermediate face-state parameter values between two keyframes by stepping through individual frames with concrete numbers, and exemplify how an easing curve changes those values compared to plain linear interpolation."
     ],
     "bloomsTaxonomy": "Understand (L2)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 520
     },
     "responsive": true,
     "dependencies": [],

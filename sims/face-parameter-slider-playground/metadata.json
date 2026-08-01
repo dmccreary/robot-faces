@@ -1,8 +1,8 @@
 {
   "title": "Face Parameter Slider Playground",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for face parameter slider playground",
+  "subject": "Robot Faces",
+  "description": "Construct a complete, original facial expression by designing values for the eye size, eye spacing, eyebrow angle, and mouth curvature parameters, observing how draw_face() turns that one set of numbers into a complete rendered face.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Face Parameter Slider Playground",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Construct a complete, original facial expression by designing values for the eye size, eye spacing, eyebrow angle, and mouth curvature parameters, observing how draw_face() turns that one set of numbers into a complete rendered face."
     ],
     "bloomsTaxonomy": "Create (L6)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 545
     },
     "responsive": true,
     "dependencies": [],

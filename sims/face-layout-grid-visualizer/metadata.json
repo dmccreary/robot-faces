@@ -1,8 +1,8 @@
 {
   "title": "Face Layout Grid Visualizer",
   "creator": "Dan McCreary",
-  "subject": "High School Geometry",
-  "description": "Interactive MicroSim for face layout grid visualizer",
+  "subject": "Robot Faces",
+  "description": "Interpret how a face layout grid divides display height into margin, eye, nose/cheek, and mouth bands by hovering each band to reveal its proportion, and explain why a robot face adapts real face-proportion conventions rather than copying them exactly.",
   "date": "2026-07-31",
   "educational": {
     "gradeLevel": [
@@ -11,10 +11,10 @@
       "11",
       "12"
     ],
-    "subjectArea": "Mathematics",
+    "subjectArea": "Computer Science",
     "topic": "Face Layout Grid Visualizer",
     "learningObjectives": [
-      "TODO: Add learning objectives"
+      "Interpret how a face layout grid divides display height into margin, eye, nose/cheek, and mouth bands by hovering each band to reveal its proportion, and explain why a robot face adapts real face-proportion conventions rather than copying them exactly."
     ],
     "bloomsTaxonomy": "Understand (L2)",
     "duration": "10-15 minutes",
@@ -26,7 +26,7 @@
     "version": "1.0",
     "canvasDimensions": {
       "width": "responsive",
-      "height": 450
+      "height": 490
     },
     "responsive": true,
     "dependencies": [],
