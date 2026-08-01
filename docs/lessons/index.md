@@ -32,8 +32,8 @@ These eight lessons cover every drawing command the MicroPython framebuffer offe
 |--|--|
 | [Basic Face Layouts](basic-face-layouts/index.md) | Placing eyes and a mouth so they read as a face |
 | [Eye Scanner](eye-scanner/index.md) | Animating a pupil that sweeps back and forth |
-| [Blinking](blinking/index.md) | Reading a push button and reacting with both eyes |
 | [Eyebrows](eyebrows/index.md) | The single most expressive feature on a robot face |
-| [Emotion Types](emotion-types/index.md) | The core expression set and how to draw each one |
 | [Winking with a Smile](wink/index.md) | Combining a closed eye and a curved mouth |
+| [Blinking](blinking/index.md) | Reading a push button and reacting with both eyes |
+| [Emotion Types](emotion-types/index.md) | The core expression set and how to draw each one |
 | [Sleeping Faces](sleeping-faces/index.md) | Closed eyes, drooping eyebrows, and a drifting `Zzz` |

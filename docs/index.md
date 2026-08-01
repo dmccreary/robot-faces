@@ -53,7 +53,7 @@ Use the navigation menu to explore:
 - **[Stories](stories/index.md)** — The history of commercial screen-faced robots like Cozmo and Vector
 - **[Learning Graph](learning-graph/index.md)** — An interactive map of the concepts this course teaches and how they connect
 - **[Glossary](glossary.md)** — Key terms and definitions
-- **[Parts List](parts-lists.md)** — Everything you need to build a robot face kit for under $30
+- **[Parts List](parts-list.md)** — Everything you need to build a robot face kit for under $30
 
 ## Getting Started
 
