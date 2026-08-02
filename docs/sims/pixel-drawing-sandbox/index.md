@@ -38,8 +38,13 @@ one line of code you will type on real hardware.
 4. With **Vertical Line** selected, press and drag up or down instead.
 5. Watch the **Last method call** box after every mark, and use the coordinate
    readout under the screen to aim precisely.
-6. Read the **Recent calls** list to see your last five calls in order.
+6. Read the **Recent calls** list to see your calls in order, newest first. The
+   list holds far more calls than it can show at once, so scroll it with your
+   mouse wheel or drag the scrollbar on its right edge to reach older ones.
 7. Click **Clear** to wipe the screen, which logs `fb.fill(BLACK)`.
+8. Click **Copy Code** to copy every call you have made, in the order you drew
+   them, to your clipboard as a runnable MicroPython block. Paste it into your
+   editor or your notes.
 
 ## Iframe Embed Code
 
@@ -78,7 +83,8 @@ You can add this MicroSim to any web page by adding this to your HTML:
    and vertical lines. Count how many calls it took, and compare that to the one
    `fb.rect()` call that would do the same job.
 3. **Assessment** (5 min): Draw a simple robot mouth using at most three calls,
-   then copy the generated lines into your notes as working MicroPython.
+   then use **Copy Code** to paste the generated lines into your notes as
+   working MicroPython.
 
 ### Assessment
 

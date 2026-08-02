@@ -144,13 +144,13 @@ Learning objective: Demonstrate the effect of `pixel()`, `hline()`, and `vline()
 
 Canvas layout:
 - Left 70% (responsive, roughly 450x300 at default width): a scaled-up 128x64 pixel grid representing the OLED frame buffer, drawn as small squares
-- Right 30%: a tool selector, a live code readout, and a "Clear" button
+- Right 30%: a tool selector, a live code readout, a "Clear" button, and a "Copy Code" button
 
 Visual elements:
 - A grid of squares, each square either black (off) or white (on), matching the monochrome OLED
 - The currently selected tool highlighted in the tool selector
 - A live-updating code readout showing the exact method call the last action generated, e.g. `fb.pixel(64, 32, WHITE)` or `fb.hline(10, 20, 45, WHITE)`
-- A running list of the last five method calls made, scrollable
+- A running list of the method calls made, newest first, scrollable by mouse wheel or scrollbar so a long drawing session stays reachable
 
 Interactive controls:
 - Tool selector: "Pixel", "Horizontal Line", "Vertical Line"
@@ -158,6 +158,7 @@ Interactive controls:
 - Clicking and dragging horizontally with "Horizontal Line" selected draws a line from the click point to the release point and logs the equivalent `fb.hline(x, y, width, WHITE)` call
 - Clicking and dragging vertically with "Vertical Line" selected does the same for `fb.vline()`
 - "Clear" button calls the fill-method equivalent, resetting the entire grid to black and logging `fb.fill(BLACK)`
+- "Copy Code" button copies the whole call history to the clipboard, oldest call first, as a runnable MicroPython block
 
 Default parameters: "Pixel" tool selected, grid fully black, call log empty
 

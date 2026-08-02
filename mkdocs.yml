@@ -97,8 +97,7 @@ nav:
     - Blinking: lessons/blinking/index.md
     - Emotion Types: lessons/emotion-types/index.md
     - Sleeping Faces: lessons/sleeping-faces/index.md
-    # - lessons/multiple-threads/index.md
-  
+
   - MicroSims:
     - List of MicroSims: sims/index.md
     - Ambiguous Expression Confusability Sorter: sims/ambiguous-expression-confusability-sorter/index.md
