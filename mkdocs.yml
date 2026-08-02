@@ -181,6 +181,11 @@ theme:
     - content.code.copy
 plugins:
   - search
+exclude_docs: |
+  img/cover-image-prompt.md
+  img/mascot/character-sheet.md
+  img/mascot/image-prompts.md
+  learning-graph/index-template.md
 extra_css:
   - css/extra.css
   - css/mascot.css
