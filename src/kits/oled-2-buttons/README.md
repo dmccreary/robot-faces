@@ -78,6 +78,7 @@ through them in order, each one building on ideas from the last:
 
 | Lab | File | What it teaches |
 |--|--|--|
+| 0 | `00-blink-onboard-led.py` | Confirm the Pico itself works: blink the onboard LED |
 | 1 | `01-hello.py` | Confirm the wiring works: print "Hello World!" |
 | 2 | `02-screen-coordinates.py` | The (0,0)-at-top-left coordinate system |
 | 3 | `03-pixel.py` | `pixel()`, the single dot everything else builds on |
@@ -100,6 +101,24 @@ through them in order, each one building on ideas from the last:
 | 20 | `20-demo.py` | A self-running demo reel, no buttons needed |
 | 21 | `21-sample-main-demo.py` | Self-advancing demo reel + button menu, meant to become `main.py` |
 | 22 | `22-face-parameters.py` | Live-tuning one face parameter with two buttons |
+
+**If `01-hello.py` doesn't show anything on the display:** don't start
+rewiring yet — first run `00-blink-onboard-led.py` to find out whether the
+problem is the Pico/USB connection or the display wiring. That lab uses
+nothing but the LED built into the Pico itself, so it needs no breadboard,
+no jumper wires, and no OLED.
+
+- **The onboard LED blinks** — the Pico, the USB cable, and Thonny's
+  connection are all fine, so the trouble is downstream: check the seven
+  Dupont wires against the wiring table above, make sure `ssd1306.py` landed
+  in `/lib` on the Pico (not the root), and confirm the OLED's power and
+  ground pins are seated in the breadboard.
+- **The onboard LED does nothing** — the problem is the Pico or how you're
+  talking to it. Try a different USB cable (many cheap cables are
+  charge-only and carry no data), a different USB port, and check that
+  Thonny's interpreter is set to *MicroPython (Raspberry Pi Pico)* on the
+  right serial port. If Thonny can't see the Pico at all, MicroPython may
+  not be installed on it yet.
 
 **Making a lab run automatically:** MicroPython looks for a file named
 `main.py` in the root of the filesystem and runs it a few seconds after
