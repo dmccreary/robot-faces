@@ -23,6 +23,53 @@ This kit contains:
 All of these pin numbers live in one place, [`config.py`](config.py), which
 every lab below imports for its display and button setup.
 
+## Display Library
+
+`config.init_display()` calls `import ssd1306`, so the driver has to be on
+the Pico too. It lives in [`lib/ssd1306.py`](lib/ssd1306.py) here, which
+matches where MicroPython looks for modules automatically (`/lib` is on
+`sys.path` by default, so `import ssd1306` finds it with no extra setup).
+
+**Kept in sync with upstream (checked August 2026):** this copy matches
+[`micropython/micropython-lib`](https://github.com/micropython/micropython-lib/blob/master/micropython/drivers/display/ssd1306/ssd1306.py)
+byte-for-byte, the current canonical source — the driver moved there from
+the main `micropython/micropython` repo in September 2022. It includes a
+[June 2021 fix](https://github.com/micropython/micropython/commit/bc7822d8e95c40a9d5e403fd22c82b1bbad53b8b)
+that (1) sends an `SET_IREF_SELECT` command during init, needed by some
+SSD1315-based panels and harmless on true SSD1306 displays, and (2)
+generalizes `show()`'s column-centering from a hardcoded `width == 64` case
+to any width narrower than 128 — neither of which affects this kit's
+128x64 display, but both matter if a narrower panel is ever used. If you
+pull a newer `ssd1306.py` from elsewhere, diff it against the file at that
+URL first rather than assuming it's safe to drop in.
+
+## Uploading the Code
+
+Use the `upload-code.sh` script to copy the library, `config.py`, and every
+lab onto the Pico:
+
+```bash
+./upload-code.sh
+```
+
+> **⚠️ Quit or disconnect Thonny first.** Only one program can use the Pico's
+> serial port at a time. If Thonny is still connected, the upload fails with
+> *"failed to access ... (it may be in use by another program)"*. In Thonny,
+> click **Stop/Restart** then **Run → Disconnect**, or just quit Thonny, then
+> run the script again.
+
+The script requires [`mpremote`](https://docs.micropython.org/en/latest/reference/mpremote.html)
+(`pip install mpremote`), uploads `lib/ssd1306.py` to `:lib/ssd1306.py` first
+(creating the `/lib` directory on the Pico if it isn't there yet), then
+`config.py` so the other labs can import it, and auto-detects the Pico's
+serial port. If it picks the wrong port, override it:
+`PORT=/dev/your-device ./upload-code.sh`.
+
+If you'd rather upload by hand in Thonny instead of running the script,
+make sure `ssd1306.py` ends up in a `/lib` folder on the Pico, not the
+root — otherwise `import ssd1306` fails with `ImportError: no module named
+'ssd1306'`.
+
 ## Labs
 
 Copy `config.py` plus whichever lab file you're working on onto the Pico's
