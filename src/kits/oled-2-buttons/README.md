@@ -98,7 +98,7 @@ through them in order, each one building on ideas from the last:
 | 18 | `18-modes.py` | Button A/B cycle forward/back through a mode list |
 | 19 | `19-emotion-modes.py` | A two-button menu over all seven Ekman emotions |
 | 20 | `20-demo.py` | A self-running demo reel, no buttons needed |
-| 21 | `21-sample-main-demo.py` | Idle animation + button menu, meant to become `main.py` |
+| 21 | `21-sample-main-demo.py` | Self-advancing demo reel + button menu, meant to become `main.py` |
 | 22 | `22-face-parameters.py` | Live-tuning one face parameter with two buttons |
 
 **Making a lab run automatically:** MicroPython looks for a file named

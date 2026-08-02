@@ -1,19 +1,29 @@
-# Lab 21: Sample main.py -- Idle Animation + Button Menu
+# Lab 21: Sample main.py -- Self-Advancing Demo + Button Menu
 #
 # Rename this file to main.py and copy it to the root of the Pico's
 # filesystem. MicroPython always runs main.py a few seconds after power
 # comes on, so once this is main.py the robot face works standalone --
 # no computer, no Thonny, just USB power.
 #
-# Default behavior: a slow idle eye-scanner sweep, using the non-blocking
-# ticks_ms() pattern from Lab 15 so the animation and the button checks
-# both run in the same loop. Press button A or B to jump into the
-# emotion menu from Lab 19; if neither button is pressed for a few
-# seconds, the face returns to its idle sweep on its own -- a default
-# idle state, just like a real product would have.
+# Default behavior: a demo reel that cycles through all ten modes (the
+# seven emotions from Lab 19 plus Blink, Wink, and Sleepy) automatically,
+# advancing to the next mode after 5 seconds with no button press. Blink
+# and Wink are the exception -- a single blink is over in a fraction of a
+# second, so those two stay up for 10 seconds and replay themselves every
+# 3 seconds, which is what makes them read as a living face instead of a
+# still picture. Press button A or B to jump forward or back through the
+# modes yourself; any press pushes the next auto-advance out to 30
+# seconds, so you have time to look before the demo reel takes over
+# again. Uses the non-blocking ticks_ms() pattern from Lab 15 so the
+# timers and the button checks all run in the same loop.
 
 import config
 from utime import sleep, ticks_ms, ticks_diff
+
+# Give Thonny a window to interrupt (Stop/Restart) before main.py's loop
+# takes over the serial port -- without this, a fast-booting Pico can start
+# running before you get a chance to break in.
+sleep(1)
 
 oled = config.init_display()
 button_a, button_b = config.init_buttons()
@@ -39,9 +49,23 @@ EYEBROW_HALF_WIDTH = 11
 EYEBROW_Y = EYE_Y - 10
 MOUTH_Y = 46
 
-IDLE_TIMEOUT_MS = 8000
-SCAN_STEP_MS = 40
-SCAN_RANGE = 12
+# Geometry for the Blink/Wink/Sleepy modes: a neutral open-eye size plus a
+# closed-eye arc (same TOP_HALF-masked ellipse trick as Labs 12, 13, 16).
+NEUTRAL_EYE_RADIUS = 11
+CLOSED_EYE_HEIGHT = 6
+CLOSED_EYE_Y = EYE_Y + 3
+EYE_STROKE = 3
+
+ZZZ_X = 106
+ZZZ_Y = 26
+ZZZ_STEP_X = 8
+ZZZ_STEP_Y = 10
+BOB_RANGE = 3
+
+AUTO_ADVANCE_MS = 5000      # how long a still face stays up on its own
+REPEATING_HOLD_MS = 10000   # modes that replay themselves get longer
+REPEAT_MS = 3000            # ...and replay this often while they are up
+POST_INPUT_DELAY_MS = 30000
 
 
 def draw_eye(x, rx, ry, offset=0):
@@ -138,19 +162,100 @@ EMOTIONS = (
 )
 
 
-def show_emotion(index):
-    name, draw = EMOTIONS[index]
+def draw_closed_eye(x):
+    for offset in range(EYE_STROKE):
+        oled.ellipse(x, CLOSED_EYE_Y + offset, NEUTRAL_EYE_RADIUS,
+                     CLOSED_EYE_HEIGHT, WHITE, NO_FILL, TOP_HALF)
+
+
+def draw_blink(closed):
+    if closed:
+        draw_closed_eye(LEFT_EYE_X)
+        draw_closed_eye(RIGHT_EYE_X)
+    else:
+        draw_eyes(NEUTRAL_EYE_RADIUS, NEUTRAL_EYE_RADIUS)
+    draw_mouth_curve(18, 8, BOTTOM_HALF)
+
+
+def draw_wink(right_closed):
+    if right_closed:
+        draw_eye(LEFT_EYE_X, NEUTRAL_EYE_RADIUS, NEUTRAL_EYE_RADIUS)
+        draw_closed_eye(RIGHT_EYE_X)
+    else:
+        draw_eyes(NEUTRAL_EYE_RADIUS, NEUTRAL_EYE_RADIUS)
+    draw_mouth_curve(18, 8, BOTTOM_HALF)
+
+
+def draw_sleepy(bob):
+    draw_closed_eye(LEFT_EYE_X)
+    draw_closed_eye(RIGHT_EYE_X)
+    draw_eyebrows(-2, -2, lift=-2)
+    oled.ellipse(HALF_WIDTH, MOUTH_Y, 4, 4, WHITE, NO_FILL)
+    oled.text('Z', ZZZ_X, ZZZ_Y + bob, WHITE)
+    oled.text('Z', ZZZ_X + ZZZ_STEP_X, ZZZ_Y - ZZZ_STEP_Y + bob, WHITE)
+    oled.text('z', ZZZ_X + ZZZ_STEP_X * 2, ZZZ_Y - ZZZ_STEP_Y * 2 + bob, WHITE)
+
+
+def show_face(name, draw):
     oled.fill(BLACK)
     draw()
     oled.text(name, 2, 2, WHITE)
     oled.show()
 
 
-def show_idle(offset):
-    oled.fill(BLACK)
-    draw_eyes(12, 10, offset)
-    draw_mouth_curve(18, 8, BOTTOM_HALF)
-    oled.show()
+def play_blink(name):
+    show_face(name, lambda: draw_blink(True))    # eyes snap shut
+    sleep(0.15)                                    # a real blink is fast
+    show_face(name, lambda: draw_blink(False))   # eyes open again
+
+
+def play_wink(name):
+    show_face(name, lambda: draw_wink(True))      # right eye closes
+    sleep(0.35)                                    # hold it long enough to read
+    show_face(name, lambda: draw_wink(False))     # both eyes open, resting
+
+
+def play_sleepy(name):
+    for bob in range(-BOB_RANGE, BOB_RANGE + 1):
+        show_face(name, lambda bob=bob: draw_sleepy(bob))
+        sleep(0.1)
+    for bob in range(BOB_RANGE, -BOB_RANGE - 1, -1):
+        show_face(name, lambda bob=bob: draw_sleepy(bob))
+        sleep(0.1)
+
+
+# Name, play function, how long the mode stays on screen, and how often it
+# replays itself while it is up (0 means play once, then hold the last frame).
+ANIMATED_MODES = (
+    ("Blink", play_blink, REPEATING_HOLD_MS, REPEAT_MS),
+    ("Wink", play_wink, REPEATING_HOLD_MS, REPEAT_MS),
+    ("Sleepy", play_sleepy, AUTO_ADVANCE_MS, 0),
+)
+
+MODE_COUNT = len(EMOTIONS) + len(ANIMATED_MODES)
+
+
+def show_mode(index):
+    if index < len(EMOTIONS):
+        name, draw = EMOTIONS[index]
+        show_face(name, draw)
+    else:
+        name, play, _, _ = ANIMATED_MODES[index - len(EMOTIONS)]
+        play(name)
+
+
+def hold_ms(index):
+    """How long this mode stays up before the demo reel moves on."""
+    if index < len(EMOTIONS):
+        return AUTO_ADVANCE_MS
+    return ANIMATED_MODES[index - len(EMOTIONS)][2]
+
+
+def repeat_ms(index):
+    """How often this mode replays itself; 0 means play once and hold."""
+    if index < len(EMOTIONS):
+        return 0
+    return ANIMATED_MODES[index - len(EMOTIONS)][3]
 
 
 def pressed(button):
@@ -165,43 +270,43 @@ def wait_for_release(button):
         sleep(0.01)
 
 
-emotion_index = 0
-in_menu = False
-last_input = ticks_ms()
+mode_index = 0
+last_change = ticks_ms()
+last_repeat = last_change
+advance_delay = hold_ms(mode_index)
 
-scan_offset = 0
-scan_direction = 1
-last_scan_step = ticks_ms()
-
-show_idle(0)
+show_mode(mode_index)
 
 while True:
     now = ticks_ms()
 
     if pressed(button_a):
-        emotion_index = (emotion_index + 1) % len(EMOTIONS)
-        in_menu = True
-        last_input = now
-        show_emotion(emotion_index)
+        mode_index = (mode_index + 1) % MODE_COUNT
+        show_mode(mode_index)
         wait_for_release(button_a)
+        last_change = ticks_ms()      # cooldown starts when the button comes up
+        last_repeat = last_change
+        advance_delay = POST_INPUT_DELAY_MS
 
     elif pressed(button_b):
-        emotion_index = (emotion_index - 1) % len(EMOTIONS)
-        in_menu = True
-        last_input = now
-        show_emotion(emotion_index)
+        mode_index = (mode_index - 1) % MODE_COUNT
+        show_mode(mode_index)
         wait_for_release(button_b)
+        last_change = ticks_ms()
+        last_repeat = last_change
+        advance_delay = POST_INPUT_DELAY_MS
 
-    elif in_menu and ticks_diff(now, last_input) >= IDLE_TIMEOUT_MS:
-        in_menu = False
-        show_idle(scan_offset)
-        last_scan_step = now
+    elif ticks_diff(now, last_change) >= advance_delay:
+        mode_index = (mode_index + 1) % MODE_COUNT
+        show_mode(mode_index)
+        last_change = now
+        last_repeat = now
+        advance_delay = hold_ms(mode_index)
 
-    elif not in_menu and ticks_diff(now, last_scan_step) >= SCAN_STEP_MS:
-        scan_offset += scan_direction
-        if scan_offset >= SCAN_RANGE or scan_offset <= -SCAN_RANGE:
-            scan_direction *= -1
-        show_idle(scan_offset)
-        last_scan_step = now
+    # Blink and Wink land here every REPEAT_MS so they play again instead of
+    # freezing on their last frame for the rest of the mode's turn.
+    elif repeat_ms(mode_index) and ticks_diff(now, last_repeat) >= repeat_ms(mode_index):
+        show_mode(mode_index)
+        last_repeat = now
 
     sleep(0.005)

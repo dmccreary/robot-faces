@@ -15,6 +15,7 @@
         "Fictiv",
         "framebuf",
         "hline",
+        "hlines",
         "Maitreyee",
         "microcontroller",
         "Microcontrollers",
@@ -24,6 +25,7 @@
         "Pico",
         "solderless",
         "Thonny",
-        "vline"
+        "vline",
+        "vlines"
     ]
 }
