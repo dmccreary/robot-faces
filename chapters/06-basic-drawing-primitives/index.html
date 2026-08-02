@@ -4996,18 +4996,19 @@ Bloom Taxonomy Verb: demonstrate, execute</p>
 <p>Learning objective: Demonstrate the effect of <code>pixel()</code>, <code>hline()</code>, and <code>vline()</code> calls by drawing directly on a simulated frame buffer, and execute the correct tool choice for horizontal, vertical, and single-dot marks.</p>
 <p>Canvas layout:
 - Left 70% (responsive, roughly 450x300 at default width): a scaled-up 128x64 pixel grid representing the OLED frame buffer, drawn as small squares
-- Right 30%: a tool selector, a live code readout, and a "Clear" button</p>
+- Right 30%: a tool selector, a live code readout, a "Clear" button, and a "Copy Code" button</p>
 <p>Visual elements:
 - A grid of squares, each square either black (off) or white (on), matching the monochrome OLED
 - The currently selected tool highlighted in the tool selector
 - A live-updating code readout showing the exact method call the last action generated, e.g. <code>fb.pixel(64, 32, WHITE)</code> or <code>fb.hline(10, 20, 45, WHITE)</code>
-- A running list of the last five method calls made, scrollable</p>
+- A running list of the method calls made, newest first, scrollable by mouse wheel or scrollbar so a long drawing session stays reachable</p>
 <p>Interactive controls:
 - Tool selector: "Pixel", "Horizontal Line", "Vertical Line"
 - Clicking the grid with "Pixel" selected toggles that one pixel on or off and logs <code>fb.pixel(x, y, WHITE)</code>
 - Clicking and dragging horizontally with "Horizontal Line" selected draws a line from the click point to the release point and logs the equivalent <code>fb.hline(x, y, width, WHITE)</code> call
 - Clicking and dragging vertically with "Vertical Line" selected does the same for <code>fb.vline()</code>
-- "Clear" button calls the fill-method equivalent, resetting the entire grid to black and logging <code>fb.fill(BLACK)</code></p>
+- "Clear" button calls the fill-method equivalent, resetting the entire grid to black and logging <code>fb.fill(BLACK)</code>
+- "Copy Code" button copies the whole call history to the clipboard, oldest call first, as a runnable MicroPython block</p>
 <p>Default parameters: "Pixel" tool selected, grid fully black, call log empty</p>
 <p>Behavior: every click or drag immediately updates the grid and appends the equivalent FrameBuf method call to the code readout and the call history list, so the learner can connect a hand gesture directly to the exact line of MicroPython it represents.</p>
 <p>Instructional Rationale: An Apply-level, direct-manipulation pattern is appropriate because the objective requires the learner to actively produce marks with each tool and see the resulting method call, building an accurate mental model of what each primitive does rather than reading a description of it.</p>
