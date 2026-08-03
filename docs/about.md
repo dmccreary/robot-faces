@@ -113,7 +113,7 @@ Thonny, then move to
 If you'd rather explore non-linearly or check the prerequisites for a specific
 topic, begin at the [Learning Graph](learning-graph/index.md).
 
-Teachers and club mentors: the [Parts List](parts-lists.md) includes bulk
+Teachers and club mentors: the [Parts List](parts-list.md) includes bulk
 sourcing notes for building a class set of ten kits, and every MicroSim can be
 embedded in an external LMS page with a plain `<iframe>`.
 
