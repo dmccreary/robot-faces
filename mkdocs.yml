@@ -98,6 +98,15 @@ nav:
     - Blinking: kits/oled/blinking/index.md
     - Emotion Types: kits/oled/emotion-types/index.md
     - Sleeping Faces: kits/oled/sleeping-faces/index.md
+    - The Face Module: kits/oled/face-module/index.md
+    - The Emotion Table: kits/oled/emotion-table/index.md
+    - Five Broken Faces: kits/oled/broken-faces/index.md
+    - Trace and Watch: kits/oled/trace-and-watch/index.md
+    - Keyframes: kits/oled/keyframes/index.md
+    - A Face With a Memory: kits/oled/state-machine/index.md
+    - Only Redraw What Changed: kits/oled/partial-redraw/index.md
+    - Design Your Own Emotion: kits/oled/design-your-own/index.md
+    - How Fast Is a Face?: kits/oled/draw-speed-timing/index.md
     - Box Cover Template: kits/oled/box-cover/index.md
 
   - MicroSims:

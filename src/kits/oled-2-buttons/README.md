@@ -23,6 +23,21 @@ This kit contains:
 All of these pin numbers live in one place, [`config.py`](config.py), which
 every lab below imports for its display and button setup.
 
+## Two Shared Modules
+
+Two files in this folder are not labs. They are libraries the labs import:
+
+| File | What it holds |
+|---|---|
+| [`config.py`](config.py) | The **hardware** facts — which pin, which pixel size, how to start the display and the buttons. Every lab imports it. |
+| [`face.py`](face.py) | The **face** facts — how wide an eye is, where an eyebrow sits, how to draw each style of mouth. Labs 23 and up import it. |
+
+`face.py` does not introduce any new drawing tricks. Every function in it is
+a copy of code students already wrote by hand in labs 10 through 22. Lab 23
+is where they move those copies into one file and see why that matters, so
+don't hand out `face.py` as a starting point before then — feeling the
+duplication first is what makes the lesson land.
+
 ## Display Library
 
 `config.init_display()` calls `import ssd1306`, so the driver has to be on
@@ -101,6 +116,33 @@ through them in order, each one building on ideas from the last:
 | 20 | `20-demo.py` | A self-running demo reel, no buttons needed |
 | 21 | `21-sample-main-demo.py` | Self-advancing demo reel + button menu, meant to become `main.py` |
 | 22 | `22-face-parameters.py` | Live-tuning one face parameter with two buttons |
+
+### Computational Thinking Labs
+
+Labs 0 through 22 teach students how to *make the hardware do something*.
+Labs 23 through 30 teach them how to *think about the code they just
+wrote* — the four habits that transfer to every program they will ever
+write, taught on code they already understand.
+
+Each of these labs refactors or interrogates something from an earlier
+lab, so work them in order and only after lab 22. The whole point is that
+students have already felt the problem each one solves.
+
+| Lab | File | Thinking skill | What it teaches |
+|--|--|--|--|
+| 23 | `23-face-module.py` | Decomposition, abstraction | Move the duplicated face parts into `face.py`; three expressions in nine lines |
+| 24 | `24-emotion-table.py` | Pattern recognition | Seven emotions become seven rows of data and one drawing function |
+| 25 | `25-broken-faces.py` | Debugging | Five faces, five planted bugs, and a symptom-to-cause table |
+| 26 | `26-trace-and-watch.py` | Debugging by measurement | An on-screen instrument panel: frame rate, button state, missed presses |
+| 27 | `27-keyframes.py` | Algorithms | An animation is a list of poses; one player runs all of them |
+| 28 | `28-state-machine.py` | Abstraction, modeling | A face with a memory — states and transitions as tables, not if-chains |
+| 29 | `29-partial-redraw.py` | Decomposition, measurement | Redraw only what changed, then measure whether it actually helped |
+| 30 | `30-design-your-own.py` | Capstone | Design an original expression and test whether strangers can read it |
+| 31 | `31-draw-speed-timing.py` | Measurement, algorithms | Time a hand-coded `ellipse()` against the built-in and find out what a library is worth |
+
+Lab 25 is the one to reach for when a class is stuck. It is the only lab
+whose goal is to be broken, and its symptom table doubles as a standing
+troubleshooting reference for every other lab in the kit.
 
 **If `01-hello.py` doesn't show anything on the display:** don't start
 rewiring yet — first run `00-blink-onboard-led.py` to find out whether the

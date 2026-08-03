@@ -1,4 +1,4 @@
-# List of Lessons
+# Robot Faces - OLED Kit - List of Hands on Labs
 
 Each lesson is a short, hands-on walkthrough of one idea, with a complete program you can paste onto your microcontroller and a picture of what it draws on a real 128 by 64 display.
 
@@ -6,7 +6,6 @@ Each lesson is a short, hands-on walkthrough of one idea, with a complete progra
 
 | Lesson | What you'll learn |
 |--|--|
-| [History of Robot Faces](history-of-robot-faces/index.md) | Where screen-based robot faces came from and why they caught on |
 | [Screen Coordinates](screen-coordinates/index.md) | How `x` and `y` map to the display, and why `y` grows downward |
 | [Basic Drawing Commands](drawing-commands/index.md) | A tour of every framebuffer command, plus the standard setup preamble |
 
@@ -37,6 +36,27 @@ These eight lessons cover every drawing command the MicroPython framebuffer offe
 | [Blinking](blinking/index.md) | Reading a push button and reacting with both eyes |
 | [Emotion Types](emotion-types/index.md) | The core expression set and how to draw each one |
 | [Sleeping Faces](sleeping-faces/index.md) | Closed eyes, drooping eyebrows, and a drifting `Zzz` |
+
+## Thinking About Your Code
+
+The lessons above teach you how to make the hardware do something. These eight teach you how to
+think about the code you just wrote — the four habits that transfer to every program you will
+ever write, taught on code you already understand.
+
+Work them in order, and only after you have finished the lessons above. Each one solves a
+problem you have already felt, which is what makes it stick.
+
+| Lesson | Thinking skill | What you'll learn |
+|--|--|--|
+| [The Face Module](face-module/index.md) | Decomposition, abstraction | Move the duplicated face parts into one shared file |
+| [The Emotion Table](emotion-table/index.md) | Pattern recognition | Seven emotions become seven rows of data and one function |
+| [Five Broken Faces](broken-faces/index.md) | Debugging | Five planted bugs, a method for finding them, and a symptom table |
+| [Trace and Watch](trace-and-watch/index.md) | Debugging by measurement | An on-screen instrument panel for bugs you cannot photograph |
+| [Keyframes](keyframes/index.md) | Algorithms | An animation is a list of poses, and one player runs them all |
+| [A Face With a Memory](state-machine/index.md) | Abstraction, modeling | States and transitions as tables, instead of tangled if-statements |
+| [Only Redraw What Changed](partial-redraw/index.md) | Decomposition, measurement | Redraw just the moving part, then measure whether it helped |
+| [Design Your Own Emotion](design-your-own/index.md) | All four | Invent an expression and test whether a stranger can read it |
+| [How Fast Is a Face?](draw-speed-timing/index.md) | Measurement, algorithms | Race a hand-written `ellipse()` against the built-in, and explain the gap |
 
 ## Kit Packaging & Accessories
 
