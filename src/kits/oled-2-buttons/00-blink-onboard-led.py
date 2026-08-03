@@ -1,3 +1,4 @@
+# use this to test that the Pico is correctly connected to Thonny and running the MicroPython runtime.
 from machine import Pin
 import time
 
