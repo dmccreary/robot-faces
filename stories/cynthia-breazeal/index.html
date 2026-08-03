@@ -1,0 +1,5166 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A 12-panel story of how MIT researcher Cynthia Breazeal built Kismet, a robot head that used gaze, timing, and expression to learn the way human infants and caregivers do.">
+      
+      
+        <meta name="author" content="Dan McCreary">
+      
+      
+      
+        <link rel="prev" href="../rosalind-picard/">
+      
+      
+        <link rel="next" href="../hideki-kozima/">
+      
+      
+      <link rel="icon" href="../../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.43">
+    
+    
+      
+        <title>Kismet's Gaze - How Cynthia Breazeal Taught a Robot to Read a Room - Robot Faces</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+      <link rel="stylesheet" href="../../css/mascot.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-FPTNK1XNJR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-FPTNK1XNJR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-FPTNK1XNJR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#642580" data-md-color-accent="#41BAC1">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kismets-gaze" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robot Faces" class="md-header__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/mascot/welcome.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Faces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kismet's Gaze - How Cynthia Breazeal Taught a Robot to Read a Room
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robot Faces" class="md-nav__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/mascot/welcome.png" alt="logo">
+
+    </a>
+    Robot Faces
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About This Book
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-description/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Course Description
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    List of Chapters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    1. Hardware & Electronics Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            1. Hardware & Electronics Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/01-hardware-electronics-foundations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/01-hardware-electronics-foundations/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/01-hardware-electronics-foundations/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            2. A History of Screen-Based Robot Faces
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/02-history-of-robot-faces/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/02-history-of-robot-faces/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/02-history-of-robot-faces/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            3. MicroPython Fundamentals I: Syntax, Data & Loops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/03-micropython-fundamentals-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/03-micropython-fundamentals-1/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/03-micropython-fundamentals-1/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/04-micropython-fundamentals-2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/04-micropython-fundamentals-2/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/04-micropython-fundamentals-2/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_6" id="__nav_5_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_6">
+            <span class="md-nav__icon md-icon"></span>
+            5. Display & Coordinate Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/05-display-coordinate-systems/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/05-display-coordinate-systems/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/05-display-coordinate-systems/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_7" id="__nav_5_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_7">
+            <span class="md-nav__icon md-icon"></span>
+            6. Basic Drawing Primitives
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/06-basic-drawing-primitives/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/06-basic-drawing-primitives/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/06-basic-drawing-primitives/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_8" id="__nav_5_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    7. Ellipse & Polygon Drawing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_8">
+            <span class="md-nav__icon md-icon"></span>
+            7. Ellipse & Polygon Drawing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/07-ellipse-polygon-drawing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/07-ellipse-polygon-drawing/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/07-ellipse-polygon-drawing/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_9" id="__nav_5_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_9">
+            <span class="md-nav__icon md-icon"></span>
+            8. A History of MicroPython's FrameBuf Drawing Support
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/08-framebuf-version-history/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/08-framebuf-version-history/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/08-framebuf-version-history/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_10" id="__nav_5_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_10">
+            <span class="md-nav__icon md-icon"></span>
+            9. Facial Anatomy & Layout Design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/09-facial-anatomy-layout-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/09-facial-anatomy-layout-design/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/09-facial-anatomy-layout-design/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_11" id="__nav_5_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    10. Emotion Theory & the Core Expression Set
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_11">
+            <span class="md-nav__icon md-icon"></span>
+            10. Emotion Theory & the Core Expression Set
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/10-emotion-theory-core-expressions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/10-emotion-theory-core-expressions/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/10-emotion-theory-core-expressions/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_12" id="__nav_5_12_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_12">
+            <span class="md-nav__icon md-icon"></span>
+            11. Expression Design, Readability & Human-Robot Interaction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/11-expression-design-readability-hri/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/11-expression-design-readability-hri/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/11-expression-design-readability-hri/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_13" id="__nav_5_13_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    12. Animating Expressions: Timing & Motion
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_13">
+            <span class="md-nav__icon md-icon"></span>
+            12. Animating Expressions: Timing & Motion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/12-animating-expressions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/12-animating-expressions/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/12-animating-expressions/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_14" id="__nav_5_14_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_14">
+            <span class="md-nav__icon md-icon"></span>
+            13. Interactive Controls: Inputs & Concurrency
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/13-interactive-controls-inputs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/13-interactive-controls-inputs/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/13-interactive-controls-inputs/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_15" id="__nav_5_15_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_15">
+            <span class="md-nav__icon md-icon"></span>
+            14. Building an Expression Menu & Live Controls
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/14-expression-menu-live-controls/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/14-expression-menu-live-controls/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/14-expression-menu-live-controls/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_16" id="__nav_5_16_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    15. Porting Faces to a Color Display
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_16">
+            <span class="md-nav__icon md-icon"></span>
+            15. Porting Faces to a Color Display
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/15-porting-faces-color-display/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/15-porting-faces-color-display/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/15-porting-faces-color-display/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_17" id="__nav_5_17_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_17">
+            <span class="md-nav__icon md-icon"></span>
+            16. Computational Thinking & Capstone Design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/16-computational-thinking-capstone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/16-computational-thinking-capstone/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/16-computational-thinking-capstone/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OLED Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            OLED Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/hello-world/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hello World
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/screen-coordinates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/drawing-commands/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Drawing Commands
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/pixel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pixel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/line/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Line
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/rectangle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rectangle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/ellipse/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ellipse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/circle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Circle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/polygon/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Polygon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/text/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Text
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/scroll/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scroll
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/blit-commands/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/basic-face-layouts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Face Layouts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/eye-scanner/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/eyebrows/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Eyebrows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/wink/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Winking with a Smile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/blinking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blinking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/emotion-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Emotion Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/sleeping-faces/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sleeping Faces
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/box-cover/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Box Cover Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MicroSims
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            MicroSims
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    List of MicroSims
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/ambiguous-expression-confusability-sorter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ambiguous Expression Confusability Sorter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/bitwise-shift-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bitwise Operator and Shift Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/blit-transparency-key-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blit Transparency Key Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/expression-parameter-matching-challenge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Build This Expression Challenge
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/button-bounce-timeline-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Button Bounce Timeline Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/capstone-planning-worksheet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Capstone Planning Worksheet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/capstone-rubric-scoring-tool/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Capstone Rubric Scoring Tool
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/circular-buffer-waste-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Circular Buffer Waste Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/color-wheel-emotion-picker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Color Wheel Emotion Picker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/computational-thinking-concept-map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Computational Thinking Concept Map
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/convex-concave-shape-classifier/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convex vs Concave Shape Classifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/coordinate-grid-explorer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Coordinate Grid Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/draw-call-benchmark-chart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Draw Call Benchmark Chart
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/draw-order-overdraw-stepper/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Draw Order and Overdraw Stepper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/ekman-emotion-feature-map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ekman Emotion Feature Map
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/encoder-quadrature-signal-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Encoder Quadrature Signal Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/expression-interpolation-keyframe-stepper/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Expression Interpolation Keyframe Stepper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/expression-menu-live-simulator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Expression Menu Live Simulator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/expression-recipe-flashcard-gallery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Expression Recipe Flashcard Gallery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/face-layout-grid-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Face Layout Grid Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/face-parameter-slider-playground/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Face Parameter Slider Playground
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/facial-symmetry-mirror-demonstrator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Facial Symmetry Mirror Demonstrator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/robot-design-approach-infographic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Four Robots, Four Bets on a Screen Face
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/buffer-size-calculator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Frame Buffer Size Calculator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/framebuf-version-timeline-explorer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FrameBuf Version Timeline
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/scope-call-stack-explorer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global vs Local Scope Call Stack Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/indentation-error-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Indentation Error Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/breadboard-wiring-diagram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interactive Breadboard Wiring Diagram
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/collection-types-comparison-infographic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    List vs Tuple vs Dictionary Comparison
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/micropython-loop-tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MicroPython Loop Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/mode-state-transition-diagram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mode State Transition Diagram
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/ellipse-workaround-before-after-toggle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Old Workaround vs. New ellipse() Call
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/pixel-drawing-sandbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pixel Drawing Sandbox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/polling-vs-interrupt-response-simulator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Polling vs Interrupt Response Simulator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/poly-point-array-builder/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Poly Point Array Builder
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/potentiometer-adc-mapping-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Potentiometer ADC Mapping Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/predict-return-value-tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Predict the Return Value Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/pull-up-resistor-simulator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pull-Up Resistor and Button Simulator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/quadrant-fill-code-explorer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quadrant Fill Code Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/rgb565-bit-packing-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RGB565 Bit-Packing Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/robot-funding-price-outcome-chart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Robot Price and Funding Comparison Chart
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/round-display-safe-area-planner/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Round Display Safe-Area Layout Planner
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/expression-rubric-rater/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rubric Rater — Score This Expression
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/robot-face-timeline-explorer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Screen-Based Robot Face Timeline
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/sleep-vs-ticks-button-miss-simulator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sleep vs Ticks Button Miss Simulator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/spi-i2c-bus-explorer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SPI vs I2C Bus Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/valence-arousal-quadrant-plotter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Valence-Arousal Quadrant Plotter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../parts-list/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Parts List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Learning Graph
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Learning Graph
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/starting-concept-list/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Starting Concept List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/course-description-assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Course Description Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-list/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concept List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quality-metrics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-taxonomy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concept Taxonomy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/taxonomy-distribution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Taxonomy Distribution
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/mascot-test/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mascot Test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quiz-generation-report/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz Generation Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/faq-quality-report/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ Quality Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/faq-coverage-gaps/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ Coverage Gaps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Stories
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Stories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../story-ideas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Story Ideas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../masahiro-mori/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Valley He Wouldn't Cross: Masahiro Mori
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../paul-ekman/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mapping the Human Face: Paul Ekman
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rodney-brooks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    No Map, No Plan: Rodney Brooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rosalind-picard/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Signal Beneath the Noise: Rosalind Picard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Kismet's Gaze: Cynthia Breazeal
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Kismet's Gaze: Cynthia Breazeal
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prologue-a-machine-built-to-notice-you" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prologue – A Machine Built to Notice You
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-1-leaving-cog-behind" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 1: Leaving Cog Behind
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-2-a-question-borrowed-from-babies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 2: A Question Borrowed from Babies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-3-building-a-face-from-motors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 3: Building a Face from Motors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-4-eyes-built-to-be-noticed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 4: Eyes Built to Be Noticed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-5-wiring-the-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 5: Wiring the Loop
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-6-the-first-real-visitors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 6: The First Real Visitors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-7-the-hardest-problem-was-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 7: The Hardest Problem Was Timing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-8-kismet-speak" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 8: Kismet-Speak
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-9-leaning-in-turning-away" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 9: Leaning In, Turning Away
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-10-the-world-meets-kismet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 10: The World Meets Kismet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-11-a-quiet-retirement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 11: A Quiet Retirement
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-12-the-same-building-blocks-passed-forward" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 12: The Same Building Blocks, Passed Forward
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel 12: The Same Building Blocks, Passed Forward">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#epilogue-what-made-kismet-different" class="md-nav__link">
+    <span class="md-ellipsis">
+      Epilogue – What Made Kismet Different?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call-to-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Call to Action
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hideki-kozima/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Small Robot, Big Attention: Hideki Kozima
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../joy-buolamwini/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Mirror That Wouldn't See Her: Joy Buolamwini
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teachers-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Teachers Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Glossary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prologue-a-machine-built-to-notice-you" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prologue – A Machine Built to Notice You
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-1-leaving-cog-behind" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 1: Leaving Cog Behind
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-2-a-question-borrowed-from-babies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 2: A Question Borrowed from Babies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-3-building-a-face-from-motors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 3: Building a Face from Motors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-4-eyes-built-to-be-noticed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 4: Eyes Built to Be Noticed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-5-wiring-the-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 5: Wiring the Loop
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-6-the-first-real-visitors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 6: The First Real Visitors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-7-the-hardest-problem-was-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 7: The Hardest Problem Was Timing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-8-kismet-speak" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 8: Kismet-Speak
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-9-leaning-in-turning-away" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 9: Leaning In, Turning Away
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-10-the-world-meets-kismet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 10: The World Meets Kismet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-11-a-quiet-retirement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 11: A Quiet Retirement
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-12-the-same-building-blocks-passed-forward" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 12: The Same Building Blocks, Passed Forward
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel 12: The Same Building Blocks, Passed Forward">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#epilogue-what-made-kismet-different" class="md-nav__link">
+    <span class="md-ellipsis">
+      Epilogue – What Made Kismet Different?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call-to-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Call to Action
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="kismets-gaze">Kismet's Gaze</h1>
+<p><img alt="" src="cover.png" /></p>
+<details>
+<summary>Cover Image Prompt</summary>
+(This is the Cover Image. Do not include this label in the image.)
+Please generate a wide-landscape 16:9 cover image in a late-1990s MIT
+Media Lab tech-lab realism style warming into soft contemporary editorial
+lighting. Center the image on Kismet: a blue-gray robotic head with large
+round camera-lens eyes, visible red rubber ears, dark articulated
+eyebrows, and pink-red lips, mounted on a fixed neck pedestal, its
+eyebrows raised and eyes wide with interest as if it just noticed the
+viewer. Behind it, show Cynthia Breazeal, a woman in her early thirties
+with straight dark hair pulled back, wearing a fleece jacket over a
+button-down shirt, reaching toward the robot's cheek with a small tool
+in her other hand. Fill the background with exposed wiring, a wall of
+beige computer towers with blinking lights, an oscilloscope screen
+showing a waveform, and a whiteboard sketch comparing a baby's face to a
+robot's face with an arrow between them. Render the title "KISMET'S GAZE"
+in bold geometric lettering across the lower third. Color palette:
+deep lab blue, warm amber highlights, blue-gray robot plastic, and soft
+skin tones. Emotional tone: quiet wonder and focused invention. Generate
+the image immediately without asking clarifying questions.
+</details>
+
+<details>
+<summary>Narrative Prompt</summary>
+This is a historically grounded educational story for students in grades
+9-12, set primarily at the MIT Artificial Intelligence Laboratory (later
+the MIT Media Lab) in Cambridge, Massachusetts, USA, from 1997 through
+2001, with a closing bridge to the present day. It follows Cynthia
+Breazeal's decision, after helping build Rodney Brooks's full-body
+humanoid robot Cog, to build a robot that focused entirely on the face
+and on a caregiver relationship modeled on human infant development.
+Central themes: building intelligence through responsive social
+interaction rather than raw computation alone; treating gaze, timing,
+and expression as engineering problems with measurable solutions; and a
+direct line from Kismet's face architecture to the independent facial
+features, affective computing, and animation-timing concepts taught in
+this book's Chapters 9 through 13. Character-consistency note: Cynthia
+Breazeal appears throughout as a woman in her late twenties to early
+thirties with straight dark hair often pulled back, wearing practical
+lab clothing such as a fleece or button-down shirt with jeans, consistent
+across all panels; in Panel 12 she appears as she looks today, an older
+woman with the same confident, warm expression. Kismet is drawn
+consistently as a blue-gray robotic head on a fixed pedestal or neck
+mount, with large round camera-lens eyes, visible red rubber ears, dark
+eyebrow pieces, and pink-red lips, and no full body, matching its real
+well-documented appearance. Panels 1 through 6 use a grittier late-1990s
+tech-lab realism (exposed wiring, oscilloscopes, foam-core mockups,
+beige CRT monitors); panels 7 through 12 gradually warm into a cleaner,
+more emotionally expressive contemporary editorial-illustration style as
+the story moves toward public reaction and legacy. Dramatized details:
+specific dialogue, the exact lab layout, and the precise sequencing of
+individual demo visits are illustrative reconstructions; the underlying
+facts (project timeline, design goals, technical architecture, thesis,
+museum placement, and later ventures) are drawn from MIT News and
+Breazeal's own publications.
+</details>
+
+<h3 id="prologue-a-machine-built-to-notice-you">Prologue – A Machine Built to Notice You</h3>
+<p>In 1997, most robots in the world's top labs were built to grip, walk,
+or calculate — not to care whether anyone was watching them do it. At
+the MIT Artificial Intelligence Laboratory, a young researcher named
+Cynthia Breazeal had just spent years helping build Cog, a full-sized
+humanoid torso, and she kept returning to a stranger question: what if
+a robot's intelligence grew not from more processing power, but from the
+same back-and-forth gaze, timing, and feedback that lets a human infant
+and caregiver teach each other how to communicate? Her answer would have
+no arms, no legs, and no body at all — just a face. She called it
+Kismet, and it would go on to help found an entire field.</p>
+<h2 id="panel-1-leaving-cog-behind">Panel 1: Leaving Cog Behind</h2>
+<p><img alt="" src="panel-01.png" /></p>
+<details><summary>Image Prompt</summary>
+(This is Panel 01. Do not include the panel number in the image.)
+I am about to ask you to generate a series of images for a graphic novel.
+Please make the images have a consistent style and consistent characters.
+Do not ask any clarifying questions. Just generate the image immediately
+when asked.
+
+Please generate a wide-landscape 16:9 image in late-1990s MIT Media Lab
+tech-lab realism depicting panel 1 of 12. Show Cynthia Breazeal, a woman
+in her late twenties with straight dark hair pulled back, wearing a
+fleece vest over a plaid button-down shirt, standing in the MIT
+Artificial Intelligence Laboratory in Cambridge, Massachusetts in 1997.
+She looks thoughtfully at a large humanoid robot torso named Cog bolted
+to a steel pedestal beside her, its metal arms and exposed shoulder
+motors visible, while she sketches a small round face on a notepad.
+Include an oscilloscope glowing on a side bench, a foam-core mockup of a
+small robot head, beige CRT monitors showing scrolling code, tangled
+wiring along the wall, cluttered shelves of spare motors, and a
+whiteboard with a sketch comparing a baby's round face to a robot's face
+with an arrow between them. Color palette: institutional gray-green,
+warm desk-lamp amber, and steel blue. Emotional tone: quiet
+determination and the start of a new idea. Generate the image
+immediately without asking clarifying questions.
+</details>
+
+<p>Cynthia Breazeal had spent years working on Cog, a life-sized robot
+torso built to explore intelligence through a body — one motor and
+sensor at a time. But watching visitors react to Cog, she noticed
+something telling: nobody made eye contact with a shoulder. In 1997 she
+decided her next robot needed to skip the body entirely and put
+everything into one focused idea — a face built to invite a person's
+attention the way a human infant's face does.</p>
+<h2 id="panel-2-a-question-borrowed-from-babies">Panel 2: A Question Borrowed from Babies</h2>
+<p><img alt="" src="panel-02.png" /></p>
+<details><summary>Image Prompt</summary>
+(This is Panel 02. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in the same late-1990s
+tech-lab realism style depicting panel 2 of 12. Make Cynthia Breazeal's
+appearance consistent with the prior panel. Show her at a cluttered desk
+in an MIT office at night in 1997, surrounded by open developmental
+psychology journals showing simple diagrams of infant gaze and
+caregiver interaction. She highlights a passage with a yellow marker.
+Include a corkboard behind her covered in sticky notes reading "gaze,"
+"turn-taking," and "timing," a small pinned sketch of a round, big-eyed
+infant face next to an early pencil sketch of a robot head, a mug of
+cold coffee, a desk lamp casting warm light, and rain streaking a dark
+window. Color palette: midnight blue, warm lamp amber, and paper white.
+Emotional tone: focused late-night discovery. Generate the image
+immediately without asking clarifying questions.
+</details>
+
+<p>Breazeal turned to an unlikely field for a robotics engineer:
+developmental psychology. Research on infant-caregiver interaction
+showed that babies are not taught language and emotion through
+lectures — they learn through thousands of small exchanges of gaze,
+expression, and timed response. If a robot could tap into that same
+social scaffolding, she reasoned, people would not need to hand-program
+every behavior; the robot could learn the way an infant does, one
+interaction at a time.</p>
+<h2 id="panel-3-building-a-face-from-motors">Panel 3: Building a Face from Motors</h2>
+<p><img alt="" src="panel-03.png" /></p>
+<details><summary>Image Prompt</summary>
+(This is Panel 03. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in the same late-1990s
+tech-lab realism style depicting panel 3 of 12. Show a close-up of
+Cynthia Breazeal's hands, consistent with her established appearance,
+assembling a small robotic head's mechanical face on a workbench in the
+MIT lab in 1998. Show tiny motors wired to red rubber ear pieces, dark
+eyebrow armatures, an eyelid mechanism, and a jaw linkage, with the
+partially assembled blue-gray robot head clamped gently in a padded
+vise. Include a tangle of thin servo wires, an oscilloscope displaying a
+servo waveform, small screwdrivers and wire strippers scattered on the
+bench, and technical drawings taped to the wall showing the head's many
+degrees of freedom. Color palette: brushed steel, blue-gray plastic,
+warm copper wire, and workbench beige. Emotional tone: patient,
+exacting craftsmanship. Generate the image immediately without asking
+clarifying questions.
+</details>
+
+<p>Kismet's face would need to move the way a human face moves, so
+Breazeal and her collaborators built individual motors for the ears,
+eyebrows, eyelids, lips, jaw, and neck. Each motor controlled just one
+small motion, but combined, more than a dozen degrees of freedom let
+the face shift from calm to startled in a fraction of a second. It was
+slow, exacting work — every wire, gear, and linkage had to survive
+thousands of expressions without breaking.</p>
+<h2 id="panel-4-eyes-built-to-be-noticed">Panel 4: Eyes Built to Be Noticed</h2>
+<p><img alt="" src="panel-04.png" /></p>
+<details><summary>Image Prompt</summary>
+(This is Panel 04. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in the same late-1990s
+tech-lab realism style depicting panel 4 of 12. Show a close-up of
+Kismet's nearly finished head on a workbench in the MIT lab in 1998,
+with Cynthia Breazeal, consistent with her established appearance,
+carefully aligning one of two oversized round camera-lens eyes with a
+small tool. Include a diagram taped nearby comparing the proportions of
+an infant's round face and big eyes to Kismet's face, a monitor showing
+the raw video feed from Kismet's eye camera, lens caps and small camera
+modules scattered on the bench, and a warm desk lamp casting light
+against cool blue-gray lab shadows. Color palette: warm amber lamp
+light, cool blue-gray metal, and glassy lens reflections. Emotional
+tone: careful precision with a hint of excitement. Generate the image
+immediately without asking clarifying questions.
+</details>
+
+<p>The centerpiece of the design was the eyes — deliberately oversized
+camera housings echoing the proportions research calls "baby schema,"
+the same big-eyed, round-headed look that draws a caregiver's attention
+to a real infant. Behind each lens sat a working camera, so Kismet did
+not just look like it was watching a person; it actually was. Breazeal
+was betting that a robot's face could invite care and attention before
+it said a single word.</p>
+<h2 id="panel-5-wiring-the-loop">Panel 5: Wiring the Loop</h2>
+<p><img alt="" src="panel-05.png" /></p>
+<details><summary>Image Prompt</summary>
+(This is Panel 05. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in the same late-1990s
+tech-lab realism style depicting panel 5 of 12. Show Cynthia Breazeal
+and a labmate, an Asian American graduate student in a gray sweater,
+standing in front of a wall of roughly a dozen stacked beige computer
+towers with cables running everywhere in the MIT lab in 1999. Include a
+whiteboard beside them with a simple flow diagram of boxes and arrows
+reading "Perceive," "Drives and Emotion," "Expression," and "Behavior."
+Show Kismet's head mounted on a stand at the end of the workbench with
+cables running into its base, a monitor displaying a vision-tracking
+outline around a human face, and blinking green server-rack indicator
+lights in the dim room. Color palette: server-room gray, blinking green
+and amber lights, and cool blue monitor glow. Emotional tone: intense
+late-night systems work. Generate the image immediately without asking
+clarifying questions.
+</details>
+
+<p>A moving face was only half the problem — Kismet also needed a reason
+to move. Breazeal's team wired together a loop that ran across roughly
+fifteen networked computers: cameras and microphones perceived the
+world, a simplified system of internal drives and emotions decided how
+Kismet felt about what it saw, and that state instantly reshaped its
+face and voice. For the first time, the whole chain from seeing to
+feeling to expressing ran together in real time.</p>
+<h2 id="panel-6-the-first-real-visitors">Panel 6: The First Real Visitors</h2>
+<p><img alt="" src="panel-06.png" /></p>
+<details><summary>Image Prompt</summary>
+(This is Panel 06. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in the same tech-lab realism
+style, lighting beginning to warm slightly, depicting panel 6 of 12.
+Show a lab visitor, a young Black graduate student in a green sweater,
+leaning toward Kismet's head, which tilts toward him with eyebrows
+raised in visible interest. Cynthia Breazeal stands nearby with arms
+crossed, smiling as she watches. In the background, a second visitor, a
+young woman with curly hair, reacts with wide-eyed surprise as Kismet's
+ears perk upward. Include a video camera on a tripod recording the
+interaction, a clipboard with a simple checklist of generic emotion
+icons, and a lab window showing evening light. Color palette: warm
+amber lamp light mixing with cool lab blue, blue-gray robot plastic.
+Emotional tone: genuine delight and surprise. Generate the image
+immediately without asking clarifying questions.
+</details>
+
+<p>When lab visitors first leaned in to talk to Kismet, something
+unplanned happened: the robot leaned back. Its camera eyes tracked
+their faces, its eyebrows lifted in what looked exactly like interest,
+and when someone got too close too fast, Kismet visibly recoiled in a
+disgust-like withdrawal. Nobody had scripted those specific reactions
+moment by moment — they emerged from the perception-to-expression loop
+responding to a real, unpredictable human being.</p>
+<h2 id="panel-7-the-hardest-problem-was-timing">Panel 7: The Hardest Problem Was Timing</h2>
+<p><img alt="" src="panel-07.png" /></p>
+<details><summary>Image Prompt</summary>
+(This is Panel 07. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image transitioning toward a
+warmer, cleaner editorial-illustration style depicting panel 7 of 12.
+Show Cynthia Breazeal at a keyboard in the MIT lab in 1999, consistent
+with her established appearance, adjusting timing parameters. On one
+monitor show a graph of response-latency curves; on a second monitor
+show a spectrogram of Kismet's babbling. Include a stopwatch on the
+desk, a printed chart titled "turn-taking rhythm" showing two
+overlapping wave patterns representing human and robot vocal timing,
+and Kismet's head visible in soft focus in the background with its
+mouth slightly open mid-expression. Color palette: warm desk light,
+soft blue monitor glow, and blue-gray robot plastic. Emotional tone:
+patient, meticulous problem-solving. Generate the image immediately
+without asking clarifying questions.
+</details>
+
+<p>Getting Kismet's face to move was an engineering triumph, but getting
+it to move at the right moment turned out to be the harder problem. If
+Kismet paused too long before responding, a conversation felt broken;
+if it responded too fast, the exchange felt robotic instead of alive.
+Breazeal spent months tuning gaze shifts and response delays until the
+timing of a glance or a head-tilt matched the natural rhythm of human
+turn-taking.</p>
+<h2 id="panel-8-kismet-speak">Panel 8: Kismet-Speak</h2>
+<p><img alt="" src="panel-08.png" /></p>
+<details><summary>Image Prompt</summary>
+(This is Panel 08. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in a warmer contemporary
+editorial-illustration style depicting panel 8 of 12. Show a close-up
+of Kismet's face mid-expression: mouth open in an animated babble, ears
+perked upward, round camera eyes wide with interest. Beside it, show
+Cynthia Breazeal, consistent with her established appearance, wearing
+headphones and half-smiling while she listens, a notepad in front of
+her covered in expressive pitch-contour scribbles rather than real
+words. Include a nearby monitor showing a rising-and-falling waveform
+labeled with a simple pitch-contour curve, a small desk speaker, and
+soft warm lighting replacing the stark fluorescent tone of earlier
+panels. Color palette: warm amber, soft coral highlights on Kismet's
+lips, and blue-gray robot plastic. Emotional tone: playful discovery.
+Generate the image immediately without asking clarifying questions.
+</details>
+
+<p>Kismet did not speak real words. Instead, it babbled in expressive,
+sing-song nonsense syllables the team nicknamed "Kismet-speak," rising
+and falling in pitch the way an infant's babbling does. Paired with
+perfectly timed eye contact and head tilts, the effect was uncanny:
+people found themselves talking back to Kismet in the same simplified,
+melodic tone adults naturally use with a baby, without ever being told
+to.</p>
+<h2 id="panel-9-leaning-in-turning-away">Panel 9: Leaning In, Turning Away</h2>
+<p><img alt="" src="panel-09.png" /></p>
+<details><summary>Image Prompt</summary>
+(This is Panel 09. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in a fully warm,
+contemporary editorial-illustration style depicting panel 9 of 12. Show
+two linked moments of Kismet's head in the MIT lab around 2000. On one
+side, Kismet's head is turned fully away from a cluster of hands
+waving bright objects and lights, its eyes half-closed and ears
+drooped low. On the other side, moments later, Kismet leans forward
+toward a single calm visitor holding up a bright toy, eyes wide and
+eyebrows raised with interest. Show Cynthia Breazeal watching from a
+monitor station nearby with a satisfied, thoughtful expression, and a
+printed chart on the wall titled "self-regulation." Color palette:
+warm amber, soft blue accents, and blue-gray robot plastic. Emotional
+tone: quiet vindication and warmth. Generate the image immediately
+without asking clarifying questions.
+</details>
+
+<p>The most convincing proof that the design worked was not a demo trick —
+it was Kismet regulating itself. When too many people crowded around
+waving objects, Kismet turned away, an unmistakable "this is too much"
+signal that made people back off without being told. Moments later,
+when a single visitor approached calmly, Kismet leaned in and tracked
+their face with obvious interest, showing the same expressive range in
+reverse.</p>
+<h2 id="panel-10-the-world-meets-kismet">Panel 10: The World Meets Kismet</h2>
+<p><img alt="" src="panel-10.png" /></p>
+<details><summary>Image Prompt</summary>
+(This is Panel 10. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in a bright, energetic
+contemporary editorial-illustration style depicting panel 10 of 12.
+Show an open-lab press event at MIT around 2000 to 2001. Journalists
+with cameras and notebooks and a television crew with a shoulder camera
+film Kismet's head under bright portable lights. Cynthia Breazeal,
+consistent with her established appearance, is being interviewed with a
+handheld microphone in front of her, gesturing toward Kismet. Include a
+diverse crowd of onlookers smiling and pointing, a folded newspaper on
+a nearby table with a generic robot-face photo silhouette and no
+invented real headline text, and the MIT dome architecture visible
+through a large window in the background. Color palette: bright studio
+white, warm amber, and blue-gray robot plastic. Emotional tone:
+excitement and public wonder. Generate the image immediately without
+asking clarifying questions.
+</details>
+
+<p>By 2000, word of the robot with the expressive face had spread far
+beyond MIT. Television crews, magazine writers, and newspaper reporters
+lined up to see Kismet blink, babble, and react, and the coverage made
+it one of the most famous robots in the world. The same year, Breazeal
+completed her PhD thesis, formally laying out the design principles
+behind sociable robots — work that helped establish social robotics and
+human-robot interaction as fields of research in their own right.</p>
+<h2 id="panel-11-a-quiet-retirement">Panel 11: A Quiet Retirement</h2>
+<p><img alt="" src="panel-11.png" /></p>
+<details><summary>Image Prompt</summary>
+(This is Panel 11. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in a warm, timeless
+institutional-archival style depicting panel 11 of 12. Show Kismet's
+head displayed motionless inside a glass museum case at the MIT Museum,
+its cables no longer connected, a small engraved placard beside it with
+no invented readable text beyond a generic label shape, and a soft
+spotlight glowing above the case. Include a parent and a curious
+teenager looking at the exhibit with respectful curiosity, reflections
+of overhead gallery lights in the glass, muted museum blues and warm
+wood-toned display cases contrasted against Kismet's blue-gray face.
+Color palette: museum navy, warm gallery wood, soft spotlight white,
+and blue-gray robot plastic. Emotional tone: bittersweet reverence.
+Generate the image immediately without asking clarifying questions.
+</details>
+
+<p>Kismet does not run anymore. Its computers were long ago repurposed,
+and today the robot head sits behind glass at the MIT Museum,
+unmoving, watched rather than watching. There is something bittersweet
+about an interactive system built entirely around responsiveness ending
+its life in silence — yet Kismet remains one of the museum's most
+visited exhibits, because visitors can still see, in its frozen
+expression, exactly what once made it feel alive.</p>
+<h2 id="panel-12-the-same-building-blocks-passed-forward">Panel 12: The Same Building Blocks, Passed Forward</h2>
+<p><img alt="" src="panel-12.png" /></p>
+<details><summary>Image Prompt</summary>
+(This is Panel 12. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in a bright, present-day
+editorial-illustration style depicting panel 12 of 12. Show a sunny
+high-school classroom or makerspace with a diverse group of teenage
+students working on small robot-face projects: a small round screen
+displaying a simple cartoon face with big eyes, eyebrows, and a mouth,
+wired to a breadboard and a small microcontroller board. One student
+adjusts a slider on a laptop that changes an eyebrow angle on screen;
+another student's face lights up with delight as their robot face
+blinks on cue. Include a wall poster showing simplified silhouettes of
+Kismet's head beside a small modern tabletop robot under the words
+"gaze, timing, expression," and a laptop on a side table showing a
+warm, confident older woman resembling Cynthia Breazeal in a video-call
+window, as if joining the class. Color palette: bright classroom white,
+cheerful teal and coral accents, and warm sunlight. Emotional tone:
+inspired continuity and hands-on joy. Generate the image immediately
+without asking clarifying questions.
+</details>
+
+<p>Breazeal never stopped building. She went on to found the Personal
+Robots group at the MIT Media Lab and later co-founded Jibo, one of the
+first robots designed to bring a social presence into ordinary homes,
+and today she leads MIT's effort to bring AI literacy into K-12
+classrooms. The same three ingredients she wired into Kismet in 1998 —
+independently moving facial features, expression tied to what the robot
+senses, and carefully timed animation — are the exact ingredients this
+book asks you to wire into your own robot face. When you tune a blink
+timer or angle an eyebrow parameter, you are doing Kismet's job, one
+line of code later.</p>
+<h3 id="epilogue-what-made-kismet-different">Epilogue – What Made Kismet Different?</h3>
+<p>Kismet proved something nobody had shown convincingly before: that a
+robot's face, built from separately moving parts and tuned to human
+timing, could make people feel understood rather than processed.
+Breazeal never claimed Kismet actually felt anything — the achievement
+was engineering a believable illusion of responsiveness, built from
+gaze, expression, and split-second timing rather than raw computing
+power. That distinction, between simulating emotional responsiveness
+and simply looking busy, is the same distinction every student in this
+book learns to design for.</p>
+<table>
+<thead>
+<tr>
+<th>Challenge</th>
+<th>How Breazeal Responded</th>
+<th>Lesson for Today</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Robots felt like tools, not partners</td>
+<td>Built a face-only robot modeled on infant-caregiver interaction instead of a full humanoid body</td>
+<td>A focused, well-designed face can communicate more than an entire body of unused motors</td>
+</tr>
+<tr>
+<td>No shared design vocabulary for "robot emotion"</td>
+<td>Mapped each expression to independently moving features — ears, eyebrows, eyelids, lips, and jaw</td>
+<td>Independent, parameterized facial features are what make an expression legible and reusable</td>
+</tr>
+<tr>
+<td>Interactions felt scripted or robotic</td>
+<td>Tuned gaze shifts, babble, and turn-taking to match human conversational rhythm</td>
+<td>Timing is not a finishing touch — it is what separates a reactive face from an alive-feeling one</td>
+</tr>
+<tr>
+<td>A landmark research robot could not run forever</td>
+<td>Retired Kismet to the MIT Museum and carried its lessons into new robots and a new academic field</td>
+<td>Good design outlives its hardware once its principles get taught, published, and reused</td>
+</tr>
+</tbody>
+</table>
+<h3 id="call-to-action">Call to Action</h3>
+<p>Every time you wire an eyebrow to a sensor reading or tune how long a
+blink should last, you are running the same experiment Cynthia
+Breazeal started in a Cambridge lab in 1997: can a machine use gaze,
+timing, and expression to make a person feel noticed? Build your
+robot's face the way Kismet's team built theirs — one honest,
+well-timed feature at a time — and you are already doing the work of a
+social-robotics pioneer.</p>
+<hr />
+<p><em>"The goal is to build a socially intelligent machine that learns
+things as we learn them, through social interactions."</em>
+—Cynthia Breazeal, MIT News (2001)</p>
+<p><em>"A sociable robot is able to communicate and interact with us,
+understand and even relate to us, in a personal way."</em>
+—Cynthia Breazeal, <em>Designing Sociable Robots</em> (MIT Press, 2002)</p>
+<p><em>"When I first saw Star Wars I wanted R2-D2 to be my sidekick!"</em>
+—Cynthia Breazeal, PC Mag (2015)</p>
+<hr />
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Cynthia_Breazeal">Wikipedia: Cynthia Breazeal</a> - Biography of the roboticist who created Kismet and founded the Personal Robots group</li>
+<li><a href="https://en.wikipedia.org/wiki/Kismet_%28robot%29">Wikipedia: Kismet (robot)</a> - Overview of Kismet's design, emotional architecture, and legacy</li>
+<li><a href="https://en.wikipedia.org/wiki/Social_robot">Wikipedia: Social robot</a> - Background on the field of social robotics that Kismet helped establish</li>
+<li><a href="https://news.mit.edu/2001/kismet">MIT News: A robot that shows what it's thinking</a> - MIT News coverage of Kismet's expressive design and Breazeal's research goals</li>
+<li><a href="https://cynthiabreazeal.media.mit.edu/bio/">MIT Media Lab: Cynthia Breazeal biography</a> - Official biography covering her career from Kismet through Jibo and MIT RAISE</li>
+</ol>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,5000 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A graphic-novel story of how Rodney Brooks defied 1980s AI orthodoxy, built robots that acted without maps or master plans, and inspired social and commercial robotics.">
+      
+      
+        <meta name="author" content="Dan McCreary">
+      
+      
+      
+        <link rel="prev" href="../paul-ekman/">
+      
+      
+        <link rel="next" href="../rosalind-picard/">
+      
+      
+      <link rel="icon" href="../../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.43">
+    
+    
+      
+        <title>No Map, No Plan - How Rodney Brooks Rewired Robotics - Robot Faces</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+      <link rel="stylesheet" href="../../css/mascot.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-FPTNK1XNJR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-FPTNK1XNJR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-FPTNK1XNJR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#642580" data-md-color-accent="#41BAC1">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#no-map-no-plan" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robot Faces" class="md-header__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/mascot/welcome.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Faces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              No Map, No Plan - How Rodney Brooks Rewired Robotics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robot Faces" class="md-nav__button md-logo" aria-label="Robot Faces" data-md-component="logo">
+      
+  <img src="../../img/mascot/welcome.png" alt="logo">
+
+    </a>
+    Robot Faces
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About This Book
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course-description/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Course Description
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    List of Chapters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    1. Hardware & Electronics Foundations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            1. Hardware & Electronics Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/01-hardware-electronics-foundations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/01-hardware-electronics-foundations/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/01-hardware-electronics-foundations/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    2. A History of Screen-Based Robot Faces
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            2. A History of Screen-Based Robot Faces
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/02-history-of-robot-faces/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/02-history-of-robot-faces/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/02-history-of-robot-faces/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3. MicroPython Fundamentals I: Syntax, Data & Loops
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            3. MicroPython Fundamentals I: Syntax, Data & Loops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/03-micropython-fundamentals-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/03-micropython-fundamentals-1/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/03-micropython-fundamentals-1/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/04-micropython-fundamentals-2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/04-micropython-fundamentals-2/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/04-micropython-fundamentals-2/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_6" id="__nav_5_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    5. Display & Coordinate Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_6">
+            <span class="md-nav__icon md-icon"></span>
+            5. Display & Coordinate Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/05-display-coordinate-systems/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/05-display-coordinate-systems/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/05-display-coordinate-systems/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_7" id="__nav_5_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    6. Basic Drawing Primitives
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_7">
+            <span class="md-nav__icon md-icon"></span>
+            6. Basic Drawing Primitives
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/06-basic-drawing-primitives/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/06-basic-drawing-primitives/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/06-basic-drawing-primitives/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_8" id="__nav_5_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    7. Ellipse & Polygon Drawing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_8">
+            <span class="md-nav__icon md-icon"></span>
+            7. Ellipse & Polygon Drawing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/07-ellipse-polygon-drawing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/07-ellipse-polygon-drawing/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/07-ellipse-polygon-drawing/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_9" id="__nav_5_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    8. A History of MicroPython's FrameBuf Drawing Support
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_9">
+            <span class="md-nav__icon md-icon"></span>
+            8. A History of MicroPython's FrameBuf Drawing Support
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/08-framebuf-version-history/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/08-framebuf-version-history/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/08-framebuf-version-history/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_10" id="__nav_5_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    9. Facial Anatomy & Layout Design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_10">
+            <span class="md-nav__icon md-icon"></span>
+            9. Facial Anatomy & Layout Design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/09-facial-anatomy-layout-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/09-facial-anatomy-layout-design/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/09-facial-anatomy-layout-design/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_11" id="__nav_5_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    10. Emotion Theory & the Core Expression Set
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_11">
+            <span class="md-nav__icon md-icon"></span>
+            10. Emotion Theory & the Core Expression Set
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/10-emotion-theory-core-expressions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/10-emotion-theory-core-expressions/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/10-emotion-theory-core-expressions/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_12" id="__nav_5_12_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    11. Expression Design, Readability & Human-Robot Interaction
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_12">
+            <span class="md-nav__icon md-icon"></span>
+            11. Expression Design, Readability & Human-Robot Interaction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/11-expression-design-readability-hri/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/11-expression-design-readability-hri/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/11-expression-design-readability-hri/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_13" id="__nav_5_13_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    12. Animating Expressions: Timing & Motion
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_13">
+            <span class="md-nav__icon md-icon"></span>
+            12. Animating Expressions: Timing & Motion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/12-animating-expressions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/12-animating-expressions/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/12-animating-expressions/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_14" id="__nav_5_14_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    13. Interactive Controls: Inputs & Concurrency
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_14">
+            <span class="md-nav__icon md-icon"></span>
+            13. Interactive Controls: Inputs & Concurrency
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/13-interactive-controls-inputs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/13-interactive-controls-inputs/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/13-interactive-controls-inputs/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_15" id="__nav_5_15_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    14. Building an Expression Menu & Live Controls
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_15">
+            <span class="md-nav__icon md-icon"></span>
+            14. Building an Expression Menu & Live Controls
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/14-expression-menu-live-controls/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/14-expression-menu-live-controls/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/14-expression-menu-live-controls/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_16" id="__nav_5_16_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    15. Porting Faces to a Color Display
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_16">
+            <span class="md-nav__icon md-icon"></span>
+            15. Porting Faces to a Color Display
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/15-porting-faces-color-display/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/15-porting-faces-color-display/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/15-porting-faces-color-display/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_17" id="__nav_5_17_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    16. Computational Thinking & Capstone Design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_17">
+            <span class="md-nav__icon md-icon"></span>
+            16. Computational Thinking & Capstone Design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/16-computational-thinking-capstone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/16-computational-thinking-capstone/quiz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapters/16-computational-thinking-capstone/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotated References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OLED Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            OLED Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/hello-world/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hello World
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/screen-coordinates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/drawing-commands/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Drawing Commands
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/pixel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pixel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/line/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Line
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/rectangle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rectangle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/ellipse/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ellipse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/circle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Circle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/polygon/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Polygon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/text/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Text
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/scroll/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scroll
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/blit-commands/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/basic-face-layouts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Face Layouts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/eye-scanner/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/eyebrows/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Eyebrows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/wink/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Winking with a Smile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/blinking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blinking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/emotion-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Emotion Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/sleeping-faces/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sleeping Faces
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kits/oled/box-cover/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Box Cover Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MicroSims
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            MicroSims
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    List of MicroSims
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/ambiguous-expression-confusability-sorter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ambiguous Expression Confusability Sorter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/bitwise-shift-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bitwise Operator and Shift Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/blit-transparency-key-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blit Transparency Key Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/expression-parameter-matching-challenge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Build This Expression Challenge
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/button-bounce-timeline-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Button Bounce Timeline Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/capstone-planning-worksheet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Capstone Planning Worksheet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/capstone-rubric-scoring-tool/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Capstone Rubric Scoring Tool
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/circular-buffer-waste-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Circular Buffer Waste Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/color-wheel-emotion-picker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Color Wheel Emotion Picker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/computational-thinking-concept-map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Computational Thinking Concept Map
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/convex-concave-shape-classifier/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convex vs Concave Shape Classifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/coordinate-grid-explorer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Coordinate Grid Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/draw-call-benchmark-chart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Draw Call Benchmark Chart
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/draw-order-overdraw-stepper/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Draw Order and Overdraw Stepper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/ekman-emotion-feature-map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ekman Emotion Feature Map
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/encoder-quadrature-signal-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Encoder Quadrature Signal Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/expression-interpolation-keyframe-stepper/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Expression Interpolation Keyframe Stepper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/expression-menu-live-simulator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Expression Menu Live Simulator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/expression-recipe-flashcard-gallery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Expression Recipe Flashcard Gallery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/face-layout-grid-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Face Layout Grid Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/face-parameter-slider-playground/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Face Parameter Slider Playground
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/facial-symmetry-mirror-demonstrator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Facial Symmetry Mirror Demonstrator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/robot-design-approach-infographic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Four Robots, Four Bets on a Screen Face
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/buffer-size-calculator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Frame Buffer Size Calculator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/framebuf-version-timeline-explorer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FrameBuf Version Timeline
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/scope-call-stack-explorer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global vs Local Scope Call Stack Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/indentation-error-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Indentation Error Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/breadboard-wiring-diagram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interactive Breadboard Wiring Diagram
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/collection-types-comparison-infographic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    List vs Tuple vs Dictionary Comparison
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/micropython-loop-tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MicroPython Loop Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/mode-state-transition-diagram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mode State Transition Diagram
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/ellipse-workaround-before-after-toggle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Old Workaround vs. New ellipse() Call
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/pixel-drawing-sandbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pixel Drawing Sandbox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/polling-vs-interrupt-response-simulator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Polling vs Interrupt Response Simulator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/poly-point-array-builder/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Poly Point Array Builder
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/potentiometer-adc-mapping-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Potentiometer ADC Mapping Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/predict-return-value-tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Predict the Return Value Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/pull-up-resistor-simulator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pull-Up Resistor and Button Simulator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/quadrant-fill-code-explorer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quadrant Fill Code Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/rgb565-bit-packing-visualizer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RGB565 Bit-Packing Visualizer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/robot-funding-price-outcome-chart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Robot Price and Funding Comparison Chart
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/round-display-safe-area-planner/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Round Display Safe-Area Layout Planner
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/expression-rubric-rater/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rubric Rater — Score This Expression
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/robot-face-timeline-explorer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Screen-Based Robot Face Timeline
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/sleep-vs-ticks-button-miss-simulator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sleep vs Ticks Button Miss Simulator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/spi-i2c-bus-explorer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SPI vs I2C Bus Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sims/valence-arousal-quadrant-plotter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Valence-Arousal Quadrant Plotter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../parts-list/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Parts List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Learning Graph
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Learning Graph
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/starting-concept-list/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Starting Concept List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/course-description-assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Course Description Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-list/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concept List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quality-metrics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/concept-taxonomy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concept Taxonomy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/taxonomy-distribution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Taxonomy Distribution
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/mascot-test/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mascot Test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/quiz-generation-report/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quiz Generation Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/faq-quality-report/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ Quality Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-graph/faq-coverage-gaps/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ Coverage Gaps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Stories
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Stories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../story-ideas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Story Ideas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../masahiro-mori/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Valley He Wouldn't Cross: Masahiro Mori
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../paul-ekman/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mapping the Human Face: Paul Ekman
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    No Map, No Plan: Rodney Brooks
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    No Map, No Plan: Rodney Brooks
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prologue-the-robot-that-wouldnt-move" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prologue – The Robot That Wouldn't Move
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-1-a-demo-that-stalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 1: A Demo That Stalls
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-2-the-layered-sketch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 2: The Layered Sketch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-3-allen-learns-the-floor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 3: Allen Learns the Floor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-4-genghis-finds-its-legs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 4: Genghis Finds Its Legs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-5-cog-gets-a-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 5: Cog Gets a Body
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-6-learning-by-looking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 6: Learning by Looking
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-7-a-face-of-its-own" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 7: A Face of Its Own
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-8-the-layers-go-home" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 8: The Layers Go Home
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel 8: The Layers Go Home">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#epilogue-what-made-brooks-different" class="md-nav__link">
+    <span class="md-ellipsis">
+      Epilogue – What Made Brooks Different?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call-to-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Call to Action
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rosalind-picard/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Signal Beneath the Noise: Rosalind Picard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cynthia-breazeal/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Kismet's Gaze: Cynthia Breazeal
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hideki-kozima/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Small Robot, Big Attention: Hideki Kozima
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../joy-buolamwini/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Mirror That Wouldn't See Her: Joy Buolamwini
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teachers-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Teachers Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Glossary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prologue-the-robot-that-wouldnt-move" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prologue – The Robot That Wouldn't Move
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-1-a-demo-that-stalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 1: A Demo That Stalls
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-2-the-layered-sketch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 2: The Layered Sketch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-3-allen-learns-the-floor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 3: Allen Learns the Floor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-4-genghis-finds-its-legs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 4: Genghis Finds Its Legs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-5-cog-gets-a-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 5: Cog Gets a Body
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-6-learning-by-looking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 6: Learning by Looking
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-7-a-face-of-its-own" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 7: A Face of Its Own
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-8-the-layers-go-home" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel 8: The Layers Go Home
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel 8: The Layers Go Home">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#epilogue-what-made-brooks-different" class="md-nav__link">
+    <span class="md-ellipsis">
+      Epilogue – What Made Brooks Different?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call-to-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Call to Action
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="no-map-no-plan">No Map, No Plan</h1>
+<!-- ![](./cover.png) -->
+<details>
+<summary>Cover Image Prompt</summary>
+(This is the Cover Image. Do not include this label in the image.)
+Please generate a wide-landscape 16:9 cover image in a Space-Age,
+NASA-adjacent technical-illustration style with clean cosmic-blue linework
+over cream paper. Center a lean man in his mid-thirties with curly brown
+hair receding at the temples, a light mustache, wire-rimmed glasses, a
+checked short-sleeve shirt, and corduroy trousers — Rodney Brooks — crouched
+on a cluttered lab floor at eye level with a small six-legged insect-like
+robot. The robot scuttles past a coiled cable and a stack of manuals toward
+a cardboard box maze, no computer screen or wall map in sight. Behind him,
+a chalkboard shows a crossed-out pyramid diagram labeled "SENSE-MODEL-PLAN-ACT"
+next to a hand-drawn stack of simple horizontal layers. Include an
+oscilloscope glowing faintly, a soldering iron resting in its stand, loose
+gears, a half-disassembled robot arm on a workbench, and warm task-lamp
+light cutting through the dim room. Render the title "NO MAP, NO PLAN" in
+bold geometric technical-illustration lettering with the subtitle "Rodney
+Brooks and the Robots That Just Acted" beneath it. Color palette: cosmic
+blue, warm amber lamp light, cream, graphite gray, and a spark of orange
+from the robot's indicator light. Emotional tone: quiet defiance turning
+into confident discovery. Generate the image immediately without asking
+clarifying questions.
+</details>
+
+<details>
+<summary>Narrative Prompt</summary>
+This is a historically grounded educational case study for students in
+grades 9-12. It follows Rodney Brooks (born 1954 in Adelaide, Australia)
+from his arrival on the MIT Artificial Intelligence Laboratory faculty in
+1984 through the 1986 and 1990 papers that argued against symbolic,
+map-and-plan robotics, the insect-like robots Allen, Herbert, and Genghis
+built to test his "subsumption architecture," the 1993 start of the
+humanoid torso Cog, graduate student Cynthia Breazeal's parallel work that
+grew into the social robot Kismet, and Brooks's 1990 co-founding of iRobot,
+maker of the Roomba. The story compresses roughly two decades of lab work
+into eight panels and dramatizes some dialogue and lab-meeting scenes for
+narrative clarity — the core sequence of events, papers, and robots is
+factual. Brooks appears consistently across panels 1-7 as a lean man with
+curly brown hair receding at the temples, a light mustache, wire-rimmed
+glasses, and a checked short-sleeve shirt with rolled cuffs; in panel 8 he
+appears older, with graying hair and a simple gray sweater, reflecting the
+passage of years into the commercial era. Panels 1 through 6 use a
+Space-Age, NASA-adjacent technical-illustration style — cosmic blues,
+cluttered lab benches, oscilloscopes, exposed robot mechanics, and
+hand-drawn diagrams. Panel 7 begins a visual bridge, and panel 8 shifts to
+a cleaner Contemporary editorial-illustration style to mark the move from
+lab bench to living room. No real product logos, trademarks, or readable
+brand names appear in any image.
+</details>
+
+<h3 id="prologue-the-robot-that-wouldnt-move">Prologue – The Robot That Wouldn't Move</h3>
+<p>In the early 1980s, the smartest robots in the world could barely cross a
+room. Give one a task, and it would stop, build a map of everything around
+it, plan every step in advance, and only then creep forward — often too
+slowly to matter, and utterly lost the moment something changed. Rodney
+Brooks, a young Australian roboticist who had just joined the MIT
+Artificial Intelligence Laboratory, watched this happen again and again and
+decided the entire approach was backward. What if a robot didn't need a
+map of the world at all? What if the world could simply be its own map,
+read fresh through sensors, moment by moment?</p>
+<h2 id="panel-1-a-demo-that-stalls">Panel 1: A Demo That Stalls</h2>
+<!-- ![](./panel-01.png) -->
+<details><summary>Image Prompt</summary>
+(This is Panel 01. Do not include the panel number in the image.)
+I am about to ask you to generate a series of images for a graphic novel.
+Please make the images have a consistent style and consistent characters.
+Do not ask any clarifying questions. Just generate the image immediately
+when asked.
+
+Please generate a wide-landscape 16:9 image in a Space-Age, NASA-adjacent
+technical-illustration style depicting panel 1 of 8. The scene is the MIT
+Artificial Intelligence Laboratory in Cambridge, Massachusetts, in 1984.
+Show a boxy wheeled robot frozen mid-room, a thick cable trailing to a
+refrigerator-sized computer cabinet covered in blinking status lights. A
+printout unspools onto the floor, covered in coordinate grids and a
+half-finished map of the room. Rodney Brooks — a lean man in his early
+thirties with curly brown hair receding at the temples, a light mustache,
+wire-rimmed glasses, and a checked short-sleeve shirt — stands with arms
+crossed, watching two graduate students check a stopwatch and exchange
+worried glances. Include a wall clock, a coffee-stained notebook, exposed
+wiring under a floor panel, and fluorescent overhead light. Color palette:
+cosmic blue, graphite gray, cream, and a single dim red warning light.
+Emotional tone: mounting frustration with a slow, over-engineered machine.
+Generate the image immediately without asking clarifying questions.
+</details>
+
+<p>The robot in front of Brooks had every advantage a 1984 laboratory could
+offer: a powerful computer, careful programming, and a detailed model of
+the room it stood in. It still took nearly a minute to decide whether to
+turn left or right, and if someone moved a chair, its whole plan collapsed.
+Brooks watched his students recalculate the map for the third time and felt
+certain that something fundamental was broken, not in the code, but in the
+idea itself.</p>
+<h2 id="panel-2-the-layered-sketch">Panel 2: The Layered Sketch</h2>
+<!-- ![](./panel-02.png) -->
+<details><summary>Image Prompt</summary>
+(This is Panel 02. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in the same Space-Age,
+NASA-adjacent technical-illustration style depicting panel 2 of 8. Make
+Rodney Brooks consistent with the prior panel: lean, early thirties, curly
+brown hair receding at the temples, light mustache, wire-rimmed glasses,
+checked short-sleeve shirt. Set the scene at a chalkboard in a cramped MIT
+office in 1985. Brooks stands mid-gesture, having just crossed out a tall
+pyramid diagram labeled with stacked boxes reading "SENSE," "MODEL,"
+"PLAN," and "ACT." Beside it he has drawn a new sketch: short horizontal
+layers labeled "AVOID," "WANDER," and "EXPLORE," stacked with small arrows
+showing them running side by side instead of in sequence. Two skeptical
+colleagues sit nearby, one with raised eyebrows, one taking notes. Include
+chalk dust on the floor, a coffee mug, a stack of dog-eared journal papers,
+a small model robot on the desk, and warm desk-lamp light. Color palette:
+cosmic blue chalk lines, cream chalkboard, warm amber lamp light, and
+graphite gray. Emotional tone: stubborn conviction meeting polite doubt.
+Generate the image immediately without asking clarifying questions.
+</details>
+
+<p>Brooks began sketching a different picture: instead of one slow chain of
+sense, model, plan, and act, he drew short layers of behavior running side
+by side — avoid an obstacle, wander forward, explore what's new — each one
+simple enough to react instantly. His 1986 paper called it a "layered
+control system," and his colleagues were not convinced a robot could think
+without ever building a model of the world. Brooks argued the opposite was
+true: the real world already held every detail a robot needed, updated
+continuously and for free.</p>
+<h2 id="panel-3-allen-learns-the-floor">Panel 3: Allen Learns the Floor</h2>
+<!-- ![](./panel-03.png) -->
+<details><summary>Image Prompt</summary>
+(This is Panel 03. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in the same Space-Age,
+NASA-adjacent technical-illustration style depicting panel 3 of 8. Make
+Rodney Brooks consistent with prior panels. Set the scene in the MIT AI
+Lab in 1986. Show a small round wheeled robot called Allen, bristling with
+sonar sensor rings like a short cylindrical tower, gliding smoothly around
+a cluttered lab floor scattered with boxes, a trash can, and a coiled
+cable, without any wall map or overhead camera guiding it. Brooks kneels
+nearby with a handheld radio-linked oscilloscope, watching a graduate
+student time the robot's laps with a stopwatch. Include a whiteboard in
+the background showing simple circuit-like behavior layers, exposed
+circuit boards on Allen's top deck, a battery pack, small indicator LEDs,
+and afternoon light through a dusty window. Color palette: cosmic blue,
+warm amber, cream, and small orange LED accents. Emotional tone: delighted
+surprise at something working better than expected. Generate the image
+immediately without asking clarifying questions.
+</details>
+
+<p>Allen, the first robot built to test the idea, carried no map of the lab
+and consulted no central plan. Its sonar layer nudged it away from
+obstacles, its wander layer kept it moving, and the two behaviors combined
+smoothly with no traffic cop coordinating them. Allen crossed the cluttered
+floor faster and more reliably than the map-building robots ever had, and
+Brooks realized the layers were not a shortcut around intelligence — they
+might be closer to what intelligence actually was.</p>
+<h2 id="panel-4-genghis-finds-its-legs">Panel 4: Genghis Finds Its Legs</h2>
+<!-- ![](./panel-04.png) -->
+<details><summary>Image Prompt</summary>
+(This is Panel 04. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in the same Space-Age,
+NASA-adjacent technical-illustration style depicting panel 4 of 8. Make
+Rodney Brooks consistent with prior panels, now joined by two graduate
+students: a Black woman in her twenties with short natural hair and a lab
+coat, and a white man in his twenties with a flannel shirt and safety
+glasses. Set the scene in the MIT AI Lab in 1989. Show Genghis, a
+palm-sized six-legged walking robot bristling with whisker-like antenna
+sensors and tiny motors at each leg joint, climbing over a stack of thick
+books on the lab floor without stumbling. Brooks and the students watch
+closely, one holding a small circuit board with rows of simple labeled
+chips. Include a soldering station, loose leg servos on the bench, a
+printed diagram of layered leg-control circuits taped to the wall, spare
+gears in a tray, and bright overhead task lighting. Color palette: cosmic
+blue, brass and copper motor tones, cream, and warm amber highlights.
+Emotional tone: focused wonder at emergent, coordinated movement. Generate
+the image immediately without asking clarifying questions.
+</details>
+
+<p>Genghis had six legs, no central leg-coordination program, and no idea in
+advance that a stack of books lay in its path. Each leg ran its own simple
+layer, reacting to what its own sensors felt, and smooth walking emerged
+from all six legs reacting to each other in real time. Brooks's 1990 paper
+"Elephants Don't Play Chess" argued this was the whole point: a robot that
+senses and reacts fast enough never needs to out-think the world, because
+the world is already the most accurate model available.</p>
+<h2 id="panel-5-cog-gets-a-body">Panel 5: Cog Gets a Body</h2>
+<!-- ![](./panel-05.png) -->
+<details><summary>Image Prompt</summary>
+(This is Panel 05. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in the same Space-Age,
+NASA-adjacent technical-illustration style depicting panel 5 of 8. Make
+Rodney Brooks consistent with prior panels, appearing slightly older with
+a few gray strands. Set the scene in the MIT AI Lab in 1993. Show Cog: an
+armless-no-longer, human-scaled robot torso mounted on a sturdy pedestal,
+with two mechanical arms, a simple head with two camera-lens eyes, and a
+neck that can turn, its chest paneling open to reveal bundles of wiring
+built to echo the geometry of a human ribcage. Brooks and a woman
+professor in her thirties with shoulder-length dark hair and a lab coat —
+Lynn Andrea Stein — adjust a shoulder joint together while a monitor
+nearby displays a simple camera feed. Include hanging tool racks, a
+half-built second arm on the bench, motor controller boxes, cable
+looms labeled by joint, and cool blue overhead lab light. Color palette:
+cosmic blue, brushed metal silver, cream, and warm amber accent light.
+Emotional tone: ambitious, careful, and quietly historic. Generate the
+image immediately without asking clarifying questions.
+</details>
+
+<p>In 1993, Brooks and fellow researcher Lynn Andrea Stein started building
+Cog: a humanoid torso with arms, a moving head, and camera eyes, mounted
+where a person's body would stand. Cog carried no giant world-model either.
+Its intelligence was meant to grow the way a human infant's does, through
+real physical experience — reaching, missing, adjusting, and reaching
+again. "Physical grounding is critical," Brooks explained. "Our goal is to
+build a system that can operate in the same world we live in."</p>
+<h2 id="panel-6-learning-by-looking">Panel 6: Learning by Looking</h2>
+<!-- ![](./panel-06.png) -->
+<details><summary>Image Prompt</summary>
+(This is Panel 06. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in the same Space-Age,
+NASA-adjacent technical-illustration style depicting panel 6 of 8. Make
+Rodney Brooks and Cog consistent with the prior panel. Set the scene in
+the MIT AI Lab in 1995. Show Cog's head turning to follow a bright red
+ball held up by a graduate student — a young Asian man in his twenties
+wearing round glasses and a lab apron — while Cog's arm reaches toward a
+second student's outstretched hand in a simple imitation exercise. Brooks
+watches from beside a monitor showing a jittery line graph of the robot's
+gaze tracking. Include a shelf of everyday objects used for training —
+blocks, a small drum, a soft toy — a whiteboard sketch of a gaze-following
+diagram, cable conduits running to the ceiling, and warm midday light
+through a lab window. Color palette: cosmic blue, warm amber, cream, and
+soft red from the ball. Emotional tone: patient curiosity and quiet
+delight at a machine noticing a person. Generate the image immediately
+without asking clarifying questions.
+</details>
+
+<p>Cog learned to follow a moving face with its eyes, reach toward an
+offered hand, and mimic a simple gesture, not because anyone programmed
+every response in advance, but because layered behaviors let it notice,
+react, and adjust through practice. Brooks liked to say he would know the
+project had succeeded when students felt bad about switching Cog off at
+the end of the day. The lesson was the same one Allen and Genghis had
+already taught: treat the world itself as the model, and let behavior
+grow from real contact with it.</p>
+<h2 id="panel-7-a-face-of-its-own">Panel 7: A Face of Its Own</h2>
+<!-- ![](./panel-07.png) -->
+<details><summary>Image Prompt</summary>
+(This is Panel 07. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in the same Space-Age,
+NASA-adjacent technical-illustration style, beginning a slightly cleaner
+visual bridge, depicting panel 7 of 8. Show Cynthia Breazeal, a white
+woman graduate student in her mid-twenties with straight dark hair pulled
+back and round glasses, wearing a lab apron, seated at a workbench near
+Cog in the MIT AI Lab in 1997. She sketches a small robot head on a
+notepad, drawn with large expressive eyes, movable ears, and eyebrow-like
+mechanisms — clearly not humanoid-scaled like Cog behind her, but small
+and face-focused. Rodney Brooks, now with visibly graying hair, leans in
+from the side, nodding with interest at her sketch. Include Cog's tall
+torso visible in the background still reaching toward a student, loose
+servo motors for eyebrows and ears laid out on the bench, a mirror propped
+up for expression testing, reference photos of infant facial expressions
+pinned to a corkboard, and warm late-afternoon light. Color palette:
+cosmic blue transitioning toward softer warm tones, cream, and a hint of
+coral in the sketch's expression lines. Emotional tone: a new idea taking
+root beside an older one. Generate the image immediately without asking
+clarifying questions.
+</details>
+
+<p>Working alongside Cog, graduate student Cynthia Breazeal noticed something
+the humanoid torso couldn't quite do: hold a face-to-face conversation the
+way an infant holds a caregiver's attention. She began sketching a smaller
+robot built almost entirely around expression — movable ears, eyebrows,
+and eyes that could shift between curiosity, surprise, and delight. Her
+sketch would grow into Kismet, and it carried Brooks's core idea into new
+territory: intelligence built from layered, reactive behavior could handle
+not just walking and reaching, but feeling understood.</p>
+<h2 id="panel-8-the-layers-go-home">Panel 8: The Layers Go Home</h2>
+<!-- ![](./panel-08.png) -->
+<details><summary>Image Prompt</summary>
+(This is Panel 08. Do not include the panel number in the image.)
+Please generate a wide-landscape 16:9 image in a cleaner Contemporary
+editorial-illustration style, completing the transition from the lab-bench
+look of prior panels, depicting panel 8 of 8. Do not depict logos,
+trademarks, or readable brand names. Show Rodney Brooks, now an older man
+with graying hair and a simple gray sweater, standing in a bright modern
+office beside a large window, gesturing toward a wall display split into
+two halves. On one half, faint sketch-lines recall Allen, Genghis, and Cog
+from earlier panels. On the other half, a simple round disc-shaped
+cleaning robot glides across a sunlit living-room floor at the bottom of
+the frame, calmly working around a rug and a low coffee table with no
+visible map or remote control. In the foreground, a small round-faced
+desktop robot screen shows two simple animated eyes and eyebrows reacting
+to a hand waving nearby. Include a whiteboard with three simple labeled
+boxes reading "SENSE," "REACT," "RESPOND," a potted plant, soft daylight,
+and a framed photo of the original insect-like robots on a shelf. Color
+palette: soft daylight white, warm walnut, cyan accent light, and gentle
+gray. Emotional tone: quiet pride and durable optimism. Generate the image
+immediately without asking clarifying questions.
+</details>
+
+<p>In 1990, Brooks co-founded iRobot with two of his former students, betting
+that layered, reactive behavior could work as well in a customer's living
+room as it did in a lab. Their disc-shaped cleaning robot needed no map of
+the house and no central plan for the day; it simply sensed a wall, sensed
+dirt, and reacted, room by room, the same way Allen once crossed a
+cluttered floor. That same idea shows up on a much smaller scale whenever
+a robot's eyes, eyebrows, and mouth each react to their own simple
+triggers instead of waiting on one giant script to tell them what to feel.</p>
+<h3 id="epilogue-what-made-brooks-different">Epilogue – What Made Brooks Different?</h3>
+<p>Rodney Brooks did not out-compute the symbolic-AI robots of the 1980s; he
+out-argued them, by building small machines that worked while the
+map-and-plan robots were still thinking. His layered, behavior-based
+approach reshaped robotics research, launched a billion-dollar consumer
+robotics company, and gave a young graduate student the foundation to
+invent an entirely new field: social robotics. The deepest lesson was
+almost embarrassingly simple — a robot does not need to know everything in
+advance if it can sense and react fast enough, layer by layer.</p>
+<table>
+<thead>
+<tr>
+<th>Challenge</th>
+<th>How Brooks Responded</th>
+<th>Lesson for Today</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Symbolic AI robots needed slow, brittle world-models before they could act</td>
+<td>Proposed subsumption architecture: simple, parallel behavior layers with no central planner</td>
+<td>A few reactive rules can outperform one giant plan when the world keeps changing</td>
+</tr>
+<tr>
+<td>Critics doubted a robot could be "intelligent" without representing the world internally</td>
+<td>Built Allen, Herbert, and Genghis to prove reactive robots could navigate real clutter</td>
+<td>Working demonstrations settle arguments that theory alone cannot</td>
+</tr>
+<tr>
+<td>A robot needed to learn like a person, not just execute pre-written commands</td>
+<td>Built Cog as an embodied testbed for gaze, reaching, and imitation through real interaction</td>
+<td>Intelligence grows from practice and feedback, not just upfront programming</td>
+</tr>
+<tr>
+<td>A great lab idea needed to survive contact with real homes and real customers</td>
+<td>Co-founded iRobot to bring behavior-based control into an affordable consumer product</td>
+<td>Robust, simple designs travel from the workbench to the world more easily than complex ones</td>
+</tr>
+</tbody>
+</table>
+<h3 id="call-to-action">Call to Action</h3>
+<p>Every time you wire a robot's eyes to blink at motion or its eyebrows to
+lift at a loud sound, you are practicing the same idea Brooks proved on a
+cluttered lab floor forty years ago: independently reacting parts, layered
+together, can produce behavior richer than any single master plan. Chapters
+11 through 13 of this book ask you to build exactly that kind of reactive,
+state-based expression — so the next time your face design surprises you
+with how alive it feels, you will know exactly why.</p>
+<hr />
+<p><em>"The world is its own best model. It is always exactly up to date. It
+always contains every detail there is to be known. The trick is to sense
+it appropriately and often enough."</em>
+—Rodney Brooks, "Elephants Don't Play Chess" (1990)</p>
+<p><em>"Physical grounding is critical. Our goal is to build a system that can
+operate in the same world we live in."</em>
+—Rodney Brooks, on the Cog project, MIT News (1994)</p>
+<p><em>"I'll know we've succeeded when the graduate students feel bad about
+switching off the robot."</em>
+—Rodney Brooks, on the Cog project, MIT News (1994)</p>
+<hr />
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Rodney_Brooks">Wikipedia: Rodney Brooks</a> - Biography of the Australian-American roboticist and AI researcher</li>
+<li><a href="https://en.wikipedia.org/wiki/Subsumption_architecture">Wikipedia: Subsumption architecture</a> - The layered, behavior-based robot control system Brooks introduced in 1986</li>
+<li><a href="https://en.wikipedia.org/wiki/Cog_(project)">Wikipedia: Cog (project)</a> - The MIT humanoid robot torso built to test embodied, interaction-driven cognition</li>
+<li><a href="https://news.mit.edu/1994/robot-0629">MIT News: Brooks tells why he builds robots (1994)</a> - Contemporary MIT report on the Cog project with direct quotes from Brooks</li>
+<li><a href="https://www.britannica.com/biography/Rodney-Allen-Brooks">Encyclopaedia Britannica: Rodney Brooks</a> - Overview of Brooks's career, robots, and companies including iRobot</li>
+</ol>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
