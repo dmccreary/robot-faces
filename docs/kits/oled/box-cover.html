@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robot Faces OLED Kit - 9" x 6" Box Cover (White Ink-Friendly Edition)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@500;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #e2e8f0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .no-print-toolbar {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 16px 28px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .no-print-toolbar h1 {
+      font-size: 1.1rem;
+      color: #0284c7;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .no-print-toolbar p {
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .print-btn {
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    }
+
+    .print-btn:hover {
+      background: #0369a1;
+      transform: translateY(-1px);
+    }
+
+    /* 8.5" x 11" US Letter Landscape Page Sheet */
+    .page-sheet {
+      width: 11in;
+      height: 8.5in;
+      background-color: #ffffff;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Outer Crop / Trim Boundary Guides for 9" x 6" Box Cover */
+    .crop-container {
+      width: 9in;
+      height: 6in;
+      position: relative;
+      outline: 2px dashed #94a3b8;
+      outline-offset: 4px;
+    }
+
+    .corner-mark {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      border-color: #475569;
+      border-style: solid;
+      pointer-events: none;
+      z-index: 100;
+    }
+    .top-left { top: -12px; left: -12px; border-width: 2px 0 0 2px; }
+    .top-right { top: -12px; right: -12px; border-width: 2px 2px 0 0; }
+    .bottom-left { bottom: -12px; left: -12px; border-width: 0 0 2px 2px; }
+    .bottom-right { bottom: -12px; right: -12px; border-width: 0 2px 2px 0; }
+
+    /* 9" x 6" Box Cover Panel Main Graphic Design (Ink-Friendly White Background) */
+    .box-cover {
+      width: 9in;
+      height: 6in;
+      background: #ffffff;
+      color: #0f172a;
+      position: relative;
+      overflow: hidden;
+      padding: 0.35in 0.45in;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 3px solid #0f172a;
+    }
+
+    /* Subtle Light Grid Accents */
+    .circuit-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.25;
+      background-image: 
+        radial-gradient(#0284c7 1px, transparent 1px),
+        linear-gradient(to right, rgba(2, 132, 199, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(2, 132, 199, 0.08) 1px, transparent 1px);
+      background-size: 24px 24px, 48px 48px, 48px 48px;
+      pointer-events: none;
+    }
+
+    /* Top Header Bar */
+    .header-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 0.12in;
+    }
+
+    .brand-tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #0369a1;
+      background: #e0f2fe;
+      border: 1px solid #0284c7;
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+
+    .main-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: #0f172a;
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0284c7;
+      margin-top: 3px;
+    }
+
+    .audience-badges {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+    }
+
+    .target-pill {
+      background: #f1f5f9;
+      border: 1.5px solid #64748b;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #0f172a;
+    }
+
+    .target-pill.highlight-pill {
+      background: #0284c7;
+      border-color: #0369a1;
+      color: #ffffff;
+    }
+
+    /* Main Body Grid Layout */
+    .content-body {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 0.3in;
+      align-items: center;
+      margin: 0.12in 0;
+    }
+
+    /* Left Gallery Grid of OLED Robot Faces */
+    .faces-gallery-card {
+      background: #f8fafc;
+      border: 2px solid #0f172a;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .gallery-title {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #0f172a;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .face-box {
+      background: #000000; /* OLED Screen Glass Representation */
+      border: 2px solid #0f172a;
+      border-radius: 6px;
+      padding: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .face-box img {
+      width: 100%;
+      height: 46px;
+      object-fit: contain;
+    }
+
+    .face-label {
+      font-size: 0.6rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 2px;
+      text-align: center;
+    }
+
+    /* Right Features List */
+    .features-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .feature-item {
+      background: #ffffff;
+      border: 2px solid #0f172a;
+      border-left: 6px solid #0284c7;
+      padding: 8px 12px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .feature-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #e0f2fe;
+      border: 1px solid #0284c7;
+      color: #0369a1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .feature-text {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    /* Footer Specs Bar */
+    .footer-bar {
+      position: relative;
+      z-index: 10;
+      background: #f1f5f9;
+      border: 2px solid #0f172a;
+      border-radius: 6px;
+      padding: 7px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .spec-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .spec-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0284c7;
+    }
+
+    .kit-includes {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #0369a1;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .no-print-toolbar {
+        display: none !important;
+      }
+
+      .page-sheet {
+        box-shadow: none;
+        width: 11in;
+        height: 8.5in;
+      }
+
+      @page {
+        size: letter landscape;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen Toolbar for Printing Instructions -->
+  <div class="no-print-toolbar">
+    <div>
+      <h1>Robot Faces OLED Kit — Printable Box Cover (White Ink-Friendly)</h1>
+      <p>Dimensions: 9" × 6" (centered on 8.5" × 11" US Letter Landscape paper with trim marks)</p>
+    </div>
+    <button class="print-btn" onclick="window.print()">🖨️ Print Box Cover (100% Scale)</button>
+  </div>
+
+  <!-- 8.5" x 11" Page Sheet -->
+  <div class="page-sheet">
+    
+    <!-- 9" x 6" Crop Container with Cut Line Guides -->
+    <div class="crop-container">
+      <div class="corner-mark top-left"></div>
+      <div class="corner-mark top-right"></div>
+      <div class="corner-mark bottom-left"></div>
+      <div class="corner-mark bottom-right"></div>
+
+      <!-- 9" x 6" Box Cover Front Panel (White Background) -->
+      <div class="box-cover">
+        <div class="circuit-bg"></div>
+
+        <!-- Header Section -->
+        <div class="header-bar">
+          <div>
+            <div class="brand-tag">Hands-On MicroPython STEM Kit</div>
+            <div class="main-title">Robot Faces</div>
+            <div class="subtitle">OLED Display &amp; Expression Kit</div>
+          </div>
+          <div class="audience-badges">
+            <div class="target-pill highlight-pill">AGES 8+ TO ADULT</div>
+            <div class="target-pill">STUDENTS • LIBRARIES • CODING CLUBS</div>
+            <div class="target-pill">NO SOLDERING REQUIRED</div>
+          </div>
+        </div>
+
+        <!-- Main Body: Gallery + Features -->
+        <div class="content-body">
+          
+          <!-- Sample Images Gallery from docs/lessons -->
+          <div class="faces-gallery-card">
+            <div class="gallery-title">
+              <span>Expression Gallery</span>
+              <span style="color:#64748b; font-weight:normal;">2.42" 128 × 64 OLED</span>
+            </div>
+            <div class="gallery-grid">
+              <div class="face-box">
+                <img src="emotion-types/happy.png" alt="Happy Expression">
+                <div class="face-label">Happy</div>
+              </div>
+              <div class="face-box">
+                <img src="emotion-types/surprised.png" alt="Surprised Expression">
+                <div class="face-label">Surprised</div>
+              </div>
+              <div class="face-box">
+                <img src="emotion-types/angry.png" alt="Angry Expression">
+                <div class="face-label">Angry</div>
+              </div>
+              <div class="face-box">
+                <img src="wink/sample-output.png" alt="Wink Expression">
+                <div class="face-label">Winking</div>
+              </div>
+              <div class="face-box">
+                <img src="sleeping-faces/sample-output.png" alt="Sleeping Expression">
+                <div class="face-label">Sleeping</div>
+              </div>
+              <div class="face-box">
+                <img src="emotion-types/sad.png" alt="Sad Expression">
+                <div class="face-label">Sad</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature Bullets (Requested Requirements) -->
+          <div class="features-panel">
+            <div class="feature-item">
+              <div class="feature-icon">🧠</div>
+              <div class="feature-text">Teaches Computational Thinking</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🎨</div>
+              <div class="feature-text">Learn Interactive Graphics</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🐍</div>
+              <div class="feature-text">Uses MicroPython</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🤖</div>
+              <div class="feature-text">Learn how robots express feelings</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer Specs -->
+        <div class="footer-bar">
+          <div class="spec-item">
+            <div class="spec-dot"></div>
+            <span>2.42" OLED Display</span>
+          </div>
+          <div class="spec-item">
+            <div class="spec-dot"></div>
+            <span>Raspberry Pi Pico Compatible</span>
+          </div>
+          <div class="spec-item">
+            <div class="spec-dot"></div>
+            <span>Complete Step-by-Step Lessons</span>
+          </div>
+          <div class="kit-includes">INCLUDES FULL HARDWARE &amp; ONLINE BOOK</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

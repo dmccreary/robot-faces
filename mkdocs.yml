@@ -76,27 +76,28 @@ nav:
       - Quiz: chapters/16-computational-thinking-capstone/quiz.md
       - Annotated References: chapters/16-computational-thinking-capstone/references.md
   
-  - Lessons:
-    - Introduction: lessons/index.md
-    - History of Robot Faces: lessons/history-of-robot-faces/index.md
-    - Screen Coordinates: lessons/screen-coordinates/index.md
-    - Basic Drawing Commands: lessons/drawing-commands/index.md
-    - Pixel: lessons/pixel/index.md
-    - Line: lessons/line/index.md
-    - Rectangle: lessons/rectangle/index.md
-    - Ellipse: lessons/ellipse/index.md
-    - Circle: lessons/circle/index.md
-    - Polygon: lessons/polygon/index.md
-    - Text: lessons/text/index.md
-    - Scroll: lessons/scroll/index.md
-    - Blit: lessons/blit-commands/index.md
-    - Basic Face Layouts: lessons/basic-face-layouts/index.md
-    - Eye Scanner: lessons/eye-scanner/index.md
-    - Eyebrows: lessons/eyebrows/index.md
-    - Winking with a Smile: lessons/wink/index.md
-    - Blinking: lessons/blinking/index.md
-    - Emotion Types: lessons/emotion-types/index.md
-    - Sleeping Faces: lessons/sleeping-faces/index.md
+  - OLED Labs:
+    - Introduction: kits/oled/index.md
+    - Hello World: kits/oled/hello-world/index.md
+    - Screen Coordinates: kits/oled/screen-coordinates/index.md
+    - Basic Drawing Commands: kits/oled/drawing-commands/index.md
+    - Pixel: kits/oled/pixel/index.md
+    - Line: kits/oled/line/index.md
+    - Rectangle: kits/oled/rectangle/index.md
+    - Ellipse: kits/oled/ellipse/index.md
+    - Circle: kits/oled/circle/index.md
+    - Polygon: kits/oled/polygon/index.md
+    - Text: kits/oled/text/index.md
+    - Scroll: kits/oled/scroll/index.md
+    - Blit: kits/oled/blit-commands/index.md
+    - Basic Face Layouts: kits/oled/basic-face-layouts/index.md
+    - Eye Scanner: kits/oled/eye-scanner/index.md
+    - Eyebrows: kits/oled/eyebrows/index.md
+    - Winking with a Smile: kits/oled/wink/index.md
+    - Blinking: kits/oled/blinking/index.md
+    - Emotion Types: kits/oled/emotion-types/index.md
+    - Sleeping Faces: kits/oled/sleeping-faces/index.md
+    - Box Cover Template: kits/oled/box-cover/index.md
 
   - MicroSims:
     - List of MicroSims: sims/index.md
@@ -160,11 +161,22 @@ nav:
     - Taxonomy Distribution: learning-graph/taxonomy-distribution.md
     - Mascot Test: learning-graph/mascot-test.md
     - Quiz Generation Report: learning-graph/quiz-generation-report.md
+    - FAQ Quality Report: learning-graph/faq-quality-report.md
+    - FAQ Coverage Gaps: learning-graph/faq-coverage-gaps.md
   - Stories:
     - Overview: stories/index.md
+    - Story Ideas: stories/story-ideas.md
     - "Bright Eyes, Closed Doors: Cozmo and Vector": stories/anki-cozmo-vector/index.md
+    - "The Valley He Wouldn't Cross: Masahiro Mori": stories/masahiro-mori/index.md
+    - "Mapping the Human Face: Paul Ekman": stories/paul-ekman/index.md
+    - "No Map, No Plan: Rodney Brooks": stories/rodney-brooks/index.md
+    - "The Signal Beneath the Noise: Rosalind Picard": stories/rosalind-picard/index.md
+    - "Kismet's Gaze: Cynthia Breazeal": stories/cynthia-breazeal/index.md
+    - "Small Robot, Big Attention: Hideki Kozima": stories/hideki-kozima/index.md
+    - "The Mirror That Wouldn't See Her: Joy Buolamwini": stories/joy-buolamwini/index.md
   - Teachers Guide: teachers-guide/index.md
   - Contact: contact.md
+  - FAQ: faq.md
   - Glossary: glossary.md
   - References: references.md
 # CoderDojo Microsite Standards from here down

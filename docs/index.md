@@ -49,7 +49,7 @@ Use the navigation menu to explore:
 
 - **[Getting Started](getting-started.md)** — Order parts and set up your development environment
 - **[Chapters](chapters/index.md)** — 16 chapters covering hardware, MicroPython, drawing, and expression design
-- **[Lessons](lessons/index.md)** — Short, focused lessons on individual drawing and interaction skills
+- **[Lessons](kits/oled/index.md)** — Short, focused lessons on individual drawing and interaction skills
 - **[Stories](stories/index.md)** — The history of commercial screen-faced robots like Cozmo and Vector
 - **[Learning Graph](learning-graph/index.md)** — An interactive map of the concepts this course teaches and how they connect
 - **[Glossary](glossary.md)** — Key terms and definitions
