@@ -10,7 +10,7 @@ social:
 
 # Small Robot, Big Attention
 
-<!-- ![](./cover.png) -->
+![](./cover.png)
 <details>
 <summary>Cover Image Prompt</summary>
 (This is the Cover Image. Do not include this label in the image.)
@@ -76,7 +76,7 @@ travel farther than anyone expected.
 
 ## Panel 1: The Robot That Tried Too Hard
 
-<!-- ![](./panel-01.png) -->
+![](./panel-01.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 01. Do not include the panel number in the image.)
 I am about to ask you to generate a series of images for a graphic novel.
@@ -111,7 +111,7 @@ Infanoid was not too weak to communicate; it was too loud.
 
 ## Panel 2: Sketching the Smallest Robot
 
-<!-- ![](./panel-02.png) -->
+![](./panel-02.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 02. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same contemporary
@@ -140,7 +140,7 @@ might be optional equipment rather than a requirement.
 
 ## Panel 3: A Bulky Prototype and a Fresh Start
 
-<!-- ![](./panel-03.png) -->
+![](./panel-03.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 03. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same contemporary
@@ -170,7 +170,7 @@ became Keepon — a name and a form built around doing less, better.
 
 ## Panel 4: Four Motions, No Face
 
-<!-- ![](./panel-04.png) -->
+![](./panel-04.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 04. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same contemporary
@@ -202,7 +202,7 @@ face.
 
 ## Panel 5: A Child Leans In
 
-<!-- ![](./panel-05.png) -->
+![](./panel-05.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 05. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same contemporary
@@ -233,7 +233,7 @@ connection happen instead.
 
 ## Panel 6: The World Discovers Keepon
 
-<!-- ![](./panel-06.png) -->
+![](./panel-06.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 06. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same contemporary

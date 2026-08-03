@@ -10,7 +10,7 @@ social:
 
 # No Map, No Plan
 
-<!-- ![](./cover.png) -->
+![](./cover.png)
 <details>
 <summary>Cover Image Prompt</summary>
 (This is the Cover Image. Do not include this label in the image.)
@@ -75,7 +75,7 @@ read fresh through sensors, moment by moment?
 
 ## Panel 1: A Demo That Stalls
 
-<!-- ![](./panel-01.png) -->
+![](./panel-01.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 01. Do not include the panel number in the image.)
 I am about to ask you to generate a series of images for a graphic novel.
@@ -110,7 +110,7 @@ idea itself.
 
 ## Panel 2: The Layered Sketch
 
-<!-- ![](./panel-02.png) -->
+![](./panel-02.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 02. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same Space-Age,
@@ -142,7 +142,7 @@ continuously and for free.
 
 ## Panel 3: Allen Learns the Floor
 
-<!-- ![](./panel-03.png) -->
+![](./panel-03.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 03. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same Space-Age,
@@ -172,7 +172,7 @@ might be closer to what intelligence actually was.
 
 ## Panel 4: Genghis Finds Its Legs
 
-<!-- ![](./panel-04.png) -->
+![](./panel-04.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 04. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same Space-Age,
@@ -203,7 +203,7 @@ the world is already the most accurate model available.
 
 ## Panel 5: Cog Gets a Body
 
-<!-- ![](./panel-05.png) -->
+![](./panel-05.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 05. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same Space-Age,
@@ -234,7 +234,7 @@ build a system that can operate in the same world we live in."
 
 ## Panel 6: Learning by Looking
 
-<!-- ![](./panel-06.png) -->
+![](./panel-06.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 06. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same Space-Age,
@@ -265,7 +265,7 @@ grow from real contact with it.
 
 ## Panel 7: A Face of Its Own
 
-<!-- ![](./panel-07.png) -->
+![](./panel-07.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 07. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in the same Space-Age,
@@ -299,7 +299,7 @@ not just walking and reaching, but feeling understood.
 
 ## Panel 8: The Layers Go Home
 
-<!-- ![](./panel-08.png) -->
+![](./panel-08.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 08. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in a cleaner Contemporary

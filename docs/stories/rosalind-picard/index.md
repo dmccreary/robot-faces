@@ -10,7 +10,7 @@ social:
 
 # The Signal Beneath the Noise
 
-<!-- ![](./cover.png) -->
+![](./cover.png)
 <details>
 <summary>Cover Image Prompt</summary>
 (This is the Cover Image. Do not include this label in the image.)
@@ -75,7 +75,7 @@ create an entire field of research.
 
 ## Panel 1: The Young Engineer at the Media Lab
 
-<!-- ![](./panel-01.png) -->
+![](./panel-01.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 01. Do not include the panel number in the image.)
 I am about to ask you to generate a series of images for a graphic novel.
@@ -107,7 +107,7 @@ she would soon start asking out loud.
 
 ## Panel 2: Photobook and the Language of Texture
 
-<!-- ![](./panel-02.png) -->
+![](./panel-02.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 02. Do not include the panel number in the image.)
 Please generate a 16:9 image in the same clean 1990s Bell-Labs-style
@@ -135,7 +135,7 @@ reputation was about to become the thing she risked.
 
 ## Panel 3: A Question Bell Labs Never Asked
 
-<!-- ![](./panel-03.png) -->
+![](./panel-03.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 03. Do not include the panel number in the image.)
 Please generate a 16:9 image in the same clean 1990s Bell-Labs-style
@@ -163,7 +163,7 @@ maybe computers built to reason like people needed a way to notice it too.
 
 ## Panel 4: "Emotion Is Just Noise"
 
-<!-- ![](./panel-04.png) -->
+![](./panel-04.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 04. Do not include the panel number in the image.)
 Please generate a 16:9 image in the same clean 1990s Bell-Labs-style
@@ -192,7 +192,7 @@ with data instead of intuition.
 
 ## Panel 5: Naming a New Field
 
-<!-- ![](./panel-05.png) -->
+![](./panel-05.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 05. Do not include the panel number in the image.)
 Please generate a 16:9 image in the same clean 1990s Bell-Labs-style
@@ -219,7 +219,7 @@ now had a founding text and a founder.
 
 ## Panel 6: Wires, Skin, and a New Kind of Sensor
 
-<!-- ![](./panel-06.png) -->
+![](./panel-06.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 06. Do not include the panel number in the image.)
 Please generate a 16:9 image in a contemporary photorealistic-with-period-
@@ -247,7 +247,7 @@ body was quietly signaling.
 
 ## Panel 7: The Wristband That Listened
 
-<!-- ![](./panel-07.png) -->
+![](./panel-07.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 07. Do not include the panel number in the image.)
 Please generate a 16:9 image in the same contemporary photorealistic-with-
@@ -277,7 +277,7 @@ frustration.
 
 ## Panel 8: A Signal Is Not a Mind
 
-<!-- ![](./panel-08.png) -->
+![](./panel-08.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 08. Do not include the panel number in the image.)
 Please generate a 16:9 image in the same contemporary photorealistic-with-
