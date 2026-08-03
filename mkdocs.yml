@@ -78,6 +78,7 @@ nav:
   
   - OLED Labs:
     - Introduction: kits/oled/index.md
+    - Connection Test: kits/oled/connection-test/index.md
     - Hello World: kits/oled/hello-world/index.md
     - Screen Coordinates: kits/oled/screen-coordinates/index.md
     - Basic Drawing Commands: kits/oled/drawing-commands/index.md
