@@ -85,6 +85,27 @@ make sure `ssd1306.py` ends up in a `/lib` folder on the Pico, not the
 root — otherwise `import ssd1306` fails with `ImportError: no module named
 'ssd1306'`.
 
+> **⚠️ Everything `.py` in this folder gets uploaded.** The script globs
+> `*.py` with no allowlist, so a stray tool or test script would land on
+> the Pico and take up filesystem space students need. Only labs, the
+> shared modules they import (`config.py`, `face.py`), and `lib/` belong
+> here. Development tools go in [`src/utils/`](../../utils/README.md).
+
+## Checking the Labs Without a Pico
+
+[`src/utils/check-labs.py`](../../utils/check-labs.py) runs every lab in
+this folder against a fake microcontroller, which catches crashes, bad
+table rows, and drawing calls that fall off the screen before you upload
+anything:
+
+```bash
+python3 src/utils/check-labs.py
+```
+
+It is a smoke test, not a simulator — it proves a lab *runs*, not that a
+face looks right, and any timing number a lab prints under it comes from
+a fake clock. Run the labs on real hardware before handing them out.
+
 ## Labs
 
 Copy `config.py` plus whichever lab file you're working on onto the Pico's

@@ -18,6 +18,9 @@
 # The symptom table at the bottom of this file is your lookup key. Try to
 # solve each face before you read it.
 #
+# check-labs: allow-offscreen  -- bug 3 draws off the top on purpose, so
+# src/utils/check-labs.py must not report it as a mistake.
+#
 # Button A goes to the next face, button B goes back. The bug number is
 # also printed to the Thonny shell, which matters for bug 1 -- when the
 # screen shows nothing at all, the shell is the only thing telling you the
