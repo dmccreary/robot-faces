@@ -10,7 +10,7 @@ social:
 
 # Mapping the Human Face: Paul Ekman and the Science of Expression
 
-<!-- ![](./cover.png) -->
+![](./cover.png)
 <details>
 <summary>Cover Image Prompt</summary>
 (This is the Cover Image. Do not include this label in the image.)
@@ -91,7 +91,7 @@ the moving human face.
 
 ## Panel 1: Into the Highlands
 
-<!-- ![](./panel-01.png) -->
+![](./panel-01.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 01. Do not include the panel number in the image.)
 I am about to ask you to generate a series of images for a graphic novel.
@@ -131,7 +131,7 @@ serious problem.
 
 ## Panel 2: A Story for Every Face
 
-<!-- ![](./panel-02.png) -->
+![](./panel-02.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 02. Do not include the panel number in the image.)
 Please generate a 16:9 image in the same Mid-Century/Space-Age technical
@@ -164,7 +164,7 @@ students, the recognition ran both ways.
 
 ## Panel 3: The Room Goes Cold
 
-<!-- ![](./panel-03.png) -->
+![](./panel-03.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 03. Do not include the panel number in the image.)
 Please generate a 16:9 image in the same Mid-Century/Space-Age technical
@@ -196,7 +196,7 @@ committed relativists took nerve, and the room did not applaud.
 
 ## Panel 4: Data Against Dogma
 
-<!-- ![](./panel-04.png) -->
+![](./panel-04.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 04. Do not include the panel number in the image.)
 Please generate a 16:9 image in the same Mid-Century/Space-Age technical
@@ -228,7 +228,7 @@ cultural lines that everything else about human life does not.
 
 ## Panel 5: Contracting One Muscle at a Time
 
-<!-- ![](./panel-05.png) -->
+![](./panel-05.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 05. Do not include the panel number in the image.)
 Please generate a 16:9 image in the same Mid-Century/Space-Age technical
@@ -260,7 +260,7 @@ electrical probe just to confirm which one it was.
 
 ## Panel 6: Forty Action Units and Counting
 
-<!-- ![](./panel-06.png) -->
+![](./panel-06.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 06. Do not include the panel number in the image.)
 Please generate a 16:9 image in the same Mid-Century/Space-Age technical
@@ -292,7 +292,7 @@ same precision an engineer expects from a ruler.
 
 ## Panel 7: A System Leaves the Lab
 
-<!-- ![](./panel-07.png) -->
+![](./panel-07.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 07. Do not include the panel number in the image.)
 Please generate a 16:9 image in a transitional late-20th-century
@@ -325,7 +325,7 @@ relying on gut impressions that no two observers could reliably agree on.
 
 ## Panel 8: Teaching Machines to Wear a Face
 
-<!-- ![](./panel-08.png) -->
+![](./panel-08.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 08. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in a Contemporary
@@ -360,7 +360,7 @@ the working reference sheet for an entirely new kind of machine.
 
 ## Panel 9: The Reckoning
 
-<!-- ![](./panel-09.png) -->
+![](./panel-09.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 09. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in a Contemporary
@@ -394,7 +394,7 @@ happening inside someone's mind.
 
 ## Panel 10: A Measure, Not a Mind-Reader
 
-<!-- ![](./panel-10.png) -->
+![](./panel-10.png)
 <details><summary>Image Prompt</summary>
 (This is Panel 10. Do not include the panel number in the image.)
 Please generate a wide-landscape 16:9 image in a Contemporary

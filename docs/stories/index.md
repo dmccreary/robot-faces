@@ -31,7 +31,7 @@ larger question: what makes educational technology last?
 
 - **[Mapping the Human Face](paul-ekman/index.md)**
 
-    <!-- ![Paul Ekman](./paul-ekman/cover.png) -->
+    ![Paul Ekman](./paul-ekman/cover.png)
 
     Paul Ekman spent a lifetime turning the fleeting human face into precise,
     measurable data—first proving that some expressions cross every culture,
