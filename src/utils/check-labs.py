@@ -24,7 +24,15 @@ WHAT IT DOES NOT CATCH
   * Anything about timing -- the clock here is fake, so any lab that
     measures microseconds reports meaningless numbers under this harness
   * MicroPython-only failures -- this runs on CPython, and CPython
-    accepting your code does not prove MicroPython will
+    accepting your code does not prove MicroPython will. A real one from
+    this repo, which passed here and raised TypeError on the board:
+
+        buffer = bytearray(n)
+        display.blit_buffer(buffer * 2, ...)   # bytes * int is fine,
+                                               # bytearray * int is not
+
+    MicroPython leaves out corners of the language CPython fills in, and
+    nothing in this file can tell you which ones.
   * Wiring, SPI speed, button bounce, or any other hardware reality
 
 Passing here means a lab is worth uploading. It does not mean the lab
@@ -69,7 +77,11 @@ LAB_PATTERN = re.compile(r"^\d\d-.*\.py$")
 # that teach debugging need to be broken on purpose.
 ALLOW_OFFSCREEN = "check-labs: allow-offscreen"
 
-# Screen size until a display driver tells us otherwise.
+# Screen size until a display driver tells us otherwise. A framebuf-style
+# driver is constructed with its dimensions, so DisplayStub picks them up
+# for free. The GC9A01 driver is not -- it knows it is always 240x240 --
+# so for kits like that these get filled in from the kit's own config.py
+# before any lab runs. See _read_kit_screen_size().
 FALLBACK_WIDTH = 128
 FALLBACK_HEIGHT = 64
 
@@ -396,9 +408,23 @@ class DisplayStub:
     def poly(self, x, y, coords, colour, fill=0):
         BENCH.check("poly origin", x, y)
 
-    def text(self, string, x, y, colour=1):
+    def text(self, *args):
+        """Two different drivers, two different signatures.
+
+        framebuf-backed drivers take text(string, x, y, colour) and use a
+        built-in 8x8 font. The GC9A01 driver has no built-in font, so its
+        signature is text(font_module, string, x, y, fg, bg). Which one
+        we got is obvious from the first argument."""
+        if args and not isinstance(args[0], str):
+            font, string, x, y = args[0], args[1], args[2], args[3]
+            char_w = getattr(font, "WIDTH", 8)
+            char_h = getattr(font, "HEIGHT", 8)
+        else:
+            string, x, y = args[0], args[1], args[2]
+            char_w, char_h = 8, 8
         BENCH.check("text origin", x, y)
-        BENCH.check("text end", x + 8 * len(str(string)) - 1, y + 7)
+        BENCH.check("text end",
+                    x + char_w * len(str(string)) - 1, y + char_h - 1)
 
     def scroll(self, dx, dy):
         pass
@@ -406,19 +432,79 @@ class DisplayStub:
     def blit(self, source, x, y, key=-1, palette=None):
         BENCH.check("blit origin", x, y)
 
+    def blit_buffer(self, buffer, x, y, width, height):
+        BENCH.check("blit_buffer origin", x, y)
+        BENCH.check("blit_buffer corner", x + width - 1, y + height - 1)
+
 
 def _build_driver_module(name):
-    """A fake driver module that hands back DisplayStub for ANY class
-    name. That way a kit using SSD1306_SPI, ST7789, or GC9A01 all work
-    without this file knowing anything about them."""
+    """A fake driver module that answers to ANY attribute name, so a kit
+    using SSD1306_SPI, ST7789, or GC9A01 works without this file knowing
+    anything about them.
+
+    Drivers export two kinds of thing, and they need different fakes:
+
+      CLASSES, which get constructed and then drawn on -- DisplayStub.
+      HELPER FUNCTIONS, which get called and whose result is used as a
+      number. gc9a01.color565() is one: a kit that does
+      `config.color565(255, 0, 0)` at import time needs an int back, not
+      a class, or the kit fails to import at all.
+
+    They are told apart by PEP 8 naming: `GC9A01` is a class, `color565`
+    is a function. The number a fake helper returns is meaningless -- 0
+    for everything -- which is fine for a harness that never rasterizes
+    anything, but it does mean a lab CANNOT be checked here for whether
+    it computed the right color."""
     mod = types.ModuleType(name)
+
+    def fake_helper(*args, **kwargs):
+        return 0
 
     def module_getattr(attr):
         if attr.startswith("__"):
             raise AttributeError(attr)
+        if attr.islower():
+            return fake_helper
         return DisplayStub
 
     mod.__getattr__ = module_getattr
+    return mod
+
+
+def _read_kit_screen_size(kit_dir):
+    """Pull WIDTH and HEIGHT out of a kit's config.py.
+
+    Read as text rather than imported, so this runs before the stubs are
+    in place and has no chance of starting a display."""
+    path = os.path.join(kit_dir, "config.py")
+    if not os.path.isfile(path):
+        return None, None
+    found = {}
+    pattern = re.compile(r"^(WIDTH|HEIGHT)\s*=\s*(\d+)\s*(#.*)?$")
+    with open(path) as handle:
+        for line in handle:
+            match = pattern.match(line)
+            if match:
+                found[match.group(1)] = int(match.group(2))
+    return found.get("WIDTH"), found.get("HEIGHT")
+
+
+def _defines_a_class(path):
+    """True if this source file declares a class at the top level."""
+    with open(path) as handle:
+        for line in handle:
+            if line.startswith("class "):
+                return True
+    return False
+
+
+def _load_real_module(name, path):
+    """Import a lib/ file for real, exactly as CPython would."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(name, path)
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[name] = mod
+    spec.loader.exec_module(mod)
     return mod
 
 
@@ -464,13 +550,26 @@ def install_stubs(kit_dir):
     import random as _random
     STUB_MODULES["urandom"] = _random
 
-    # Every module the kit ships in lib/ is a driver the labs import.
+    # Everything the kit ships in lib/ is something the labs import. Two
+    # kinds live there, and they need opposite treatment:
+    #
+    #   DRIVERS talk to hardware, so they get stubbed. We spot them by the
+    #   fact that they define a class -- every display driver does.
+    #
+    #   DATA MODULES, such as the bitmap font modules the GC9A01 driver
+    #   needs, define no class and no hardware calls. Stubbing those would
+    #   be actively wrong: a lab that centers text needs the REAL
+    #   font.WIDTH, not a stand-in, or the layout check means nothing.
     lib_dir = os.path.join(kit_dir, "lib")
     if os.path.isdir(lib_dir):
         for entry in sorted(os.listdir(lib_dir)):
             if entry.endswith(".py") and not entry.startswith("_"):
                 name = entry[:-3]
-                STUB_MODULES[name] = _build_driver_module(name)
+                path = os.path.join(lib_dir, entry)
+                if _defines_a_class(path):
+                    STUB_MODULES[name] = _build_driver_module(name)
+                else:
+                    STUB_MODULES[name] = _load_real_module(name, path)
 
     sys.modules.update(STUB_MODULES)
     return set(STUB_MODULES)
@@ -558,6 +657,13 @@ def main():
         print("No such kit directory:", kit_dir, file=sys.stderr)
         return 2
 
+    global FALLBACK_WIDTH, FALLBACK_HEIGHT
+    width, height = _read_kit_screen_size(kit_dir)
+    size_from_config = bool(width and height)
+    if size_from_config:
+        FALLBACK_WIDTH = width
+        FALLBACK_HEIGHT = height
+
     labs = sorted(f for f in os.listdir(kit_dir) if LAB_PATTERN.match(f))
     if args.only:
         labs = [f for f in labs if args.only in f]
@@ -591,8 +697,11 @@ def main():
 
     print()
     if not BENCH.saw_display:
-        print("note: no display was constructed, so bounds were checked "
-              "against the %dx%d fallback" % (FALLBACK_WIDTH, FALLBACK_HEIGHT))
+        source = "config.py" if size_from_config else "the built-in fallback"
+        print("note: the driver was not constructed with its dimensions, so "
+              "bounds were checked")
+        print("      against %dx%d, taken from %s"
+              % (FALLBACK_WIDTH, FALLBACK_HEIGHT, source))
     print("%d ok, %d off-screen, %d failed"
           % (len(labs) - len(failures) - len(warnings),
              len(warnings), len(failures)))
