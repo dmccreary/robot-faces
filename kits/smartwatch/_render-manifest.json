@@ -12,8 +12,7 @@
   },
   "broken-faces": {
     "blank": true,
-    "has_image": true,
-    "note": "intentional -- this is Bug 1 itself"
+    "has_image": true
   },
   "buttons": {
     "blank": false,
