@@ -1,0 +1,138 @@
+{
+  "blink": {
+    "blank": false,
+    "has_image": true
+  },
+  "blink-onboard-led": {
+    "has_image": false
+  },
+  "blit": {
+    "blank": false,
+    "has_image": true
+  },
+  "broken-faces": {
+    "blank": true,
+    "has_image": true,
+    "note": "intentional -- this is Bug 1 itself"
+  },
+  "buttons": {
+    "blank": false,
+    "has_image": true
+  },
+  "circle": {
+    "blank": false,
+    "has_image": true
+  },
+  "color-bits": {
+    "blank": false,
+    "has_image": true
+  },
+  "color-wheel": {
+    "blank": false,
+    "has_image": true
+  },
+  "demo": {
+    "blank": false,
+    "has_image": true
+  },
+  "design-your-own": {
+    "blank": false,
+    "has_image": true
+  },
+  "draw-speed-timing": {
+    "blank": false,
+    "has_image": true
+  },
+  "ellipse": {
+    "blank": false,
+    "has_image": true
+  },
+  "emotion-modes": {
+    "blank": false,
+    "has_image": true
+  },
+  "emotion-table": {
+    "blank": false,
+    "has_image": true
+  },
+  "eye-scanner": {
+    "blank": false,
+    "has_image": true
+  },
+  "eyebrows": {
+    "blank": false,
+    "has_image": true
+  },
+  "face-module": {
+    "blank": false,
+    "has_image": true
+  },
+  "face-parameters": {
+    "blank": false,
+    "has_image": true
+  },
+  "happy-face": {
+    "blank": false,
+    "has_image": true
+  },
+  "hello": {
+    "blank": false,
+    "has_image": true
+  },
+  "keyframes": {
+    "blank": false,
+    "has_image": true
+  },
+  "lines": {
+    "blank": false,
+    "has_image": true
+  },
+  "modes": {
+    "blank": false,
+    "has_image": true
+  },
+  "no-blocking": {
+    "blank": false,
+    "has_image": true
+  },
+  "partial-redraw": {
+    "blank": false,
+    "has_image": true
+  },
+  "pixel": {
+    "blank": false,
+    "has_image": true
+  },
+  "poly": {
+    "blank": false,
+    "has_image": true
+  },
+  "rect": {
+    "blank": false,
+    "has_image": true
+  },
+  "sample-main-demo": {
+    "blank": false,
+    "has_image": true
+  },
+  "screen-coordinates": {
+    "blank": false,
+    "has_image": true
+  },
+  "sleepy": {
+    "blank": false,
+    "has_image": true
+  },
+  "state-machine": {
+    "blank": false,
+    "has_image": true
+  },
+  "trace-and-watch": {
+    "blank": false,
+    "has_image": true
+  },
+  "wink": {
+    "blank": false,
+    "has_image": true
+  }
+}
