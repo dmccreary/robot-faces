@@ -22,7 +22,7 @@ larger question: what makes educational technology last?
 
 - **[The Valley He Wouldn't Cross](masahiro-mori/index.md)**
 
-    <!-- ![Masahiro Mori](./masahiro-mori/cover.png) -->
+    ![Masahiro Mori](./masahiro-mori/cover.png)
 
     When a realistic prosthetic hand felt eerie instead of comforting,
     Japanese roboticist Masahiro Mori graphed the feeling instead of ignoring
@@ -40,7 +40,7 @@ larger question: what makes educational technology last?
 
 - **[No Map, No Plan](rodney-brooks/index.md)**
 
-    <!-- ![Rodney Brooks](./rodney-brooks/cover.png) -->
+    ![Rodney Brooks](./rodney-brooks/cover.png)
 
     In the 1980s, Rodney Brooks bet that robots didn't need maps or master
     plans to be smart—just fast, layered reactions to the real world. Follow
@@ -49,7 +49,7 @@ larger question: what makes educational technology last?
 
 - **[The Signal Beneath the Noise](rosalind-picard/index.md)**
 
-    <!-- ![Rosalind Picard](./rosalind-picard/cover.png) -->
+    ![Rosalind Picard](./rosalind-picard/cover.png)
 
     Rosalind Picard risked her reputation as a respected MIT Media Lab
     computer-vision researcher to argue that emotion isn't noise but
@@ -58,7 +58,7 @@ larger question: what makes educational technology last?
 
 - **[Kismet's Gaze](cynthia-breazeal/index.md)**
 
-    <!-- ![Cynthia Breazeal](./cynthia-breazeal/cover.png) -->
+    ![Cynthia Breazeal](./cynthia-breazeal/cover.png)
 
     Follow MIT roboticist Cynthia Breazeal as she leaves full-body robots
     behind to build Kismet—an expressive robot head that learns to connect
@@ -67,7 +67,7 @@ larger question: what makes educational technology last?
 
 - **[Small Robot, Big Attention](hideki-kozima/index.md)**
 
-    <!-- ![Hideki Kozima](./hideki-kozima/cover.png) -->
+    ![Hideki Kozima](./hideki-kozima/cover.png)
 
     Researcher Hideki Kozima asked how little a robot needs to feel alive—and
     answered with Keepon, a small yellow robot with just two camera eyes, a
