@@ -128,14 +128,18 @@ def draw_angry():
 
 
 def draw_afraid():
-    draw_eyes(13, 13)
-    draw_eyebrows(-5, -5, lift=3)
+    #draw_eyes(13, 13)
+    draw_eyes(8, 8)
+    #draw_eyebrows(-5, -5, lift=3)
+    draw_eyebrows(-4, -4, lift=0)
     draw_mouth_open(6, 9)
 
 
 def draw_surprised():
-    draw_eyes(14, 14)
-    draw_eyebrows(0, 0, lift=6)
+    #draw_eyes(14, 14)
+    draw_eyes(10, 10)
+    draw_eyebrows(0, 0, lift=2)
+    #draw_eyebrows(0, 0, lift=6)
     draw_mouth_open(8, 11)
 
 
@@ -150,6 +154,10 @@ def draw_contempt():
     draw_eyebrows(0, 0, lift=0)
     draw_mouth_smirk(14, 1)
 
+def draw_no_emotions():
+    #draw_eyes(10, 10)
+    draw_eyebrows(0, 0, lift=-6)
+    draw_mouth_flat(10)
 
 EMOTIONS = (
     ("Happy", draw_happy),
@@ -159,6 +167,7 @@ EMOTIONS = (
     ("Surprised", draw_surprised),
     ("Disgusted", draw_disgusted),
     ("Contempt", draw_contempt),
+    ("Emotionless", draw_no_emotions),
 )
 
 
@@ -177,14 +186,24 @@ def draw_blink(closed):
     draw_mouth_curve(18, 8, BOTTOM_HALF)
 
 
-def draw_wink(right_closed):
-    if right_closed:
+#def draw_wink(right_closed):
+#    if right_closed:
+#        draw_eye(LEFT_EYE_X, NEUTRAL_EYE_RADIUS, NEUTRAL_EYE_RADIUS)
+#        draw_closed_eye(RIGHT_EYE_X)
+#    else:
+#        draw_eyes(NEUTRAL_EYE_RADIUS, NEUTRAL_EYE_RADIUS)
+#    draw_mouth_curve(18, 8, BOTTOM_HALF)
+
+def draw_wink(right_closed,left_closed):
+    if right_closed and not left_closed:
         draw_eye(LEFT_EYE_X, NEUTRAL_EYE_RADIUS, NEUTRAL_EYE_RADIUS)
         draw_closed_eye(RIGHT_EYE_X)
+    elif left_closed and not right_closed:
+        draw_eye(RIGHT_EYE_X,NEUTRAL_EYE_RADIUS, NEUTRAL_EYE_RADIUS)
+        draw_closed_eye(LEFT_EYE_X)
     else:
         draw_eyes(NEUTRAL_EYE_RADIUS, NEUTRAL_EYE_RADIUS)
     draw_mouth_curve(18, 8, BOTTOM_HALF)
-
 
 def draw_sleepy(bob):
     draw_closed_eye(LEFT_EYE_X)
@@ -208,11 +227,19 @@ def play_blink(name):
     sleep(0.15)                                    # a real blink is fast
     show_face(name, lambda: draw_blink(False))   # eyes open again
 
+def play_wink_both(name):
+    show_face(name, lambda: draw_wink(True,False))    # eyes snap shut
+    sleep(0.15)                                    # a real blink is fast
+    show_face(name, lambda: draw_wink(False,False))
+    sleep(0.15)
+    show_face(name, lambda: draw_wink(False,True))    # eyes snap shut
+    sleep(0.15)                                    # a real blink is fast
+    show_face(name, lambda: draw_wink(False,False))
 
-def play_wink(name):
-    show_face(name, lambda: draw_wink(True))      # right eye closes
-    sleep(0.35)                                    # hold it long enough to read
-    show_face(name, lambda: draw_wink(False))     # both eyes open, resting
+#def play_wink(name):
+#    show_face(name, lambda: draw_wink(True))      # right eye closes
+#    sleep(0.35)                                    # hold it long enough to read
+#    show_face(name, lambda: draw_wink(False))     # both eyes open, resting
 
 
 def play_sleepy(name):
@@ -228,7 +255,8 @@ def play_sleepy(name):
 # replays itself while it is up (0 means play once, then hold the last frame).
 ANIMATED_MODES = (
     ("Blink", play_blink, REPEATING_HOLD_MS, REPEAT_MS),
-    ("Wink", play_wink, REPEATING_HOLD_MS, REPEAT_MS),
+    #("Wink", play_wink, REPEATING_HOLD_MS, REPEAT_MS),
+    ("Wink", play_wink_both, REPEATING_HOLD_MS, REPEAT_MS),
     ("Sleepy", play_sleepy, AUTO_ADVANCE_MS, 0),
 )
 
@@ -310,3 +338,4 @@ while True:
         last_repeat = now
 
     sleep(0.005)
+
