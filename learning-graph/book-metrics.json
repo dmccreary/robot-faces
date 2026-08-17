@@ -2,8 +2,8 @@
   "$schema": "https://raw.githubusercontent.com/dmccreary/claude-skills/main/src/book-metrics/book-metrics.schema.json",
   "metricsVersion": "1.0",
   "metricsGeneratedBy": "Book Metrics Python Program v0.08",
-  "metricsGeneratedOn": "August 04, 2026 at 05:42 PM",
-  "metricsGeneratedOnISO": "2026-08-04T17:42:31",
+  "metricsGeneratedOn": "August 04, 2026 at 05:56 PM",
+  "metricsGeneratedOnISO": "2026-08-04T17:56:40",
   "metrics": {
     "concepts": 293,
     "chapters": 16,
