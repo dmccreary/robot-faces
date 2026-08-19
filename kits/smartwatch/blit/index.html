@@ -22,15 +22,15 @@
       
       
       <link rel="icon" href="../../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.43">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
     
     
       
-        <title>Blitting Buffers - Robot Faces</title>
+        <title>Blit - Robot Faces</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2afb09e1.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -75,7 +75,7 @@
       
         <meta  property="og:type"  content="website" >
       
-        <meta  property="og:title"  content="Blitting Buffers - Robot Faces" >
+        <meta  property="og:title"  content="Blit - Robot Faces" >
       
         <meta  property="og:description"  content="Resources for teaching drawing of robot faces with microcontrollers and MicroPython to robotics students.  All content licensed Creative Commons ShareAlike Attribution Noncommercial" >
       
@@ -91,7 +91,7 @@
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
-        <meta  name="twitter:title"  content="Blitting Buffers - Robot Faces" >
+        <meta  name="twitter:title"  content="Blit - Robot Faces" >
       
         <meta  name="twitter:description"  content="Resources for teaching drawing of robot faces with microcontrollers and MicroPython to robotics students.  All content licensed Creative Commons ShareAlike Attribution Noncommercial" >
       
@@ -116,7 +116,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lab-9-blitting-buffers" class="md-skip">
+        <a href="#blitting-buffers" class="md-skip">
           Skip to content
         </a>
       
@@ -151,7 +151,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Blitting Buffers
+              Blit
             
           </span>
         </div>
@@ -163,11 +163,13 @@
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -199,13 +201,14 @@
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub Repo
@@ -250,7 +253,7 @@
       <a href="https://github.com/dmccreary/robot-faces" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub Repo
@@ -270,8 +273,10 @@
       <a href="../../.." class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Home
+    
   </span>
   
 
@@ -290,8 +295,10 @@
       <a href="../../../about/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     About This Book
+    
   </span>
   
 
@@ -310,8 +317,10 @@
       <a href="../../../course-description/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Course Description
+    
   </span>
   
 
@@ -330,8 +339,10 @@
       <a href="../../../getting-started/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Getting Started
+    
   </span>
   
 
@@ -350,6 +361,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -360,8 +372,10 @@
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     Chapters
+    
   </span>
   
 
@@ -385,8 +399,10 @@
       <a href="../../../chapters/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     List of Chapters
+    
   </span>
   
 
@@ -406,6 +422,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -416,8 +433,10 @@
           <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     1. Hardware & Electronics Foundations
+    
   </span>
   
 
@@ -441,8 +460,10 @@
       <a href="../../../chapters/01-hardware-electronics-foundations/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -462,8 +483,10 @@
       <a href="../../../chapters/01-hardware-electronics-foundations/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -483,8 +506,10 @@
       <a href="../../../chapters/01-hardware-electronics-foundations/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -512,6 +537,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -522,8 +548,10 @@
           <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     2. A History of Screen-Based Robot Faces
+    
   </span>
   
 
@@ -547,8 +575,10 @@
       <a href="../../../chapters/02-history-of-robot-faces/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -568,8 +598,10 @@
       <a href="../../../chapters/02-history-of-robot-faces/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -589,8 +621,10 @@
       <a href="../../../chapters/02-history-of-robot-faces/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -618,6 +652,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -628,8 +663,10 @@
           <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     3. MicroPython Fundamentals I: Syntax, Data & Loops
+    
   </span>
   
 
@@ -653,8 +690,10 @@
       <a href="../../../chapters/03-micropython-fundamentals-1/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -674,8 +713,10 @@
       <a href="../../../chapters/03-micropython-fundamentals-1/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -695,8 +736,10 @@
       <a href="../../../chapters/03-micropython-fundamentals-1/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -724,6 +767,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -734,8 +778,10 @@
           <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     4. MicroPython Fundamentals II: Functions & the FrameBuf Module
+    
   </span>
   
 
@@ -759,8 +805,10 @@
       <a href="../../../chapters/04-micropython-fundamentals-2/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -780,8 +828,10 @@
       <a href="../../../chapters/04-micropython-fundamentals-2/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -801,8 +851,10 @@
       <a href="../../../chapters/04-micropython-fundamentals-2/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -830,6 +882,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -840,8 +893,10 @@
           <label class="md-nav__link" for="__nav_5_6" id="__nav_5_6_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     5. Display & Coordinate Systems
+    
   </span>
   
 
@@ -865,8 +920,10 @@
       <a href="../../../chapters/05-display-coordinate-systems/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -886,8 +943,10 @@
       <a href="../../../chapters/05-display-coordinate-systems/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -907,8 +966,10 @@
       <a href="../../../chapters/05-display-coordinate-systems/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -936,6 +997,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -946,8 +1008,10 @@
           <label class="md-nav__link" for="__nav_5_7" id="__nav_5_7_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     6. Basic Drawing Primitives
+    
   </span>
   
 
@@ -971,8 +1035,10 @@
       <a href="../../../chapters/06-basic-drawing-primitives/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -992,8 +1058,10 @@
       <a href="../../../chapters/06-basic-drawing-primitives/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -1013,8 +1081,10 @@
       <a href="../../../chapters/06-basic-drawing-primitives/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -1042,6 +1112,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -1052,8 +1123,10 @@
           <label class="md-nav__link" for="__nav_5_8" id="__nav_5_8_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     7. Ellipse & Polygon Drawing
+    
   </span>
   
 
@@ -1077,8 +1150,10 @@
       <a href="../../../chapters/07-ellipse-polygon-drawing/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -1098,8 +1173,10 @@
       <a href="../../../chapters/07-ellipse-polygon-drawing/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -1119,8 +1196,10 @@
       <a href="../../../chapters/07-ellipse-polygon-drawing/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -1148,6 +1227,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -1158,8 +1238,10 @@
           <label class="md-nav__link" for="__nav_5_9" id="__nav_5_9_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     8. A History of MicroPython's FrameBuf Drawing Support
+    
   </span>
   
 
@@ -1183,8 +1265,10 @@
       <a href="../../../chapters/08-framebuf-version-history/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -1204,8 +1288,10 @@
       <a href="../../../chapters/08-framebuf-version-history/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -1225,8 +1311,10 @@
       <a href="../../../chapters/08-framebuf-version-history/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -1254,6 +1342,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -1264,8 +1353,10 @@
           <label class="md-nav__link" for="__nav_5_10" id="__nav_5_10_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     9. Facial Anatomy & Layout Design
+    
   </span>
   
 
@@ -1289,8 +1380,10 @@
       <a href="../../../chapters/09-facial-anatomy-layout-design/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -1310,8 +1403,10 @@
       <a href="../../../chapters/09-facial-anatomy-layout-design/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -1331,8 +1426,10 @@
       <a href="../../../chapters/09-facial-anatomy-layout-design/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -1360,6 +1457,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -1370,8 +1468,10 @@
           <label class="md-nav__link" for="__nav_5_11" id="__nav_5_11_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     10. Emotion Theory & the Core Expression Set
+    
   </span>
   
 
@@ -1395,8 +1495,10 @@
       <a href="../../../chapters/10-emotion-theory-core-expressions/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -1416,8 +1518,10 @@
       <a href="../../../chapters/10-emotion-theory-core-expressions/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -1437,8 +1541,10 @@
       <a href="../../../chapters/10-emotion-theory-core-expressions/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -1466,6 +1572,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -1476,8 +1583,10 @@
           <label class="md-nav__link" for="__nav_5_12" id="__nav_5_12_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     11. Expression Design, Readability & Human-Robot Interaction
+    
   </span>
   
 
@@ -1501,8 +1610,10 @@
       <a href="../../../chapters/11-expression-design-readability-hri/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -1522,8 +1633,10 @@
       <a href="../../../chapters/11-expression-design-readability-hri/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -1543,8 +1656,10 @@
       <a href="../../../chapters/11-expression-design-readability-hri/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -1572,6 +1687,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -1582,8 +1698,10 @@
           <label class="md-nav__link" for="__nav_5_13" id="__nav_5_13_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     12. Animating Expressions: Timing & Motion
+    
   </span>
   
 
@@ -1607,8 +1725,10 @@
       <a href="../../../chapters/12-animating-expressions/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -1628,8 +1748,10 @@
       <a href="../../../chapters/12-animating-expressions/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -1649,8 +1771,10 @@
       <a href="../../../chapters/12-animating-expressions/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -1678,6 +1802,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -1688,8 +1813,10 @@
           <label class="md-nav__link" for="__nav_5_14" id="__nav_5_14_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     13. Interactive Controls: Inputs & Concurrency
+    
   </span>
   
 
@@ -1713,8 +1840,10 @@
       <a href="../../../chapters/13-interactive-controls-inputs/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -1734,8 +1863,10 @@
       <a href="../../../chapters/13-interactive-controls-inputs/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -1755,8 +1886,10 @@
       <a href="../../../chapters/13-interactive-controls-inputs/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -1784,6 +1917,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -1794,8 +1928,10 @@
           <label class="md-nav__link" for="__nav_5_15" id="__nav_5_15_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     14. Building an Expression Menu & Live Controls
+    
   </span>
   
 
@@ -1819,8 +1955,10 @@
       <a href="../../../chapters/14-expression-menu-live-controls/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -1840,8 +1978,10 @@
       <a href="../../../chapters/14-expression-menu-live-controls/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -1861,8 +2001,10 @@
       <a href="../../../chapters/14-expression-menu-live-controls/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -1890,6 +2032,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -1900,8 +2043,10 @@
           <label class="md-nav__link" for="__nav_5_16" id="__nav_5_16_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     15. Porting Faces to a Color Display
+    
   </span>
   
 
@@ -1925,8 +2070,10 @@
       <a href="../../../chapters/15-porting-faces-color-display/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -1946,8 +2093,10 @@
       <a href="../../../chapters/15-porting-faces-color-display/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -1967,8 +2116,10 @@
       <a href="../../../chapters/15-porting-faces-color-display/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -1996,6 +2147,7 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
@@ -2006,8 +2158,10 @@
           <label class="md-nav__link" for="__nav_5_17" id="__nav_5_17_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
     16. Computational Thinking & Capstone Design
+    
   </span>
   
 
@@ -2031,8 +2185,10 @@
       <a href="../../../chapters/16-computational-thinking-capstone/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Content
+    
   </span>
   
 
@@ -2052,8 +2208,10 @@
       <a href="../../../chapters/16-computational-thinking-capstone/quiz/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz
+    
   </span>
   
 
@@ -2073,8 +2231,10 @@
       <a href="../../../chapters/16-computational-thinking-capstone/references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Annotated References
+    
   </span>
   
 
@@ -2103,8 +2263,72 @@
       
   
   
+    
   
   
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Kits
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Kits
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of Kits
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
     
     
     
@@ -2113,24 +2337,26 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
-    OLED Labs
+    OLED
+    
   </span>
   
 
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
             <span class="md-nav__icon md-icon"></span>
-            OLED Labs
+            OLED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -2144,8 +2370,10 @@
       <a href="../../oled/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Introduction
+    
   </span>
   
 
@@ -2165,8 +2393,10 @@
       <a href="../../oled/connection-test/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Connection Test
+    
   </span>
   
 
@@ -2186,8 +2416,10 @@
       <a href="../../oled/hello-world/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Hello World
+    
   </span>
   
 
@@ -2207,8 +2439,10 @@
       <a href="../../oled/screen-coordinates/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Screen Coordinates
+    
   </span>
   
 
@@ -2228,8 +2462,10 @@
       <a href="../../oled/drawing-commands/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Basic Drawing Commands
+    
   </span>
   
 
@@ -2249,8 +2485,10 @@
       <a href="../../oled/pixel/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Pixel
+    
   </span>
   
 
@@ -2270,8 +2508,10 @@
       <a href="../../oled/line/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Line
+    
   </span>
   
 
@@ -2291,8 +2531,10 @@
       <a href="../../oled/rectangle/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Rectangle
+    
   </span>
   
 
@@ -2312,8 +2554,10 @@
       <a href="../../oled/ellipse/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Ellipse
+    
   </span>
   
 
@@ -2333,8 +2577,10 @@
       <a href="../../oled/circle/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Circle
+    
   </span>
   
 
@@ -2354,8 +2600,10 @@
       <a href="../../oled/polygon/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Polygon
+    
   </span>
   
 
@@ -2375,8 +2623,10 @@
       <a href="../../oled/text/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Text
+    
   </span>
   
 
@@ -2396,8 +2646,10 @@
       <a href="../../oled/scroll/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Scroll
+    
   </span>
   
 
@@ -2417,8 +2669,10 @@
       <a href="../../oled/blit-commands/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Blit
+    
   </span>
   
 
@@ -2438,8 +2692,10 @@
       <a href="../../oled/basic-face-layouts/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Basic Face Layouts
+    
   </span>
   
 
@@ -2459,8 +2715,10 @@
       <a href="../../oled/eye-scanner/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Eye Scanner
+    
   </span>
   
 
@@ -2480,8 +2738,10 @@
       <a href="../../oled/eyebrows/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Eyebrows
+    
   </span>
   
 
@@ -2501,8 +2761,10 @@
       <a href="../../oled/wink/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Winking with a Smile
+    
   </span>
   
 
@@ -2522,8 +2784,10 @@
       <a href="../../oled/blinking/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Blinking
+    
   </span>
   
 
@@ -2543,8 +2807,10 @@
       <a href="../../oled/emotion-types/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Emotion Types
+    
   </span>
   
 
@@ -2564,8 +2830,10 @@
       <a href="../../oled/sleeping-faces/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Sleeping Faces
+    
   </span>
   
 
@@ -2585,8 +2853,10 @@
       <a href="../../oled/face-module/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     The Face Module
+    
   </span>
   
 
@@ -2606,8 +2876,10 @@
       <a href="../../oled/emotion-table/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     The Emotion Table
+    
   </span>
   
 
@@ -2627,8 +2899,10 @@
       <a href="../../oled/broken-faces/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Five Broken Faces
+    
   </span>
   
 
@@ -2648,8 +2922,10 @@
       <a href="../../oled/trace-and-watch/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Trace and Watch
+    
   </span>
   
 
@@ -2669,8 +2945,10 @@
       <a href="../../oled/keyframes/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Keyframes
+    
   </span>
   
 
@@ -2690,8 +2968,10 @@
       <a href="../../oled/state-machine/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     A Face With a Memory
+    
   </span>
   
 
@@ -2711,8 +2991,10 @@
       <a href="../../oled/partial-redraw/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Only Redraw What Changed
+    
   </span>
   
 
@@ -2732,8 +3014,10 @@
       <a href="../../oled/design-your-own/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Design Your Own Emotion
+    
   </span>
   
 
@@ -2753,8 +3037,33 @@
       <a href="../../oled/draw-speed-timing/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     How Fast Is a Face?
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../oled/eye-saccade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Saccade
+    
   </span>
   
 
@@ -2774,8 +3083,10 @@
       <a href="../../oled/box-cover/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Box Cover Template
+    
   </span>
   
 
@@ -2791,15 +3102,17 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
     
   
   
   
+    
     
     
     
@@ -2808,24 +3121,26 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
-    Smartwatch Labs
+    1.2" Smartwatch
+    
   </span>
   
 
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_3">
             <span class="md-nav__icon md-icon"></span>
-            Smartwatch Labs
+            1.2" Smartwatch
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -2839,8 +3154,10 @@
       <a href="../" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Introduction
+    
   </span>
   
 
@@ -2857,11 +3174,13 @@
   
   
     <li class="md-nav__item">
-      <a href="../blink-onboard-led/" class="md-nav__link">
+      <a href="../connection-test/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Blink Something
+    Connection Test
+    
   </span>
   
 
@@ -2881,8 +3200,10 @@
       <a href="../hello/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Hello World
+    
   </span>
   
 
@@ -2902,8 +3223,10 @@
       <a href="../screen-coordinates/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Screen Coordinates on a Round Display
+    Screen Coordinates
+    
   </span>
   
 
@@ -2923,8 +3246,10 @@
       <a href="../pixel/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Drawing Pixels
+    Pixel
+    
   </span>
   
 
@@ -2944,8 +3269,10 @@
       <a href="../lines/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Drawing Lines
+    Lines
+    
   </span>
   
 
@@ -2965,8 +3292,10 @@
       <a href="../rect/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Drawing Rectangles
+    Rectangle
+    
   </span>
   
 
@@ -2986,8 +3315,10 @@
       <a href="../ellipse/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Ellipse and Quadrant Fill Codes
+    Ellipse
+    
   </span>
   
 
@@ -3007,8 +3338,10 @@
       <a href="../circle/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Drawing Circles
+    Circle
+    
   </span>
   
 
@@ -3028,8 +3361,10 @@
       <a href="../poly/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Drawing Polygons
+    Polygon
+    
   </span>
   
 
@@ -3058,8 +3393,10 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
-    Blitting Buffers
+    Blit
+    
   </span>
   
 
@@ -3069,8 +3406,10 @@
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
+  
   <span class="md-ellipsis">
-    Blitting Buffers
+    Blit
+    
   </span>
   
 
@@ -3092,6 +3431,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#two-bytes-per-pixel-changes-everything" class="md-nav__link">
+    <span class="md-ellipsis">
+      Two Bytes Per Pixel Changes Everything
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blit_buffer-is-opaque" class="md-nav__link">
+    <span class="md-ellipsis">
+      blit_buffer() Is Opaque
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sample-program-code" class="md-nav__link">
     <span class="md-ellipsis">
       Sample Program Code
@@ -3101,9 +3458,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#color-costs-memory-and-heres-where-you-feel-it" class="md-nav__link">
+  <a href="#the-sprite-class-is-worth-stealing" class="md-nav__link">
     <span class="md-ellipsis">
-      Color Costs Memory, and Here's Where You Feel It
+      The Sprite Class Is Worth Stealing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#things-to-try" class="md-nav__link">
+    <span class="md-ellipsis">
+      Things to Try
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
     </span>
   </a>
   
@@ -3128,8 +3503,10 @@
       <a href="../happy-face/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Happy Face
+    Your First Face
+    
   </span>
   
 
@@ -3149,8 +3526,10 @@
       <a href="../eye-scanner/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Eye Scanner
+    
   </span>
   
 
@@ -3170,8 +3549,10 @@
       <a href="../wink/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Winking with a Smile
+    
   </span>
   
 
@@ -3191,8 +3572,10 @@
       <a href="../blink/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Blinking
+    
   </span>
   
 
@@ -3212,8 +3595,10 @@
       <a href="../eyebrows/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Eyebrows with poly()
+    Eyebrows
+    
   </span>
   
 
@@ -3233,8 +3618,10 @@
       <a href="../no-blocking/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Don't Block the Loop
+    
   </span>
   
 
@@ -3254,8 +3641,10 @@
       <a href="../sleepy/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Sleeping Face
+    
   </span>
   
 
@@ -3275,8 +3664,10 @@
       <a href="../buttons/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Reading Two Buttons
+    
   </span>
   
 
@@ -3296,8 +3687,10 @@
       <a href="../modes/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Mode Switching
+    
   </span>
   
 
@@ -3317,8 +3710,10 @@
       <a href="../emotion-modes/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Expression Menu
+    The Expression Menu
+    
   </span>
   
 
@@ -3338,8 +3733,10 @@
       <a href="../demo/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Demo Reel
+    
   </span>
   
 
@@ -3359,8 +3756,10 @@
       <a href="../sample-main-demo/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Sample main.py: Self-Advancing Demo + Button Menu
+    Standalone main.py
+    
   </span>
   
 
@@ -3380,8 +3779,10 @@
       <a href="../face-parameters/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Face Parameters - Live Tuning
+    Live Face Parameters
+    
   </span>
   
 
@@ -3401,8 +3802,10 @@
       <a href="../face-module/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    The Face Module - Decomposition and Abstraction
+    The Face Module
+    
   </span>
   
 
@@ -3422,8 +3825,10 @@
       <a href="../emotion-table/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    The Emotion Table - Pattern Recognition
+    The Emotion Table
+    
   </span>
   
 
@@ -3443,8 +3848,10 @@
       <a href="../broken-faces/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Five Broken Faces - Debugging
+    Five Broken Faces
+    
   </span>
   
 
@@ -3464,8 +3871,10 @@
       <a href="../trace-and-watch/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Trace and Watch - Debugging by Measurement
+    Trace and Watch
+    
   </span>
   
 
@@ -3485,8 +3894,10 @@
       <a href="../keyframes/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Keyframes - An Animation Is Just Data
+    Keyframes
+    
   </span>
   
 
@@ -3506,8 +3917,10 @@
       <a href="../state-machine/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     A Face With a Memory
+    
   </span>
   
 
@@ -3527,8 +3940,10 @@
       <a href="../partial-redraw/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Only Redraw What Changed
+    
   </span>
   
 
@@ -3548,8 +3963,33 @@
       <a href="../design-your-own/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Design Your Own Emotion - The Capstone
+    Design Your Own Emotion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eye-saccade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Saccade
+    
   </span>
   
 
@@ -3569,8 +4009,10 @@
       <a href="../draw-speed-timing/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     How Fast Is a Face?
+    
   </span>
   
 
@@ -3590,8 +4032,10 @@
       <a href="../color-bits/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Color and Bits - What a Number Has to Give Up
+    Color and Bits
+    
   </span>
   
 
@@ -3611,12 +4055,942 @@
       <a href="../color-wheel/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     The Color Wheel
+    
   </span>
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    2.1" Smartwatch
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            2.1" Smartwatch
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/connection-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Connection Test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/hello/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hello World
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/screen-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Screen Coordinates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/pixel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pixel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/lines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lines
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/rect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rectangle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/ellipse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ellipse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/circle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Circle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/poly/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polygon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/blit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/happy-face/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Your First Face
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/eye-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Scanner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/eye-scanner-speedup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Making the Eye Scanner Fast
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/wink/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Winking with a Smile
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/blink/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blinking
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/eyebrows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eyebrows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/no-blocking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Don't Block the Loop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/sleepy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sleeping Face
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/buttons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Reading Two Buttons
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/modes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mode Switching
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/emotion-modes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The Expression Menu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Demo Reel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/sample-main-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Standalone main.py
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/face-parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Live Face Parameters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/color-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Color and Resolution Demo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/face-module/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The Face Module
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/emotion-table/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The Emotion Table
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/broken-faces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Five Broken Faces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/trace-and-watch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Trace and Watch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/keyframes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Keyframes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/state-machine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A Face With a Memory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/partial-redraw/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Only Redraw What Changed
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/design-your-own/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Design Your Own Emotion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/eye-saccade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eye Saccade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/draw-speed-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How Fast Is a Face?
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/color-bits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Color and Bits
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sw-gc9b72/color-wheel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The Color Wheel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -3639,26 +5013,29 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     MicroSims
+    
   </span>
   
 
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             MicroSims
           </label>
@@ -3674,8 +5051,10 @@
       <a href="../../../sims/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     List of MicroSims
+    
   </span>
   
 
@@ -3695,8 +5074,10 @@
       <a href="../../../sims/ambiguous-expression-confusability-sorter/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Ambiguous Expression Confusability Sorter
+    
   </span>
   
 
@@ -3716,8 +5097,10 @@
       <a href="../../../sims/bitwise-shift-visualizer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Bitwise Operator and Shift Visualizer
+    
   </span>
   
 
@@ -3737,8 +5120,10 @@
       <a href="../../../sims/blit-transparency-key-visualizer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Blit Transparency Key Visualizer
+    
   </span>
   
 
@@ -3758,8 +5143,10 @@
       <a href="../../../sims/expression-parameter-matching-challenge/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Build This Expression Challenge
+    
   </span>
   
 
@@ -3779,8 +5166,10 @@
       <a href="../../../sims/button-bounce-timeline-visualizer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Button Bounce Timeline Visualizer
+    
   </span>
   
 
@@ -3800,8 +5189,10 @@
       <a href="../../../sims/capstone-planning-worksheet/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Capstone Planning Worksheet
+    
   </span>
   
 
@@ -3821,8 +5212,10 @@
       <a href="../../../sims/capstone-rubric-scoring-tool/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Capstone Rubric Scoring Tool
+    
   </span>
   
 
@@ -3842,8 +5235,10 @@
       <a href="../../../sims/circular-buffer-waste-visualizer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Circular Buffer Waste Visualizer
+    
   </span>
   
 
@@ -3863,8 +5258,10 @@
       <a href="../../../sims/color-wheel-emotion-picker/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Color Wheel Emotion Picker
+    
   </span>
   
 
@@ -3884,8 +5281,10 @@
       <a href="../../../sims/computational-thinking-concept-map/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Computational Thinking Concept Map
+    
   </span>
   
 
@@ -3905,8 +5304,10 @@
       <a href="../../../sims/convex-concave-shape-classifier/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Convex vs Concave Shape Classifier
+    
   </span>
   
 
@@ -3926,8 +5327,10 @@
       <a href="../../../sims/coordinate-grid-explorer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Coordinate Grid Explorer
+    
   </span>
   
 
@@ -3947,8 +5350,10 @@
       <a href="../../../sims/draw-call-benchmark-chart/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Draw Call Benchmark Chart
+    
   </span>
   
 
@@ -3968,8 +5373,10 @@
       <a href="../../../sims/draw-order-overdraw-stepper/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Draw Order and Overdraw Stepper
+    
   </span>
   
 
@@ -3989,8 +5396,10 @@
       <a href="../../../sims/ekman-emotion-feature-map/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Ekman Emotion Feature Map
+    
   </span>
   
 
@@ -4010,8 +5419,10 @@
       <a href="../../../sims/encoder-quadrature-signal-visualizer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Encoder Quadrature Signal Visualizer
+    
   </span>
   
 
@@ -4031,8 +5442,10 @@
       <a href="../../../sims/expression-interpolation-keyframe-stepper/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Expression Interpolation Keyframe Stepper
+    
   </span>
   
 
@@ -4052,8 +5465,10 @@
       <a href="../../../sims/expression-menu-live-simulator/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Expression Menu Live Simulator
+    
   </span>
   
 
@@ -4073,8 +5488,10 @@
       <a href="../../../sims/expression-recipe-flashcard-gallery/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Expression Recipe Flashcard Gallery
+    
   </span>
   
 
@@ -4094,8 +5511,10 @@
       <a href="../../../sims/face-layout-grid-visualizer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Face Layout Grid Visualizer
+    
   </span>
   
 
@@ -4115,8 +5534,10 @@
       <a href="../../../sims/face-parameter-slider-playground/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Face Parameter Slider Playground
+    
   </span>
   
 
@@ -4136,8 +5557,10 @@
       <a href="../../../sims/facial-symmetry-mirror-demonstrator/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Facial Symmetry Mirror Demonstrator
+    
   </span>
   
 
@@ -4157,8 +5580,10 @@
       <a href="../../../sims/robot-design-approach-infographic/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Four Robots, Four Bets on a Screen Face
+    
   </span>
   
 
@@ -4178,8 +5603,10 @@
       <a href="../../../sims/buffer-size-calculator/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Frame Buffer Size Calculator
+    
   </span>
   
 
@@ -4199,8 +5626,10 @@
       <a href="../../../sims/framebuf-version-timeline-explorer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     FrameBuf Version Timeline
+    
   </span>
   
 
@@ -4220,8 +5649,10 @@
       <a href="../../../sims/scope-call-stack-explorer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Global vs Local Scope Call Stack Explorer
+    
   </span>
   
 
@@ -4241,8 +5672,10 @@
       <a href="../../../sims/indentation-error-visualizer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Indentation Error Visualizer
+    
   </span>
   
 
@@ -4262,8 +5695,10 @@
       <a href="../../../sims/breadboard-wiring-diagram/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Interactive Breadboard Wiring Diagram
+    
   </span>
   
 
@@ -4283,8 +5718,10 @@
       <a href="../../../sims/collection-types-comparison-infographic/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     List vs Tuple vs Dictionary Comparison
+    
   </span>
   
 
@@ -4304,8 +5741,10 @@
       <a href="../../../sims/micropython-loop-tracer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     MicroPython Loop Tracer
+    
   </span>
   
 
@@ -4325,8 +5764,10 @@
       <a href="../../../sims/mode-state-transition-diagram/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Mode State Transition Diagram
+    
   </span>
   
 
@@ -4346,8 +5787,10 @@
       <a href="../../../sims/ellipse-workaround-before-after-toggle/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Old Workaround vs. New ellipse() Call
+    
   </span>
   
 
@@ -4367,8 +5810,10 @@
       <a href="../../../sims/pixel-drawing-sandbox/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Pixel Drawing Sandbox
+    
   </span>
   
 
@@ -4388,8 +5833,10 @@
       <a href="../../../sims/polling-vs-interrupt-response-simulator/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Polling vs Interrupt Response Simulator
+    
   </span>
   
 
@@ -4409,8 +5856,10 @@
       <a href="../../../sims/poly-point-array-builder/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Poly Point Array Builder
+    
   </span>
   
 
@@ -4430,8 +5879,10 @@
       <a href="../../../sims/potentiometer-adc-mapping-visualizer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Potentiometer ADC Mapping Visualizer
+    
   </span>
   
 
@@ -4451,8 +5902,10 @@
       <a href="../../../sims/predict-return-value-tracer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Predict the Return Value Tracer
+    
   </span>
   
 
@@ -4472,8 +5925,10 @@
       <a href="../../../sims/pull-up-resistor-simulator/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Pull-Up Resistor and Button Simulator
+    
   </span>
   
 
@@ -4493,8 +5948,10 @@
       <a href="../../../sims/quadrant-fill-code-explorer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quadrant Fill Code Explorer
+    
   </span>
   
 
@@ -4514,8 +5971,10 @@
       <a href="../../../sims/rgb565-bit-packing-visualizer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     RGB565 Bit-Packing Visualizer
+    
   </span>
   
 
@@ -4535,8 +5994,10 @@
       <a href="../../../sims/robot-funding-price-outcome-chart/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Robot Price and Funding Comparison Chart
+    
   </span>
   
 
@@ -4556,8 +6017,10 @@
       <a href="../../../sims/round-display-safe-area-planner/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Round Display Safe-Area Layout Planner
+    
   </span>
   
 
@@ -4577,8 +6040,10 @@
       <a href="../../../sims/expression-rubric-rater/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Rubric Rater — Score This Expression
+    
   </span>
   
 
@@ -4598,8 +6063,10 @@
       <a href="../../../sims/robot-face-timeline-explorer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Screen-Based Robot Face Timeline
+    
   </span>
   
 
@@ -4619,8 +6086,10 @@
       <a href="../../../sims/sleep-vs-ticks-button-miss-simulator/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Sleep vs Ticks Button Miss Simulator
+    
   </span>
   
 
@@ -4640,8 +6109,10 @@
       <a href="../../../sims/spi-i2c-bus-explorer/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     SPI vs I2C Bus Explorer
+    
   </span>
   
 
@@ -4661,8 +6132,10 @@
       <a href="../../../sims/valence-arousal-quadrant-plotter/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Valence-Arousal Quadrant Plotter
+    
   </span>
   
 
@@ -4689,8 +6162,10 @@
       <a href="../../../parts-list/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Parts List
+    
   </span>
   
 
@@ -4709,26 +6184,29 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Learning Graph
+    
   </span>
   
 
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_10">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Learning Graph
           </label>
@@ -4744,8 +6222,10 @@
       <a href="../../../learning-graph/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Introduction
+    
   </span>
   
 
@@ -4765,8 +6245,10 @@
       <a href="../../../learning-graph/starting-concept-list/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Starting Concept List
+    
   </span>
   
 
@@ -4786,8 +6268,10 @@
       <a href="../../../learning-graph/course-description-assessment/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Course Description Assessment
+    
   </span>
   
 
@@ -4807,8 +6291,10 @@
       <a href="../../../learning-graph/concept-list/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Concept List
+    
   </span>
   
 
@@ -4828,8 +6314,10 @@
       <a href="../../../learning-graph/quality-metrics/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quality Metrics
+    
   </span>
   
 
@@ -4849,8 +6337,10 @@
       <a href="../../../learning-graph/concept-taxonomy/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Concept Taxonomy
+    
   </span>
   
 
@@ -4870,8 +6360,10 @@
       <a href="../../../learning-graph/taxonomy-distribution/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Taxonomy Distribution
+    
   </span>
   
 
@@ -4891,8 +6383,10 @@
       <a href="../../../learning-graph/mascot-test/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Mascot Test
+    
   </span>
   
 
@@ -4912,8 +6406,10 @@
       <a href="../../../learning-graph/quiz-generation-report/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Quiz Generation Report
+    
   </span>
   
 
@@ -4933,8 +6429,10 @@
       <a href="../../../learning-graph/faq-quality-report/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     FAQ Quality Report
+    
   </span>
   
 
@@ -4954,71 +6452,10 @@
       <a href="../../../learning-graph/faq-coverage-gaps/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     FAQ Coverage Gaps
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../learning-graph/book-metrics/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Book Metrics
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../learning-graph/chapter-metrics/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Chapter Metrics
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../learning-graph/glossary-quality-report/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Glossary Quality Report
+    
   </span>
   
 
@@ -5045,26 +6482,29 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
         
           
-          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Stories
+    
   </span>
   
 
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_11">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             Stories
           </label>
@@ -5080,197 +6520,10 @@
       <a href="../../../stories/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Overview
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../stories/the-label-on-the-screen/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    The Label on the Screen
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../stories/anki-cozmo-vector/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Bright Eyes, Closed Doors: Cozmo and Vector
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../stories/masahiro-mori/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    The Valley He Wouldn't Cross: Masahiro Mori
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../stories/paul-ekman/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Mapping the Human Face: Paul Ekman
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../stories/rodney-brooks/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    No Map, No Plan: Rodney Brooks
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../stories/rosalind-picard/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    The Signal Beneath the Noise: Rosalind Picard
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../stories/cynthia-breazeal/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Kismet's Gaze: Cynthia Breazeal
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../stories/hideki-kozima/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Small Robot, Big Attention: Hideki Kozima
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../stories/joy-buolamwini/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    The Mirror That Wouldn't See Her: Joy Buolamwini
+    
   </span>
   
 
@@ -5290,8 +6543,194 @@
       <a href="../../../stories/story-ideas/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Story Ideas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../stories/anki-cozmo-vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bright Eyes, Closed Doors: Cozmo and Vector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../stories/masahiro-mori/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The Valley He Wouldn't Cross: Masahiro Mori
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../stories/paul-ekman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mapping the Human Face: Paul Ekman
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../stories/rodney-brooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    No Map, No Plan: Rodney Brooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../stories/rosalind-picard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The Signal Beneath the Noise: Rosalind Picard
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../stories/cynthia-breazeal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kismet's Gaze: Cynthia Breazeal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../stories/hideki-kozima/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Small Robot, Big Attention: Hideki Kozima
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../stories/joy-buolamwini/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The Mirror That Wouldn't See Her: Joy Buolamwini
+    
   </span>
   
 
@@ -5318,8 +6757,10 @@
       <a href="../../../teachers-guide/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Teachers Guide
+    
   </span>
   
 
@@ -5338,8 +6779,10 @@
       <a href="../../../contact/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Contact
+    
   </span>
   
 
@@ -5358,8 +6801,10 @@
       <a href="../../../faq/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     FAQ
+    
   </span>
   
 
@@ -5378,8 +6823,10 @@
       <a href="../../../glossary/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Glossary
+    
   </span>
   
 
@@ -5398,8 +6845,10 @@
       <a href="../../../references/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     References
+    
   </span>
   
 
@@ -5435,6 +6884,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#two-bytes-per-pixel-changes-everything" class="md-nav__link">
+    <span class="md-ellipsis">
+      Two Bytes Per Pixel Changes Everything
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blit_buffer-is-opaque" class="md-nav__link">
+    <span class="md-ellipsis">
+      blit_buffer() Is Opaque
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sample-program-code" class="md-nav__link">
     <span class="md-ellipsis">
       Sample Program Code
@@ -5444,9 +6911,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#color-costs-memory-and-heres-where-you-feel-it" class="md-nav__link">
+  <a href="#the-sprite-class-is-worth-stealing" class="md-nav__link">
     <span class="md-ellipsis">
-      Color Costs Memory, and Here's Where You Feel It
+      The Sprite Class Is Worth Stealing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#things-to-try" class="md-nav__link">
+    <span class="md-ellipsis">
+      Things to Try
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
     </span>
   </a>
   
@@ -5466,130 +6951,153 @@
                 
                   
 
+
   
   
 
 
-<h1 id="lab-9-blitting-buffers">Lab 9: Blitting Buffers</h1>
-<p><code>display.blit_buffer(buffer, x, y, width, height)</code> stamps a whole block of pre-computed pixels onto the display in one shot. Build a sprite once into an off-screen buffer, then copy it wherever — and however many times — you need it.</p>
+<h1 id="blitting-buffers">Blitting Buffers</h1>
+<p><code>blit_buffer()</code> stamps a whole block of pixels onto the display in one shot. Draw a sprite once
+into a buffer in RAM, then copy it wherever — and however many times — you need it.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">display</span><span class="o">.</span><span class="n">blit_buffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>This is also where the color display's <strong>memory budget</strong> shows up for the first time, and the
+arithmetic explains something about this entire kit.</p>
+<h2 id="two-bytes-per-pixel-changes-everything">Two Bytes Per Pixel Changes Everything</h2>
+<p>On the OLED, a sprite was one <strong>bit</strong> per pixel. Here it is two <strong>bytes</strong> — sixteen times bigger.</p>
+<table>
+<thead>
+<tr>
+<th>Sprite</th>
+<th>OLED (1 bit/px)</th>
+<th>This display (RGB565, 2 bytes/px)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A 64 × 48 eye</td>
+<td>384 bytes</td>
+<td><strong>6,144 bytes</strong></td>
+</tr>
+<tr>
+<td>A full screen</td>
+<td>1,024 bytes</td>
+<td><strong>115,200 bytes</strong></td>
+</tr>
+<tr>
+<td>RP2040 RAM, total</td>
+<td>264 KB</td>
+<td>264 KB</td>
+</tr>
+</tbody>
+</table>
+<p>Look at that last column. A full-screen buffer would be 115,200 bytes out of the 264 KB an RP2040
+has — most of what MicroPython leaves free. <strong>That is the real reason this driver has no frame
+buffer, and the reason there is no <code>show()</code> anywhere in this kit.</strong></p>
+<div class="admonition mascot-thinking">
+<p class="admonition-title">Every Constraint in This Kit Comes From That Number</p>
+<p><img alt="Pixel thinks it through" class="mascot-admonition-img" src="../../../img/mascot/thinking.png" />
+No frame buffer means no <code>show()</code>, which means every drawing call lands on the glass immediately, which means erasing has to be careful and animations only redraw what moved. One arithmetic fact, and the whole kit is shaped by it.</p>
+</div>
+<h2 id="blit_buffer-is-opaque">blit_buffer() Is Opaque</h2>
+<p><code>framebuf</code>'s <code>blit()</code> took a <code>key</code> color to skip, so you could stamp a sprite over a background and
+let the background show through. This driver has no such option — <code>blit_buffer()</code> sends a solid
+rectangle of pixels, background and all.</p>
+<p>So <code>shapes.blit_keyed()</code> does it the hard way: it walks each row, finds the runs of non-key pixels,
+and sends only those. Read it and you will know exactly what <code>framebuf</code> was doing for you.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>display.blit_buffer()</code></th>
+<th><code>shapes.blit_keyed()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What it sends</td>
+<td>One command, then the whole block</td>
+<td>One command per run, per row</td>
+</tr>
+<tr>
+<td>Background pixels</td>
+<td>Painted over whatever was there</td>
+<td>Skipped</td>
+</tr>
+<tr>
+<td>Speed</td>
+<td>Fast</td>
+<td>Noticeably slower</td>
+</tr>
+<tr>
+<td>Use it when</td>
+<td>The sprite sits on a known background</td>
+<td>The sprite must sit on top of something</td>
+</tr>
+</tbody>
+</table>
 <h2 id="sample-program-code">Sample Program Code</h2>
-<p>One eye built into a sprite, stamped twice for a matching pair, then stamped over a striped background two ways — opaque and with the background key skipped:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
-<span class="normal">  2</span>
-<span class="normal">  3</span>
-<span class="normal">  4</span>
-<span class="normal">  5</span>
-<span class="normal">  6</span>
-<span class="normal">  7</span>
-<span class="normal">  8</span>
-<span class="normal">  9</span>
-<span class="normal"> 10</span>
-<span class="normal"> 11</span>
-<span class="normal"> 12</span>
-<span class="normal"> 13</span>
-<span class="normal"> 14</span>
-<span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
-<span class="normal"> 45</span>
-<span class="normal"> 46</span>
-<span class="normal"> 47</span>
-<span class="normal"> 48</span>
-<span class="normal"> 49</span>
-<span class="normal"> 50</span>
-<span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
-<span class="normal"> 54</span>
-<span class="normal"> 55</span>
-<span class="normal"> 56</span>
-<span class="normal"> 57</span>
-<span class="normal"> 58</span>
-<span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Lab 09: Blitting Buffers</span>
-<span class="c1"># display.blit_buffer(buffer, x, y, width, height) stamps a block of</span>
-<span class="c1"># pixels onto the display in one shot. Draw a sprite once into a buffer,</span>
-<span class="c1"># then copy it wherever (and however many times) you need it.</span>
-<span class="c1">#</span>
-<span class="c1"># This is where the color display&#39;s memory budget shows up for the first</span>
-<span class="c1"># time. On the OLED, a sprite was one BIT per pixel. Here it is two</span>
-<span class="c1"># BYTES per pixel -- sixteen times bigger. A 64x48 eye costs 6,144 bytes,</span>
-<span class="c1"># and a full-screen 240x240 buffer would cost 115,200, which is most of</span>
-<span class="c1"># the RAM MicroPython has on an RP2040. That is the real reason this</span>
-<span class="c1"># driver has no frame buffer, and the reason there is no show().</span>
-<span class="c1">#</span>
-<span class="c1"># The other difference: blit_buffer() is OPAQUE. framebuf&#39;s blit() took a</span>
-<span class="c1"># `key` color to skip, so you could stamp a sprite over a background.</span>
-<span class="c1"># This driver has no such option, so shapes.blit_keyed() does it the hard</span>
-<span class="c1"># way -- finding the runs of non-key pixels and sending those. Read it</span>
-<span class="c1"># and you will know exactly what framebuf was doing for you.</span>
+<p>The program builds one eye in an off-screen buffer, then stamps it four times — twice on plain
+black, and twice over a striped background so you can see exactly what each kind of blit covers up.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Lab 09: Blitting Buffers</span>
 
 <span class="kn">import</span> <span class="nn">config</span>
 <span class="kn">import</span> <span class="nn">shapes</span>
@@ -5601,12 +7109,6 @@
 <span class="n">FONT</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">SMALL_FONT</span>
 <span class="n">TRANSPARENT</span> <span class="o">=</span> <span class="n">BLACK</span>
 
-<span class="c1"># --- build one eye in an off-screen buffer ---------------------------</span>
-<span class="c1">#</span>
-<span class="c1"># shapes.sprite() hands back a bytearray of RGB565 pixels. To draw into</span>
-<span class="c1"># it we need something that behaves like a display, so Sprite below wraps</span>
-<span class="c1"># the buffer and offers the three calls shapes.ellipse() actually uses.</span>
-
 <span class="n">EYE_WIDTH</span> <span class="o">=</span> <span class="mi">64</span>
 <span class="n">EYE_HEIGHT</span> <span class="o">=</span> <span class="mi">48</span>
 
@@ -5614,10 +7116,7 @@
 <span class="k">class</span> <span class="nc">Sprite</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A tiny stand-in for the display that draws into a buffer instead.</span>
 
-<span class="sd">    shapes.ellipse() only ever calls hline(), so that is all this needs.</span>
-<span class="sd">    Passing this to a drawing function instead of the real display is a</span>
-<span class="sd">    trick worth remembering -- the drawing code cannot tell the</span>
-<span class="sd">    difference, and does not need to.&quot;&quot;&quot;</span>
+<span class="sd">    shapes.ellipse() only ever calls hline(), so that is all this needs.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="n">BLACK</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
@@ -5642,8 +7141,7 @@
 <span class="n">display</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">BLACK</span><span class="p">)</span>
 <span class="n">display</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">FONT</span><span class="p">,</span> <span class="s2">&quot;blit_buffer&quot;</span><span class="p">,</span> <span class="mi">76</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">,</span> <span class="n">BLACK</span><span class="p">)</span>
 
-<span class="c1"># top: stamp the same eye buffer twice to get a matching pair. One buffer,</span>
-<span class="c1"># two trips down the wire, and no ellipse math either time.</span>
+<span class="c1"># top: stamp the same eye buffer twice to get a matching pair.</span>
 <span class="n">display</span><span class="o">.</span><span class="n">blit_buffer</span><span class="p">(</span><span class="n">eye</span><span class="o">.</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">EYE_WIDTH</span><span class="p">,</span> <span class="n">EYE_HEIGHT</span><span class="p">)</span>
 <span class="n">display</span><span class="o">.</span><span class="n">blit_buffer</span><span class="p">(</span><span class="n">eye</span><span class="o">.</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">134</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">EYE_WIDTH</span><span class="p">,</span> <span class="n">EYE_HEIGHT</span><span class="p">)</span>
 
@@ -5655,30 +7153,43 @@
 <span class="c1"># stripes, because the sprite is a solid rectangle of pixels</span>
 <span class="n">display</span><span class="o">.</span><span class="n">blit_buffer</span><span class="p">(</span><span class="n">eye</span><span class="o">.</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">EYE_WIDTH</span><span class="p">,</span> <span class="n">EYE_HEIGHT</span><span class="p">)</span>
 
-<span class="c1"># right, blit_keyed: black pixels are skipped, so the stripes show</span>
-<span class="c1"># through. Watch how much slower it is -- that is the price of asking</span>
-<span class="c1"># about every pixel instead of shipping the whole block.</span>
+<span class="c1"># right, blit_keyed: black pixels are skipped, so the stripes show through</span>
 <span class="n">shapes</span><span class="o">.</span><span class="n">blit_keyed</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="n">eye</span><span class="o">.</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">142</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span>
                   <span class="n">EYE_WIDTH</span><span class="p">,</span> <span class="n">EYE_HEIGHT</span><span class="p">,</span> <span class="n">TRANSPARENT</span><span class="p">)</span>
-
-<span class="c1"># Things to try:</span>
-<span class="c1">#</span>
-<span class="c1"># 1. Work out the byte cost of the eye sprite: 64 * 48 * 2. Then work out</span>
-<span class="c1">#    what a full-screen buffer would cost, and compare that to the 264 KB</span>
-<span class="c1">#    of RAM on an RP2040 -- most of which MicroPython is already using.</span>
-<span class="c1">#</span>
-<span class="c1"># 2. Time the two bottom blits. The plain one sends one command and 6,144</span>
-<span class="c1">#    bytes. The keyed one sends a command per run, per row.</span>
-<span class="c1">#</span>
-<span class="c1"># 3. Make the sprite&#39;s background RED instead of BLACK and pass that as</span>
-<span class="c1">#    the key. Transparency is not a property of a color -- it is whichever</span>
-<span class="c1">#    color you point at.</span>
 </code></pre></div></td></tr></table></div>
-<p>Here's what that program draws:</p>
-<p><img alt="Simulated output of 09-blit.py" src="sample-output.png" /></p>
-<h2 id="color-costs-memory-and-heres-where-you-feel-it">Color Costs Memory, and Here's Where You Feel It</h2>
-<p>On the OLED kit, a sprite was one <strong>bit</strong> per pixel. Here it's two <strong>bytes</strong> — sixteen times more. A 64x48 eye sprite costs 6,144 bytes; a full-screen 240x240 buffer would cost 115,200, which is most of what MicroPython leaves free on an RP2040's 264 KB of RAM. That arithmetic is the real reason this driver keeps no frame buffer at all.</p>
-<p>It's also why <code>blit_buffer()</code> is <strong>opaque</strong> — it has no transparency key the way <code>framebuf.blit()</code> did. <code>shapes.blit_keyed()</code> in this kit rebuilds that feature the hard way, scanning each row of the sprite for runs of non-key pixels and sending only those. Reading it once is the fastest way to understand exactly what <code>framebuf</code> was quietly doing for you on the OLED kit.</p>
+<p>Here's what that program draws on the display:</p>
+<p><img alt="Two identical eyes stamped side by side on black at the top, and below them a band of horizontal stripes where the left eye sits in a solid black rectangle that blocks the stripes while the right eye lets the stripes run through the space around it" src="sample-output.png" /></p>
+<p>Compare the two bottom eyes carefully. The left one carries a black rectangle with it and punches a
+hole in the stripes. The right one lets the stripes run right up to the edge of the eye, because
+every black pixel in the sprite was skipped.</p>
+<h2 id="the-sprite-class-is-worth-stealing">The Sprite Class Is Worth Stealing</h2>
+<p>Look at what <code>Sprite</code> actually is: an object with <code>hline()</code> and <code>pixel()</code> methods that writes into
+a bytearray instead of a display. <code>shapes.ellipse()</code> cannot tell the difference and does not need
+to — it just calls <code>hline()</code> on whatever it was handed.</p>
+<p>That is a trick worth remembering well beyond this lab. Any drawing function that only talks to an
+interface can be pointed at something other than a screen.</p>
+<div class="admonition mascot-warning">
+<p class="admonition-title">Transparency Is Not a Property of a Color</p>
+<p><img alt="Pixel warns you" class="mascot-admonition-img" src="../../../img/mascot/warning.png" />
+Black is not special here. <code>blit_keyed()</code> skips whatever color you point it at, so if you build your sprite on a red background and pass red as the key, red becomes the transparent one. The key is a choice you make, not a fact about the pixel.</p>
+</div>
+<h2 id="things-to-try">Things to Try</h2>
+<ol>
+<li><strong>Do the memory arithmetic yourself.</strong> Work out the byte cost of the eye sprite (64 × 48 × 2),
+   then a full-screen buffer, and compare both to an RP2040's 264 KB.</li>
+<li><strong>Time the two bottom blits.</strong> The plain one sends one command and 6,144 bytes. The keyed one
+   sends a command per run, per row. Measure the gap — that is the price of asking about every pixel.</li>
+<li><strong>Change the sprite's background to <code>config.RED</code></strong> and pass that as the key. Same behavior,
+   different color skipped.</li>
+<li><strong>Blit the eye eight times</strong> in a ring around the center. One buffer, eight stamps, and no
+   ellipse math after the first one.</li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="../ellipse/">Drawing Ellipses</a> — the function that draws into the sprite buffer</li>
+<li><a href="../color-bits/">Color and Bits</a> — what those two bytes per pixel actually contain</li>
+<li><a href="../partial-redraw/">Only Redraw What Changed</a> — the other answer to "how do I avoid sending the whole screen?"</li>
+</ul>
 
 
 
@@ -5730,10 +7241,12 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
       
         <script src="../../../js/mathjax.js"></script>
       
