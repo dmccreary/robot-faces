@@ -4,8 +4,9 @@
 # GC9A01 module) using mpremote. Run from within this directory or from
 # anywhere — the script resolves its own location.
 #
-# Everything in lib/ goes to :lib/ first — the GC9A01 driver and the two font
-# modules, all of which config.py imports. Then config.py, then the labs.
+# Everything in lib/ goes to :lib/ first — the GC9A01 driver, the two font
+# modules, and shapes.py, all of which config.py or the labs import. Then
+# config.py, then the labs.
 #
 # The fonts are not optional. Unlike framebuf, this driver has no built-in
 # font, so config.py fails to import if lib/vga1_8x16.py and

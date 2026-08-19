@@ -16,9 +16,17 @@ it competes for space with the code students actually run and shows up in their 
 Only these belong in a kit directory:
 
 - Numbered lab programs (`NN-name.py`) that students run
-- Shared modules the labs import, such as `config.py` and `face.py`
-- Display drivers and other vendored libraries, in `lib/`
+- Shared modules holding facts about *this kit*, at the kit root — `config.py` (which pins,
+  which screen size) and `face.py` (how wide an eye is, where an eyebrow sits)
+- Generic plumbing, in `lib/` — display drivers, vendored libraries, bitmap fonts, and
+  drawing utilities like `shapes.py` that never mention the kit they're in
 - `README.md` and `upload-code.sh`, which are not `.py` and are skipped
+
+The kit-root vs. `lib/` line is about **what the code knows**, not who wrote it. If a file
+would have to change when you swap the display or redesign the face, it belongs at the root.
+If it would travel to another kit unchanged, it belongs in `lib/`. Either location imports
+the same way — MicroPython puts both `/` and `/lib` on `sys.path` — so this is purely
+organizational.
 
 Everything else — test harnesses, build scripts, generators, one-off analysis code — goes in
 `src/utils/`, which is never uploaded. See `src/utils/README.md`.

@@ -204,13 +204,20 @@ here — the `"pico"` wiring above is the one that has been tested.
 
 ## Three Shared Modules
 
-Three files in this folder are not labs. They are libraries the labs import:
+Three files here are not labs. They are libraries the labs import:
 
 | File | What it holds |
 |---|---|
 | [`config.py`](config.py) | The **hardware** facts — which pin, which pixel size, the circle's geometry, how to start the display and the buttons. Every lab imports it. |
-| [`shapes.py`](shapes.py) | The **drawing commands this driver does not have** — `ellipse()`, `poly()`, `circle()`, `ring()`, keyed blitting. Labs 06 and up import it. |
+| [`lib/shapes.py`](lib/shapes.py) | The **drawing commands this driver does not have** — `ellipse()`, `poly()`, `circle()`, `ring()`, keyed blitting. Labs 06 and up import it. |
 | [`face.py`](face.py) | The **face** facts — how wide an eye is, where an eyebrow sits, how to draw each style of mouth, and what color it all draws in. Labs 23 and up import it. |
+
+`shapes.py` sits in `lib/` while the other two sit at the kit root, and the
+split is about what each file knows. `config.py` and `face.py` describe *this*
+kit — its pins, its screen, its eyes. `shapes.py` never mentions the kit at
+all; it is generic geometry that would move to another display unchanged, and
+in fact it did, into the [sw-gc9b72 kit](../sw-gc9b72/README.md). Both places
+import the same way, since MicroPython puts `/` and `/lib` on `sys.path`.
 
 `face.py` also holds the two color switches. `face.set_color(c)` changes what
 every part draws in from then on; every part function also takes an optional
@@ -307,14 +314,16 @@ other labs can import it, and auto-detects the serial port. If it picks the
 wrong one, override it: `PORT=/dev/your-device ./upload-code.sh`.
 
 If you'd rather upload by hand in Thonny, make sure `gc9a01.py`,
-`vga1_8x16.py` and `vga1_bold_16x32.py` all end up in a `/lib` folder on the
-board, not the root — otherwise `import gc9a01` fails with `ImportError: no
-module named 'gc9a01'`.
+`vga1_8x16.py`, `vga1_bold_16x32.py` and `shapes.py` all end up in a `/lib`
+folder on the board — otherwise `import gc9a01` fails with `ImportError: no
+module named 'gc9a01'`. (`shapes.py` is the one exception that would still
+work from the root, since MicroPython searches both, but keep it with the
+rest of `lib/` so the board matches this folder.)
 
 > **⚠️ Everything `.py` in this folder gets uploaded.** The script globs `*.py`
 > with no allowlist, so a stray tool or test script would land on the board and
 > take up filesystem space students need. Only labs, the shared modules they
-> import (`config.py`, `shapes.py`, `face.py`), and `lib/` belong here.
+> import (`config.py`, `face.py`), and `lib/` belong here.
 > Development tools go in [`src/utils/`](../../utils/README.md).
 
 ## Checking the Labs Without a Board
@@ -394,9 +403,9 @@ more than the successes:
 
 ## Labs
 
-Copy `config.py`, `shapes.py`, plus whichever lab file you're working on onto
-the board's filesystem and run it in Thonny. The labs are numbered so you can
-work through them in order, each one building on ideas from the last:
+Copy `config.py`, `lib/shapes.py`, plus whichever lab file you're working on
+onto the board's filesystem and run it in Thonny. The labs are numbered so you
+can work through them in order, each one building on ideas from the last:
 
 | Lab | File | What it teaches |
 |--|--|--|

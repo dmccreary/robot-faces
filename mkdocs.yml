@@ -77,39 +77,78 @@ nav:
       - Quiz: chapters/16-computational-thinking-capstone/quiz.md
       - Annotated References: chapters/16-computational-thinking-capstone/references.md
   
-  - OLED Labs:
-    - Introduction: kits/oled/index.md
-    - Connection Test: kits/oled/connection-test/index.md
-    - Hello World: kits/oled/hello-world/index.md
-    - Screen Coordinates: kits/oled/screen-coordinates/index.md
-    - Basic Drawing Commands: kits/oled/drawing-commands/index.md
-    - Pixel: kits/oled/pixel/index.md
-    - Line: kits/oled/line/index.md
-    - Rectangle: kits/oled/rectangle/index.md
-    - Ellipse: kits/oled/ellipse/index.md
-    - Circle: kits/oled/circle/index.md
-    - Polygon: kits/oled/polygon/index.md
-    - Text: kits/oled/text/index.md
-    - Scroll: kits/oled/scroll/index.md
-    - Blit: kits/oled/blit-commands/index.md
-    - Basic Face Layouts: kits/oled/basic-face-layouts/index.md
-    - Eye Scanner: kits/oled/eye-scanner/index.md
-    - Eyebrows: kits/oled/eyebrows/index.md
-    - Winking with a Smile: kits/oled/wink/index.md
-    - Blinking: kits/oled/blinking/index.md
-    - Emotion Types: kits/oled/emotion-types/index.md
-    - Sleeping Faces: kits/oled/sleeping-faces/index.md
-    - The Face Module: kits/oled/face-module/index.md
-    - The Emotion Table: kits/oled/emotion-table/index.md
-    - Five Broken Faces: kits/oled/broken-faces/index.md
-    - Trace and Watch: kits/oled/trace-and-watch/index.md
-    - Keyframes: kits/oled/keyframes/index.md
-    - A Face With a Memory: kits/oled/state-machine/index.md
-    - Only Redraw What Changed: kits/oled/partial-redraw/index.md
-    - Design Your Own Emotion: kits/oled/design-your-own/index.md
-    - How Fast Is a Face?: kits/oled/draw-speed-timing/index.md
-    - Box Cover Template: kits/oled/box-cover/index.md
-
+  - Kits:
+    - List of Kits: kits/index.md
+    - OLED:
+      - Introduction: kits/oled/index.md
+      - Connection Test: kits/oled/connection-test/index.md
+      - Hello World: kits/oled/hello-world/index.md
+      - Screen Coordinates: kits/oled/screen-coordinates/index.md
+      - Basic Drawing Commands: kits/oled/drawing-commands/index.md
+      - Pixel: kits/oled/pixel/index.md
+      - Line: kits/oled/line/index.md
+      - Rectangle: kits/oled/rectangle/index.md
+      - Ellipse: kits/oled/ellipse/index.md
+      - Circle: kits/oled/circle/index.md
+      - Polygon: kits/oled/polygon/index.md
+      - Text: kits/oled/text/index.md
+      - Scroll: kits/oled/scroll/index.md
+      - Blit: kits/oled/blit-commands/index.md
+      - Basic Face Layouts: kits/oled/basic-face-layouts/index.md
+      - Eye Scanner: kits/oled/eye-scanner/index.md
+      - Eyebrows: kits/oled/eyebrows/index.md
+      - Winking with a Smile: kits/oled/wink/index.md
+      - Blinking: kits/oled/blinking/index.md
+      - Emotion Types: kits/oled/emotion-types/index.md
+      - Sleeping Faces: kits/oled/sleeping-faces/index.md
+      - The Face Module: kits/oled/face-module/index.md
+      - The Emotion Table: kits/oled/emotion-table/index.md
+      - Five Broken Faces: kits/oled/broken-faces/index.md
+      - Trace and Watch: kits/oled/trace-and-watch/index.md
+      - Keyframes: kits/oled/keyframes/index.md
+      - A Face With a Memory: kits/oled/state-machine/index.md
+      - Only Redraw What Changed: kits/oled/partial-redraw/index.md
+      - Design Your Own Emotion: kits/oled/design-your-own/index.md
+      - How Fast Is a Face?: kits/oled/draw-speed-timing/index.md
+      - Box Cover Template: kits/oled/box-cover/index.md
+    - 1.2" Smartwatch:
+      - Introduction: kits/smartwatch/index.md
+      - Connection Test: kits/smartwatch/connection-test/index.md
+      - Hello World: kits/smartwatch/hello/index.md
+      - Screen Coordinates: kits/smartwatch/screen-coordinates/index.md
+      - Pixel: kits/smartwatch/pixel/index.md
+      - Lines: kits/smartwatch/lines/index.md
+      - Rectangle: kits/smartwatch/rect/index.md
+      - Ellipse: kits/smartwatch/ellipse/index.md
+      - Circle: kits/smartwatch/circle/index.md
+      - Polygon: kits/smartwatch/poly/index.md
+      - Blit: kits/smartwatch/blit/index.md
+      - Your First Face: kits/smartwatch/happy-face/index.md
+      - Eye Scanner: kits/smartwatch/eye-scanner/index.md
+      - Winking with a Smile: kits/smartwatch/wink/index.md
+      - Blinking: kits/smartwatch/blink/index.md
+      - Eyebrows: kits/smartwatch/eyebrows/index.md
+      - Don't Block the Loop: kits/smartwatch/no-blocking/index.md
+      - Sleeping Face: kits/smartwatch/sleepy/index.md
+      - Reading Two Buttons: kits/smartwatch/buttons/index.md
+      - Mode Switching: kits/smartwatch/modes/index.md
+      - The Expression Menu: kits/smartwatch/emotion-modes/index.md
+      - Demo Reel: kits/smartwatch/demo/index.md
+      - Standalone main.py: kits/smartwatch/sample-main-demo/index.md
+      - Live Face Parameters: kits/smartwatch/face-parameters/index.md
+      - The Face Module: kits/smartwatch/face-module/index.md
+      - The Emotion Table: kits/smartwatch/emotion-table/index.md
+      - Five Broken Faces: kits/smartwatch/broken-faces/index.md
+      - Trace and Watch: kits/smartwatch/trace-and-watch/index.md
+      - Keyframes: kits/smartwatch/keyframes/index.md
+      - A Face With a Memory: kits/smartwatch/state-machine/index.md
+      - Only Redraw What Changed: kits/smartwatch/partial-redraw/index.md
+      - Design Your Own Emotion: kits/smartwatch/design-your-own/index.md
+      - "How Fast Is a Face?": kits/smartwatch/draw-speed-timing/index.md
+      - Color and Bits: kits/smartwatch/color-bits/index.md
+      - The Color Wheel: kits/smartwatch/color-wheel/index.md
+    - 2.1" Smartwatch:
+      - Introduction: kits/sw-gc9b72/index.md
   - MicroSims:
     - List of MicroSims: sims/index.md
     - Ambiguous Expression Confusability Sorter: sims/ambiguous-expression-confusability-sorter/index.md

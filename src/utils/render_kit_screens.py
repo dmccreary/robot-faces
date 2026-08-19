@@ -6,12 +6,25 @@ every drawing call onto a real pixel buffer and saves a PNG, instead of
 discarding the call the way check-labs.py's DisplayStub does.
 
     python3 src/utils/render_kit_screens.py src/kits/smartwatch docs/kits/smartwatch
+    python3 src/utils/render_kit_screens.py src/kits/sw-gc9b72  docs/kits/sw-gc9b72
 
 For every lab NN-name.py this writes <outdir>/<name>/sample-output.png,
 where <name> is the filename with its NN- prefix and .py stripped. A lab
-that never constructs a display (lab 00 in the smartwatch kit, which only
+that never constructs a display (lab 00 in either round kit, which only
 blinks a pin) is skipped, and reported as skipped rather than given a
 blank image.
+
+WHICH DISPLAY IT DRAWS
+
+Nothing here names a controller. The screen's size, its center and its
+radius all come from the kit's own config.py, and the driver is
+whichever lib/ module defines a class -- so the 240x240 GC9A01 kit and
+the 360x360 GC9B72 kit both work, and a third kit would too. A kit whose
+config.py has no RADIUS is treated as rectangular and rendered unmasked.
+
+The one thing that is NOT generic is the pixel format: the buffer and
+color565() below are RGB565, because both round kits are. A future
+kit with a different color depth would need a second packing.
 
 HOW IT WORKS
 
@@ -41,9 +54,14 @@ display, it is retried once with a large budget instead, on the theory
 that a real blank screen this early is rarer than a lab that just needed
 more ticks to draw anything at all.
 
-Not a simulator. This models GC9A01 drawing calls faithfully enough for
-a documentation screenshot, not for hardware timing or color accuracy
+Not a simulator. This models the drawing calls faithfully enough for a
+documentation screenshot, not for hardware timing or color accuracy
 under real ambient light. Always compare against a real board too.
+
+In particular it will happily render a lab that has never run on the
+hardware it claims to depict -- which is exactly the case for the
+sw-gc9b72 kit's ported labs. A rendered PNG is evidence about the CODE,
+not about the panel.
 """
 
 import argparse
@@ -159,11 +177,16 @@ class RasterDisplay:
         return (self.buffer[off] << 8) | self.buffer[off + 1]
 
     def touched(self):
-        """True if anything but black has ever been written."""
-        return any(self.buffer[i] or self.buffer[i + 1]
-                  for i in range(0, len(self.buffer), 2))
+        """True if anything but black has ever been written.
 
-    # --- drawing, matching lib/gc9a01.py's public surface --------------
+        Black is 0x0000, so a non-black pixel is exactly a non-zero
+        BYTE, and `any()` over the raw buffer answers the question in C
+        instead of in a Python loop over every pixel. That matters more
+        than it looks: on a 360x360 panel this is 259,200 bytes, and
+        this runs once per lab."""
+        return any(self.buffer)
+
+    # --- drawing, matching the drivers' public surface -----------------
 
     def fill(self, color):
         self.fill_rect(0, 0, self.width, self.height, color)
@@ -172,17 +195,34 @@ class RasterDisplay:
         self._set(x, y, color)
 
     def hline(self, x, y, length, color):
-        for i in range(length):
-            self._set(x + i, y, color)
+        self.fill_rect(x, y, length, 1, color)
 
     def vline(self, x, y, length, color):
-        for i in range(length):
-            self._set(x, y + i, color)
+        self.fill_rect(x, y, 1, length, color)
 
     def fill_rect(self, x, y, width, height, color):
-        for row in range(height):
-            for col in range(width):
-                self._set(x + col, y + row, color)
+        """Filled rectangle, one buffer SLICE per row.
+
+        The obvious nested loop calling _set() per pixel is correct and
+        far too slow here: a single fill() on a 360x360 screen is
+        129,600 Python-level calls, and the labs clear the screen
+        constantly. Packing the row's bytes once and assigning the whole
+        run per row keeps the work in C.
+
+        Clipping is done here rather than in _set() because a slice
+        assignment cannot skip out-of-range pixels the way a per-pixel
+        guard could -- and labs DO draw off the edge, lab 25 on purpose."""
+        left = max(0, x)
+        top = max(0, y)
+        right = min(self.width, x + width)
+        bottom = min(self.height, y + height)
+        if right <= left or bottom <= top:
+            return
+        run = bytes(((color >> 8) & 0xFF, color & 0xFF)) * (right - left)
+        span = len(run)
+        for row in range(top, bottom):
+            start = (row * self.width + left) * 2
+            self.buffer[start:start + span] = run
 
     def rect(self, x, y, w, h, color):
         self.hline(x, y, w, color)
@@ -211,11 +251,32 @@ class RasterDisplay:
                 y0 += sy
 
     def blit_buffer(self, buffer, x, y, width, height):
+        """Copy a block of already-packed RGB565 bytes onto the screen.
+
+        Both the source and the destination store two big-endian bytes
+        per pixel in row-major order, so a fully on-screen row is a
+        straight slice-to-slice copy with no per-pixel work. This is the
+        path every text() glyph and every sprite goes through, and on
+        the 360x360 kit lab 33's color wheel alone blits several hundred
+        rows, so it is worth not doing pixel by pixel.
+
+        A row that hangs off either side falls back to the slow path
+        rather than being dropped -- partially visible is not the same
+        as invisible."""
         for row in range(height):
+            dest_y = y + row
+            if not (0 <= dest_y < self.height):
+                continue
+            src = row * width * 2
+            if 0 <= x and x + width <= self.width:
+                start = (dest_y * self.width + x) * 2
+                self.buffer[start:start + width * 2] = \
+                    buffer[src:src + width * 2]
+                continue
             for col in range(width):
-                off = (row * width + col) * 2
-                color = (buffer[off] << 8) | buffer[off + 1]
-                self._set(x + col, y + row, color)
+                off = src + col * 2
+                self._set(x + col, dest_y,
+                          (buffer[off] << 8) | buffer[off + 1])
 
     def text(self, font, string, x0, y0, color=0xFFFF, background=0x0000):
         """One glyph renderer for both fonts this kit ships. WIDTH=8 fonts
@@ -243,21 +304,50 @@ class RasterDisplay:
             x += font.WIDTH
 
 
-def _build_gc9a01_module():
-    """The one lib/ file this harness does not treat generically. Every
-    other class-defining driver falls back to check-labs.py's
-    DisplayStub; this kit's driver gets a real color565() and a display
-    that actually keeps its pixels."""
+def _build_raster_driver_module(name):
+    """A rendering stand-in for whatever display driver a kit ships.
+
+    This is check-labs.py's _build_driver_module() with its two answers
+    swapped for ones that keep pixels: where that returns DisplayStub
+    (which discards every draw) this returns RasterDisplay, and where it
+    returns a helper that always answers 0 this returns a real
+    color565(). Everything else -- including the PEP 8 convention that
+    tells a class from a function, `GC9A01` and `GC9B72` being classes
+    while `color565` is not -- is unchanged.
+
+    Answering to ANY attribute name is what makes this work for a kit
+    this file has never heard of. The GC9A01 kit asks the module for
+    GC9A01, the GC9B72 kit asks for GC9B72, and neither name appears
+    anywhere below."""
     import types
-    mod = types.ModuleType("gc9a01")
-    mod.GC9A01 = RasterDisplay
-    mod.color565 = real_color565
+    mod = types.ModuleType(name)
+
+    def fake_helper(*args, **kwargs):
+        return 0
+
+    def module_getattr(attr):
+        if attr.startswith("__"):
+            raise AttributeError(attr)
+        if attr == "color565":
+            return real_color565
+        if attr.islower():
+            return fake_helper
+        return RasterDisplay
+
+    mod.__getattr__ = module_getattr
     return mod
 
 
 def install_render_stubs(kit_dir):
-    """check-labs.py's install_stubs(), with one substitution: gc9a01.py
-    gets a rendering module instead of the generic class-name stub."""
+    """check-labs.py's install_stubs(), with one substitution: a lib/
+    module that defines a class gets a RENDERING driver rather than
+    check-labs.py's discard-everything one.
+
+    The same class-defines-a-driver rule check-labs.py uses applies
+    here, and for the same reason: a lib/ file with no class is data --
+    a bitmap font, or this kit's shapes.py -- and has to load for real,
+    with its real glyph bytes and its real geometry, or the picture
+    means nothing."""
     machine = cl._build_machine()
     utime = cl._build_utime()
 
@@ -280,10 +370,8 @@ def install_render_stubs(kit_dir):
                 continue
             name = entry[:-3]
             path = os.path.join(lib_dir, entry)
-            if name == "gc9a01":
-                stub_modules[name] = _build_gc9a01_module()
-            elif cl._defines_a_class(path):
-                stub_modules[name] = cl._build_driver_module(name)
+            if cl._defines_a_class(path):
+                stub_modules[name] = _build_raster_driver_module(name)
             else:
                 stub_modules[name] = cl._load_real_module(name, path)
 

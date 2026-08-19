@@ -9,9 +9,11 @@
 # the wire, and you WATCH it happen. Do that on every frame and the
 # animation flickers hard and crawls.
 #
-# So this lab erases only the two eye boxes instead. Same picture,
-# roughly a tenth of the pixels, no flicker. That is not an optimization
-# you save for later on this hardware -- it is the price of admission.
+# So this lab erases only the two eye boxes instead. Two boxes of
+# 92 x 56 is 10,304 pixels rather than the screen's 57,600 -- under a
+# fifth of the work, same picture, no flicker. That is not an
+# optimization you save for later on this hardware -- it is the price of
+# admission.
 
 import config
 import shapes

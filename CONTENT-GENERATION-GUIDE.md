@@ -2,13 +2,21 @@
 
 **Project:** Robot Faces: Drawing Expressive Displays for STEM Robots
 
-This file is the single source of truth for **voice, tone, reading level, and
-mascot usage** across every piece of student-facing content in this book —
-chapters, lessons, quizzes, FAQ, glossary entries, MicroSim descriptions, and
-slide decks. Any skill or agent generating student-facing text should read
-this file first. Instructor-facing content (the teacher's guide, grading
-notes) does not need to follow the mascot rules below, but should still
-match the reading-level and tone guidance.
+This file is the single source of truth for **voice, tone, reading level,
+mascot usage, and screenshots** across every piece of student-facing content
+in this book — chapters, lessons, quizzes, FAQ, glossary entries, MicroSim
+descriptions, and slide decks. Any skill or agent generating student-facing
+text should read this file first. Instructor-facing content (the teacher's
+guide, grading notes) does not need to follow the mascot rules below, but
+should still match the reading-level and tone guidance.
+
+Two rules are non-negotiable regardless of what you are writing:
+
+- **Never describe what a lab draws without rendering it first** — see
+  [Screenshots](#screenshots-render-them-never-describe-them) below.
+- **Never present unverified behavior as observed fact.** Most of this
+  book's code has been checked in a simulator, not on a board; say which
+  one you mean.
 
 ## The Big Idea
 
@@ -238,6 +246,101 @@ self-introduction.
 6. **Active voice, second person** — "You'll wire the SPI pins," not "The
    SPI pins are wired."
 
+## Screenshots: Render Them, Never Describe Them
+
+Whenever you write content that says what a lab **puts on the screen** —
+a "Sample Output" section, "here's what that program draws," a figure
+caption, or any sentence describing an expression — you must render the
+image and look at it first. Do not describe a screen from reading the
+code. Do not reuse a screenshot from a different kit.
+
+`src/utils/render_kit_screens.py` rasterizes every drawing call a lab
+makes onto a real pixel buffer and saves a PNG. It is the only way to
+see what a lab draws without a board on your desk.
+
+### The commands
+
+Run from the repo root. Needs Pillow once: `pip install pillow`.
+
+```bash
+# 240x240 GC9A01 round kit
+python3 src/utils/render_kit_screens.py src/kits/smartwatch docs/kits/smartwatch
+
+# 360x360 GC9B72 round kit
+python3 src/utils/render_kit_screens.py src/kits/sw-gc9b72 docs/kits/sw-gc9b72
+```
+
+Re-run the whole kit after changing any lab in it. **Regenerate before
+writing about a lab you just edited** — a stale PNG is worse than none,
+because it looks authoritative.
+
+### Where the image lands, and what to call it
+
+The output path is `<outdir>/<slug>/sample-output.png`, where `slug` is
+the lab's filename with its `NN-` prefix and `.py` stripped:
+
+| Lab file | Image path (sw-gc9b72) |
+|---|---|
+| `10-happy-face.py` | `docs/kits/sw-gc9b72/happy-face/sample-output.png` |
+| `24-emotion-table.py` | `docs/kits/sw-gc9b72/emotion-table/sample-output.png` |
+
+Write the lab's page at `<slug>/index.md` so the image sits beside it,
+then embed it with a plain relative path and descriptive alt text:
+
+```markdown
+## Sample Output
+
+![Sample output of the happy face](sample-output.png)
+```
+
+Alt text describes **what the face is doing**, not the file — "the
+sleeping face with drooping eyebrows," never "sample output image."
+
+### Match the image to the kit you are writing about
+
+The two round kits are different sizes, and their faces are laid out to
+different numbers. A 240x240 smartwatch screenshot in a sw-gc9b72
+chapter is simply wrong, and the giveaway is subtle enough to survive
+review: the picture looks fine, the proportions are just not what a
+student will see. Render from the kit the page is teaching.
+
+### Four ways this quietly gives you a bad image
+
+1. **A "rendered" report is not proof of a picture.** Each lab races a
+   3-second wall clock, so a slow or heavy lab can be cut off partway
+   and still be counted as rendered. The tool prints
+   `STILL BLANK after retry -- check this one by hand` when it notices;
+   read the output, do not just count successes. A committed
+   `smartwatch/broken-faces` image was blank for exactly this reason.
+2. **`--only` overwrites the whole manifest.** `_render-manifest.json`
+   is rewritten from just the labs that ran, so
+   `--only keyframes` leaves a one-entry manifest and drops every other
+   lab's record. Use `--only` while iterating, then do a full run before
+   you commit. (The smartwatch manifest is currently a one-entry file
+   from exactly this mistake.)
+3. **Open the PNG.** The manifest's `"blank": true` flags an empty
+   image, but nothing flags a *wrong* one — a face drawn at the wrong
+   scale, a label overlapping an eyebrow, text clipped by the round
+   bezel. Those are visible in a second and invisible in a log.
+4. **Button labs show one frozen state.** A menu lab renders whichever
+   screen it draws before reading a button, so a seven-emotion lab gives
+   you the first emotion, not a montage. Say which state the image
+   shows rather than implying it is the whole lab.
+
+### What a rendered PNG is evidence of
+
+The **code**, not the panel. The renderer models drawing calls — not
+timing, not color under real light, not where the bezel actually cuts.
+It will happily render a lab that has never run on the hardware it
+depicts, which is true of every ported lab in the sw-gc9b72 kit today.
+
+So a screenshot supports "here is what this program draws." It does not
+support "this is exactly what you will see." When a kit's labs are not
+yet hardware-confirmed, keep the claim to the drawing and let the
+student's own board be the authority — which is the same instinct as the
+voice guidance above: *"Don't take your face's word for it — wire it up
+and watch it blink."*
+
 ## Quick Reference
 
 | Question | Answer |
@@ -248,3 +351,4 @@ self-introduction.
 | Tone | Bright, positive, optimistic — a mentor's voice, not a manual's |
 | Mascot | Pixel the Round-Face Robot — see mascot section above |
 | Emoji | Only when teaching an actual metaphor; otherwise none |
+| Screenshots | Render with `render_kit_screens.py` and look at the PNG — never describe a screen from the code |
