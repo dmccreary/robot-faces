@@ -55,11 +55,48 @@ LED_PIN = 25
 BUTTON_A_PIN = 14
 BUTTON_B_PIN = 15
 
-# Conservative first-bring-up speed. The Arduino_GC9B72 driver this kit's
-# init sequence was ported from reports ~20 MHz working on short leads, so
-# once 01-hello.py is confirmed working you can raise this and see how far
-# it goes. If you see speckled pixels or torn frames, drop back down.
-BAUDRATE = 10_000_000
+# Conservative first-bring-up speed -- but READ THE NEXT PARAGRAPH before
+# you try to raise it, because "nudge it up and see" does not work here.
+#
+# THE NUMBER YOU ASK FOR IS ALMOST NEVER THE NUMBER YOU GET. The RP2040
+# derives its SPI clock by dividing the peripheral clock, and MicroPython
+# rounds DOWN to the nearest rate it can actually produce. Measured on a
+# Pico running MicroPython 1.28, the peripheral clock is 48 MHz, so the
+# only rungs on the ladder near the top are 48/6, 48/4 and 48/2:
+#
+#     you ask for      you get
+#     10_000_000        8_000_000
+#     16_000_000       12_000_000
+#     20_000_000       12_000_000
+#     23_000_000       12_000_000
+#     24_000_000       24_000_000   <- the ceiling on this chip
+#     48_000_000       24_000_000
+#
+# Between 12 and 24 MHz there is NOTHING. Asking for 20 quietly hands you
+# 12 and you never find out, which is exactly the sort of bug that makes
+# an optimization look like it did nothing. To read back what you really
+# got, print the SPI object -- its repr() carries the true baud rate:
+#
+#     from machine import Pin, SPI
+#     print(SPI(0, baudrate=24_000_000, sck=Pin(2), mosi=Pin(3)))
+#
+# WHAT IT BUYS. Measured with eye-scanner-sprite.py, which sends 4,712
+# bytes per frame in 2 calls, on a Pico with 20 cm ribbon cables:
+#
+#      8 MHz    8.1 ms per frame     6.7 Mbit/s delivered
+#     12 MHz    6.9 ms per frame    10.1 Mbit/s delivered
+#     24 MHz    4.6 ms per frame    20.2 Mbit/s delivered
+#
+# The delivered rate is about 84% of the wire rate at every rung, so the
+# clock is real -- this is not a knob that only looks like it does
+# something. See spi-cost.py, which measures all of this on your board.
+#
+# 24 MHz is what this kit now ships at, confirmed working on 20 cm ribbon
+# cables with no speckling or tearing. If your own wiring is longer or
+# messier and you see speckled pixels or torn frames, step down to
+# 12_000_000 -- and remember there is no rung between 12 and 24, so
+# anything you type in between just gives you 12.
+BAUDRATE = 24_000_000
 
 # RGB565: five bits of red, six of green, five of blue, packed into 16
 # bits. color565(red, green, blue) builds any color from three ordinary

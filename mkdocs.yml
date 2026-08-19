@@ -110,6 +110,7 @@ nav:
       - Only Redraw What Changed: kits/oled/partial-redraw/index.md
       - Design Your Own Emotion: kits/oled/design-your-own/index.md
       - How Fast Is a Face?: kits/oled/draw-speed-timing/index.md
+      - Eye Saccade: kits/oled/eye-saccade/index.md
       - Box Cover Template: kits/oled/box-cover/index.md
     - 1.2" Smartwatch:
       - Introduction: kits/smartwatch/index.md
@@ -144,11 +145,49 @@ nav:
       - A Face With a Memory: kits/smartwatch/state-machine/index.md
       - Only Redraw What Changed: kits/smartwatch/partial-redraw/index.md
       - Design Your Own Emotion: kits/smartwatch/design-your-own/index.md
+      - Eye Saccade: kits/smartwatch/eye-saccade/index.md
       - "How Fast Is a Face?": kits/smartwatch/draw-speed-timing/index.md
       - Color and Bits: kits/smartwatch/color-bits/index.md
       - The Color Wheel: kits/smartwatch/color-wheel/index.md
     - 2.1" Smartwatch:
       - Introduction: kits/sw-gc9b72/index.md
+      - Connection Test: kits/sw-gc9b72/connection-test/index.md
+      - Hello World: kits/sw-gc9b72/hello/index.md
+      - Screen Coordinates: kits/sw-gc9b72/screen-coordinates/index.md
+      - Pixel: kits/sw-gc9b72/pixel/index.md
+      - Lines: kits/sw-gc9b72/lines/index.md
+      - Rectangle: kits/sw-gc9b72/rect/index.md
+      - Ellipse: kits/sw-gc9b72/ellipse/index.md
+      - Circle: kits/sw-gc9b72/circle/index.md
+      - Polygon: kits/sw-gc9b72/poly/index.md
+      - Blit: kits/sw-gc9b72/blit/index.md
+      - Your First Face: kits/sw-gc9b72/happy-face/index.md
+      - Eye Scanner: kits/sw-gc9b72/eye-scanner/index.md
+      - Making the Eye Scanner Fast: kits/sw-gc9b72/eye-scanner-speedup/index.md
+      - Winking with a Smile: kits/sw-gc9b72/wink/index.md
+      - Blinking: kits/sw-gc9b72/blink/index.md
+      - Eyebrows: kits/sw-gc9b72/eyebrows/index.md
+      - Don't Block the Loop: kits/sw-gc9b72/no-blocking/index.md
+      - Sleeping Face: kits/sw-gc9b72/sleepy/index.md
+      - Reading Two Buttons: kits/sw-gc9b72/buttons/index.md
+      - Mode Switching: kits/sw-gc9b72/modes/index.md
+      - The Expression Menu: kits/sw-gc9b72/emotion-modes/index.md
+      - Demo Reel: kits/sw-gc9b72/demo/index.md
+      - Standalone main.py: kits/sw-gc9b72/sample-main-demo/index.md
+      - Live Face Parameters: kits/sw-gc9b72/face-parameters/index.md
+      - Color and Resolution Demo: kits/sw-gc9b72/color-demo/index.md
+      - The Face Module: kits/sw-gc9b72/face-module/index.md
+      - The Emotion Table: kits/sw-gc9b72/emotion-table/index.md
+      - Five Broken Faces: kits/sw-gc9b72/broken-faces/index.md
+      - Trace and Watch: kits/sw-gc9b72/trace-and-watch/index.md
+      - Keyframes: kits/sw-gc9b72/keyframes/index.md
+      - A Face With a Memory: kits/sw-gc9b72/state-machine/index.md
+      - Only Redraw What Changed: kits/sw-gc9b72/partial-redraw/index.md
+      - Design Your Own Emotion: kits/sw-gc9b72/design-your-own/index.md
+      - Eye Saccade: kits/sw-gc9b72/eye-saccade/index.md
+      - "How Fast Is a Face?": kits/sw-gc9b72/draw-speed-timing/index.md
+      - Color and Bits: kits/sw-gc9b72/color-bits/index.md
+      - The Color Wheel: kits/sw-gc9b72/color-wheel/index.md
   - MicroSims:
     - List of MicroSims: sims/index.md
     - Ambiguous Expression Confusability Sorter: sims/ambiguous-expression-confusability-sorter/index.md

@@ -5,10 +5,10 @@ from machine import Pin
 # with a debounce delay value of 200ms in the interrupt handler
 # https://www.coderdojotc.org/micropython/basics/03-button/
 
-# these are the pins in the lower-left corner (USB on top)
-BUTTON_PIN_A = 12
-BUTTON_PIN_B = 13
-
+# Buttons A and B on GP14 and GP15 -- the kit standard used by every
+# kit in this repo. Each button's other leg goes to GND.
+BUTTON_PIN_A = 14
+BUTTON_PIN_B = 15
 button_presses = 0 # the count of times the button has been pressed.  A is +1, B is -1
 last_time = 0 # the last time we pressed the button
 

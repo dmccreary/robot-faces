@@ -102,12 +102,19 @@ else:
 # 20_000_000 and work back up.
 BAUDRATE = 60_000_000
 
-# Two momentary push buttons on free GPIO. Each button's other leg goes to
-# GND, and PULL_UP holds the pin at 1 until a press pulls it to 0. These
-# are the same pin numbers the OLED kit uses, and both are free on either
-# board above.
-BUTTON_A_PIN = 20
-BUTTON_B_PIN = 21
+# Two momentary push buttons on GP14 and GP15, PULL_UP, reading 1 when
+# idle and 0 when pressed. Each button's other leg goes to GND.
+#
+# GP14/GP15 is the kit standard everywhere in this repo, so these are the
+# same two pins on every board and every kit.
+#
+# NOTE FOR THE CYTRON MAKER PI RP2040: that board's two ONBOARD buttons are
+# wired to GP20 and GP21, not GP14/GP15, so the standard pins mean two
+# external buttons on the breadboard rather than the ones already on the
+# board. If you would rather use the onboard pair, change these two lines
+# to 20 and 21 -- nothing else in the kit needs to change.
+BUTTON_A_PIN = 14
+BUTTON_B_PIN = 15
 
 # RGB565: five bits of red, six of green, five of blue, packed into 16
 # bits. The kit draws white on black, but the others are here so you can

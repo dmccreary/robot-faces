@@ -15,8 +15,9 @@ goes to GND.
 button_a, button_b = config.init_buttons()
 ```
 
-The pin numbers themselves live in `config.py` as `BUTTON_A_PIN` and `BUTTON_B_PIN`. Wire your
-buttons wherever is convenient and change them there — every lab in the kit picks up the change.
+Button A is **GP14** and button B is **GP15**, set in `config.py` as `BUTTON_A_PIN` and
+`BUTTON_B_PIN`. Those two pins are the standard across every kit in this book, so a student who has
+built the OLED kit keeps their wiring habits when they swap displays.
 
 ## Text Has To Be Centered Here
 
@@ -109,14 +110,15 @@ Here's the starting screen, before either button has been pressed:
 
 ![Three centered lines of text on the round screen reading Two Buttons, A (GP14): 0, and B (GP15): 0](sample-output.png)
 
-## The Caption Is a Hard-Coded String
+## The Counters Are Your Wiring Test
 
-Notice that `show_counts()` writes the pin numbers as literal text: `"A (GP14): "`. The program
-does not read them from `config.py`, so if you move your buttons to different pins, the labels on
-screen will confidently tell you the wrong thing.
+Press A ten times and B five times. If the two numbers on screen match what your fingers did, your
+buttons are wired correctly, your pull-ups are working, and your debounce is doing its job — all
+confirmed before you build anything that depends on them.
 
-That is worth fixing, and exercise 3 below asks you to. A label that can disagree with the code it
-describes is a small bug that grows up into a big one.
+If a count runs ahead of your presses, the debounce is too short. If it lags behind, something in
+the loop is blocking. Both are much easier to diagnose here, on a screen with nothing else on it,
+than inside a menu three labs from now.
 
 !!! mascot-tip "Two Buttons Is a Whole Interface"
     ![Pixel giving a tip](../../../img/mascot/tip.png){ class="mascot-admonition-img" }
@@ -128,8 +130,8 @@ describes is a small bug that grows up into a big one.
    the old digit, because nothing erased it.
 2. **Pass `WHITE` as the background color** for one row instead of `BLACK`. The driver really does
    paint that background behind each character, and now you can see it.
-3. **Make the label honest.** Build the string from `config.BUTTON_A_PIN` instead of hard-coding
-   `GP14`, so the screen always reports the pin your kit is actually using.
+3. **Build the caption from `config.BUTTON_A_PIN`** instead of the hard-coded `"A (GP14): "`. It
+   prints the same thing today, and it keeps printing the truth if the pins ever move.
 4. **Count how many presses you can register in ten seconds.** Then remove `wait_for_release()` and
    try again. The second number is not a measure of your finger.
 

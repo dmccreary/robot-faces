@@ -34,9 +34,10 @@ CS = machine.Pin(6)
 spi=machine.SPI(0, sck=clock, mosi=data)
 oled = ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, DC, RES, CS)
 
-# these are the pins in the lower-left corner (USB on top)
-PIN_NUM_CLK = 14
-PIN_NUM_DATA = 15
+# Rotary encoder on GP12 and GP13, just above the buttons on the left
+# side of the board with USB on top.
+PIN_NUM_CLK = 12
+PIN_NUM_DATA = 13
 # defauls are for pull up input pins and bounded ranges
 # note there is a bug in the ellipse() function that hangs if a radius is 0
 r = RotaryIRQ(pin_num_clk=PIN_NUM_CLK,
@@ -44,10 +45,10 @@ r = RotaryIRQ(pin_num_clk=PIN_NUM_CLK,
               min_val=1,
               max_val=45)
 
-# these are the two pins above (USB on top)
-BUTTON_PIN_A = 12
-BUTTON_PIN_B = 13
-
+# Buttons A and B on GP14 and GP15 -- the kit standard used by every
+# kit in this repo. Each button's other leg goes to GND.
+BUTTON_PIN_A = 14
+BUTTON_PIN_B = 15
 button_presses = 0 # the count of times the button has been pressed.  A is +1, B is -1
 last_time = 0 # the last time we pressed the button
 

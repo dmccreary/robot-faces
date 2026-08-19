@@ -21,8 +21,8 @@ which feels backwards the first time and never again.
 | 1 | Not pressed — the internal pull-up resistor is holding the line high |
 | 0 | Pressed — the button has connected the pin to GND |
 
-The pin numbers themselves live in `config.py` as `BUTTON_A_PIN` and `BUTTON_B_PIN`, so if you
-wire your buttons somewhere else you change them in one place. On the Waveshare RP2040-LCD-1.28
+Button A is **GP14** and button B is **GP15**, set once in `config.py` as `BUTTON_A_PIN` and
+`BUTTON_B_PIN`. Every kit in this book uses those same two pins. On the Waveshare RP2040-LCD-1.28
 the board has no buttons of its own, so these go on free GPIO pins along the edge.
 
 !!! mascot-thinking "Why Debounce Exists"

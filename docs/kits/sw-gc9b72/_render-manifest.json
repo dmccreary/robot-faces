@@ -58,6 +58,10 @@
     "blank": false,
     "has_image": true
   },
+  "eye-saccade": {
+    "blank": false,
+    "has_image": true
+  },
   "eye-scanner": {
     "blank": false,
     "has_image": true

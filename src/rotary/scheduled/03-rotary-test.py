@@ -2,7 +2,7 @@ from rotary import Rotary
 import utime as time
 from machine import Pin
 
-# GPIO Pins 14 and 15 are for the encoder pins. 13 is the button press switch.
+# GP12 and GP13 are the encoder pins. Buttons are on GP14/GP15.
 rotary = Rotary(14, 15, 13)
 val = 0
 

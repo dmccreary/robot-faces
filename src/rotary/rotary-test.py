@@ -17,8 +17,10 @@ else:
 import time
 
 
-r = RotaryIRQ(pin_num_clk=13,
-              pin_num_dt=14,
+# GP12 and GP13 are the encoder pins. GP14/GP15 are reserved for the two
+# buttons on every kit in this repo, so the encoder stays clear of them.
+r = RotaryIRQ(pin_num_clk=12,
+              pin_num_dt=13,
               min_val=0,
               max_val=5,
               reverse=False,

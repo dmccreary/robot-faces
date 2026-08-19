@@ -49,6 +49,14 @@ not used by this driver.
 | SDO | white | not connected |
 | TE | brown | not connected |
 
+The two push buttons go on the kit standard, the same pins the OLED and
+smartwatch kits use:
+
+| Signal | Pico pin | Note |
+|---|---|---|
+| Button A | GP14 | PULL_UP, other leg to GND |
+| Button B | GP15 | PULL_UP, other leg to GND |
+
 All of this lives in one place, [`config.py`](config.py), which every lab
 imports.
 

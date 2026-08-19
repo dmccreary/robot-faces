@@ -121,8 +121,11 @@ order the OLED kit uses. Only the last three change meaning.
 | VCC | 3V3 |
 | GND | GND |
 | BL | 3V3 (tied on, on most bare modules) |
-| Button A | `config.BUTTON_A_PIN` (PULL_UP, other leg to GND) |
-| Button B | `config.BUTTON_B_PIN` (PULL_UP, other leg to GND) |
+| Button A | 14 (PULL_UP, other leg to GND) |
+| Button B | 15 (PULL_UP, other leg to GND) |
+
+Buttons A and B are on **GP14 and GP15 in every kit in this book**, so wiring habits carry across
+when you swap displays.
 
 Full wiring notes, the Waveshare pinout, upload instructions, and the porting cheat sheet are in the
 kit's [README](https://github.com/dmccreary/robot-faces/blob/master/src/kits/smartwatch/README.md).
