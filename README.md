@@ -9,7 +9,7 @@
 [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![p5.js](https://img.shields.io/badge/p5.js-ED225D?logo=p5.js&logoColor=white)](https://p5js.org/)
 [![Built with Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code-DA7857?logo=anthropic)](https://claude.ai/code)
-[![Uses Claude Skills](https://img.shields.io/badge/Uses-Claude%20Skills-DA7857?logo=anthropic)](https://github.com/dmccreary/claude-skills)
+[![Uses Claude Skills](https://img.shields.io/badge/Uses-Claude%20Skills-DA7857?logo=anthropic)](https://github.com/dmccreary/ibook-skills)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ## View the Live Site
@@ -218,7 +218,7 @@ This project stands on the shoulders of the open source community:
 - **[p5.js](https://p5js.org/)** — creative coding library from NYU ITP, behind most of the MicroSims
 - **[vis-network](https://visjs.org/)** — network visualization for the learning graph viewer
 - **[Chart.js](https://www.chartjs.org/)** — charting for the data-driven simulations
-- **[Claude](https://claude.ai)** by Anthropic — AI-assisted content generation via [Claude Skills](https://github.com/dmccreary/claude-skills)
+- **[Claude](https://claude.ai)** by Anthropic — AI-assisted content generation via [Claude Skills](https://github.com/dmccreary/ibook-skills)
 - **[GitHub Pages](https://pages.github.com/)** — free hosting for open educational resources
 
 Thanks also to the researchers whose work this book teaches — Paul Ekman, Cynthia Breazeal,
