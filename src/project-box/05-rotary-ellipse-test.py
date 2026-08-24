@@ -23,8 +23,8 @@ CS = machine.Pin(6)
 spi=machine.SPI(0, sck=clock, mosi=data)
 oled = ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, DC, RES, CS)
    
-PIN_NUM_CLK = 14
-PIN_NUM_DATA = 15
+PIN_NUM_CLK = 12
+PIN_NUM_DATA = 13
 # defauls are for pull up input pins and bounded ranges
 # note there is a bug in the ellipse() function that hangs if a radius is 0
 r = RotaryIRQ(pin_num_clk=PIN_NUM_CLK,

@@ -1,27 +1,54 @@
-# Lab 6: Ellipse and Quadrant Fill Codes
+# Drawing Ellipses
 
-`shapes.ellipse(display, x, y, horz_radius, vert_radius, color, fill_flag, quad_code)` draws every eye, eyebrow arc, and mouth curve in this kit. The quadrant codes are unchanged from the OLED kit's `framebuf.ellipse()`: 1 for top-right, 2 for top-left, 4 for bottom-left, 8 for bottom-right, added together to combine quarters — so `TOP_HALF` (3) still frowns and `BOTTOM_HALF` (12) still smiles.
+Here's the trick behind every curved eyebrow, every smiling mouth, and every eye in this book:
+`ellipse()` can draw just one quarter of a shape at a time. Master that and you can build an
+entire emotional range out of a single function.
+
+```py
+shapes.ellipse(display, x, y, horz_radius, vert_radius, color, fill_flag, quad_code)
+```
+
+## What Changed From the OLED Kit
+
+The call now starts with `shapes.ellipse(display, ...)` instead of `oled.ellipse(...)`, and the
+reason is worth knowing: **the GC9A01 driver has no ellipse at all.**
+
+`framebuf`'s version was compiled into the MicroPython firmware, in C, for free. This driver is not
+built on `framebuf`, so `shapes.py` rebuilds the missing commands in about 200 lines of readable
+MicroPython. You can open the file and read the whole thing — one of the lines in it is the ellipse
+equation you already know from math class.
+
+| | OLED kit | This kit |
+|---|---|---|
+| Where the code lives | Compiled into the firmware | `lib/shapes.py`, in MicroPython |
+| How you call it | `oled.ellipse(...)` | `shapes.ellipse(display, ...)` |
+| Can you read it? | No | Yes — and you should |
+| How it fills | Pixel runs inside C | One `hline()` per row |
+
+## The Quadrant Fill Codes
+
+The optional `quad_code` restricts drawing to one or more quarters of the ellipse. Add the numbers
+together to combine quarters. These are the same numbers the OLED used, and they still mean the
+same thing:
+
+| Code | Quarter | Add them for |
+|---|---|---|
+| 1 | Top-right | 3 = top half — **a frown** |
+| 2 | Top-left | 12 = bottom half — **a smile** |
+| 4 | Bottom-left | 6 = left half |
+| 8 | Bottom-right | 9 = right half |
+
+!!! mascot-thinking "Two Characters Apart, Opposite Feelings"
+    ![Pixel thinks it through](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    Mask 3 is the frown. Mask 12 is the smile. That is the entire difference between a robot that looks pleased to see you and one that looks disappointed in you — and the [Five Broken Faces](../broken-faces/index.md) lab plants that exact bug on purpose.
 
 ## Sample Program Code
 
-A filled reference ellipse, then the four quadrant combinations that matter most for a face:
+One plain filled ellipse for reference, then all four half-codes drawn as outlines so each arc
+stands on its own.
 
 ```py
 # Lab 06: Ellipse and Quadrant Fill Codes
-# shapes.ellipse(display, x, y, horz_radius, vert_radius, color, fill_flag,
-#                quad_code)
-#
-# The optional quad_code restricts drawing to one or more quarters of the
-# ellipse: 1=top-right, 2=top-left, 4=bottom-left, 8=bottom-right. Add the
-# numbers together to combine quarters. Those are the same numbers the
-# OLED used, and they still mean the same thing.
-#
-# WHAT CHANGED: the call now starts with shapes.ellipse(display, ... )
-# instead of oled.ellipse( ... ). The GC9A01 driver has no ellipse at all.
-# framebuf's version was compiled into the MicroPython firmware; this one
-# is written in MicroPython, in shapes.py, and you can open it and read
-# the whole thing. Do that at some point -- it is fifty lines, and one of
-# them is the ellipse equation you already know.
 
 import config
 import shapes
@@ -54,29 +81,32 @@ for code, name in QUADRANTS:
     x += 44
 
 display.text(FONT, "3=frown 12=smile", 56, 200, WHITE, BLACK)
-
-# Things to try:
-#
-# 1. Codes 3 and 12 are the two that matter for a face: 3 is the frown,
-#    12 is the smile. Two characters apart in the code, opposite feelings
-#    on the robot's face. Lab 25 plants that exact bug on purpose.
-#
-# 2. Open shapes.py and find the loop in ellipse(). It walks one row at a
-#    time and draws a horizontal run. Change the fill branch to use
-#    display.pixel() in a loop instead and run this lab again -- the same
-#    picture, drawn visibly slower.
 ```
 
-Here's what that program draws:
+Here's what that program draws on the display:
 
-![Simulated output of 06-ellipse.py](sample-output.png)
+![A solid white ellipse near the top, and below it a row of four arcs labeled 3, 12, 6 and 9 — a downward-curving frown arc, an upward-curving smile arc, and two side arcs — with the caption 3=frown 12=smile](sample-output.png)
 
-## This Ellipse Doesn't Come From the Firmware
+Read that row left to right. Code 3 curves like a frown, code 12 curves like a smile, and codes 6
+and 9 are the left and right halves you will use for a smirk.
 
-The OLED kit's `ellipse()` was compiled into MicroPython's `framebuf` module. This driver has no such thing, because it isn't built on `framebuf` at all — so `shapes.ellipse()` is ordinary MicroPython, living in `shapes.py`, and you can open that file and read the whole implementation. It walks the shape one row at a time and sends each row as a single run of pixels, which is what keeps a filled eye fast on a display with no buffer to hide the cost of drawing slowly.
+!!! mascot-tip "Thicken Every Curve"
+    ![Pixel giving a tip](../../../img/mascot/tip.png){ class="mascot-admonition-img" }
+    A one-pixel arc on a 240-pixel screen reads as a scratch, not a mouth. Every face in this kit draws its curves four times, one pixel apart — look for `for offset in range(STROKE)` in the face labs.
 
-Codes 3 and 12 are the two that matter most on a face: 3 is a frown, 12 is a smile. Two characters apart in the code, opposite feelings on the robot's face — and Lab 25 plants exactly that bug on purpose, later, once you already know what correct looks like.
+## Things to Try
 
-!!! mascot-thinking "Worth Thinking About"
-    ![Pixel](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
-    1 + 2 + 4 + 8 = 15, every quadrant on. Add just the ones you want and the code tells the shape exactly how much of itself to draw.
+1. **Turn the frown into a smile.** Change the first quadrant code from 3 to 12 and watch the arc
+   flip. Two characters, opposite mood.
+2. **Read the source.** Open `lib/shapes.py` and find the loop inside `ellipse()`. It walks one row
+   at a time and draws a horizontal run. That single design decision is worth about 10x, and the
+   [How Fast Is a Face?](../draw-speed-timing/index.md) lab measures it.
+3. **Make it slow on purpose.** Change the fill branch in `shapes.py` to use `display.pixel()` in a
+   loop and run this lab again. Same picture, visibly slower — you just found where the speed lives.
+4. **Combine three quarters.** What does code 7 draw? Predict before you run it.
+
+## References
+
+- [Drawing Circles](../circle/index.md) — the special case where both radii are equal
+- [The Emotion Table](../emotion-table/index.md) — where the quadrant code becomes one column of a data table
+- [Five Broken Faces](../broken-faces/index.md) — the inverted-mask bug, planted on purpose

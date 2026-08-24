@@ -1,67 +1,38 @@
-# Lab 24: The Emotion Table — Pattern Recognition
+# The Emotion Table
 
-Look hard at Lab 19 again. Seven functions — `draw_happy`, `draw_sad`, `draw_angry`, and four more — and every one of them has the same three lines, in the same order: set the eyes, set the eyebrows, set the mouth. Only the *numbers* ever change.
+Go back and look hard at the [expression menu](../emotion-modes/index.md). It has seven functions —
+`draw_happy`, `draw_sad`, `draw_angry`, and four more — and every single one has the same three
+lines in the same order: set the eyes, set the eyebrows, set the mouth.
 
-Spotting that is **pattern recognition**, and it pays off immediately. If seven functions differ only in their numbers, the numbers are the real content and the function is just packaging — so put the numbers in a table, write the packaging once, and let a single function draw all seven.
+Only the numbers change.
 
-## Sample Program Code
+Once you see that, you cannot unsee it, and the moment has a name.
 
-Eight columns per emotion, eight lines of data, and one function — `draw_emotion()` — that can draw any row you hand it, including a color:
+!!! mascot-welcome "Spot the repeat"
+    ![Pixel waving welcome](../../../img/mascot/welcome.png){ class="mascot-admonition-img" }
+    Seven functions that differ only in their numbers are not really seven functions. Let's find out what they actually are.
+
+## Pattern Recognition
+
+**Pattern recognition** means noticing that several things share a structure, so you can handle
+them all with one piece of code instead of one piece each. It is the thinking skill that turns a
+long program into a short one.
+
+If seven functions differ only in their numbers, then the numbers are the real content and the
+function around them is just packaging. So put the numbers in a table, write the packaging once,
+and let one function draw all seven.
+
+!!! mascot-thinking "Data and Code Are Different Things"
+    ![Pixel thinks it through](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    Ten numbers describing a feeling are *data*. The instructions for turning numbers into pixels are *code*. Keeping them in separate places is one of the oldest good ideas in programming.
+
+## Seven Emotions, Eight Lines
+
+Each emotion becomes one row. Read the columns straight across, and the whole emotional range of
+the robot fits on one screen:
 
 ```py
-# Lab 24: The Emotion Table -- Pattern Recognition
-#
-# Look hard at lab 19. It has seven functions -- draw_happy, draw_sad,
-# draw_angry, and four more -- and every single one has the same three
-# lines in the same order: set the eyes, set the eyebrows, set the mouth.
-# Only the NUMBERS change.
-#
-# Spotting that is PATTERN RECOGNITION, and it pays off immediately. If
-# seven functions differ only in their numbers, then the numbers are the
-# real content and the function is just packaging. So put the numbers in a
-# table, write the packaging once, and let one function draw all seven.
-#
-# Lab 19 needs about 50 lines to define seven emotions. The table below
-# does it in eight, and an eighth emotion costs one more line -- no new
-# code at all.
-
-import config
-import face
-
-button_a, button_b = config.init_buttons()
-
-# --- one more column --------------------------------------------------
-#
-# The table below gained a COLOR column, and that is the whole point of
-# this paragraph. Adding it required no new drawing code, no new
-# function, and no change to draw_emotion() beyond unpacking one more
-# name. That is what "the numbers are the real content" buys you: a
-# brand-new axis of expression costs one column.
-#
-# The colors are built with config.color565(red, green, blue), which
-# takes three ordinary 0-255 values. Lab 32 takes that function apart and
-# shows you what it does to them.
-WHITE = config.WHITE
-SOFT_BLUE = config.color565(120, 170, 255)
-SOFT_RED = config.color565(255, 110, 110)
-VIOLET = config.color565(200, 160, 255)
-LIME = config.color565(150, 230, 120)
-
-# One row per emotion. Read the columns straight across:
-#
-#   name  eye_rx  eye_ry  brow_L  brow_R  lift  mouth style  size_x  size_y  color
-#
-# eye_rx / eye_ry are the eye's width and height. A tall eye reads as
-# alert, a squashed one as angry or bored. brow_L / brow_R tilt the inner
-# ends down when positive; lift raises the whole brow.
-#
-# The geometry numbers are roughly two and a half times the OLED kit's,
-# because the screen is roughly two and a half times as wide -- but they
-# are not a straight multiplication. The OLED was half as tall as it was
-# wide, so its faces were squashed. Here they are not.
-#
-# Note that Contempt is deliberately left WHITE. "No color" is a design
-# choice too, and a table that lets you say so is a better table.
+# name  eye_rx  eye_ry  brow_L  brow_R  lift  mouth style  size_x  size_y  color
 EMOTIONS = (
     ("Happy",     24, 24,   0,   0,   5, face.SMILE, 50, 24, config.YELLOW),
     ("Sad",       22, 22,  -7,  -7,   0, face.FROWN, 40, 20, SOFT_BLUE),
@@ -72,8 +43,49 @@ EMOTIONS = (
     ("Contempt",  24, 24,   0,   0,   0, face.SMIRK, 34,  0, WHITE),
     # ("Bored",   24, 10,   0,   0,  -7, face.FLAT,  28,  0, config.GREEN),
 )
+```
 
+Before you can read that table you need to know what each column controls. Every one of these is a
+knob you already turned by hand in an earlier lab:
 
+| Column | What it controls | What changing it does |
+|---|---|---|
+| `eye_rx`, `eye_ry` | The eye's width and height | A tall eye reads alert; a squashed one reads angry or bored |
+| `brow_L`, `brow_R` | Each eyebrow's tilt | Positive angles the inner end down into an angry V |
+| `lift` | How high both brows sit | A big lift is the fastest way to say "surprised" |
+| `mouth style` | Which shape the mouth takes | `SMILE`, `FROWN`, `FLAT`, `OPEN`, `SMIRK`, or `SNEER` |
+| `size_x`, `size_y` | The mouth's width and curve depth | A wide shallow curve reads friendlier than a deep one |
+| `color` | What the whole face draws in | A new axis of expression, for the cost of one column |
+
+## One More Column
+
+That color column is the whole point of this section. Adding it required **no new drawing code, no
+new function**, and no change to `draw_emotion()` beyond unpacking one more name.
+
+That is what "the numbers are the real content" buys you: a brand-new axis of expression costs one
+column.
+
+```py
+WHITE = config.WHITE
+SOFT_BLUE = config.color565(120, 170, 255)
+SOFT_RED = config.color565(255, 110, 110)
+VIOLET = config.color565(200, 160, 255)
+LIME = config.color565(150, 230, 120)
+```
+
+`config.color565(red, green, blue)` takes three ordinary 0–255 values and packs them into the
+16-bit number the display wants. The [color bits lab](../color-bits/index.md) takes that function
+apart and shows you exactly what it does to them.
+
+Notice that Contempt is deliberately left white. **"No color" is a design choice too**, and a table
+that lets you say so is a better table.
+
+## One Function Draws All of Them
+
+Here is the entire drawing half of the program. There is no `draw_happy`, no `draw_angry`, and no
+`if` statement asking which emotion this is.
+
+```py
 def draw_emotion(row):
     """Draw ANY row from the table above. This is the only drawing code in
     the lab -- the seven expressions are data, not seven functions."""
@@ -87,82 +99,85 @@ def draw_emotion(row):
     face.mouth(style, size_x, size_y)
     face.label(name, color=WHITE)   # the caption stays white, always
 
-    # The shell gets the row too, so you can see the data that produced
-    # the picture. This is the habit lab 26 turns into a real tool.
     print("drawing", name, row[1:])
-
-
-index = 0
-draw_emotion(EMOTIONS[index])
-
-while True:
-    if face.pressed(button_a):
-        index = (index + 1) % len(EMOTIONS)
-        draw_emotion(EMOTIONS[index])
-        face.wait_for_release(button_a)
-
-    if face.pressed(button_b):
-        index = (index - 1) % len(EMOTIONS)
-        draw_emotion(EMOTIONS[index])
-        face.wait_for_release(button_b)
-
-# Things to try:
-#
-# 1. Uncomment the "Bored" row. You just added an emotion to the menu
-#    without writing one line of drawing code. Now invent your own row.
-#
-# 2. Make "Sad" sadder by editing only its numbers -- try eye_ry 17 and
-#    brow tilt -12. You are tuning a face the way a designer would, by
-#    changing values instead of rewriting code.
-#
-# 3. Give one emotion a lopsided brow: set brow_L to 12 and brow_R to -7
-#    on Contempt and see how much a single mismatched eyebrow changes the
-#    meaning.
-#
-# 4. Sort the table so the emotions run from most positive to most
-#    negative. Because they are data, sorting the menu is just reordering
-#    lines -- something that would be a real edit in lab 19.
-#
-# 5. Push one emotion's eye_rx up until the eyes touch the bezel. Write
-#    down the number. That is the widest eye this screen can hold at
-#    face.EYE_SPACING, and it is a fact about the hardware, not the code.
-#
-# 6. Set every color in the table to WHITE and step through the menu
-#    again. Can you still tell the seven emotions apart? You should be
-#    able to -- the shapes were doing that work before the colors
-#    existed. Color is allowed to REINFORCE an expression. It must never
-#    be the only thing carrying it.
-#
-#    Two reasons that rule is not fussiness:
-#
-#    Roughly one boy in twelve has a red-green color deficiency, so an
-#    angry-red-versus-happy-green scheme fails for someone in most
-#    classrooms. And color survives a photograph, a video call, and a
-#    bright window far worse than a shape does.
-#
-# 7. Try config.BLUE (pure 0x001F) on one emotion, then SOFT_BLUE, and
-#    look at them from across the room. Pure blue is startlingly dim.
-#    Your eye gets most of its brightness from green light and almost
-#    none from blue, so a "blue" face is a dark face. That is why the
-#    colors above are pale mixes rather than pure channels -- every one
-#    of them has plenty of green in it.
-#
-# 8. Add a color column to lab 28's POSES table the same way, so the
-#    robot's mood changes hue as its state machine moves. One column,
-#    again, and no new drawing code -- which is the same lesson arriving
-#    for the third time.
 ```
 
-Here's the first row, drawn:
+That first statement does the work. **Tuple unpacking** takes the ten values in the row and hands
+each one its own name, in order, in a single statement. From there the function neither knows nor
+cares which emotion it is drawing.
 
-![Simulated output of 24-emotion-table.py](sample-output.png)
+Here's the first row of the table, drawn:
 
-## One More Column Costs One More Column
+![The word Happy in white at the top of the circle above a yellow face: two yellow eyebrows, two yellow eyes with dark pupils, and a wide yellow smile](sample-output.png)
 
-The table below adds a **color** column on top of the geometry columns, and drawing it required no new function and no change to `draw_emotion()` beyond unpacking one more name. That's the whole argument for tables over functions, proven a second time on a new axis: a brand-new dimension of expression costs exactly one column, for free.
+The menu shows one row at a time, so this picture is Happy — the first row. Press button A to walk
+the rest of the table.
 
-Notice that Contempt is deliberately left `WHITE`. "No color" is a design choice too, and a table that lets a row say so explicitly is a better table than one that forces every row to pick something.
+!!! mascot-warning "The Columns Must Line Up"
+    ![Pixel warns you](../../../img/mascot/warning.png){ class="mascot-admonition-img" }
+    Unpacking matches by position, not by name. Put the mouth style where the lift belongs and MicroPython will happily try to draw an eyebrow lifted by the word "smile" — so count your columns when you add a row.
 
-!!! mascot-thinking "Worth Thinking About"
-    ![Pixel](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
-    Seven functions that differ only in their numbers were never seven functions — they were one function and a table, waiting to be noticed.
+## The One Rule About Color
+
+**Color may reinforce an expression. It must never be the only thing carrying it.**
+
+That is not fussiness, and there are two concrete reasons for it. Roughly one boy in twelve has a
+red-green color deficiency, so an angry-red/happy-green scheme says nothing at all to somebody in
+most classrooms. And color survives photographs, video calls, and bright windows far worse than
+shape does.
+
+There is also a perceptual trap worth knowing before you pick colors. Your eye takes most of its
+sense of brightness from green light and almost none from blue:
+
+| Color | Perceived brightness (white = 255) |
+|---|---|
+| Pure green `0x07E0` | 180 |
+| Pure red `0xF800` | 53 |
+| Pure blue `0x001F` | 18 |
+
+That is why every color in the table above is a pale mix with plenty of green in it, rather than a
+pure channel. A "blue" face is a dark face.
+
+## The Real Payoff
+
+Adding an eighth emotion to the old program meant writing a new function, adding it to the menu
+tuple, and hoping you matched the style of the other seven. Adding one here costs a single line.
+
+| Task | Seven functions | One table |
+|---|---|---|
+| Add an emotion | Write a function, register it | Add one row |
+| Reorder the menu | Reorder a tuple of function names | Reorder rows |
+| Make every mouth wider | Edit seven functions | Edit one column |
+| Add color to every emotion | Edit seven functions | Add one column |
+| Store the set on disk or send it over a network | Not possible — code is not data | Straightforward — rows are just numbers |
+
+That last row is worth a second look. Because your emotions are now plain numbers, a robot could
+download a new personality the way it downloads a file.
+
+!!! mascot-celebration "Seven feelings, one function"
+    ![Pixel celebrating](../../../img/mascot/celebration.png){ class="mascot-admonition-img" }
+    You just replaced fifty lines of near-identical code with eight rows of numbers, and gained the ability to add a feeling in one line. Let's draw some feelings!
+
+## Things to Try
+
+1. **Uncomment the "Bored" row.** You just added an emotion without writing one line of drawing
+   code. Now invent a row of your own.
+2. **Make Sad sadder** by editing only its numbers — try `eye_ry` 17 and a brow tilt of −12.
+3. **Give one emotion a lopsided brow.** Set `brow_L` to 12 and `brow_R` to −7 on Contempt and see
+   how much a single mismatched eyebrow changes the meaning.
+4. **Sort the table** so the emotions run from most positive to most negative. Because they are
+   data, sorting the menu is just reordering lines.
+5. **Push one emotion's `eye_rx` up** until the eyes touch the bezel. Write the number down — that
+   is the widest eye this screen can hold at `face.EYE_SPACING`, and it is a fact about the
+   hardware, not the code.
+6. **Set every color to `WHITE`** and step through again. Can you still tell the seven apart? You
+   should be able to — the shapes were doing that work before the colors existed.
+7. **Try `config.BLUE` on one emotion**, then `SOFT_BLUE`, and look at both from across the room.
+8. **Add a color column to the [state machine](../state-machine/index.md)'s `POSES` table** so the
+   robot's mood changes hue as its state changes. One column, again, and no new drawing code.
+
+## References
+
+- [The Face Module](../face-module/index.md) — the `face.mouth()` style names that let a row of data pick a shape
+- [The Expression Menu](../emotion-modes/index.md) — the seven hand-written functions this lab replaces
+- [Color and Bits](../color-bits/index.md) — what `config.color565()` actually does to your three numbers

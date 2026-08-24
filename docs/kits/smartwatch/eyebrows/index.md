@@ -1,21 +1,32 @@
-# Lab 14: Eyebrows with poly()
+# Eyebrows
 
-Builds a curved eyebrow out of a six-point polygon instead of a single straight line — a bend that reads as far more expressive than a flat diagonal ever could.
+If you could keep only one feature on a robot face, keep the eyebrows. They carry more emotional
+information per pixel than the eyes and the mouth combined, and this lab builds them out of
+`poly()` so they can **bend** instead of just tilting.
+
+## Why a Polygon Instead of a Line
+
+A straight diagonal line reads as an eyebrow, barely. A four-point polygon with a bend in the
+middle reads as an eyebrow that *belongs to somebody*. The curve is what does it.
+
+```py
+left_eyebrow = array('h', [-30, 0, -10, -12, 26, -2, 26, 6, -8, -4, -30, 8])
+right_eyebrow = array('h', [30, 0, 10, -12, -26, -2, -26, 6, 8, -4, 30, 8])
+```
+
+Every number is an offset from the eyebrow's anchor point, in signed shorts, so negative offsets
+are allowed — which is what lets the shape be written around a center rather than from a corner.
+Read the two arrays side by side and you will see the second is the first with its x-values
+negated. That is the mirror image, written by hand.
+
+!!! mascot-thinking "The Cost of a Filled Brow"
+    ![Pixel thinks it through](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    `shapes.poly()` fills a shape by drawing one horizontal run per row it covers. A brow this size is about a dozen rows — a dozen runs down the wire, which is cheap. Open `lib/shapes.py` and read the scanline fill if you have not yet.
 
 ## Sample Program Code
 
-Each eyebrow is one array of offsets from the eye's center, placed with `shapes.poly()`:
-
 ```py
 # Lab 14: Eyebrows with poly()
-# Builds a curved eyebrow out of a four-point polygon instead of a single
-# straight line -- a bend that reads as far more expressive than a flat
-# diagonal.
-#
-# shapes.poly() fills the polygon itself with a scanline fill, since this
-# driver has no poly() of its own. That means a filled eyebrow costs one
-# hline per row it covers, which on a brow this size is about a dozen
-# rows -- cheap. Read the fill in shapes.py if you have not yet.
 
 import config
 import shapes
@@ -68,27 +79,45 @@ def draw_face():
 
 
 draw_face()
-
-# Things to try:
-#
-# 1. Flip the sign on the second number of each array (the -12) and the
-#    brows arch the other way. One number, opposite mood.
-#
-# 2. Draw the brows with NO_FILL instead of FILL. An outlined brow is a
-#    thin wire frame -- on a screen this size it reads as a scratch, not
-#    a brow, which is why every stroke in this kit gets thickened.
-#
-# 3. Give the two brows different shapes by editing one array. A face
-#    with mismatched brows reads as skeptical, and it takes exactly one
-#    changed number to get there.
 ```
 
-Here's what that program draws:
+Here's what that program draws on the display:
 
-![Simulated output of 14-eyebrows.py](sample-output.png)
+![A face with two thick angled eyebrows bending toward the center above two wide oval eyes with dark pupils, and a smile below](sample-output.png)
 
-## A Filled Polygon Costs About a Dozen Rows
+Look at how much attitude those two shapes add compared with the flat lines in
+[Your First Face](../happy-face/index.md). Same eyes, same mouth, completely different character.
 
-`shapes.poly()` fills the eyebrow with the same scanline algorithm from Lab 8 — one `hline()` per row the shape covers, which for a brow this size is roughly a dozen rows. That's cheap enough that a filled, curved eyebrow costs barely more than the straight-line version from Lab 10 did.
+## The Eyebrow Vocabulary
 
-Try drawing the brows with `NO_FILL` instead of `FILL`. An outlined brow is a thin wire frame, and at this size it reads as a scratch, not a brow — which is exactly why every stroke in this kit, lines included, gets thickened rather than left as a single pixel wide.
+Almost every emotion in this kit is reachable by changing two things about the brows: their **tilt**
+and their **lift**.
+
+| Brow position | Reads as |
+|---|---|
+| Inner ends angled down toward the nose | Angry, determined |
+| Inner ends angled up | Sad, worried, pleading |
+| Both raised high and flat | Surprised |
+| Both low and flat | Bored, skeptical |
+| One up, one down | Doubtful — the single most useful mismatched face |
+
+!!! mascot-tip "One Number, Opposite Mood"
+    ![Pixel giving a tip](../../../img/mascot/tip.png){ class="mascot-admonition-img" }
+    Flip the sign on the second number of each array — the `-12` — and the brows arch the other way. One character in the file, and my whole face changes what it is saying.
+
+## Things to Try
+
+1. **Flip the arch**, as in the tip above, and describe the new expression in one word before you
+   look at anything else.
+2. **Draw the brows with `NO_FILL`.** An outlined brow is a thin wire frame — on a screen this size
+   it reads as a scratch, not a brow. That is why every stroke in this kit gets thickened.
+3. **Give the two brows different shapes** by editing one array. A face with mismatched brows reads
+   as skeptical, and it takes exactly one changed number to get there.
+4. **Move the anchor.** Change `EYE_Y - 44` to `EYE_Y - 30` so the brows sit closer to the eyes. A
+   low brow crowds the eye and reads as intensity; a high one reads as openness.
+
+## References
+
+- [Drawing Polygons](../poly/index.md) — the scanline fill that makes a curved brow possible
+- [Drawing Lines](../lines/index.md) — the straight-line eyebrow, and the rule about which way to tilt
+- [The Emotion Table](../emotion-table/index.md) — where brow tilt and lift become two columns of data

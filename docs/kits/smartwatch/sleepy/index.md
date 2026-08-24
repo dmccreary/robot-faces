@@ -1,28 +1,35 @@
-# Lab 16: Sleeping Face
+# Sleeping Face
 
-Closed eyes, drooping eyebrows, a quiet round mouth, and three drifting `Zzz` characters that bob up and down as if floating away.
+Closed eyes, drooping eyebrows, a small quiet mouth, and three `Z` characters drifting up and away.
+This lab is where the round screen stops being a constraint you work around and starts making
+design decisions **for** you.
+
+!!! mascot-welcome "Time for a nap"
+    ![Pixel waving welcome](../../../img/mascot/welcome.png){ class="mascot-admonition-img" }
+    A sleeping robot is one of the friendliest things a machine can be. It says "I'm fine, I'm just resting" — which is exactly what you want a robot to say when it has nothing to do.
+
+## The Zzz Had Nowhere to Go
+
+On the OLED, the `Zzz` sat in the top-right **corner**. This screen has no corners.
+
+The obvious replacement — up beside the right eye, where the OLED put them — is already occupied.
+On a 240×240 circle the eyebrow reaches out to x=192 at that height, and the first `Z` lands right
+on top of it. There is no free corner to retreat to.
+
+So the `Z`s drift up and to the right from **beside the mouth**, rising into the empty quarter
+below the right eye. That is not a stylistic preference; it is the only clear space left.
+
+| Screen shape | Where the Zzz can live |
+|---|---|
+| 128 × 64 rectangle | The top-right corner, away from everything |
+| 240 × 240 circle | Beside the mouth, rising into the gap under the right eye |
 
 ## Sample Program Code
 
-Everything that never moves is drawn once; only the `Zzz` group's box is erased and rebuilt on every frame:
+Only the `Z`s move, so only the `Z` box is erased between frames. Everything else is drawn once.
 
 ```py
 # Lab 16: Sleeping Face
-# Closed eyes, drooping eyebrows, a quiet mouth, and three drifting Z
-# characters. The bob value shifts the whole Zzz group up and down so it
-# looks like it is floating away instead of glued in place.
-#
-# On the OLED the Zzz sat in the top-right CORNER. This screen has no
-# corners, so they drift up and to the right from BESIDE THE MOUTH,
-# rising into the empty quarter below the right eye.
-#
-# That placement is the round screen making a decision for you. The
-# obvious spot -- up beside the right eye, where the OLED put them -- is
-# already occupied: on a 240x240 circle the eyebrow reaches out to x=192
-# at the same height, and the first Z lands on top of it. There is no
-# free corner to retreat to, so the Zzz go somewhere the face is not.
-#
-# Only the Zzz move, so only the Zzz box is erased between frames.
 
 import config
 import shapes
@@ -117,24 +124,44 @@ while True:
     for bob in range(BOB_RANGE, -BOB_RANGE, -1):
         draw_zzz(bob)
         sleep(0.15)
-
-# Things to try:
-#
-# 1. Comment out the fill_rect() in draw_zzz(). The Z's smear into a
-#    solid block within a few seconds -- the exact bug lab 25 plants on
-#    purpose, and the one you will meet most often on this display.
-#
-# 2. Swap FONT for config.BIG_FONT and adjust the box. Bigger Z's read
-#    better from a distance, but they need more room inside the circle
-#    than you expect.
 ```
 
-Here's what that program draws:
+Here's one frame of the animation:
 
-![Simulated output of 16-sleepy.py](sample-output.png)
+![A sleeping face: two drooping eyebrow lines above two closed eyes drawn as downward arcs, a small round mouth, and three Z characters climbing diagonally up to the right beside it](sample-output.png)
 
-## Where Do You Put a Sleeping Robot's Zzz's?
+## Three Signals Saying the Same Thing
 
-On the OLED kit, the `Zzz` sat in the top-right **corner** — an option this screen doesn't have. The obvious next choice, tucked up beside the right eye where the OLED put them, turns out to already be occupied: on this layout the right eyebrow reaches out to x=192 at almost exactly that height, so the first `Z` would land right on top of it. There's no free corner to retreat to on a circle, so the `Zzz` drift up out of the empty space below and to the right of the mouth instead.
+Sleep is one of the few expressions where redundancy is the point. Each of these on its own is
+ambiguous; together there is no mistaking it:
 
-That's a real design decision forced by the shape of the screen, not an arbitrary choice — and it's worth remembering the next time you're placing a detail near a busy part of a round layout.
+| Feature | On its own it could mean | Together they mean |
+|---|---|---|
+| Closed eyes (arcs) | Blinking, winking, laughing | |
+| Drooping outer brows | Sad, tired, relaxed | **Asleep** |
+| Small round mouth | Surprised, whistling, neutral | |
+| Drifting `Zzz` | Only one thing | |
+
+That is a design lesson worth keeping: when an expression has to survive being glanced at, give the
+viewer more than one clue.
+
+!!! mascot-warning "Comment Out the Erase and Watch It Smear"
+    ![Pixel warns you](../../../img/mascot/warning.png){ class="mascot-admonition-img" }
+    Take the `fill_rect()` out of `draw_zzz()` and the Z's pile into a solid white block within seconds. There is no frame buffer here — the glass keeps whatever you last sent it, forever, until you paint over it. That is the bug you will meet most often on this display.
+
+## Things to Try
+
+1. **Break the erase**, as in the warning above, and watch how fast it happens. Then put it back
+   and appreciate how much work one rectangle is doing.
+2. **Use `config.BIG_FONT` for the Z's** and adjust the box. Bigger Z's read better from a distance
+   but need more room inside the circle than you expect.
+3. **Slow the bob down** from 0.15 to 0.4 seconds. Breathing rate is a personality trait — a fast
+   bob reads as restless, a slow one as deeply asleep.
+4. **Add a fourth `Z`** further up and to the right. Check that it is still inside the circle with
+   `config.inside_circle()` before you run it.
+
+## References
+
+- [Blinking](../blink/index.md) — where the closed-eye arc was introduced
+- [Screen Coordinates](../screen-coordinates/index.md) — why there is no corner to put the Zzz in
+- [A Face With a Memory](../state-machine/index.md) — where falling asleep becomes something the robot decides on its own

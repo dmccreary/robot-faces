@@ -1,101 +1,54 @@
-# Lab 19: Expression Menu
+# The Expression Menu
 
-The mode-switching pattern from Lab 18, applied to all seven Ekman emotions instead of demo shapes. Button A steps forward, button B steps back, and the emotion's name appears centered at the top of the circle so you always know which expression is on screen.
+Here is the payoff for everything so far. The mode-switching pattern, applied to all seven
+**Ekman emotions** — the expressions psychologist Paul Ekman found people recognize across every
+culture he tested. Button A steps forward, button B steps back, and the name of the emotion sits at
+the top of the circle so you always know what the robot thinks it is doing.
+
+!!! mascot-welcome "Seven feelings, one robot"
+    ![Pixel waving welcome](../../../img/mascot/welcome.png){ class="mascot-admonition-img" }
+    This is the whole superpower in one program. Press a button and a machine tells a stranger how it feels — and the stranger understands, without a word. Let's draw some feelings!
+
+## The Seven Expressions
+
+Every one of these is built from three decisions: how the eyes are shaped, how the eyebrows sit,
+and which mouth shape gets drawn. Nothing else.
+
+| Emotion | Eyes | Eyebrows | Mouth |
+|---|---|---|---|
+| Happy | Round, `(24, 24)` | Flat, lifted 5 | Wide upward curve |
+| Sad | Round, slightly smaller | Inner ends up, tilt −7 | Downward curve |
+| Angry | Squashed, `(24, 12)` | Inner ends down, tilt 12, lowered | Flat bar |
+| Afraid | Wide, `(31, 31)` | Tilted up hard, lifted 7 | Tall open oval |
+| Surprised | Widest, `(32, 32)` | Flat, lifted 14 | Wide open oval |
+| Disgusted | Narrow, uneven | Lopsided — one at 10, one at −5 | Off-center raised lip |
+| Contempt | Round, relaxed | Flat, no lift | Flat with one corner curled |
+
+Read down the eyebrow column. Six of the seven are distinguished more by their brows than by
+anything else, which is why the [eyebrows lab](../eyebrows/index.md) said what it said.
+
+## Five Mouth Functions
+
+The mouth is the one part that needs more than a change of numbers, so this lab defines five
+separate shapes for it:
+
+```py
+draw_mouth_curve(radius_x, radius_y, mask)   # smile (mask 12) or frown (mask 3)
+draw_mouth_flat(half_width)                  # a bar -- angry, bored
+draw_mouth_open(radius_x, radius_y)          # a filled oval -- afraid, surprised
+draw_mouth_smirk(half_width, side)           # flat, with one corner curled up
+```
+
+Notice that a smile and a frown are the *same function* with a different quadrant mask. That is the
+[ellipse lab](../ellipse/index.md) paying you back.
 
 ## Sample Program Code
 
-Seven complete `draw_*()` functions, each combining eyes, eyebrows, and a mouth with its own numbers:
+The seven drawing functions are the interesting part; the button loop underneath is the same one
+from [Mode Switching](../modes/index.md), unchanged.
 
 ```py
-# Lab 19: Expression Menu
-# The mode-switching pattern from Lab 18, applied to all seven Ekman
-# emotions instead of demo shapes. Button A steps forward through the
-# list, button B steps back, and the emotion's name is drawn at the top
-# of the circle so you always know which expression is on screen.
-
-import config
-import shapes
-from utime import sleep
-
-display = config.init_display()
-button_a, button_b = config.init_buttons()
-
-WHITE = config.WHITE
-BLACK = config.BLACK
-NO_FILL = config.NO_FILL
-FILL = config.FILL
-FONT = config.SMALL_FONT
-
-TOP_RIGHT = 1
-TOP_LEFT = 2
-BOTTOM_LEFT = 4
-BOTTOM_RIGHT = 8
-TOP_HALF = 3      # frown
-BOTTOM_HALF = 12  # smile
-
-HALF_WIDTH = config.WIDTH // 2
-EYE_SPACING = 48
-LEFT_EYE_X = HALF_WIDTH - EYE_SPACING
-RIGHT_EYE_X = HALF_WIDTH + EYE_SPACING
-EYE_Y = 102
-PUPIL_RADIUS = 8
-
-EYEBROW_HALF_WIDTH = 24
-EYEBROW_Y = EYE_Y - 40
-
-MOUTH_Y = 164
-STROKE = 4
-LABEL_Y = 30
-
-
-def draw_eye(x, rx, ry):
-    shapes.ellipse(display, x, EYE_Y, rx, ry, WHITE, FILL)
-    shapes.ellipse(display, x, EYE_Y, PUPIL_RADIUS, PUPIL_RADIUS, BLACK, FILL)
-
-
-def draw_eyes(rx, ry):
-    draw_eye(LEFT_EYE_X, rx, ry)
-    draw_eye(RIGHT_EYE_X, rx, ry)
-
-
-def draw_eyebrow(x, side, tilt, lift):
-    y = EYEBROW_Y - lift
-    outer_x = x - (EYEBROW_HALF_WIDTH * side)
-    inner_x = x + (EYEBROW_HALF_WIDTH * side)
-    for offset in range(STROKE):
-        display.line(outer_x, y - tilt + offset,
-                     inner_x, y + tilt + offset, WHITE)
-
-
-def draw_eyebrows(tilt_left, tilt_right, lift=0):
-    draw_eyebrow(LEFT_EYE_X, 1, tilt_left, lift)
-    draw_eyebrow(RIGHT_EYE_X, -1, tilt_right, lift)
-
-
-def draw_mouth_curve(radius_x, radius_y, mask):
-    for offset in range(STROKE):
-        shapes.ellipse(display, HALF_WIDTH, MOUTH_Y - offset,
-                       radius_x, radius_y, WHITE, NO_FILL, mask)
-
-
-def draw_mouth_flat(half_width):
-    display.fill_rect(HALF_WIDTH - half_width, MOUTH_Y,
-                      half_width * 2, STROKE, WHITE)
-
-
-def draw_mouth_open(radius_x, radius_y):
-    shapes.ellipse(display, HALF_WIDTH, MOUTH_Y, radius_x, radius_y,
-                   WHITE, FILL)
-
-
-def draw_mouth_smirk(half_width, side):
-    draw_mouth_flat(half_width)
-    corner_x = HALF_WIDTH + (half_width * side)
-    mask = BOTTOM_RIGHT if side > 0 else BOTTOM_LEFT
-    for offset in range(STROKE):
-        shapes.ellipse(display, corner_x, MOUTH_Y - 10 - offset, 14, 14,
-                       WHITE, NO_FILL, mask)
-
+# Lab 19: Expression Menu (excerpt -- the seven expressions)
 
 def draw_happy():
     draw_eyes(24, 24)
@@ -158,41 +111,41 @@ def show_emotion(index):
     draw()
     x = HALF_WIDTH - (len(name) * FONT.WIDTH) // 2
     display.text(FONT, name, x, LABEL_Y, WHITE, BLACK)
-
-
-def pressed(button):
-    if button.value() == 1:
-        return False
-    sleep(0.02)
-    return button.value() == 0
-
-
-def wait_for_release(button):
-    while button.value() == 0:
-        sleep(0.01)
-
-
-emotion_index = 0
-show_emotion(emotion_index)
-
-while True:
-    if pressed(button_a):
-        emotion_index = (emotion_index + 1) % len(EMOTIONS)
-        show_emotion(emotion_index)
-        wait_for_release(button_a)
-
-    if pressed(button_b):
-        emotion_index = (emotion_index - 1) % len(EMOTIONS)
-        show_emotion(emotion_index)
-        wait_for_release(button_b)
-
-    sleep(0.01)
 ```
 
-Here's the first emotion in the menu:
+The full program is `19-emotion-modes.py` in the kit.
 
-![Simulated output of 19-emotion-modes.py](sample-output.png)
+Here's the first emotion in the list, which is what the program draws before you press anything:
 
-## Every Function Has the Same Shape
+![The word Happy at the top of the circle above a happy face with flat lifted eyebrows, round eyes with dark pupils, and a wide smile](sample-output.png)
 
-Open `draw_happy()`, `draw_sad()`, and `draw_angry()` side by side. Every one of them sets the eyes, sets the eyebrows, then sets the mouth — in that order, every time. Only the *numbers* differ. That repetition is not a mistake; it's the exact pattern Lab 24 spots and collapses into a single table, so it's worth noticing here, on code you just watched yourself write, before the fix arrives.
+The menu shows one emotion at a time, so a single picture can only ever show you one of the seven.
+Press button A to walk the rest.
+
+## Look How Much Repeats
+
+Read those seven functions again, top to bottom. Every one has the same three lines in the same
+order: set the eyes, set the eyebrows, set the mouth. **Only the numbers change.**
+
+Hold on to that observation. It is the entire subject of the [emotion table](../emotion-table/index.md)
+lab, and noticing it yourself here is worth more than being told about it later.
+
+!!! mascot-tip "Test It on a Real Person"
+    ![Pixel giving a tip](../../../img/mascot/tip.png){ class="mascot-admonition-img" }
+    Step through all seven without saying the names out loud and ask a friend to guess each one. The ones they get instantly are working. The ones they hesitate on are your homework — and hesitation is data.
+
+## Things to Try
+
+1. **Run the guessing test** above with three people. Write down every word they say, including the
+   wrong ones. A wrong word tells you which feature is misleading them.
+2. **Find the confusable pair.** Afraid and Surprised use nearly the same numbers. What is the
+   smallest change that reliably separates them?
+3. **Make Sad sadder** by editing only its numbers — try `eye_ry` of 17 and a brow tilt of −12.
+4. **Add an eighth emotion.** Notice how much you have to write: a new function, a new tuple entry,
+   and a hope that you matched the style of the other seven. Remember that cost.
+
+## References
+
+- [Mode Switching](../modes/index.md) — the button loop this lab reuses without changes
+- [The Emotion Table](../emotion-table/index.md) — where these seven functions collapse into seven rows of data
+- [Eyebrows](../eyebrows/index.md) — the feature doing most of the work in six of the seven faces

@@ -9,9 +9,8 @@ from machine import Pin
 from rotary_irq_rp2 import RotaryIRQ
 import time
 
-PIN_NUM_CLK = 14
-PIN_NUM_DATA = 15
-
+PIN_NUM_CLK = 12
+PIN_NUM_DATA = 13
 # we need to set the pull-up resistors
 dt_pin = Pin(PIN_NUM_DATA, Pin.IN, Pin.PULL_UP)
 clk_pin = Pin(PIN_NUM_CLK, Pin.IN, Pin.PULL_UP)

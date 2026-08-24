@@ -1,21 +1,46 @@
-# Lab 17: Reading Two Buttons
+# Reading Two Buttons
 
-Both buttons are wired exactly like the single button in the blinking lab. This lab reads them independently and keeps a running count for each, printed centered on the circle instead of tucked into a corner.
+Two buttons is all it takes to give a robot face a user interface. One steps forward, one steps
+back, and suddenly every list you can write becomes a menu. This lab reads both buttons
+independently and shows a running count for each, so you can prove your wiring works before you
+build anything on top of it.
+
+## Both Buttons Work Like the First One
+
+They are wired exactly the way the single button in the [Blinking](../blink/index.md) lab was:
+`PULL_UP` inputs that read 1 when idle and 0 when pressed, because the other leg of each button
+goes to GND.
+
+```py
+button_a, button_b = config.init_buttons()
+```
+
+Button A is **GP14** and button B is **GP15**, set in `config.py` as `BUTTON_A_PIN` and
+`BUTTON_B_PIN`. Those two pins are the standard across every kit in this book, so a student who has
+built the OLED kit keeps their wiring habits when they swap displays.
+
+## Text Has To Be Centered Here
+
+On the OLED, a status line started at `x=4` and that was that. On a round screen a left margin is
+not a straight line: **how far in the text has to start depends on how far down the screen it is.**
+
+```py
+def centered(string, y):
+    x = HALF_WIDTH - (len(string) * FONT_WIDTH) // 2
+    # Erase the whole strip first, so a shorter number does not leave a
+    # digit from the longer one behind it.
+    display.fill_rect(0, y, config.WIDTH, FONT_HEIGHT, BLACK)
+    display.text(FONT, string, x, y, WHITE, BLACK)
+```
+
+!!! mascot-warning "Text Overprints — It Does Not Replace"
+    ![Pixel warns you](../../../img/mascot/warning.png){ class="mascot-admonition-img" }
+    With no frame buffer, drawing "9" where "10" was leaves the "1" sitting there forever. That `fill_rect()` is not tidiness — it is the only thing standing between you and a counter that turns into gibberish somewhere past nine.
 
 ## Sample Program Code
 
-Every line gets its strip erased before the new count is written, so a shorter number never leaves a stray digit behind:
-
 ```py
 # Lab 17: Reading Two Buttons
-# Both buttons on this kit are wired the same way as the single button in
-# the Blinking lab: PULL_UP inputs that read 1 when idle and 0 when
-# pressed, because the other leg of each button goes to GND. This lab
-# reads them independently and shows a running count for each.
-#
-# Text lines are centered rather than left-aligned at x=4. On a round
-# screen a left margin is not a straight line -- how far in the text has
-# to start depends on how far down the screen it is.
 
 import config
 from utime import sleep
@@ -79,28 +104,39 @@ while True:
         wait_for_release(button_b)
 
     sleep(0.01)
-
-# Things to try:
-#
-# 1. Take the fill_rect() out of centered() and count past 9. The 1 from
-#    "10" sits on top of the old digit, because nothing erased it. On a
-#    display with no frame buffer, text does not replace -- it overprints.
-#
-# 2. The driver's text() takes a background color, and it really does
-#    paint that background behind each character. Try passing WHITE as
-#    the background for one row to see it.
 ```
 
-Here's the starting screen, before either button is pressed:
+Here's the starting screen, before either button has been pressed:
 
-![Simulated output of 17-buttons.py](sample-output.png)
+![Three centered lines of text on the round screen reading Two Buttons, A (GP14): 0, and B (GP15): 0](sample-output.png)
 
-## Text Overprints — It Does Not Replace
+## The Counters Are Your Wiring Test
 
-With no frame buffer behind it, this driver has no concept of "replace what was there." Draw the string `"9"` where `"10"` used to be and the leading `1` simply stays, because nothing told the display to paint over it. `centered()` in this lab erases the whole text strip first, every time, specifically to guard against that.
+Press A ten times and B five times. If the two numbers on screen match what your fingers did, your
+buttons are wired correctly, your pull-ups are working, and your debounce is doing its job — all
+confirmed before you build anything that depends on them.
 
-Take that `fill_rect()` out and count a button past nine. Watching the old digit survive underneath the new one is a fast, memorable way to feel the difference between a buffered display and this one.
+If a count runs ahead of your presses, the debounce is too short. If it lags behind, something in
+the loop is blocking. Both are much easier to diagnose here, on a screen with nothing else on it,
+than inside a menu three labs from now.
 
-!!! mascot-warning "Watch Out"
-    ![Pixel](../../../img/mascot/warning.png){ class="mascot-admonition-img" }
-    Forgetting to erase before you redraw text is the single most common bug people bring from the OLED kit — there, it just worked, because `fill()` reset everything on the next frame.
+!!! mascot-tip "Two Buttons Is a Whole Interface"
+    ![Pixel giving a tip](../../../img/mascot/tip.png){ class="mascot-admonition-img" }
+    Forward and back is enough to walk any list — seven emotions, five modes, ten animations. Everything from here to the end of the kit is built on the two buttons you just tested.
+
+## Things to Try
+
+1. **Take the `fill_rect()` out of `centered()`** and count past 9. The "1" from "10" sits on top of
+   the old digit, because nothing erased it.
+2. **Pass `WHITE` as the background color** for one row instead of `BLACK`. The driver really does
+   paint that background behind each character, and now you can see it.
+3. **Build the caption from `config.BUTTON_A_PIN`** instead of the hard-coded `"A (GP14): "`. It
+   prints the same thing today, and it keeps printing the truth if the pins ever move.
+4. **Count how many presses you can register in ten seconds.** Then remove `wait_for_release()` and
+   try again. The second number is not a measure of your finger.
+
+## References
+
+- [Blinking](../blink/index.md) — the same button pattern with one button and a face
+- [Mode Switching](../modes/index.md) — where forward and back become a real menu
+- [Trace and Watch](../trace-and-watch/index.md) — where button state becomes part of an on-screen instrument

@@ -1,22 +1,31 @@
-# Lab 5: Drawing Rectangles
+# Drawing Rectangles
 
-This driver splits what `framebuf` combined into one command. `display.rect(x, y, w, h, color)` always draws an outline — there is no fill flag. `display.fill_rect(x, y, w, h, color)` is the separate call for a solid block. There's still no "erase" command anywhere in this kit: drawing in black **is** erasing, since black is just an unlit pixel.
+Rectangles are the workhorse shape of this kit — not because robot faces are boxy, but because a
+filled rectangle is how you **erase** on a display with no frame buffer. Almost every animation in
+these labs is built on that one idea.
+
+This driver splits what `framebuf` combined into a single call:
+
+```py
+display.rect(x, y, w, h, color)        # outline only -- no fill flag
+display.fill_rect(x, y, w, h, color)   # solid block
+```
+
+There is no separate "erase" command anywhere in this kit. Drawing in black *is* erasing, and
+`fill_rect(..., BLACK)` is the fastest eraser you have, because it is the one call that sends long
+runs of identical pixels.
+
+!!! mascot-thinking "The Fastest Eraser You Have"
+    ![Pixel thinks it through](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    Wiping my whole screen means sending 115,200 bytes. Wiping just the box around my mouth might be 8,000. Same result on the glass, one-fourteenth of the work — and that is the difference between a smooth animation and a flicker.
 
 ## Sample Program Code
 
-A border, a blocky retro face, and a mouth bar with teeth erased out of it in black:
+This program draws a border pulled well inside the safe radius, a retro blocky face with square
+eye sockets, and a mouth bar with teeth **erased** out of it in black.
 
 ```py
 # Lab 05: Drawing Rectangles
-# This driver splits what framebuf combined. rect() always draws an
-# outline and takes no fill flag; fill_rect() draws the solid block:
-#
-#     display.rect(x, y, w, h, color)              <- outline only
-#     display.fill_rect(x, y, w, h, color)         <- solid
-#
-# There is still no "erase" command. Drawing in black is erasing, and on
-# this display fill_rect(..., BLACK) is the fastest eraser you have --
-# it is the one call that sends a long run of identical pixels.
 
 import config
 
@@ -41,23 +50,45 @@ display.fill_rect(148, 92, 16, 16, WHITE)
 display.fill_rect(66, 150, 108, 24, WHITE)
 for tooth_x in range(88, 174, 20):
     display.fill_rect(tooth_x, 150, 6, 24, BLACK)
-
-# Things to try:
-#
-# 1. Widen the border to display.rect(10, 10, 220, 220, WHITE) and run it
-#    again. The corners disappear and you are left with four arcs.
-#
-# 2. Erase just the mouth: fill_rect(66, 150, 108, 24, BLACK). One call
-#    takes it back, and nothing else on screen moves. That is the trick
-#    lab 29 is built on.
 ```
 
-Here's what that program draws:
+Here's what that program draws on the display:
 
-![Simulated output of 05-rect.py](sample-output.png)
+![A square border containing a blocky robot face: two rectangular eye sockets each holding a small filled square pupil, and below them a wide white mouth bar broken into five teeth by black gaps](sample-output.png)
 
-## The Fastest Eraser You Have
+## The Teeth Are the Lesson
 
-`fill_rect(..., BLACK)` sends one long run of identical pixels, which makes it the cheapest way to take something back on a display with no frame buffer to simply overwrite in RAM. That single fact — erasing is just filling with black, and filling a rectangle is the fastest thing this driver does — is what makes later labs like partial redraw (Lab 29) possible at all.
+Those teeth were never drawn. The program painted one solid white bar and then painted four black
+bars on top of it, and what is left over reads as a mouthful of teeth.
 
-Try widening the border to span nearly the whole square (say, `rect(10, 10, 220, 220, WHITE)`) and run it again. The corners disappear and you're left with four disconnected arcs — the same round-screen lesson from Lab 2, now showing up in a shape you built yourself.
+That is the same layering trick as the catchlight in the [pixel lab](../pixel/index.md), and it is
+how nearly every detail in this kit gets made: draw the big shape, then take pieces back out with
+black.
+
+| Goal | Approach |
+|---|---|
+| Solid block of color | `fill_rect(x, y, w, h, color)` |
+| Outline | `rect(x, y, w, h, color)` — no fill flag exists |
+| Erase a region | `fill_rect(x, y, w, h, BLACK)` |
+| Carve detail out of a shape | Draw the shape, then draw black on top |
+| Erase everything | `display.fill(BLACK)` — the most expensive call in the kit |
+
+!!! mascot-tip "One Call Takes the Mouth Back"
+    ![Pixel giving a tip](../../../img/mascot/tip.png){ class="mascot-admonition-img" }
+    Add `display.fill_rect(66, 150, 108, 24, BLACK)` at the end. The mouth disappears and nothing else on screen moves. That single line is the trick the [Only Redraw What Changed](../partial-redraw/index.md) lab is built on.
+
+## Things to Try
+
+1. **Widen the border** to `display.rect(10, 10, 220, 220, WHITE)` and run it again. The corners
+   disappear and you are left with four disconnected arcs.
+2. **Erase just the mouth**, as in the tip above, and confirm that the eyes are untouched.
+3. **Change the tooth spacing** in the `range(88, 174, 20)` step from 20 to 14. More teeth, no new
+   code — the loop does the counting.
+4. **Time the two erasers.** Compare `display.fill(BLACK)` against the mouth-sized `fill_rect()`
+   with `ticks_us()`. Write both numbers down; you will want them again at lab 29.
+
+## References
+
+- [Drawing Pixels](../pixel/index.md) — the same layering idea, at the smallest possible scale
+- [Only Redraw What Changed](../partial-redraw/index.md) — where erasing one box instead of the screen becomes a measured optimization
+- [Eye Scanner](../eye-scanner/index.md) — the first animation that depends on erasing a box

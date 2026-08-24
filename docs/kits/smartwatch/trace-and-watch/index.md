@@ -1,47 +1,46 @@
-# Lab 26: Trace and Watch — Debugging by Measurement
+# Trace and Watch
 
-Some bugs are invisible in a photograph. Lab 25's fifth bug was exactly that kind — nothing looked wrong on screen, the program was just too slow to notice a finger. This lab turns the face into its own instrument: a heads-up display reports frame rate and live button state, both on screen and in the shell.
+Bug 5 in the [broken faces lab](../broken-faces/index.md) was invisible. Nothing looked wrong in a
+photograph of the screen; the program was just too slow to notice a finger. You cannot find a bug
+like that by staring at the code, and you certainly cannot find it by guessing.
 
-## Sample Program Code
+You have to **measure**.
 
-`loops`, `fps`, and both button states, refreshed every iteration — flip `SLOW_MODE` to `True` and watch every number fall apart:
+!!! mascot-welcome "Let's build an instrument"
+    ![Pixel waving welcome](../../../img/mascot/welcome.png){ class="mascot-admonition-img" }
+    This lab turns my face into its own test equipment. Four numbers on screen, updated live, and suddenly a bug you could only feel becomes a bug you can read.
+
+## Four Numbers That Tell You What Is Really Happening
+
+The heads-up display reports these, and the same numbers go to the Thonny shell once a second so
+you have a record you can scroll back through:
+
+| Reading | What it means |
+|---|---|
+| `loops` | How many times the main loop has run since it started |
+| `fps` | Loops per second — the real speed of your program |
+| `A` / `B` | What each button pin reads right now (1 = up, 0 = pressed) |
+| `hit` | How many presses the program actually managed to notice |
+
+The panel takes the top and bottom strips of the circle and leaves the middle to the face, so the
+instruments never sit on top of what they are measuring.
 
 ```py
-# Lab 26: Trace and Watch -- Debugging by Measurement
-#
-# Bug 5 in lab 25 was invisible. Nothing looked wrong in a photograph of
-# the screen; the program was just too slow to notice a finger. You cannot
-# find a bug like that by staring at the code, and you certainly cannot
-# find it by guessing. You have to MEASURE.
-#
-# This lab turns the face into its own instrument. A heads-up display
-# reports four numbers that tell you what the program is really doing,
-# and the same numbers go to the Thonny shell once a second so you have a
-# record you can scroll back through.
-#
-#   loops   how many times the main loop has run since it started
-#   fps     loops per second -- the real speed of your program
-#   A / B   what each button pin reads RIGHT NOW (1 = up, 0 = pressed)
-#
-# Then flip SLOW_MODE to True and watch every one of those numbers fall
-# apart. That is the whole lesson: a bug you can measure is a bug you can
-# fix.
-#
-# One difference from the OLED version worth noticing. There, the fps you
-# measured was almost entirely YOUR code's speed, because show() cost the
-# same 8 milliseconds no matter what. Here, drawing IS sending, so the
-# fps number below is dominated by how many pixels you chose to touch.
-# The instrument measures a different thing on different hardware, which
-# is a good thing to know about instruments.
+def draw_panel(a_value, b_value):
+    face.erase_label(face.LABEL_Y)
+    face.label("fps:" + str(fps) + " hit:" + str(presses))
+    face.erase_label(face.BOTTOM_LABEL_Y)
+    face.label("A:" + str(a_value) + " B:" + str(b_value),
+               y=face.BOTTOM_LABEL_Y)
+```
 
-import config
-import face
-from utime import ticks_ms, ticks_diff, sleep_ms
+## Two Switches, Two Ways to Break It
 
-button_a, button_b = config.init_buttons()
+The lab ships with two flags at the top, both set to `False`. Each one breaks the program in a
+completely different way and produces **the same symptom**.
 
-# Set this True to reproduce lab 25's bug 5 on purpose, then watch what
-# the heads-up display says about it.
+```py
+# Set this True to reproduce lab 25's bug 5 on purpose.
 SLOW_MODE = False
 SLOW_DELAY_MS = 300
 
@@ -49,55 +48,32 @@ SLOW_DELAY_MS = 300
 # labs did. It is the second way to break this program, and the one that
 # is unique to a display with no frame buffer.
 FULL_REDRAW = False
+```
 
-REPORT_EVERY_MS = 1000
-BLINK_EVERY_MS = 3000
-BLINK_HOLD_MS = 150
+| Flag | What it does | Why fps collapses |
+|---|---|---|
+| `SLOW_MODE` | Adds a 300 ms `sleep()` per loop | The program is asleep instead of working |
+| `FULL_REDRAW` | Redraws the whole face every frame | The program is busy sending 115,200 bytes |
 
-EYE_BOX = 34
+Identical symptom, unrelated causes. **That is why you measure instead of guessing.**
 
-loops = 0
-frames = 0
-fps = 0
-presses = 0
+## The Instrument Measures a Different Thing Here
 
-blinking = False
-was_blinking = None
-last_blink = ticks_ms()
-blink_started = 0
-last_report = ticks_ms()
+One difference from the OLED version is worth noticing. There, the fps you measured was almost
+entirely *your code's* speed, because `show()` cost the same 8 milliseconds no matter what.
 
+Here, drawing **is** sending, so this fps number is dominated by how many pixels you chose to
+touch. The instrument measures a different thing on different hardware, which is a good thing to
+know about instruments in general.
 
-def draw_static_parts():
-    """The mouth never changes, so it is drawn once here rather than on
-    every frame. Everything this program does after this point touches
-    only the eyes and the two instrument strips."""
-    face.clear()
-    face.mouth(face.SMILE, 46, 18)
+!!! mascot-thinking "Counting Frames Between Two Clock Readings"
+    ![Pixel thinks it through](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    Every game, every robot, and every video player measures its own speed exactly the way this lab does: count how many times you did the thing, then divide by how long it took. That is the whole technique.
 
+## Sample Program Code
 
-def draw_eyes():
-    for x in (face.LEFT_EYE_X, face.RIGHT_EYE_X):
-        face.erase(x - EYE_BOX, face.EYE_Y - EYE_BOX, EYE_BOX * 2, EYE_BOX * 2)
-    if blinking:
-        face.closed_eyes()
-    else:
-        face.eyes(24, 24)
-
-
-def draw_panel(a_value, b_value):
-    """The instrument panel gets the top and bottom strips of the circle.
-    The face keeps the middle, so the instruments never sit on top of
-    what they measure."""
-    face.erase_label(face.LABEL_Y)
-    face.label("fps:" + str(fps) + " hit:" + str(presses))
-    face.erase_label(face.BOTTOM_LABEL_Y)
-    face.label("A:" + str(a_value) + " B:" + str(b_value),
-               y=face.BOTTOM_LABEL_Y)
-
-
-draw_static_parts()
-print("watching... press either button, and try SLOW_MODE = True")
+```py
+# Lab 26: Trace and Watch (excerpt -- the measuring loop)
 
 while True:
     loops += 1
@@ -131,9 +107,6 @@ while True:
     draw_panel(a_value, b_value)
     frames += 1
 
-    # Once a second, work out the real frame rate and report it. Counting
-    # frames between two clock readings is how every game, every robot,
-    # and every video player measures its own speed.
     if ticks_diff(now, last_report) >= REPORT_EVERY_MS:
         fps = frames
         frames = 0
@@ -142,41 +115,37 @@ while True:
               " A:", a_value, " B:", b_value)
 
     if SLOW_MODE:
-        # One innocent-looking line. Watch what it does to fps -- and to
-        # how many presses the program manages to notice.
         sleep_ms(SLOW_DELAY_MS)
-
-# Things to try:
-#
-# 1. Run it as-is and note the fps. Then set SLOW_MODE = True and note it
-#    again. Write both numbers down -- that ratio IS the bug, expressed as
-#    a number instead of a feeling.
-#
-# 2. Now leave SLOW_MODE off and set FULL_REDRAW = True instead. The
-#    program still never sleeps, and the fps still collapses. Two very
-#    different causes, one identical symptom -- which is why you measure
-#    instead of guessing.
-#
-# 3. With SLOW_MODE on, tap button A as fast as you can ten times. Compare
-#    the "hit" counter to ten. Every missing press was swallowed by a
-#    sleep().
-#
-# 4. Lower SLOW_DELAY_MS until presses stop getting lost. The number you
-#    land on is roughly how long a human finger stays on a button -- you
-#    just measured a person with a microcontroller.
-#
-# 5. Comment out the draw_panel() call for ten seconds and watch fps jump.
-#    Two text strips are not free either. Now you know how much of your
-#    program's time is spent talking to the display, which is exactly the
-#    question lab 29 answers.
 ```
 
-Here's the instrument panel mid-run:
+The full program is `26-trace-and-watch.py` in the kit.
 
-![Simulated output of 26-trace-and-watch.py](sample-output.png)
+Here's the instrument running:
 
-## The Number That Means Something Different Here
+![A face with the readout fps:0 hit:0 at the top of the circle and A:1 B:1 at the bottom, with round eyes and a smile in between](sample-output.png)
 
-The OLED kit ran this same lab, and its `fps` number was almost entirely a measure of *your* code's speed, because `show()` cost the same fixed eight milliseconds no matter what you drew. Here, drawing **is** sending — so the `fps` figure below is dominated by how many pixels you chose to touch, not by any fixed hardware cost. The same instrument, on different hardware, is measuring a different thing, which is a useful fact to know about instruments in general, not just this one.
+Both buttons read 1 in that picture, which is what "not pressed" looks like. The fps figure needs a
+full second of running before it has anything to report.
 
-Only the eyes get erased and redrawn when blink state actually changes — `was_blinking` guards it — and the two instrument strips get their own small erase boxes at top and bottom, so watching the robot's vitals never costs as much as drawing the robot.
+!!! mascot-tip "Watch the Buttons Change in Real Time"
+    ![Pixel giving a tip](../../../img/mascot/tip.png){ class="mascot-admonition-img" }
+    Hold button A down and watch `A:1` become `A:0`. That single digit answers "is my wiring right?" faster than any amount of code reading, and it will save you an afternoon at some point.
+
+## Things to Try
+
+1. **Run it as-is and note the fps.** Then set `SLOW_MODE = True` and note it again. Write both
+   numbers down — that ratio **is** the bug, expressed as a number instead of a feeling.
+2. **Now leave `SLOW_MODE` off and set `FULL_REDRAW = True`.** The program still never sleeps, and
+   the fps still collapses. Two causes, one symptom.
+3. **With `SLOW_MODE` on, tap button A ten times as fast as you can.** Compare the `hit` counter to
+   ten. Every missing press was swallowed by a `sleep()`.
+4. **Lower `SLOW_DELAY_MS`** until presses stop getting lost. The number you land on is roughly how
+   long a human finger stays on a button — you just measured a person with a microcontroller.
+5. **Comment out `draw_panel()`** for ten seconds and watch fps jump. Two text strips are not free
+   either, which is exactly the question the [next lab](../partial-redraw/index.md) answers.
+
+## References
+
+- [Five Broken Faces](../broken-faces/index.md) — bug 5, the invisible one this lab was built to catch
+- [Don't Block the Loop](../no-blocking/index.md) — the `ticks_ms()` pattern the blink timer uses
+- [Only Redraw What Changed](../partial-redraw/index.md) — where measurement turns into optimization

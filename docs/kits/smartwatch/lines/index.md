@@ -1,17 +1,41 @@
-# Lab 4: Drawing Lines
+# Drawing Lines
 
-`hline()` and `vline()` take a start point and a length; `line()` takes two full end points and walks a diagonal. Reach for `hline`/`vline` whenever a line is perfectly horizontal or vertical — they skip the angle math, and because they send one run of pixels instead of walking a diagonal dot by dot, they're also the faster call on this display.
+Lines are the fastest way to put an idea on a screen, and on a robot face they carry more emotion
+per pixel than anything else you can draw. The driver gives you three commands:
+
+```py
+display.hline(x, y, length, color)   # horizontal, from a start point
+display.vline(x, y, length, color)   # vertical, from a start point
+display.line(x1, y1, x2, y2, color)  # any angle, between two end points
+```
+
+The first two take a start point plus a **length**. The third takes two full **end points**. That
+difference is worth noticing, because mixing them up is a bug that draws something plausible
+instead of raising an error.
+
+## Reach for hline and vline When You Can
+
+They skip the angle math, and on this display they do something better: they send one continuous
+run of pixels instead of walking the line a dot at a time. A horizontal line is the single cheapest
+shape this hardware can draw, which is why `shapes.py` builds everything else out of them.
+
+| Command | What it costs on this display |
+|---|---|
+| `hline()` | One drawing window, then the whole row of color |
+| `vline()` | One window, then the whole column |
+| `line()` at an angle | A walk down the line, roughly one window per pixel |
+
+!!! mascot-thinking "The Eyebrow Rule"
+    ![Pixel thinks it through](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    Angle the inner ends of my eyebrows *down* toward my nose and I look angry. Angle them *up* and I look sad or worried. Two lines, four numbers, and a stranger across the room knows how I feel — that is the superpower this whole book is about.
 
 ## Sample Program Code
 
-A box built from lines on top, an angry face built entirely out of lines on the bottom:
+The top half of this program is a box with an X through it, which shows all three commands next to
+each other. The bottom half is an entire angry face made of nothing but lines.
 
 ```py
 # Lab 04: Drawing Lines
-# hline() and vline() take a start point plus a length; line() takes two
-# full end points. Reach for hline/vline when you can -- they skip the
-# angle math, and on this display they also send one run of pixels
-# instead of walking the line a dot at a time.
 
 import config
 
@@ -44,24 +68,37 @@ display.vline(72, 155, 26, WHITE)
 display.vline(168, 155, 26, WHITE)
 # a flat, unimpressed mouth
 display.hline(78, 200, 84, WHITE)
-
-# Things to try:
-#
-# 1. Every line above stays inside the circle. Move the mouth down to
-#    y=228 and run it again -- the ends vanish under the bezel before the
-#    middle does, which is the round screen's signature failure.
-#
-# 2. Draw the same box out at the very edge of the square (x from 0 to
-#    239). You will get four arcs instead of a box, because only the
-#    middles of the sides fall inside the glass.
 ```
 
-Here's what that program draws:
+Here's what that program draws on the display:
 
-![Simulated output of 04-lines.py](sample-output.png)
+![A rectangle with an X drawn corner to corner at the top of the circle, and below it an angry face made of two down-angled eyebrow lines, two short vertical eyes, and one flat horizontal mouth](sample-output.png)
 
-## Lines Have Opinions About Direction
+Look at how little that face is. Five lines, no curves, no fills — and it still reads as annoyed.
+The eyebrows are doing almost all of the work.
 
-Look at the eyebrows in the angry face: they angle down toward the nose. That's not a coincidence — eyebrows angled down and inward read as angry or focused on every face this kit draws, human or robot. It's one of the cheapest, most reliable moves in the whole book: two straight lines, tilted the right way, do more emotional work than almost anything else you can draw.
+## Every Line Here Stays Inside the Circle
 
-Every line in this lab stays safely inside the visible circle. Try moving the mouth's `hline()` down toward y=228 and running it again — the ends disappear under the bezel before the middle does, because the screen gets narrower the further a shape sits from the vertical center. That's the round screen's signature failure mode, and it's worth seeing once on purpose.
+That was a deliberate choice, and it is the constraint you will feel on every layout in this kit.
+The box is centered at 70 to 170 rather than pushed to the screen edges, and the mouth stops well
+short of the rim.
+
+!!! mascot-warning "The Ends Vanish Before the Middle Does"
+    ![Pixel warns you](../../../img/mascot/warning.png){ class="mascot-admonition-img" }
+    Move the mouth down to y=228 and run it again. The ends disappear under the bezel while the middle is still fine — that lopsided failure is the round screen's signature, and once you have seen it you will recognize it instantly.
+
+## Things to Try
+
+1. **Flip the eyebrow rule.** Swap the two y-values on each eyebrow line so the inner ends angle
+   *up*. The same face goes from angry to worried without touching anything else.
+2. **Move the mouth to y=228** and watch the ends get eaten first, as in the warning above.
+3. **Draw the box out at the edges** of the square, with x running from 0 to 239. You get four
+   arcs instead of a box, because only the middles of the sides fall inside the glass.
+4. **Thicken a line.** Draw the mouth four times at y, y+1, y+2, and y+3. One-pixel lines look like
+   scratches on a screen this size, which is why every stroke in this kit is drawn several times.
+
+## References
+
+- [Eyebrows](../eyebrows/index.md) — the same rule, drawn with curved polygons instead of straight lines
+- [Drawing Rectangles](../rect/index.md) — where `hline` and `vline` get bundled into one call
+- [Screen Coordinates](../screen-coordinates/index.md) — why the ends of a long line go first

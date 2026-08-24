@@ -1,42 +1,37 @@
-# Lab 28: A Face With a Memory
+# A Face With a Memory
 
-Lab 19's menu had no memory — press A and you get the next emotion, forever, the same way no matter what happened ten seconds ago. Real creatures aren't like that. This lab gives the robot a **state machine**: a set of situations it can be in (`Idle`, `Curious`, `Happy`, `Annoyed`, `Asleep`) and a table of which state each event moves it to, from each starting point.
+The [expression menu](../emotion-modes/index.md) had no memory. Press A and you get the next
+emotion, over and over, and the face reacts to your finger the same way no matter what happened ten
+seconds ago.
 
-## Sample Program Code
+Real creatures are not like that. Poke someone who is already annoyed and you get a different answer
+than poking someone who is asleep.
 
-Two tables — `POSES` and `TRANSITIONS` — and a main loop that shrinks to "look up what happens next, then do it":
+!!! mascot-welcome "Give me a mood I can carry around"
+    ![Pixel waving welcome](../../../img/mascot/welcome.png){ class="mascot-admonition-img" }
+    Button A pokes me. Button B calms me down. Leave me alone long enough and I get bored, then fall asleep on my own — and what a poke means depends entirely on what I was doing when it arrived.
+
+## Two Tables Are the Whole Idea
+
+A **state machine** is one of the most useful abstractions in all of computing — vending machines,
+traffic lights, game characters, and network protocols are all built on it. It needs only two
+things:
+
+| Part | The question it answers |
+|---|---|
+| **States** | What situations can this thing be in, one at a time? |
+| **Transitions** | For each state, which event moves you where? |
+
+Write both as tables and the main loop shrinks to "look up what happens next, then do it." Adding a
+whole new mood becomes two rows of data instead of another branch tangled into a growing pile of
+`if` statements.
+
+## What Each State Looks Like
+
+This first table is the [emotion table](../emotion-table/index.md)'s column format, reused without
+change:
 
 ```py
-# Lab 28: A State Machine -- Giving the Face a Memory
-#
-# Lab 19's menu had no memory. Press A and you get the next emotion, over
-# and over, and the face reacts to your finger the same way no matter what
-# happened ten seconds ago. Real creatures are not like that. Poke someone
-# who is already annoyed and you get a different answer than poking
-# someone who is asleep.
-#
-# The idea that fixes this is a STATE MACHINE, and it is one of the most
-# useful abstractions in all of computing -- vending machines, traffic
-# lights, game characters, and network protocols are all built on it. It
-# needs only two things:
-#
-#   STATES       the situations the face can be in, one at a time
-#   TRANSITIONS  which state each event moves you to, from each state
-#
-# Write both as tables and the main loop shrinks to "look up what happens
-# next, then do it." Adding a whole new mood becomes two rows of data
-# instead of another branch tangled into a growing pile of if-statements.
-#
-# Button A pokes the robot. Button B calms it. Wait long enough and it
-# gets bored, then falls asleep on its own.
-
-import config
-import face
-from utime import ticks_ms, ticks_diff, sleep_ms
-
-button_a, button_b = config.init_buttons()
-
-# What each state LOOKS like, in the column format from lab 24.
 #           eye_rx  eye_ry  brow_L  brow_R  lift  mouth        x   y
 POSES = {
     "Idle":    (24, 22,   0,   0,   0, face.FLAT,  30,  0),
@@ -45,11 +40,18 @@ POSES = {
     "Annoyed": (24, 12,  12,  12,  -5, face.FLAT,  26,  0),
     "Asleep":  (24,  2,   0,   0,  -7, face.FLAT,  14,  0),
 }
+```
 
-# What each state DOES, which is a different question. Read a row like a
-# sentence: "from Idle, A leads to Curious, B leads to Annoyed, and after
-# 8000 ms of nobody touching anything, we fall Asleep."
-#
+Notice Curious: one brow at −7 and the other at 5. That single mismatch is what makes it read as
+interested rather than merely awake.
+
+## What Each State Does
+
+This is a different question, and it gets its own table. Read a row like a sentence: *"from Idle, A
+leads to Curious, B leads to Annoyed, and after 8000 ms of nobody touching anything, we fall
+Asleep."*
+
+```py
 #          state         A -> ...     B -> ...     after ms -> ...
 TRANSITIONS = {
     "Idle":    {"a": "Curious", "b": "Annoyed", "timeout": (8000, "Asleep")},
@@ -58,36 +60,21 @@ TRANSITIONS = {
     "Annoyed": {"a": "Asleep",  "b": "Idle",    "timeout": (6000, "Idle")},
     "Asleep":  {"a": "Curious", "b": "Curious", "timeout": None},
 }
+```
 
+Three kinds of event drive the machine, and the third one is what makes the robot feel alive:
 
-def draw_state(name):
-    eye_rx, eye_ry, brow_l, brow_r, lift, style, size_x, size_y = POSES[name]
-    face.clear()
-    face.eyes(eye_rx, eye_ry)
-    face.eyebrows(brow_l, brow_r, lift)
-    face.mouth(style, size_x, size_y)
-    face.label(name)
-    if name == "Asleep":
-        face.label("zZ", y=face.BOTTOM_LABEL_Y)
+| Event | Where it comes from | What it models |
+|---|---|---|
+| `a` | Button A | Somebody poked the robot |
+| `b` | Button B | Somebody calmed it down |
+| `timeout` | The clock | Nothing happened for long enough to matter |
 
+A robot that changes on its own, with nobody touching it, is doing something no menu can do.
 
-state = "Idle"
-entered_at = ticks_ms()
-draw_state(state)
-print("state:", state)
+## The Loop Just Follows the Tables
 
-
-def go_to(next_state, because):
-    """The only place in the program that changes state. Funnelling every
-    change through one function means there is exactly one line to watch
-    when the face ends up somewhere you did not expect."""
-    global state, entered_at
-    print(state, "--", because, "->", next_state)
-    state = next_state
-    entered_at = ticks_ms()
-    draw_state(state)
-
-
+```py
 while True:
     rules = TRANSITIONS[state]
 
@@ -105,45 +92,61 @@ while True:
             go_to(next_state, "waited " + str(after_ms) + "ms")
 
     sleep_ms(10)
-
-# Notice what the loop above does NOT contain: the word "Happy", the word
-# "Asleep", or any knowledge of what a poke means. All of that lives in
-# the tables. The loop just follows them.
-#
-# Things to try:
-#
-# 1. Draw the machine on paper first -- a circle for each state, an arrow
-#    for each transition, labelled A, B, or the timeout. Five circles,
-#    fourteen arrows. That drawing IS the two tables above, and it is how
-#    engineers design this kind of code before writing any.
-#
-# 2. Add a "Startled" state: eyes wide, brows way up, mouth open. Give it
-#    a 700 ms timeout back to Curious, and make Asleep + A go to Startled
-#    instead. Two rows of data, no new logic -- waking a sleeping robot
-#    should surprise it.
-#
-# 3. Find the trap. From Happy, button A leads back to Happy forever. Is
-#    that a bug or a personality? Try changing it to "Annoyed" and see
-#    whether a robot that gets tired of being poked feels more alive.
-#
-# 4. Watch the shell while you play. Every transition prints, so you get a
-#    written history of the robot's mood -- the technique from lab 26,
-#    aimed at behaviour instead of speed.
-#
-# 5. draw_state() calls face.clear() on every transition, and you can see
-#    the wipe. Because states change at most a few times a second, that is
-#    a defensible choice. Rewrite it to erase only the boxes that differ
-#    between the old pose and the new one, and decide for yourself whether
-#    the extra bookkeeping earned its keep. There is no single right
-#    answer, and knowing that is the skill.
 ```
 
-Here's the robot at rest, in its Idle state:
+Notice what that loop does **not** contain: the word "Happy", the word "Asleep", or any knowledge of
+what a poke means. All of that lives in the tables.
 
-![Simulated output of 28-state-machine.py](sample-output.png)
+!!! mascot-thinking "One Door In, One Door Out"
+    ![Pixel thinks it through](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    `go_to()` is the only place in the program that changes state, and it prints every change to the shell. Funnelling every change through one function means there is exactly one line to watch when I end up somewhere you did not expect.
 
-## What the Loop Doesn't Know
+```py
+def go_to(next_state, because):
+    global state, entered_at
+    print(state, "--", because, "->", next_state)
+    state = next_state
+    entered_at = ticks_ms()
+    draw_state(state)
+```
 
-Read the main loop and notice what it never mentions: the word "Happy," the word "Asleep," or anything at all about what a poke means. All of that lives entirely in the two tables. The loop just follows them — which is exactly why adding a whole new mood later costs two rows of data, not another branch tangled into a growing pile of `if` statements.
+Here's the starting state:
 
-This is also the one lab in the kit that calls `display.fill(BLACK)` on every state change, and that's a defensible choice here — states change a few times a minute at most, nothing like the sixty-times-a-second pace an animation runs at.
+![The word Idle at the top of the circle above a neutral face with flat eyebrows, round eyes with dark pupils, and a flat horizontal mouth](sample-output.png)
+
+Press a button — or wait eight seconds — and the machine moves somewhere else.
+
+## Draw It on Paper First
+
+Five circles, one per state. Fourteen arrows, one per transition, each labelled A, B, or its
+timeout. That drawing **is** the two tables above, and it is how engineers design this kind of code
+before writing any of it.
+
+Doing it on paper will also show you something the code hides: which states are hard to reach, and
+which ones you can never leave.
+
+!!! mascot-tip "Find the Trap"
+    ![Pixel giving a tip](../../../img/mascot/tip.png){ class="mascot-admonition-img" }
+    From Happy, button A leads back to Happy forever. Is that a bug or a personality? Change it to "Annoyed" and see whether a robot that gets tired of being poked feels more alive.
+
+## Things to Try
+
+1. **Draw the machine on paper** — five circles, fourteen arrows — before you change anything.
+2. **Add a "Startled" state:** eyes wide, brows way up, mouth open. Give it a 700 ms timeout back to
+   Curious, and make Asleep + A go to Startled instead. Two rows of data, no new logic — waking a
+   sleeping robot should surprise it.
+3. **Decide about the Happy trap** described in the tip above.
+4. **Watch the shell while you play.** Every transition prints, so you get a written history of the
+   robot's mood — the technique from [Trace and Watch](../trace-and-watch/index.md), aimed at
+   behavior instead of speed.
+5. **Optimize the redraw.** `draw_state()` calls `face.clear()` on every transition, and you can see
+   the wipe. Because states change at most a few times a second, that is defensible. Rewrite it to
+   erase only the boxes that differ between the old pose and the new one, then decide for yourself
+   whether the extra bookkeeping earned its keep. There is no single right answer, and knowing that
+   is the skill.
+
+## References
+
+- [The Emotion Table](../emotion-table/index.md) — the pose format this lab reuses for `POSES`
+- [Mode Switching](../modes/index.md) — the memoryless menu this lab is an answer to
+- [Sleeping Face](../sleepy/index.md) — the expression the Asleep state is heading toward

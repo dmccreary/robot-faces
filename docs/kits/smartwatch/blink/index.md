@@ -1,20 +1,49 @@
-# Lab 13: Blinking
+# Blinking
 
-Waits for a press on button A (GP14, `PULL_UP`) and closes both eyes at once — two eyes shutting together reads as a blink, not a wink. This is the kit's first lab that reads a button at all.
+A wink is one eye. A **blink** is both eyes at once, and it means something entirely different — not
+a signal to you, but a sign of life. This lab closes both eyes on a button press, which turns the
+face from something that reacts to a timer into something that reacts to *you*.
+
+## Reading a Button
+
+Both buttons in this kit are wired the same way: one leg to a GPIO pin, the other leg to GND, with
+the pin configured as a `PULL_UP` input.
+
+```py
+button_a, _ = config.init_buttons()
+```
+
+`PULL_UP` holds the pin at 1 until a press pulls it down to 0. So a pressed button reads **0**,
+which feels backwards the first time and never again.
+
+| Pin reading | What it means |
+|---|---|
+| 1 | Not pressed — the internal pull-up resistor is holding the line high |
+| 0 | Pressed — the button has connected the pin to GND |
+
+Button A is **GP14** and button B is **GP15**, set once in `config.py` as `BUTTON_A_PIN` and
+`BUTTON_B_PIN`. Every kit in this book uses those same two pins. On the Waveshare RP2040-LCD-1.28
+the board has no buttons of its own, so these go on free GPIO pins along the edge.
+
+!!! mascot-thinking "Why Debounce Exists"
+    ![Pixel thinks it through](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    A button's metal contacts physically bounce for a few milliseconds when they meet, so one press can look like five to a program fast enough to notice. Waiting 20 ms and checking again is the whole fix.
+
+```py
+def button_pressed():
+    if button_a.value() == 1:
+        return False
+    sleep(0.02)              # debounce: let the contacts settle
+    return button_a.value() == 0
+```
 
 ## Sample Program Code
 
-Debounced with a 20 ms settle check, exactly like the OLED kit's version:
+The mouth is drawn once and never touched again. `set_eyes()` erases both eye boxes and rebuilds
+them in whichever state you ask for.
 
 ```py
 # Lab 13: Blinking
-# Waits for a press on button A (GP14, PULL_UP) and closes both eyes at
-# once -- two eyes closing together reads as a blink, not a wink.
-#
-# Wiring for the two buttons: one leg of each button to the GPIO pin, the
-# other leg to GND. PULL_UP holds the pin at 1 until a press pulls it to
-# 0. On the Waveshare RP2040-LCD-1.28 the board has no buttons of its
-# own, so these go on the free GPIO pins along the edge.
 
 import config
 import shapes
@@ -110,12 +139,38 @@ while True:
     sleep(0.01)
 ```
 
-Here's the resting face, before any button is pressed:
+Here's the resting face, between blinks:
 
-![Simulated output of 13-blink.py](sample-output.png)
+![A face with both eyes open as white rings with dark pupils, above a wide upward-curving smile](sample-output.png)
 
-## Wiring, Unchanged
+## Why wait_for_release() Matters
 
-The button wiring is identical to the OLED kit: each button's other leg goes to ground, `PULL_UP` holds the pin at 1 until a press pulls it to 0, and `pressed()` waits 20 milliseconds after the first low reading before trusting it, to filter out the electrical bounce a real switch makes as its contacts settle. Nothing about buttons changed when the display did — only the face on the other end of the wire.
+Without it, a finger held on the button for half a second would trigger dozens of blinks — the loop
+runs far faster than you can lift your hand. `wait_for_release()` turns "the button is down" into
+"the button was just pressed," which is almost always what you actually mean.
 
-`set_eyes()` erases both eye boxes and redraws them open or shut, leaving the smile alone entirely. It never changes, so it never costs anything to touch.
+```py
+def wait_for_release():
+    while button_a.value() == 0:
+        sleep(0.01)
+```
+
+!!! mascot-warning "This Loop Is Blocking, and That Is a Real Cost"
+    ![Pixel warns you](../../../img/mascot/warning.png){ class="mascot-admonition-img" }
+    While `blink_once()` runs its `sleep(0.15)`, nothing else in the program happens — no second button, no timer, no animation. That is fine here and a serious problem later, which is exactly what the [Don't Block the Loop](../no-blocking/index.md) lab is about.
+
+## Things to Try
+
+1. **Delete the debounce sleep** and press the button twenty times. Count how many blinks you get.
+   The extra ones are real electrical events, not a software bug.
+2. **Change the blink hold** from 0.15 to 0.6 seconds. A slow blink reads as sleepy or bored; a
+   fast one reads as alert. You are tuning personality with a single number.
+3. **Blink twice per press.** Two `blink_once()` calls with a short gap read very differently from
+   one long blink.
+4. **Remove `wait_for_release()`** and hold the button down. Now you know what it was preventing.
+
+## References
+
+- [Winking with a Smile](../wink/index.md) — one eye instead of two, and why that changes the meaning
+- [Don't Block the Loop](../no-blocking/index.md) — how to blink on a timer without freezing everything else
+- [Reading Two Buttons](../buttons/index.md) — the same pattern, doubled, with counters on screen

@@ -1,27 +1,37 @@
-# Lab 8: Drawing Polygons
+# Drawing Polygons
 
-`shapes.poly(display, x, y, point_array, color, fill_flag)` draws any shape you can list points for — triangles, stars, a rocket, whatever you can describe as a sequence of offsets from a center point. The array type moved from `'B'` (unsigned bytes) on the OLED kit to `'h'` (signed shorts) here, since placing a shape relative to a center means half its offsets are negative.
+`poly()` draws any shape you can list points for — triangles, pentagons, stars, and the curved,
+angled eyebrows that make a robot face expressive. It is the one drawing command that can point in
+a **direction**, which is exactly why the eyebrow lab reaches for it.
+
+```py
+shapes.poly(display, x, y, point_array, color, fill_flag)
+```
+
+`point_array` is a MicroPython `array('h', [x0, y0, x1, y1, ...])` of signed shorts. The `'h'`
+matters: the OLED kit used `array('B')` — unsigned bytes, maximum 255 — which still fits this
+screen, but signed shorts let the offsets go **negative**, and negative offsets are what let you
+write a shape around its own center instead of from a corner.
+
+## How the Fill Works
+
+This driver has no `poly()` of its own, so `shapes.poly()` fills polygons itself using a
+**scanline fill**: for each row, find where the shape's edges cross it, sort the crossings, and
+fill between them in pairs.
+
+Open `lib/shapes.py` and read it. It is the same algorithm every 2-D graphics library on earth
+uses, and it fits on one screen.
+
+!!! mascot-thinking "One Array, Four Positions"
+    ![Pixel thinks it through](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    Every shape below is written once, as offsets from a center point, and then placed by moving that center. Change the anchor and the shape moves; change the array and the shape changes. Keeping those two ideas separate is most of what makes drawing code readable.
 
 ## Sample Program Code
 
-Filled and outlined versions of every shape, each placed by moving the same point array's anchor:
+Four shapes, each drawn filled on one side and outlined on the other so you can compare them.
 
 ```py
 # Lab 08: Drawing Polygons
-# shapes.poly(display, x, y, point_array, color, fill_flag) draws any
-# shape you can list points for. point_array is an array('h', [x0,y0,
-# x1,y1, ...]) of signed shorts, so the offsets can be negative and the
-# range is plenty for a 240x240 display.
-#
-# The OLED kit used array('B') -- unsigned bytes, max 255 -- which still
-# fits this screen. 'h' is the safer habit once shapes start being placed
-# relative to a center point, because half of those offsets are negative.
-#
-# HOW THE FILL WORKS: shapes.poly() has to fill polygons itself, since
-# this driver cannot. It uses a scanline fill -- for each row, find where
-# the edges cross it, sort the crossings, fill between them in pairs.
-# Open shapes.py and read it; it is the same algorithm every 2-D graphics
-# library on earth uses, and it fits on one screen.
 
 import config
 import shapes
@@ -33,8 +43,6 @@ BLACK = config.BLACK
 NO_FILL = config.NO_FILL
 FILL = config.FILL
 FONT = config.SMALL_FONT
-
-CENTER_X = config.CENTER_X
 
 display.fill(BLACK)
 display.text(FONT, "poly()", 96, 16, ON, BLACK)
@@ -59,29 +67,44 @@ shapes.poly(display, 180, 122, PENTAGON, ON, NO_FILL)
 # row three
 shapes.poly(display, 78, 186, STAR, ON, FILL)
 shapes.poly(display, 162, 186, STAR, ON, NO_FILL)
-
-# Things to try:
-#
-# 1. A polygon is the one shape here that can point in a direction, which
-#    makes it the right tool for a curved, angled eyebrow. Lab 14 uses it
-#    for exactly that.
-#
-# 2. Add a point to STAR and see what happens. Scanline fill does not
-#    care how many points you give it, or whether the shape is convex --
-#    but it does assume the outline does not cross itself. Make it cross
-#    itself on purpose and look at the result.
-#
-# 3. Time the filled star against the outlined one. The fill sends one
-#    hline per row it covers; the outline sends one line() per edge. On
-#    this display, which one is cheaper depends entirely on the shape.
 ```
 
-Here's what that program draws:
+Here's what that program draws on the display:
 
-![Simulated output of 08-poly.py](sample-output.png)
+![Three rows of polygons under the caption poly(): a filled and an outlined triangle, then a filled pentagon, a filled hexagon and an outlined pentagon, then a filled and an outlined five-pointed star](sample-output.png)
 
-## Filling a Polygon the Driver Can't Fill
+Notice the middle row is three shapes wide and the outer rows are two. That is the circle deciding
+your layout for you — the screen is widest across its middle, so that is where the most shapes fit.
 
-This driver has no `poly()` at all, filled or otherwise, so `shapes.poly()` has to build the fill itself — with a **scanline fill**: for every row the shape covers, find where its edges cross that row, sort the crossings, and fill between them in pairs. That's the same algorithm essentially every 2-D graphics library on earth uses, and it fits in about twenty readable lines in `shapes.py`.
+## Filled or Outlined Costs Different Amounts
 
-A polygon is the one shape in this kit that can point in a direction, which is exactly why Lab 14 reaches for it to build a curved, angled eyebrow — a shape no ellipse or straight line can produce on its own.
+This is worth knowing before you start drawing brows. A filled polygon sends one `hline()` per row
+it covers. An outline sends one `line()` per edge. Which one is cheaper depends entirely on the
+shape:
+
+| Shape | Filled cost | Outline cost |
+|---|---|---|
+| A short, wide eyebrow (12 rows, 6 edges) | 12 runs | 6 angled walks |
+| A tall star (48 rows, 10 edges) | 48 runs | 10 angled walks |
+| A big filled pentagon | grows with **area** | grows with **perimeter** |
+
+!!! mascot-tip "An Outlined Brow Reads as a Scratch"
+    ![Pixel giving a tip](../../../img/mascot/tip.png){ class="mascot-admonition-img" }
+    Try drawing an eyebrow with `NO_FILL` and you get a thin wire frame that looks like a scuff on the glass. Filled polygons are what make brows read as brows on a screen this size.
+
+## Things to Try
+
+1. **Add a point to `STAR`** and see what happens. Scanline fill does not care how many points you
+   give it, or whether the shape is convex — but it does assume the outline does not cross itself.
+2. **Make it cross itself on purpose** and look at the result. The pattern you get is not a bug in
+   your code; it is what "inside" means when a shape overlaps itself.
+3. **Time the filled star against the outlined one** with `ticks_us()`. Predict which is faster
+   first, then find out whether the shape or your intuition was in charge.
+4. **Turn a triangle into an eyebrow.** Squash `TRIANGLE` flat — change the ±22 and ±16 to ±4 and
+   ±20 — and put it above an eye. You have just built the [eyebrow lab](../eyebrows/index.md).
+
+## References
+
+- [Eyebrows](../eyebrows/index.md) — where `poly()` becomes the most expressive tool on the face
+- [Drawing Lines](../lines/index.md) — the straight-line version of the same idea, and its limits
+- [MicroPython array Documentation](https://docs.micropython.org/en/latest/library/array.html) — what `array('h', ...)` actually builds

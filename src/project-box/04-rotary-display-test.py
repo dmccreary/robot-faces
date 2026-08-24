@@ -18,10 +18,10 @@ CS = machine.Pin(6)
 spi=machine.SPI(0, sck=clock, mosi=data)
 oled = ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, DC, RES, CS)
    
-# GPIO Pins 16 and 17 are for the encoder pins. 22 is the button press switch.
+# GP12 and GP13 are the encoder pins. Buttons are on GP14/GP15.
 
-PIN_NUM_CLK = 14
-PIN_NUM_DATA = 15
+PIN_NUM_CLK = 12
+PIN_NUM_DATA = 13
 # defauls are for pull up input pins and bounded ranges
 r = RotaryIRQ(pin_num_clk=PIN_NUM_CLK,
               pin_num_dt=PIN_NUM_DATA,

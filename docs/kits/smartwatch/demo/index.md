@@ -1,157 +1,52 @@
-# Lab 20: Demo Reel
+# Demo Reel
 
-A self-running showcase that needs no buttons at all — good for a science fair table or an open house. Cycles through all seven emotions, blinking briefly between each one so the transitions read as alive instead of a slideshow.
+A self-running showcase that needs no buttons at all — the right program for a science fair table,
+an open house, or a classroom shelf. It cycles through all seven emotions, blinking briefly between
+each one so the transitions read as **alive** instead of as a slideshow.
+
+## The Blink Between Faces
+
+That blink is the whole design idea. Cut straight from one expression to the next and the face
+looks like a PowerPoint deck. Close the eyes for 120 milliseconds in between and the same sequence
+looks like a creature changing its mind.
+
+```py
+def blink_transition():
+    display.fill(BLACK)
+    for x in (LEFT_EYE_X, RIGHT_EYE_X):
+        for offset in range(STROKE):
+            shapes.ellipse(display, x, EYE_Y + offset, 26, BLINK_RADIUS_Y,
+                           WHITE, NO_FILL, TOP_HALF)
+    sleep(0.12)
+```
+
+!!! mascot-thinking "Animators Have Known This for a Century"
+    ![Pixel thinks it through](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    A blink between poses hides the change and gives your eye something to do while my whole face rearranges itself. It costs one function and 120 milliseconds, and it is the difference between a machine cycling images and a robot thinking.
+
+## This Is Where a Full Wipe Is Right
+
+After all the warnings about `display.fill(BLACK)`, this lab uses one on every transition — and
+that is the correct call here. It happens once every two seconds, not sixty times a second, and it
+guarantees no leftovers from the previous face.
+
+| Program | Wipes per second | Full wipe acceptable? |
+|---|---|---|
+| [Eye scanner](../eye-scanner/index.md) | ~100 | No — flickers badly |
+| [Mode menu](../modes/index.md) | a few per minute | Yes |
+| This demo reel | 0.5 | Yes |
+| [Partial redraw](../partial-redraw/index.md) benchmark | ~50 | No — and it measures why |
+
+Judgment about *when* an optimization matters is worth as much as knowing how to do it.
 
 ## Sample Program Code
 
-Each emotion holds for two seconds, then a quick blink transition plays before the next one begins:
+The seven expression functions are identical to the ones in the
+[expression menu](../emotion-modes/index.md). What is new is the loop at the bottom, which is only
+five lines.
 
 ```py
-# Lab 20: Demo Reel
-# A self-running showcase that needs no buttons -- good for a science
-# fair table or open house. Cycles through all seven emotions, blinking
-# briefly between each one so the transitions read as alive instead of a
-# slideshow.
-#
-# On this display the demo reel is also the first program where a full
-# screen wipe per transition is genuinely the right call: it happens once
-# every two seconds, not sixty times a second, and it guarantees no
-# leftovers from the previous face.
-
-import config
-import shapes
-from utime import sleep
-
-display = config.init_display()
-WHITE = config.WHITE
-BLACK = config.BLACK
-NO_FILL = config.NO_FILL
-FILL = config.FILL
-FONT = config.SMALL_FONT
-
-TOP_HALF = 3
-BOTTOM_HALF = 12
-BOTTOM_LEFT = 4
-BOTTOM_RIGHT = 8
-
-HALF_WIDTH = config.WIDTH // 2
-EYE_SPACING = 48
-LEFT_EYE_X = HALF_WIDTH - EYE_SPACING
-RIGHT_EYE_X = HALF_WIDTH + EYE_SPACING
-EYE_Y = 102
-PUPIL_RADIUS = 8
-EYEBROW_HALF_WIDTH = 24
-EYEBROW_Y = EYE_Y - 40
-MOUTH_Y = 164
-LABEL_Y = 30
-
-BLINK_RADIUS_Y = 14
-STROKE = 4
-
-
-def draw_eye(x, rx, ry):
-    shapes.ellipse(display, x, EYE_Y, rx, ry, WHITE, FILL)
-    shapes.ellipse(display, x, EYE_Y, PUPIL_RADIUS, PUPIL_RADIUS, BLACK, FILL)
-
-
-def draw_eyes(rx, ry):
-    draw_eye(LEFT_EYE_X, rx, ry)
-    draw_eye(RIGHT_EYE_X, rx, ry)
-
-
-def draw_eyebrow(x, side, tilt, lift):
-    y = EYEBROW_Y - lift
-    outer_x = x - (EYEBROW_HALF_WIDTH * side)
-    inner_x = x + (EYEBROW_HALF_WIDTH * side)
-    for offset in range(STROKE):
-        display.line(outer_x, y - tilt + offset,
-                     inner_x, y + tilt + offset, WHITE)
-
-
-def draw_eyebrows(tilt_left, tilt_right, lift=0):
-    draw_eyebrow(LEFT_EYE_X, 1, tilt_left, lift)
-    draw_eyebrow(RIGHT_EYE_X, -1, tilt_right, lift)
-
-
-def draw_mouth_curve(radius_x, radius_y, mask):
-    for offset in range(STROKE):
-        shapes.ellipse(display, HALF_WIDTH, MOUTH_Y - offset,
-                       radius_x, radius_y, WHITE, NO_FILL, mask)
-
-
-def draw_mouth_flat(half_width):
-    display.fill_rect(HALF_WIDTH - half_width, MOUTH_Y,
-                      half_width * 2, STROKE, WHITE)
-
-
-def draw_mouth_open(radius_x, radius_y):
-    shapes.ellipse(display, HALF_WIDTH, MOUTH_Y, radius_x, radius_y,
-                   WHITE, FILL)
-
-
-def draw_mouth_smirk(half_width, side):
-    draw_mouth_flat(half_width)
-    corner_x = HALF_WIDTH + (half_width * side)
-    mask = BOTTOM_RIGHT if side > 0 else BOTTOM_LEFT
-    for offset in range(STROKE):
-        shapes.ellipse(display, corner_x, MOUTH_Y - 10 - offset, 14, 14,
-                       WHITE, NO_FILL, mask)
-
-
-def draw_happy():
-    draw_eyes(24, 24)
-    draw_eyebrows(0, 0, lift=5)
-    draw_mouth_curve(50, 24, BOTTOM_HALF)
-
-
-def draw_sad():
-    draw_eyes(22, 22)
-    draw_eyebrows(-7, -7, lift=0)
-    draw_mouth_curve(40, 20, TOP_HALF)
-
-
-def draw_angry():
-    draw_eyes(24, 12)
-    draw_eyebrows(12, 12, lift=-5)
-    draw_mouth_flat(26)
-
-
-def draw_afraid():
-    draw_eyes(31, 31)
-    draw_eyebrows(-12, -12, lift=7)
-    draw_mouth_open(15, 22)
-
-
-def draw_surprised():
-    draw_eyes(32, 32)
-    draw_eyebrows(0, 0, lift=14)
-    draw_mouth_open(20, 26)
-
-
-def draw_disgusted():
-    draw_eyes(22, 15)
-    draw_eyebrows(10, -5, lift=-3)
-    for offset in range(STROKE):
-        shapes.ellipse(display, HALF_WIDTH - 14, MOUTH_Y - offset, 30, 18,
-                       WHITE, NO_FILL, TOP_HALF)
-
-
-def draw_contempt():
-    draw_eyes(24, 24)
-    draw_eyebrows(0, 0, lift=0)
-    draw_mouth_smirk(34, 1)
-
-
-EMOTIONS = (
-    ("Happy", draw_happy),
-    ("Sad", draw_sad),
-    ("Angry", draw_angry),
-    ("Afraid", draw_afraid),
-    ("Surprised", draw_surprised),
-    ("Disgusted", draw_disgusted),
-    ("Contempt", draw_contempt),
-)
-
+# Lab 20: Demo Reel (excerpt -- the reel itself)
 
 def show_emotion(name, draw):
     display.fill(BLACK)
@@ -176,10 +71,29 @@ while True:
         blink_transition()
 ```
 
-Here's one frame from partway through the reel — which emotion you land on depends on exactly when you look, since the reel never stops moving:
+The full program is `20-demo.py` in the kit.
 
-![Simulated output of 20-demo.py](sample-output.png)
+Here's one frame from the middle of the reel:
 
-## A Full Wipe, on Purpose
+![The word Sad at the top of the circle above a sad face with eyebrows tilted up at their inner ends, round eyes, and a downward-curving frown](sample-output.png)
 
-This is the one lab in the kit where a `display.fill(BLACK)` every couple of seconds is genuinely the right call rather than a shortcut to avoid. It happens once every two seconds, not sixty times a second, and it guarantees there's never a leftover pixel from the previous face bleeding into the next one. Compare that to Lab 11's eye scanner, which redraws dozens of times a second and could never afford the same wipe.
+The reel shows one emotion at a time, so a single picture catches whichever face was up when the
+image was made. Run it and you get all seven, two seconds apart.
+
+## Things to Try
+
+1. **Delete the blink transition** and watch the same seven faces without it. The difference is
+   larger than 120 milliseconds has any right to be.
+2. **Change the hold** from 2 seconds to 4. Longer holds feel calm and a little sad; shorter ones
+   feel manic. Find the timing that suits the personality you want.
+3. **Reorder the emotions** so the reel tells a story — bored, curious, surprised, happy. A sequence
+   is a narrative, not just a list.
+4. **Add a fade.** Show each face, then redraw it with `face`-sized shapes in a dimmer color before
+   the blink. You will need a color from `config.color565()`; the
+   [color bits lab](../color-bits/index.md) explains how to pick one that stays visible.
+
+## References
+
+- [The Expression Menu](../emotion-modes/index.md) — the same seven expressions, driven by buttons
+- [Standalone main.py](../sample-main-demo/index.md) — the demo reel plus a button menu, ready to run with no computer attached
+- [Blinking](../blink/index.md) — where the closed-eye arc used in the transition comes from

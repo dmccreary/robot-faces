@@ -1,24 +1,53 @@
-# Lab 15: Don't Block the Loop
+# Don't Block the Loop
 
-Every earlier animated lab paced itself with `sleep()`, which freezes the entire program while it waits. This lab swaps `sleep()` for `ticks_ms()` so a face can blink on its own timer while the main loop stays free to do anything else — like check a button, which the very next lab adds.
+Every animation so far has paced itself with `sleep()`, which is simple and completely freezes the
+program while it waits. This lab swaps `sleep()` for `ticks_ms()` so the face can blink on its own
+schedule while the main loop stays free to do other things — like watch a button.
+
+It is the single most important structural idea in embedded programming, and this kit has a second
+version of it that the OLED kit never needed.
+
+## The Pattern
+
+Instead of *waiting* for time to pass, you *check whether* it has passed and keep going either way.
+
+```py
+while True:
+    now = ticks_ms()
+
+    if not blinking and ticks_diff(now, last_blink) >= BLINK_EVERY_MS:
+        blinking = True
+        blink_started = now
+        set_eyes(True)
+
+    if blinking and ticks_diff(now, blink_started) >= BLINK_HOLD_MS:
+        blinking = False
+        last_blink = now
+        set_eyes(False)
+
+    # this loop never calls sleep(), so this spot is free for a button
+    # check, a second animation, or anything else that needs to run often
+```
+
+Use `ticks_diff(now, then)` rather than plain subtraction. MicroPython's millisecond counter wraps
+around when it runs out of room, and `ticks_diff()` handles that correctly while `now - then` gives
+you a large negative number at the worst possible moment.
+
+| Approach | While waiting, the program can… | Cost |
+|---|---|---|
+| `sleep(4)` | nothing at all | Missed buttons, frozen animations |
+| `ticks_ms()` check | do anything else in the loop | A few lines of bookkeeping |
+
+!!! mascot-thinking "A Slow Draw Blocks Exactly As Hard As a Sleep"
+    ![Pixel thinks it through](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
+    Here is the part the OLED kit never had to think about. `display.fill(BLACK)` pushes 115,200 bytes and takes real milliseconds, and nothing else in my program runs while it does. Non-blocking timing and small redraws are two halves of one idea — neither is enough on its own.
 
 ## Sample Program Code
 
-The face blinks automatically every four seconds, without ever calling `sleep()`:
+The face blinks by itself every four seconds. Nothing in the loop ever sleeps.
 
 ```py
 # Lab 15: Don't Block the Loop
-# Every earlier lab paced itself with sleep(), which freezes the whole
-# program while it waits. This lab swaps sleep() for ticks_ms() so the
-# face can blink on its own timer while the main loop stays free to do
-# other things -- like check a button, which the next lab adds.
-#
-# There is a second kind of blocking on this display that the OLED kit
-# never had to think about: a slow DRAW blocks just as hard as a sleep().
-# display.fill(BLACK) takes real milliseconds because it is pushing
-# 115,200 bytes, and nothing else in your program runs while it does. So
-# the non-blocking pattern below is paired with the small-redraw pattern
-# from lab 11. Both are needed; neither is enough alone.
 
 import config
 import shapes
@@ -101,24 +130,39 @@ while True:
         blinking = False
         last_blink = now
         set_eyes(False)
-
-    # this loop never calls sleep(), so this spot is free for a button
-    # check, a second animation, or anything else that needs to run often
-
-# Things to try:
-#
-# 1. Replace set_eyes() with a version that does display.fill(BLACK) and
-#    redraws the smile too. The loop still never sleeps -- but it is now
-#    blocked for tens of milliseconds on every blink, which is the same
-#    problem wearing a different hat. Time it and see.
 ```
 
-Here's the resting face between blinks:
+Here's the face between blinks:
 
-![Simulated output of 15-no-blocking.py](sample-output.png)
+![A face with both eyes open as white circles with dark pupils, above a wide smile](sample-output.png)
 
-## A Second Kind of Blocking This Kit Has That the OLED Kit Didn't
+## Two Ways to Block, One Symptom
 
-The non-blocking pattern itself is identical to the OLED kit's — compare `ticks_diff()` against a remembered timestamp instead of sleeping through the wait. What's new is a **second** way to block that has nothing to do with `sleep()` at all: a slow **draw** blocks a loop exactly as hard as a `sleep()` call does, because `display.fill(BLACK)` takes real milliseconds to push 115,200 bytes, and nothing else in the program runs while it does.
+This is the idea worth carrying out of the lab. A program can be too slow for two completely
+different reasons, and they look identical from the outside:
 
-So the non-blocking timer pattern here is always paired with the small-redraw pattern from Lab 11. Neither one alone is enough; a loop that never sleeps but still calls `face.clear()` on every blink is blocked in a different disguise.
+| Cause | What it looks like | Where you meet it |
+|---|---|---|
+| A `sleep()` in the loop | Buttons get ignored, animation stutters | This lab, and lab 25's bug 5 |
+| A draw call that sends too many pixels | Buttons get ignored, animation stutters | Every full-screen wipe on this display |
+
+Identical symptoms, unrelated causes. That is exactly why the [Trace and Watch](../trace-and-watch/index.md)
+lab builds an instrument instead of asking you to guess.
+
+## Things to Try
+
+1. **Break it the interesting way.** Replace `set_eyes()` with a version that does
+   `display.fill(BLACK)` and redraws the smile too. The loop still never sleeps — and it is now
+   blocked for tens of milliseconds on every blink. Time it and see.
+2. **Add a second timer** that nudges the mouth wider every 1.5 seconds. Two independent animations
+   in one loop, with no threads and no interrupts, is the payoff for this whole pattern.
+3. **Add a button check** in the free spot at the bottom of the loop. It will respond instantly,
+   which the [blinking lab](../blink/index.md) could not manage.
+4. **Print `ticks_ms()` once per loop** for a second and count the lines. That number is your real
+   frame rate, and it is about to become the subject of its own lab.
+
+## References
+
+- [Blinking](../blink/index.md) — the blocking version of the same animation
+- [Trace and Watch](../trace-and-watch/index.md) — an on-screen instrument for measuring what this lab describes
+- [Only Redraw What Changed](../partial-redraw/index.md) — the other half of staying responsive on this display

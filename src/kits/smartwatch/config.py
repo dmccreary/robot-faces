@@ -103,15 +103,17 @@ else:
 BAUDRATE = 60_000_000
 
 # Two momentary push buttons on free GPIO. Each button's other leg goes to
-# GND, and PULL_UP holds the pin at 1 until a press pulls it to 0. These
-# are the same pin numbers the OLED kit uses, and both are free on either
-# board above.
-# Pico on Breadboard button are on the lower-left corner
-#BUTTON_A_PIN = 14
-#BUTTON_B_PIN = 15
-# Cytron Maker Pi RP2040 Robot Controller Board buttons
-BUTTON_A_PIN = 20
-BUTTON_B_PIN = 21
+# GND, and PULL_UP holds the pin at 1 until a press pulls it to 0.
+#
+# GP14 and GP15 are the kit standard across every kit in this repo -- the
+# OLED kit, this one, and the sw-gc9b72 kit all use the same two pins, so a
+# student who has built one keeps their wiring habits when they swap
+# displays. Both are free on either board above.
+#
+# If you are running on a Cytron Maker Pi RP2040, whose onboard buttons are
+# on GP20 and GP21, use config-cytron-rp2040.py instead of editing these.
+BUTTON_A_PIN = 14
+BUTTON_B_PIN = 15
 
 # RGB565: five bits of red, six of green, five of blue, packed into 16
 # bits. The kit draws white on black, but the others are here so you can
