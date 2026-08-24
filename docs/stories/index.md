@@ -20,6 +20,16 @@ larger question: what makes educational technology last?
     an unsustainable business model made them difficult for schools to depend
     on for the long term.
 
+- **[The Label on the Screen](the-label-on-the-screen/index.md)**
+
+    ![The Label on the Screen](./the-label-on-the-screen/cover.png)
+
+    A fictional robotics-club freshman with a quick temper learns that her
+    robot's emotion table does more than draw a face—it names its own
+    feelings out loud. Borrowing that trick for herself, backed by real
+    affect-labeling research, she discovers that naming a feeling is the
+    first step to taming it.
+
 - **[The Valley He Wouldn't Cross](masahiro-mori/index.md)**
 
     ![Masahiro Mori](./masahiro-mori/cover.png)

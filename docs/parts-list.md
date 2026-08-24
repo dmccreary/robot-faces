@@ -75,7 +75,7 @@ Sample listing on AliExpress and eBay
 ![](./img/oled-display-ebay.png)
 ![](./img/oled-display-amazon.png)
 
-We love the under $20 128x64 OLED displays.  These displays have fast [SPI](./glossary.md#spi) drivers that will update the display in around 2 milliseconds.  The price vary from around $10 to $20 depending on the current tariffs and quantity.  The displays come in four colors:
+We love the under $20 128x64 OLED displays.  These displays have fast [SPI](./glossary.md#spi-interface) drivers that will update the display in around 2 milliseconds.  The price vary from around $10 to $20 depending on the current tariffs and quantity.  The displays come in four colors:
 
 1. White
 2. Amber (Yellow)

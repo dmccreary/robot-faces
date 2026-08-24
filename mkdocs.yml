@@ -110,6 +110,43 @@ nav:
     - How Fast Is a Face?: kits/oled/draw-speed-timing/index.md
     - Box Cover Template: kits/oled/box-cover/index.md
 
+  - Smartwatch Labs:
+    - Introduction: kits/smartwatch/index.md
+    - Blink Something: kits/smartwatch/blink-onboard-led/index.md
+    - Hello World: kits/smartwatch/hello/index.md
+    - Screen Coordinates on a Round Display: kits/smartwatch/screen-coordinates/index.md
+    - Drawing Pixels: kits/smartwatch/pixel/index.md
+    - Drawing Lines: kits/smartwatch/lines/index.md
+    - Drawing Rectangles: kits/smartwatch/rect/index.md
+    - Ellipse and Quadrant Fill Codes: kits/smartwatch/ellipse/index.md
+    - Drawing Circles: kits/smartwatch/circle/index.md
+    - Drawing Polygons: kits/smartwatch/poly/index.md
+    - Blitting Buffers: kits/smartwatch/blit/index.md
+    - Happy Face: kits/smartwatch/happy-face/index.md
+    - Eye Scanner: kits/smartwatch/eye-scanner/index.md
+    - Winking with a Smile: kits/smartwatch/wink/index.md
+    - Blinking: kits/smartwatch/blink/index.md
+    - Eyebrows with poly(): kits/smartwatch/eyebrows/index.md
+    - Don't Block the Loop: kits/smartwatch/no-blocking/index.md
+    - Sleeping Face: kits/smartwatch/sleepy/index.md
+    - Reading Two Buttons: kits/smartwatch/buttons/index.md
+    - Mode Switching: kits/smartwatch/modes/index.md
+    - Expression Menu: kits/smartwatch/emotion-modes/index.md
+    - Demo Reel: kits/smartwatch/demo/index.md
+    - "Sample main.py: Self-Advancing Demo + Button Menu": kits/smartwatch/sample-main-demo/index.md
+    - Face Parameters - Live Tuning: kits/smartwatch/face-parameters/index.md
+    - The Face Module - Decomposition and Abstraction: kits/smartwatch/face-module/index.md
+    - The Emotion Table - Pattern Recognition: kits/smartwatch/emotion-table/index.md
+    - Five Broken Faces - Debugging: kits/smartwatch/broken-faces/index.md
+    - Trace and Watch - Debugging by Measurement: kits/smartwatch/trace-and-watch/index.md
+    - Keyframes - An Animation Is Just Data: kits/smartwatch/keyframes/index.md
+    - A Face With a Memory: kits/smartwatch/state-machine/index.md
+    - Only Redraw What Changed: kits/smartwatch/partial-redraw/index.md
+    - Design Your Own Emotion - The Capstone: kits/smartwatch/design-your-own/index.md
+    - How Fast Is a Face?: kits/smartwatch/draw-speed-timing/index.md
+    - Color and Bits - What a Number Has to Give Up: kits/smartwatch/color-bits/index.md
+    - The Color Wheel: kits/smartwatch/color-wheel/index.md
+
   - MicroSims:
     - List of MicroSims: sims/index.md
     - Ambiguous Expression Confusability Sorter: sims/ambiguous-expression-confusability-sorter/index.md
@@ -174,9 +211,13 @@ nav:
     - Quiz Generation Report: learning-graph/quiz-generation-report.md
     - FAQ Quality Report: learning-graph/faq-quality-report.md
     - FAQ Coverage Gaps: learning-graph/faq-coverage-gaps.md
+    - Book Metrics: learning-graph/book-metrics.md
+    - Chapter Metrics: learning-graph/chapter-metrics.md
+    - Glossary Quality Report: learning-graph/glossary-quality-report.md
+  
   - Stories:
     - Overview: stories/index.md
-    - Story Ideas: stories/story-ideas.md
+    - "The Label on the Screen": stories/the-label-on-the-screen/index.md
     - "Bright Eyes, Closed Doors: Cozmo and Vector": stories/anki-cozmo-vector/index.md
     - "The Valley He Wouldn't Cross: Masahiro Mori": stories/masahiro-mori/index.md
     - "Mapping the Human Face: Paul Ekman": stories/paul-ekman/index.md
@@ -185,13 +226,14 @@ nav:
     - "Kismet's Gaze: Cynthia Breazeal": stories/cynthia-breazeal/index.md
     - "Small Robot, Big Attention: Hideki Kozima": stories/hideki-kozima/index.md
     - "The Mirror That Wouldn't See Her: Joy Buolamwini": stories/joy-buolamwini/index.md
+    - "Story Ideas": stories/story-ideas.md
   - Teachers Guide: teachers-guide/index.md
   - Contact: contact.md
   - FAQ: faq.md
   - Glossary: glossary.md
   - References: references.md
 # CoderDojo Microsite Standards from here down
-edit_uri: 'blob/master/docs'
+edit_uri: 'blob/main/docs'
 theme:
   name: material
   logo: img/mascot/welcome.png

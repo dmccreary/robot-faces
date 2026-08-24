@@ -106,10 +106,10 @@ BAUDRATE = 60_000_000
 # GND, and PULL_UP holds the pin at 1 until a press pulls it to 0. These
 # are the same pin numbers the OLED kit uses, and both are free on either
 # board above.
-# Pico onn Breadboard
+# Pico on Breadboard button are on the lower-left corner
 #BUTTON_A_PIN = 14
 #BUTTON_B_PIN = 15
-# Cytron Maker Pi RP2040 Robot Controller Board
+# Cytron Maker Pi RP2040 Robot Controller Board buttons
 BUTTON_A_PIN = 20
 BUTTON_B_PIN = 21
 

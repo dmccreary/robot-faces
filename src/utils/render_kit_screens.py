@@ -436,8 +436,22 @@ def main():
 
     manifest_path = os.path.join(out_dir, "_render-manifest.json")
     os.makedirs(out_dir, exist_ok=True)
+    # MERGE with whatever is already on disk, rather than overwrite it.
+    # A --only run touches a handful of labs; without this, that filtered
+    # run would silently erase every OTHER lab's manifest entry, even
+    # though their PNGs are untouched and still correct on disk. Confirmed
+    # the hard way: a --only 27- rerun to fix one lab's render collapsed a
+    # 33-entry manifest down to 1, and the doc generator downstream
+    # trusted the (wrong) result -- every other lab's page claimed "this
+    # lab never constructs a display" over an image that was sitting right
+    # next to it.
+    existing = {}
+    if os.path.exists(manifest_path):
+        with open(manifest_path) as handle:
+            existing = json.load(handle)
+    existing.update(manifest)
     with open(manifest_path, "w") as handle:
-        json.dump(manifest, handle, indent=2, sort_keys=True)
+        json.dump(existing, handle, indent=2, sort_keys=True)
 
     print()
     print("%d rendered, %d skipped, %d retried" % (rendered, skipped, retried))
