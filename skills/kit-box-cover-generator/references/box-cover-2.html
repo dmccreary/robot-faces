@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robot Faces OLED Kit - 6" x 4" Dual Box Covers (8.5" x 11" Printable)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@500;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #e2e8f0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .no-print-toolbar {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 16px 28px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .no-print-toolbar h1 {
+      font-size: 1.1rem;
+      color: #0284c7;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .no-print-toolbar p {
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .print-btn {
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    }
+
+    .print-btn:hover {
+      background: #0369a1;
+      transform: translateY(-1px);
+    }
+
+    /* 8.5" x 11" US Letter Portrait Page Sheet */
+    .page-sheet {
+      width: 8.5in;
+      height: 11in;
+      background-color: #ffffff;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4in;
+      padding: 0.5in 0;
+    }
+
+    /* Outer Crop / Trim Container Guides for 6" x 4" Box Cover */
+    .crop-container {
+      width: 6in;
+      height: 4in;
+      position: relative;
+      outline: 1.5px dashed #94a3b8;
+      outline-offset: 3px;
+    }
+
+    .corner-mark {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-color: #475569;
+      border-style: solid;
+      pointer-events: none;
+      z-index: 100;
+    }
+    .top-left { top: -10px; left: -10px; border-width: 2px 0 0 2px; }
+    .top-right { top: -10px; right: -10px; border-width: 2px 2px 0 0; }
+    .bottom-left { bottom: -10px; left: -10px; border-width: 0 0 2px 2px; }
+    .bottom-right { bottom: -10px; right: -10px; border-width: 0 2px 2px 0; }
+
+    /* 6" x 4" Box Cover Panel Main Graphic Design */
+    .box-cover {
+      width: 6in;
+      height: 4in;
+      background: #ffffff;
+      color: #0f172a;
+      position: relative;
+      overflow: hidden;
+      padding: 0.2in 0.25in;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2px solid #0f172a;
+    }
+
+    /* Light Grid Accent Background */
+    .circuit-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.2;
+      background-image: 
+        radial-gradient(#0284c7 1px, transparent 1px),
+        linear-gradient(to right, rgba(2, 132, 199, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(2, 132, 199, 0.08) 1px, transparent 1px);
+      background-size: 20px 20px, 40px 40px, 40px 40px;
+      pointer-events: none;
+    }
+
+    /* Top Header Bar */
+    .header-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1.5px solid #0f172a;
+      padding-bottom: 4px;
+    }
+
+    .brand-tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #0369a1;
+      background: #e0f2fe;
+      border: 1px solid #0284c7;
+      padding: 2px 6px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-bottom: 2px;
+      font-weight: 700;
+    }
+
+    .main-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: #0f172a;
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #0284c7;
+    }
+
+    .audience-badges {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+    }
+
+    .target-pill {
+      background: #f1f5f9;
+      border: 1px solid #64748b;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.52rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      color: #0f172a;
+    }
+
+    .target-pill.highlight-pill {
+      background: #0284c7;
+      border-color: #0369a1;
+      color: #ffffff;
+    }
+
+    /* Main Body Layout */
+    .content-body {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 0.18in;
+      align-items: center;
+      margin: 4px 0;
+    }
+
+    /* Left OLED Expression Showcase Gallery */
+    .faces-gallery-card {
+      background: #f8fafc;
+      border: 1.5px solid #0f172a;
+      border-radius: 6px;
+      padding: 6px;
+    }
+
+    .gallery-title {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #0f172a;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+
+    .face-box {
+      background: #000000;
+      border: 1px solid #0f172a;
+      border-radius: 4px;
+      padding: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .face-box img {
+      width: 100%;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .face-label {
+      font-size: 0.48rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 1px;
+      text-align: center;
+    }
+
+    /* Right Features List */
+    .features-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .feature-item {
+      background: #ffffff;
+      border: 1px solid #0f172a;
+      border-left: 4px solid #0284c7;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .feature-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #e0f2fe;
+      border: 1px solid #0284c7;
+      color: #0369a1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.58rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .feature-text {
+      font-size: 0.6rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.15;
+    }
+
+    /* Footer Specs Bar */
+    .footer-bar {
+      position: relative;
+      z-index: 10;
+      background: #f1f5f9;
+      border: 1.5px solid #0f172a;
+      border-radius: 4px;
+      padding: 4px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .spec-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.52rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .spec-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #0284c7;
+    }
+
+    .kit-includes {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.5rem;
+      font-weight: 700;
+      color: #0369a1;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .no-print-toolbar {
+        display: none !important;
+      }
+
+      .page-sheet {
+        box-shadow: none;
+        width: 8.5in;
+        height: 11in;
+      }
+
+      @page {
+        size: letter portrait;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen Toolbar for Printing Instructions -->
+  <div class="no-print-toolbar">
+    <div>
+      <h1>Robot Faces OLED Kit — 6" × 4" Dual Box Covers</h1>
+      <p>Printable Sheet: Two 6" × 4" covers on a single 8.5" × 11" Portrait US Letter page</p>
+    </div>
+    <button class="print-btn" onclick="window.print()">🖨️ Print 2 Covers (100% Scale)</button>
+  </div>
+
+  <!-- 8.5" x 11" Portrait Page Sheet -->
+  <div class="page-sheet">
+    
+    <!-- COVER PANEL #1 (6" x 4") -->
+    <div class="crop-container">
+      <div class="corner-mark top-left"></div>
+      <div class="corner-mark top-right"></div>
+      <div class="corner-mark bottom-left"></div>
+      <div class="corner-mark bottom-right"></div>
+
+      <div class="box-cover">
+        <div class="circuit-bg"></div>
+
+        <!-- Header -->
+        <div class="header-bar">
+          <div>
+            <div class="brand-tag">MicroPython STEM Kit</div>
+            <div class="main-title">Robot Faces</div>
+            <div class="subtitle">OLED Display &amp; Expression Kit</div>
+          </div>
+          <div class="audience-badges">
+            <div class="target-pill highlight-pill">AGES 8+ TO ADULT</div>
+            <div class="target-pill">STUDENTS • LIBRARIES • CLUBS</div>
+            <div class="target-pill">NO SOLDERING REQUIRED</div>
+          </div>
+        </div>
+
+        <!-- Body: Gallery + Features -->
+        <div class="content-body">
+          <div class="faces-gallery-card">
+            <div class="gallery-title">
+              <span>Gallery</span>
+              <span style="color:#64748b; font-weight:normal;">2.42" OLED</span>
+            </div>
+            <div class="gallery-grid">
+              <div class="face-box">
+                <img src="emotion-types/happy.png" alt="Happy">
+                <div class="face-label">Happy</div>
+              </div>
+              <div class="face-box">
+                <img src="emotion-types/surprised.png" alt="Surprised">
+                <div class="face-label">Surprised</div>
+              </div>
+              <div class="face-box">
+                <img src="emotion-types/angry.png" alt="Angry">
+                <div class="face-label">Angry</div>
+              </div>
+              <div class="face-box">
+                <img src="wink/sample-output.png" alt="Wink">
+                <div class="face-label">Wink</div>
+              </div>
+              <div class="face-box">
+                <img src="sleeping-faces/sample-output.png" alt="Sleeping">
+                <div class="face-label">Sleep</div>
+              </div>
+              <div class="face-box">
+                <img src="emotion-types/sad.png" alt="Sad">
+                <div class="face-label">Sad</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="features-panel">
+            <div class="feature-item">
+              <div class="feature-icon">🧠</div>
+              <div class="feature-text">Teaches Computational Thinking</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🎨</div>
+              <div class="feature-text">Learn Interactive Graphics</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🐍</div>
+              <div class="feature-text">Uses MicroPython</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🤖</div>
+              <div class="feature-text">Learn how robots express feelings</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Specs -->
+        <div class="footer-bar">
+          <div class="spec-item">
+            <div class="spec-dot"></div>
+            <span>2.42" OLED Display</span>
+          </div>
+          <div class="spec-item">
+            <div class="spec-dot"></div>
+            <span>Raspberry Pi Pico</span>
+          </div>
+          <div class="kit-includes">FULL HARDWARE &amp; ONLINE BOOK</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- COVER PANEL #2 (6" x 4") -->
+    <div class="crop-container">
+      <div class="corner-mark top-left"></div>
+      <div class="corner-mark top-right"></div>
+      <div class="corner-mark bottom-left"></div>
+      <div class="corner-mark bottom-right"></div>
+
+      <div class="box-cover">
+        <div class="circuit-bg"></div>
+
+        <!-- Header -->
+        <div class="header-bar">
+          <div>
+            <div class="brand-tag">MicroPython STEM Kit</div>
+            <div class="main-title">Robot Faces</div>
+            <div class="subtitle">OLED Display &amp; Expression Kit</div>
+          </div>
+          <div class="audience-badges">
+            <div class="target-pill highlight-pill">AGES 8+ TO ADULT</div>
+            <div class="target-pill">STUDENTS • LIBRARIES • CLUBS</div>
+            <div class="target-pill">NO SOLDERING REQUIRED</div>
+          </div>
+        </div>
+
+        <!-- Body: Gallery + Features -->
+        <div class="content-body">
+          <div class="faces-gallery-card">
+            <div class="gallery-title">
+              <span>Gallery</span>
+              <span style="color:#64748b; font-weight:normal;">2.42" OLED</span>
+            </div>
+            <div class="gallery-grid">
+              <div class="face-box">
+                <img src="emotion-types/happy.png" alt="Happy">
+                <div class="face-label">Happy</div>
+              </div>
+              <div class="face-box">
+                <img src="emotion-types/surprised.png" alt="Surprised">
+                <div class="face-label">Surprised</div>
+              </div>
+              <div class="face-box">
+                <img src="emotion-types/angry.png" alt="Angry">
+                <div class="face-label">Angry</div>
+              </div>
+              <div class="face-box">
+                <img src="wink/sample-output.png" alt="Wink">
+                <div class="face-label">Wink</div>
+              </div>
+              <div class="face-box">
+                <img src="sleeping-faces/sample-output.png" alt="Sleeping">
+                <div class="face-label">Sleep</div>
+              </div>
+              <div class="face-box">
+                <img src="emotion-types/sad.png" alt="Sad">
+                <div class="face-label">Sad</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="features-panel">
+            <div class="feature-item">
+              <div class="feature-icon">🧠</div>
+              <div class="feature-text">Teaches Computational Thinking</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🎨</div>
+              <div class="feature-text">Learn Interactive Graphics</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🐍</div>
+              <div class="feature-text">Uses MicroPython</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🤖</div>
+              <div class="feature-text">Learn how robots express feelings</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Specs -->
+        <div class="footer-bar">
+          <div class="spec-item">
+            <div class="spec-dot"></div>
+            <span>2.42" OLED Display</span>
+          </div>
+          <div class="spec-item">
+            <div class="spec-dot"></div>
+            <span>Raspberry Pi Pico</span>
+          </div>
+          <div class="kit-includes">FULL HARDWARE &amp; ONLINE BOOK</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
