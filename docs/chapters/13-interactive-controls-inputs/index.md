@@ -89,6 +89,10 @@ while True:
     fb.show()
 ```
 
+The OLED kit's Lab 17 polls both buttons the same way. Here is its screen at power-up, after one press of A, and after A twice and B once:
+
+![Three screens titled Two Buttons that count presses: 0 and 0, then A 1 and B 0, then A 2 and B 1](two-button-counter.png)
+
 Notice that `handle_button_press()` only runs when `current_button_state` is `0` **and** `last_button_state` was `1` the previous pass — that comparison is what turns a button held down for half a second into a single event instead of hundreds of repeated calls while the loop keeps spinning. Polling is easy to reason about because the check sits in plain sight, right inside a loop whose order you already control. Its weakness is timing: a press that starts and finishes entirely between two passes through the loop can be missed completely, and a loop busy with something slow, like a long drawing operation, checks the button less often than it should.
 
 ## The Alternative: Button Interrupt Handler

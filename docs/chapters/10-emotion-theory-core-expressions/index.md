@@ -76,6 +76,10 @@ Ekman's most frequently cited universal emotions are:
 - Disgust
 - Contempt (Ekman's later, more debated addition)
 
+Here are photographs of seven of these expressions, each labeled with its emotion:
+
+![Seven photographed faces labeled Anger, Contempt, Disgust, Enjoyment, Fear, Sadness and Surprise](../../img/people-faces.png)
+
 !!! mascot-warning "Research, Not a Law of Nature"
     ![Pixel warns you](../../img/mascot/warning.png){ class="mascot-admonition-img" }
     Ekman's universal emotions are influential, well-studied, and a genuinely useful design foundation — but they are not settled fact beyond dispute. Some psychologists question how universal certain expressions really are across every culture, and how much context changes what a face communicates. Treat this chapter's expression set as a strong, research-backed starting point, not the final word on human emotion.
@@ -205,6 +209,10 @@ sad_face_state = {
     "mouth_curvature": -6,
 }
 ```
+
+Here are the neutral, happy, and sad faces drawn by Chapter 9's `draw_face()`, so you can see what a flipped `mouth_curvature` does:
+
+![Three faces: a neutral face, a happy face with a wide smile, and a sad face with a downturned mouth](neutral-happy-sad.png)
 
 Compare these two dictionaries directly: `eyebrow_angle` and `mouth_curvature` are the only two values that changed, and both simply flipped sign. That is the entire distance, in code, between "happy" and "sad."
 
@@ -358,6 +366,10 @@ With every expression's design story told in prose above, the table below collec
 | Sleepy | Very relaxed, near level | Nearly closed eyelid | Centered | Near flat | Drowsier than tired |
 | Confused | Asymmetric (one up, one down) | Normal | Centered | Slightly tilted or flat | Independent left/right angles |
 | Excited | Strongly raised | Wide | Centered | Big open smile | Happy pushed to its maximum |
+
+The recipes above are the design. The OLED kit's expression menu is one way to build them. Here are its seven Ekman expressions, one frame per press of button A:
+
+![Seven robot faces on the OLED labeled Happy, Sad, Angry, Afraid, Surprised, Disgusted and Contempt](kit-seven-expressions.png)
 
 Predicting a parameter recipe was one thing — now try assembling one yourself and checking it against Chapter 9's live-rendering face, the same exercise a real robot designer runs before shipping a new expression.
 

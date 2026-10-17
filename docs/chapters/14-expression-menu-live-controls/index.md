@@ -182,6 +182,10 @@ The idle state is not a blank or frozen face. Chapter 12 built idle animation sp
 
 With debouncing solved and a default state defined, the menu structure itself can finally be built. A **multi-mode menu** organizes a program around more than one distinct interaction mode — browsing expressions, tuning a parameter, sitting idle — the same way Chapter 13's mode state machine organized a face around NEUTRAL_MODE, GAZE_MODE, and ADJUST_MODE. An **expression selection menu** is this chapter's specific multi-mode menu: one button press advances forward through Chapter 10's named expressions, with each expression showing immediately as a live preview the instant it is selected.
 
+The OLED kit's Lab 19 is a working expression menu. Here it is stepping through its first expressions, one press of button A at a time:
+
+![Four faces labeled Happy, Sad, Angry, and Surprised, shown as button A is pressed](kit-expression-menu.png)
+
 Cycling forward through a fixed list, wrapping back to the start after the last item, is one of the simplest and most reliable menu patterns available — a student never needs to guess how far "back" is, because there is only one direction to press.
 
 A bridge sentence before the code: this snippet stores Chapter 10's expression names in order, keeps a single index of which one is currently selected, and advances that index by one, wrapping around, every time the menu button is pressed.

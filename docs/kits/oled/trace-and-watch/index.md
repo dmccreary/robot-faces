@@ -79,6 +79,12 @@ The font is 8 pixels tall and 8 pixels wide per character, so a line starting at
 rows 56 through 63 — the last row on the display. Text starting at `x = 2` fits fifteen
 characters before it runs off the right edge.
 
+Here is the panel at rest, and again a moment after button A went down. The `A:` reading flips
+from 1 to 0 and the `hit` count goes up by one. The `fps` reading stays at 0 until the program
+has counted its first full second.
+
+![The instrument panel at rest and with button A pressed](panel.png)
+
 ## The Experiment
 
 At the top of the program is a switch that reproduces the previous lesson's timing bug on

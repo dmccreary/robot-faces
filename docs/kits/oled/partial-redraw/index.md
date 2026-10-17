@@ -41,6 +41,12 @@ the previous frame, and the buffer keeps whatever you last put in it.
 This is exactly how video codecs, game engines, and every windowing system on your computer stay
 fast. None of them redraws the whole screen to move a cursor.
 
+The picture below shows the two regions that `draw_changed_only()` erases and redraws on every
+frame: the orange box around the mouth, and the blue strip across the top for the readout. Every
+pixel outside those two boxes is left alone.
+
+![A face with the mouth box outlined in orange and the readout strip outlined in blue](changed-regions.png)
+
 !!! mascot-warning "Get the Box Wrong and It Ghosts"
     ![Pixel warning](../../../img/mascot/warning.png){ class="mascot-admonition-img" }
     Set `MOUTH_BOX_W` to 20 and watch the grin's corners smear off the edges of the box you forgot to erase. That's the ghosting bug from the broken-faces lesson wearing a disguise — partial redraw fails loudly when the geometry is wrong.

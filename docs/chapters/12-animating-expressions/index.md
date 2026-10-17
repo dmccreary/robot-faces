@@ -268,6 +268,10 @@ while True:
     fb.show()
 ```
 
+Here are the two states the loop switches between, eyes open and 150 milliseconds later with the eyelids down:
+
+![A face with round open eyes, then the same face with both eyes shut under lowered eyelids](blink-frames.png)
+
 Notice that this loop never once calls `sleep()` — it redraws as fast as the hardware allows, but only *changes* `eyes_closed` when enough time has actually passed. A button check, a sensor read, or any other work could be added right inside this same loop without disturbing the blink timing at all, which is exactly the non-blocking payoff Chapter 12 has been building toward.
 
 ## Real Blinks Aren't Metronomes: Randomized Blink Timing
@@ -336,6 +340,14 @@ while True:
     fb.show()
 ```
 
+Here are three moments from that sweep, with the pupils at -6, 0, and 6:
+
+![Three faces looking left, straight ahead, and right](gaze-sweep.png)
+
+And here is a gaze sweep running on real hardware:
+
+![An animation of a robot face on a real display with its pupils sweeping from side to side](../../img/eye-scanner.gif)
+
 `math.sin()` naturally rises and falls between -1 and 1, so multiplying it by 6 produces a smooth sweep between -6 and 6 pixels of pupil offset, with no sudden jumps. Combined with the blink animation from the previous section, a face built from these two independent timers already starts to feel like it is paying quiet attention to something, even with zero buttons pressed and zero sensors read.
 
 ## Naming a Moment: Animation Keyframe
@@ -376,6 +388,10 @@ def interpolate_state(start, end, t):
 mid_state = interpolate_state(keyframe_neutral, keyframe_happy, 0.4)
 # {"eyebrow_angle": 4.0, "mouth_curvature": 4.4}
 ```
+
+Here are five steps from neutral to happy, from `t = 0` to `t = 1`. The values are rounded to whole pixels for drawing:
+
+![Five faces showing the smile growing step by step from a flat mouth to a wide smile](interpolation-steps.png)
 
 Calling `interpolate_state()` with `t` values that climb from 0.0 to 1.0 across, say, twenty frames produces twenty smoothly changing face states instead of one abrupt jump. Linear interpolation moves at a perfectly constant rate — the same fractional step every frame — which already looks far smoother than snapping instantly. An **easing function** goes one step further: instead of feeding `t` directly into `interpolate_state()`, it first reshapes `t` itself, so a transition can start slowly and speed up, or slow down as it approaches its target, rather than moving at that same constant rate the whole way through. This book keeps the math simple — linear interpolation is the baseline every transition in this chapter actually uses — but it is worth knowing easing curves exist for whenever a transition needs to feel less mechanical.
 

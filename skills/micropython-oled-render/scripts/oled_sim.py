@@ -9,7 +9,9 @@ script under CPython and capture what would have been sent to the OLED.
 import sys
 import types
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
+
+import font8x8
 
 MONO_VLSB = 0
 RGB565 = 1
@@ -130,13 +132,20 @@ class FrameBuffer:
         else:
             self._draw.polygon(pts, outline=c)
 
-    _FONT = ImageFont.load_default()
-
     def text(self, s, x, y, c=1):
-        # Approximation: MicroPython's built-in font is a fixed 8x8 bitmap
-        # font; Pillow's default font is not pixel-identical but is close
-        # enough for a visual preview.
-        self._draw.text((x, y), s, fill=c, font=self._FONT)
+        # MicroPython's framebuf font is an 8x8 cell per character, drawn
+        # transparently (only lit pixels are written). Glyph shapes come from
+        # font8x8.py: the cell and layout are exact, letterforms are close.
+        for i, ch in enumerate(s):
+            code = ord(ch)
+            if not font8x8.FIRST <= code <= font8x8.LAST:
+                code = 0x20
+            glyph = font8x8.GLYPHS[code - font8x8.FIRST]
+            for row in range(8):
+                bits = glyph[row]
+                for col in range(8):
+                    if bits & (0x80 >> col):
+                        self.pixel(x + i * 8 + col, y + row, c)
 
     def scroll(self, dx, dy):
         shifted = Image.new("L", (self.width, self.height), 0)
@@ -153,25 +162,70 @@ class FrameBuffer:
             self._img.paste(src, (x, y))
 
 
-class _NoOpPin:
-    OUT = 0
-    IN = 1
-    PULL_UP = 0
-    PULL_DOWN = 1
+class _Clock:
+    """Fake millisecond clock. sleep_ms() advances it and every ticks_ms()
+    call advances it by 1 ms, so busy-wait loops that compare ticks_diff()
+    against a delay still finish instead of spinning forever."""
 
-    def __init__(self, *a, **kw):
-        pass
+    def __init__(self):
+        self.ms = 0
 
-    def __call__(self, *a, **kw):
-        return 0
+    def advance(self, ms):
+        self.ms += ms
 
-    def value(self, *a, **kw):
-        return 0
+    def ticks_ms(self):
+        self.ms += 1
+        return self.ms
+
+
+clock = _Clock()
+
+
+class _Pin:
+    """Fake machine.Pin. An input configured with PULL_UP reads 1 (button
+    released) unless press() has scheduled a press that covers the current
+    fake-clock time; every other pin reads 0.
+
+    A press starts `delay` ms after it is scheduled and stays low for `hold`
+    ms, like a thumb on a real button. Starting it later than "now" keeps it
+    from merging with a press the script is still waiting out in
+    wait_for_release(), which matters for scripts that redraw first and
+    wait for the release afterwards."""
+
+    OUT = 1
+    IN = 0
+    PULL_UP = 1
+    PULL_DOWN = 2
+
+    _presses = {}
+
+    def __init__(self, id=None, mode=None, pull=None, *a, **kw):
+        self.id = id
+        self.pull = pull if pull is not None else kw.get("pull")
+
+    @classmethod
+    def press(cls, pin_id, delay=150, hold=100):
+        start = clock.ms + delay
+        cls._presses[pin_id] = (start, start + hold)
+
+    def value(self, v=None):
+        if v is not None:
+            return None
+        clock.advance(1)   # reading a pin takes time; guarantees busy-wait loops progress
+        start, end = self._presses.get(self.id, (0, 0))
+        if start <= clock.ms < end:
+            return 0
+        return 1 if self.pull == self.PULL_UP else 0
+
+    __call__ = value
 
     def on(self):
         pass
 
     def off(self):
+        pass
+
+    def toggle(self):
         pass
 
     def init(self, *a, **kw):
@@ -193,14 +247,22 @@ class _NoOpBus:
 
 
 class RenderSession:
-    """Collects successive show() frames until max_frames is reached."""
+    """Collects successive show() frames until max_frames is reached.
 
-    def __init__(self, max_frames=1):
+    `presses` maps a 1-based frame number to (pin, delay_ms, hold_ms) presses
+    starting a short while after that frame is captured, so a script waiting on a button
+    sees a press on its next loop pass.
+    """
+
+    def __init__(self, max_frames=1, presses=None):
         self.max_frames = max_frames
+        self.presses = presses or {}
         self.frames = []
 
     def capture(self, img):
         self.frames.append(img.copy())
+        for pin_id, delay, hold in self.presses.get(len(self.frames), ()):
+            _Pin.press(pin_id, delay, hold)
         if len(self.frames) >= self.max_frames:
             raise StopRender()
 
@@ -212,19 +274,27 @@ def install_stubs(session):
     `import machine`) still resolve, which several sample scripts rely on.
     """
     machine_mod = types.ModuleType("machine")
-    machine_mod.Pin = _NoOpPin
+    machine_mod.Pin = _Pin
     machine_mod.SPI = _NoOpBus
     machine_mod.I2C = _NoOpBus
     sys.modules["machine"] = machine_mod
 
     utime_mod = types.ModuleType("utime")
-    utime_mod.sleep = lambda *a, **kw: None
-    utime_mod.sleep_ms = lambda *a, **kw: None
-    utime_mod.sleep_us = lambda *a, **kw: None
-    utime_mod.ticks_us = lambda: 0
-    utime_mod.ticks_ms = lambda: 0
-    utime_mod.ticks_diff = lambda a, b: 0
+    clock.ms = 0
+    _Pin._presses.clear()
+    utime_mod.sleep = lambda s: clock.advance(int(s * 1000))
+    utime_mod.sleep_ms = clock.advance
+    utime_mod.sleep_us = lambda us: clock.advance(us // 1000)
+    utime_mod.ticks_ms = clock.ticks_ms
+    utime_mod.ticks_us = lambda: clock.ticks_ms() * 1000
+    utime_mod.ticks_diff = lambda a, b: a - b
+    utime_mod.ticks_add = lambda a, b: a + b
     sys.modules["utime"] = utime_mod
+    # Scripts that `import time` must not really sleep either.
+    import time as _time
+    _time.sleep = utime_mod.sleep
+    for name in ("sleep_ms", "sleep_us", "ticks_ms", "ticks_us", "ticks_diff", "ticks_add"):
+        setattr(_time, name, getattr(utime_mod, name))
 
     micropython_mod = types.ModuleType("micropython")
     micropython_mod.const = lambda x: x

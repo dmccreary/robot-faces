@@ -119,6 +119,10 @@ That function works, and it is a reasonable piece of code — but look at what i
 fb.ellipse(cx, cy, radius, radius, color, True)
 ```
 
+Here are both circles, drawn by the code above. The workaround traces an outline in short straight segments, while `ellipse()` fills the whole shape in one call:
+
+![Two screens: on the left a circle outline made of 24 short straight line segments, on the right a solid white filled circle](workaround-vs-ellipse.png)
+
 !!! mascot-tip "Always Check Your Version First"
     ![Pixel gives a tip](../../img/mascot/tip.png){ class="mascot-admonition-img" }
     If you ever see MicroPython code online that draws circles with a loop full of trigonometry, it is not wrong — it is probably just older than v1.20.0, or written for a device stuck on an older firmware. Always check `sys.implementation.version` before assuming a function like `ellipse()` is available.

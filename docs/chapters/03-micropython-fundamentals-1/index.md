@@ -83,6 +83,10 @@ Getting Thonny talking to your Pico takes only a few steps, and you only need to
 3. In the bottom-right corner of the Thonny window, select the interpreter labeled "MicroPython (Raspberry Pi Pico)."
 4. Confirm the connection worked by checking that the Shell panel at the bottom of the window shows a `>>>` prompt instead of an error message.
 
+You can also pick the interpreter in Thonny's options window, on the Interpreter tab. Choose MicroPython (Raspberry Pi Pico) and leave the port on automatic detection:
+
+![Thonny's options window on the Interpreter tab with MicroPython (Raspberry Pi Pico) selected and the port set to detect automatically](../../img/thonny-interpreter.png)
+
 Once connected, Thonny gives you two ways to run code, and this book uses both throughout every chapter. Clicking the green Run button (or pressing F5) sends the entire program in the editor to the Pico and runs it from the top. Typing directly into the Shell panel at the bottom of the window runs one line at a time — and that shell is actually a doorway into a tool worth understanding on its own.
 
 ## The REPL: Talking to Your Pico One Line at a Time

@@ -274,6 +274,35 @@ Re-run the whole kit after changing any lab in it. **Regenerate before
 writing about a lab you just edited** — a stale PNG is worse than none,
 because it looks authoritative.
 
+### The OLED kit and the chapters have their own renderers
+
+`render_kit_screens.py` draws the two round color kits. Everything on the
+128x64 monochrome OLED goes through the `micropython-oled-render` skill
+(`skills/micropython-oled-render/`) instead:
+
+```bash
+# the OLED kit's lessons: docs/kits/oled/<lesson>/
+python3 src/utils/render_oled_labs.py
+
+# the textbook chapters: docs/chapters/<chapter>/
+python3 src/utils/render_chapter_figures.py
+```
+
+`render_chapter_figures.py` pulls the code blocks out of each chapter's
+`index.md` and renders those, so a figure can never show code the chapter no
+longer contains. If you edit a chapter snippet it draws from, the next run
+fails loudly until the figure's phrase is updated, which is the point. Add a
+new figure by adding a row to its `FIGURES` table, then place it with
+`src/utils/insert_chapter_figures.py`.
+
+Two habits that the chapter figures taught the hard way:
+
+- **Render before you write the sentence.** Rendering chapter 7's own code
+  showed an "angry eyebrow" pair with the slants swapped and a "rounded
+  rectangle" shaped like a bone. Both read fine in prose.
+- **A figure shows what the code draws, not what the text claims.** If they
+  disagree, one of them is wrong. Fix it, don't caption around it.
+
 ### Where the image lands, and what to call it
 
 The output path is `<outdir>/<slug>/sample-output.png`, where `slug` is

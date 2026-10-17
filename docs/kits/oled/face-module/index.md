@@ -162,6 +162,10 @@ Notice that `show()` is the only place in the whole program that knows the clear
 sequence. Every expression trusts it to get that right, which means there is exactly one place
 to fix if it ever gets it wrong.
 
+Run it and the program cycles through the three faces, one every second and a half:
+
+![The three expressions drawn by face.py: Happy, Sad and Surprised](three-expressions.png)
+
 !!! mascot-tip "The Test That Proves It Worked"
     ![Pixel giving a tip](../../../img/mascot/tip.png){ class="mascot-admonition-img" }
     Open `face.py` and change `EYE_SPACING` from 26 to 34. Run the program again. One edit just moved the eyes on every expression at once — that is abstraction paying you back.

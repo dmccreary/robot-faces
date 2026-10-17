@@ -62,6 +62,14 @@ fb.ellipse(64, 32, 20, 12, WHITE)
 fb.show()
 ```
 
+Here is that ellipse, centered on the screen:
+
+![An outlined ellipse, wider than it is tall, centered on the screen](one-ellipse.png)
+
+Here is how each parameter of `fb.ellipse()` maps onto the shape:
+
+![A diagram of an ellipse with its horizontal radius and vertical radius marked from the x, y center point](../../img/ellipse-parameters.png)
+
 Notice that `fb.ellipse()` takes a center point rather than a corner, unlike `fb.rect()` from Chapter 6, which starts from its top-left corner. That difference makes sense once you remember what ellipses are usually used for on a face — eyes and pupils are naturally described by where their middle sits, not by a corner that does not really exist on a curved shape.
 
 ## Independent Radii: The Ellipse Radius Parameter
@@ -77,6 +85,10 @@ fb.ellipse(108, 40, 10, 10, WHITE)  # xradius == yradius, a circle
 fb.show()
 ```
 
+Three radii settings, three very different shapes:
+
+![Three outlined shapes: a wide flat oval, a tall narrow oval, and a circle](independent-radii.png)
+
 A wide, flat ellipse like the first one is exactly the shape a calm, resting mouth needs. A tall, narrow ellipse works well for a surprised or startled pupil. Once you can picture what each radius controls, choosing values for a specific expression becomes a matter of intent, not guesswork.
 
 ## Solid or Hollow: Filled Versus Outlined Shape
@@ -89,6 +101,10 @@ A bridge sentence before the code: this example draws one outlined pupil and one
 fb.ellipse(40, 30, 8, 8, WHITE)          # outline only
 fb.ellipse(80, 30, 8, 8, WHITE, True)    # filled solid
 ```
+
+The outlined pupil is on the left and the filled one is on the right:
+
+![An outlined circle on the left and a solid white circle on the right](filled-vs-outline.png)
 
 A solid, filled pupil reads far more clearly on a small display than a thin outlined ring does, especially from across a classroom. Most eyes, pupils, and eyebrows in this book use `fill=True` for exactly that reason — hollow shapes are reserved for special effects, like a faint outline behind a highlight.
 
@@ -111,6 +127,10 @@ Here is the value assigned to each quadrant, matching the four quarters of the e
 | Lower left | bottom-left quarter | 4 |
 | Lower right | bottom-right quarter | 8 |
 
+And here is the same table as a picture. Each quarter of the ellipse carries its own number:
+
+![An ellipse divided into four quadrants numbered 2 and 1 across the top and 4 and 8 across the bottom](../../img/ellipse-quadrants.png)
+
 Adding values together builds a combined mask. Because each of the four quadrant bits is either included or excluded, there are exactly sixteen possible combinations, from 0 (nothing drawn) to 15 (every quadrant drawn — the default whole ellipse).
 
 | Goal | Quadrants Added | Mask Value |
@@ -131,6 +151,10 @@ fb.ellipse(64, 45, 20, 10, WHITE, True, BOTTOM_HALF)  # a smiling mouth curve
 fb.ellipse(64, 20, 8, 8, WHITE, True, TOP_HALF)       # a sleepy, half-closed eye
 fb.show()
 ```
+
+The top shape is the sleepy eye and the bottom one is the smile:
+
+![A white half-circle dome above a wide white half-ellipse bowl, like a sleepy eyelid over a smile](smile-and-sleepy-eye.png)
 
 The `fb.ellipse()` call's full signature is `fb.ellipse(x, y, xradius, yradius, color, fill, mask)` — the quadrant mask is the seventh and final argument, and it only matters once `fill` is already provided. Skip it entirely and MicroPython assumes 15, drawing the complete shape exactly like every earlier example in this chapter.
 
@@ -209,6 +233,14 @@ fb.poly(0, 0, triangle_points, WHITE, True)
 fb.show()
 ```
 
+Here is that first triangle, tucked into the top-left corner:
+
+![A small white triangle in the top-left corner of the screen](first-triangle.png)
+
+The same method draws every shape you can list points for. Here are triangles, pentagons, hexagons, stars, and an arrow on a real display:
+
+![A photographed display filled with green outlined and solid polygons: triangles, pentagons, hexagons, octagons, stars, an arrow and a house shape](../../img/polygons.jpg)
+
 That `coords` argument is doing most of the work in this call, and it deserves its own explanation before you can use `fb.poly()` with confidence.
 
 ## Points in a List: The Point Array
@@ -225,6 +257,10 @@ from array import array
 pentagon_points = array('B', [50, 0, 60, 10, 55, 20, 45, 20, 40, 10])
 fb.poly(0, 0, pentagon_points, WHITE, True)
 ```
+
+Five points make a pentagon:
+
+![A white filled pentagon near the top center of the screen](pentagon.png)
 
 Reading that array two numbers at a time — (50, 0), then (60, 10), then (55, 20), and so on — reveals five separate coordinate pairs, one for each corner of the pentagon.
 
@@ -264,29 +300,38 @@ A bridge sentence before the code: this example draws two eyebrow triangles with
 ```python
 from array import array
 
-left_eyebrow = array('B', [0, 6, 20, 0, 20, 6])
-right_eyebrow = array('B', [0, 0, 20, 6, 0, 6])
+left_eyebrow = array('B', [0, 0, 20, 6, 0, 6])
+right_eyebrow = array('B', [0, 6, 20, 0, 20, 6])
 
 fb.poly(15, 10, left_eyebrow, WHITE, True)
 fb.poly(75, 10, right_eyebrow, WHITE, True)
 fb.show()
 ```
 
+Both eyebrows slope down toward the center of the face:
+
+![Two white wedge-shaped eyebrows whose inner ends slope downward toward the middle, an angry look](angry-eyebrows.png)
+
 Notice that only the order and position of three vertices changed between the two eyebrows — no new method, no extra parameters, just a different point array. That is the real payoff of `fb.poly()`: a single flexible tool that reshapes an eyebrow's entire emotional read with nothing more than different numbers in a list.
 
 ## Corners Without the Sharp Edges: Rounded Rectangle Approximation
 
-Sometimes a design calls for a rectangle that does not feel quite as blocky as Chapter 6's version, without needing a full custom polygon. **Rounded rectangle approximation** describes a practical shortcut: draw a plain `fb.rect()` for the body of the shape, then draw four small filled `fb.ellipse()` circles, one at each corner, to soften the hard right angles.
+Sometimes a design calls for a rectangle that does not feel quite as blocky as Chapter 6's version, without needing a full custom polygon. **Rounded rectangle approximation** describes a practical shortcut: draw two overlapping `fb.rect()` bars for the body of the shape, one a little narrower and one a little shorter, then tuck a small filled `fb.ellipse()` circle into each of the four corners to soften the hard right angles.
 
-A bridge sentence before the code: this example builds one rounded rectangle from a body rectangle and four corner circles.
+A bridge sentence before the code: this example builds one rounded rectangle from two body rectangles and four corner circles.
 
 ```python
-fb.rect(20, 20, 40, 15, WHITE, True)      # flat-sided rectangle body
-fb.ellipse(20, 20, 4, 4, WHITE, True)     # rounded corner, top-left
-fb.ellipse(60, 20, 4, 4, WHITE, True)     # rounded corner, top-right
-fb.ellipse(20, 35, 4, 4, WHITE, True)     # rounded corner, bottom-left
-fb.ellipse(60, 35, 4, 4, WHITE, True)     # rounded corner, bottom-right
+fb.rect(24, 20, 32, 15, WHITE, True)      # body bar, left and right edges pulled in
+fb.rect(20, 24, 40, 7, WHITE, True)       # body bar, top and bottom edges pulled in
+fb.ellipse(24, 24, 4, 4, WHITE, True)     # rounded corner, top-left
+fb.ellipse(55, 24, 4, 4, WHITE, True)     # rounded corner, top-right
+fb.ellipse(24, 30, 4, 4, WHITE, True)     # rounded corner, bottom-left
+fb.ellipse(55, 30, 4, 4, WHITE, True)     # rounded corner, bottom-right
 ```
+
+Here is the finished shape, with its corners softened:
+
+![A solid white rectangle with rounded corners](rounded-rectangle.png)
 
 This is a shortcut, not a precise geometric technique — the corner circles have to be sized and positioned by eye until they line up cleanly with the rectangle's edges. It is a fast, practical option for a status bar or a rounded mouth outline when a fully custom `fb.poly()` shape would be more effort than the result is worth.
 
@@ -309,6 +354,10 @@ for i in range(9):                        # nine points sweep the arc
 arc_points = array('B', points)
 fb.poly(0, 0, arc_points, WHITE, False)
 ```
+
+Here is the arc. Notice the straight line along the bottom: `fb.poly()` always closes a shape, so it joins the last point back to the first.
+
+![A dome-shaped arc made of nine short line segments, with a straight line closing its base](arc-from-lines.png)
 
 This technique connects the two headline methods of this chapter directly: `fb.ellipse()` is fast and simple for regular ovals, while `fb.poly()` with many points takes over exactly where a regular ellipse cannot reach. Knowing when to reach for each one is a design decision, not just a syntax choice.
 
@@ -431,6 +480,10 @@ fb.poly(0, 0, eyebrow_points, WHITE, True)
 
 fb.show()                                             # 5. push the buffer to the screen
 ```
+
+The eyelid hides the top half of the eye, and the slanted eyebrow sits above it:
+
+![A half-closed white eye with a slanted white eyebrow above it](eye-eyelid-eyebrow.png)
 
 Four different techniques from this chapter — a full ellipse, a quadrant-masked ellipse, a point array, and a `fb.poly()` triangle — combine into one small, recognizably expressive shape: a tired-looking eye with a lowered brow. Chapter 9 builds full faces out of exactly this kind of combination, applied to two eyes, two eyebrows, and a mouth at once.
 

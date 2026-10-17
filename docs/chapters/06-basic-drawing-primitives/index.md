@@ -79,6 +79,10 @@ fb.pixel(64, 32, WHITE)
 fb.show()
 ```
 
+That is one lit pixel, circled so you can find it:
+
+![The OLED screen with a single lit pixel at its center, circled in orange](pixel-method.png)
+
 Nothing about `fb.pixel()` is complicated, but that simplicity is exactly the point — every method covered later in this chapter, from lines to rectangles to text, is really just many calls to something like `fb.pixel()` running automatically, one dot at a time, so you never have to write that loop yourself.
 
 !!! mascot-thinking "Everything Is Built From Pixels"
@@ -110,6 +114,10 @@ fb.hline(30, 50, 60, WHITE)   # a flat mouth, 60 pixels wide
 fb.vline(5, 10, 40, WHITE)    # a vertical marker, 40 pixels tall
 ```
 
+Here is what those two calls draw:
+
+![A flat horizontal line near the bottom of the screen and a tall vertical line down its left edge](hline-vline.png)
+
 Because `fb.hline()` and `fb.vline()` only ever move in one direction, MicroPython can draw them faster internally than a method that has to check direction on every single pixel. That speed matters once a face redraws many lines every frame during an animation.
 
 ## Lines at Any Angle: The Line Method
@@ -121,6 +129,10 @@ A bridge before the code: this example connects two corners of the screen with a
 ```python
 fb.line(0, 0, 100, 40, WHITE)
 ```
+
+Here is that diagonal, with every step of the pixel staircase visible:
+
+![A diagonal line running from the top-left corner down and to the right](diagonal-line.png)
 
 Under the hood, `fb.line()` uses an efficient pixel-stepping algorithm, conceptually similar to the classic Bresenham's line algorithm, that figures out which pixels best approximate a straight line between the two endpoints without needing any decimal math. You never have to understand that algorithm to use the method — just remember that any two coordinates on the screen can become a line with one call.
 
@@ -184,6 +196,10 @@ fb.rect(10, 10, 20, 12, WHITE)          # outline only
 fb.rect(40, 10, 20, 12, WHITE, True)    # filled solid
 ```
 
+Here are the two rectangles side by side:
+
+![An outlined rectangle on the left and a solid filled rectangle on the right](rectangles.png)
+
 That single `True` argument is easy to miss, so it is worth a deliberate glance every time you write a filled shape — leaving it off silently changes a solid eyebrow into a thin, hollow-looking box.
 
 ## Safety Net: Clipping at the Screen Edge
@@ -196,6 +212,10 @@ A bridge before the code: this example deliberately draws a rectangle that exten
 fb.rect(100, 20, 50, 10, WHITE)  # right edge would land at x=150, off a 128-wide screen
 fb.show()
 ```
+
+The rectangle simply runs off the right edge, and nothing breaks:
+
+![A rectangle outline near the right edge of the screen, cut off where the screen ends](clipping.png)
 
 Running that code draws only the visible portion of the rectangle, from x = 100 up to the screen's actual edge at x = 127; the rest is silently discarded. Clipping is reassuring while you are experimenting, but it is not a substitute for correct math — a shape clipped at the edge still will not look the way you intended, so treat this as a safety net, not a design tool.
 
@@ -315,6 +335,10 @@ A bridge before the code: this example writes a short debug label near the top o
 fb.text("BATT 82%", 0, 0, WHITE)
 ```
 
+Each character fills an 8-by-8 pixel cell, so this label spans eight characters in the upper-left corner:
+
+![The text BATT 82% in the upper-left corner of the screen](text-label.png)
+
 The built-in font is deliberately simple and a little chunky, since it has to fit inside an 8x8 grid per character, so it reads best as a debugging or status tool rather than as part of a finished expression. A robot's smiling mouth or raised eyebrow should almost always be built from lines and rectangles, not text — save `fb.text()` for labels a developer needs to see while building and testing, not for the face itself.
 
 ## Order Matters: Draw Order Layering and Overdraw
@@ -325,11 +349,15 @@ A bridge before the code: this example deliberately draws a face's background re
 
 ```python
 fb.fill(BLACK)
-fb.rect(50, 25, 8, 8, WHITE, True)   # draw the eye first
-fb.rect(20, 10, 90, 45, WHITE)       # oops - background drawn second, covers the eye
+fb.rect(50, 25, 8, 8, BLACK, True)    # draw the eye first (black, so it will show on a white face plate)
+fb.rect(20, 10, 90, 45, WHITE, True)  # oops - face plate drawn second, covers the eye
 ```
 
-Because the background rectangle in that second example was drawn after the eye, its outline paints directly across pixels the eye had already lit, and part of the eye disappears from view. Correct code draws a face's background first, then layers eyes, eyebrows, and a mouth on top of it — the same way an artist blocks in a background before adding foreground detail.
+Because the white face plate in that second example was drawn after the eye, it paints directly over pixels the eye had already set, and the eye disappears from view completely. Correct code draws a face's background first, then layers eyes, eyebrows, and a mouth on top of it — the same way an artist blocks in a background before adding foreground detail.
+
+Here are both orders side by side. The only difference is which shape is drawn first:
+
+![Two screens: on the left a solid white face plate with no eye because the eye was drawn first and covered, and on the right the same plate with a black square eye visible on top](draw-order.png)
 
 Layering shapes on top of each other is often unavoidable and completely fine, but it does have a cost worth naming. **Overdraw** is the waste of redrawing pixels that immediately get covered by something drawn afterward — CPU time and drawing calls spent on pixels the viewer will never actually see in the final image.
 
@@ -415,6 +443,14 @@ fb.rect(20, 15, 24, 6, WHITE, True)     # 2. filled rectangle eyebrow
 fb.hline(15, 45, 40, WHITE)             # 3. horizontal line mouth
 fb.show()                               # 4. push the buffer to the screen
 ```
+
+Two shapes, and the beginning of a face:
+
+![A short filled rectangle eyebrow above a long thin horizontal line mouth](eyebrow-and-mouth.png)
+
+Rectangles and lines go a long way. Here is a face built only from them, on a real display:
+
+![A photographed display showing a face with two rectangular eyes, a thin horizontal line for a mouth, and a red rectangular smile below](../../img/square-face.png)
 
 That short program uses exactly two shapes — a filled rectangle and a horizontal line — and already reads as the beginning of an expression. Chapter 7 adds curved shapes like ellipses to this toolkit, and Chapter 9 combines everything into complete, parameterized faces with eyes, eyebrows, and mouths that change together to express an emotion.
 

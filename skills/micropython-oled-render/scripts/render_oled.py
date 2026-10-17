@@ -18,6 +18,7 @@ Examples:
 
 import argparse
 import runpy
+import signal
 import sys
 from pathlib import Path
 
@@ -34,8 +35,13 @@ def parse_rgb(s):
     return tuple(parts)
 
 
-def render_script(script_path, max_frames):
-    session = RenderSession(max_frames=max_frames)
+def render_script(script_path, max_frames, presses=None):
+    # A real board runs main.py from the root with modules in / and /lib, so
+    # scripts that `import config` or `import face` expect their own folder.
+    script_dir = Path(script_path).resolve().parent
+    for extra in (script_dir / "lib", script_dir):
+        sys.path.insert(0, str(extra))
+    session = RenderSession(max_frames=max_frames, presses=presses)
     init_globals = install_stubs(session)
     init_globals["__name__"] = "__main__"
     try:
@@ -66,10 +72,38 @@ def main():
     ap.add_argument("--scale", type=int, default=5, help="Integer upscale factor; 5x turns 128x64 into 640x320 (default: 5)")
     ap.add_argument("--fg", type=parse_rgb, default=(255, 255, 255), help="Lit-pixel color as R,G,B (default: 255,255,255)")
     ap.add_argument("--bg", type=parse_rgb, default=(0, 0, 0), help="Unlit-pixel color as R,G,B (default: 0,0,0)")
+    ap.add_argument("--press", action="append", default=[], metavar="PIN@FRAME",
+                    help="Press button PIN after FRAME is shown: PIN@FRAME[+DELAY][/HOLD] in fake-clock ms, e.g. 14@1 or 15@2+0/200 (repeatable)")
+    ap.add_argument("--pick", metavar="N,N,...", help="Save only these 1-based frames (captures up to the highest)")
+    ap.add_argument("--timeout", type=int, default=30, help="Abort after this many seconds (default: 30)")
     ap.add_argument("--gif", action="store_true", help="Also save an animated GIF when --frames > 1")
     args = ap.parse_args()
 
-    frames = render_script(args.script, args.frames)
+    presses = {}
+    for spec in args.press:
+        # PIN@FRAME[+DELAY][/HOLD], delay and hold in fake-clock milliseconds
+        pin_id, rest = spec.split("@")
+        rest, _, hold = rest.partition("/")
+        frame_no, _, delay = rest.partition("+")
+        presses.setdefault(int(frame_no), []).append(
+            (int(pin_id), int(delay) if delay else 150, int(hold) if hold else 100))
+    pick = [int(n) for n in args.pick.split(",")] if args.pick else None
+    wanted = max(pick) if pick else args.frames
+
+    signal.signal(signal.SIGALRM, lambda *_: (_ for _ in ()).throw(TimeoutError("script ran past --timeout without enough show() calls")))
+    signal.alarm(args.timeout)
+    try:
+        frames = render_script(args.script, wanted, presses)
+    except TimeoutError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        sys.exit(2)
+    finally:
+        signal.alarm(0)
+    if pick:
+        numbers = [n for n in pick if n <= len(frames)]
+        frames = [frames[n - 1] for n in numbers]
+    else:
+        numbers = list(range(1, len(frames) + 1))
     if not frames:
         print("error: script never called .show() -- no frame captured", file=sys.stderr)
         sys.exit(1)
@@ -82,7 +116,7 @@ def main():
         print(f"wrote {out} ({images[0].width}x{images[0].height}, 1 frame)")
     else:
         stem, suffix = out.stem, out.suffix or ".png"
-        for i, img in enumerate(images, start=1):
+        for i, img in zip(numbers, images):
             frame_path = out.with_name(f"{stem}_frame{i:03d}{suffix}")
             img.save(frame_path)
         print(f"wrote {len(images)} frames to {out.parent or '.'}/{stem}_frame###{suffix}")

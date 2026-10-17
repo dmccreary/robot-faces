@@ -45,6 +45,10 @@ Read it top to bottom and you can *see* the blink: open, half shut, closed for 7
 half open, open again. The closed pose holds longest because that is what makes a blink read as
 a blink instead of a flicker.
 
+Played back, those five poses look like this:
+
+![The five poses of a blink: eyes open, half shut, closed, half open, open again](blink.png)
+
 ## More Animations, Same Format
 
 Once the format exists, new animations cost nothing but numbers:
@@ -69,6 +73,16 @@ DOZE_OFF = (
 `SURPRISE` snaps the eyes wide and the brows up, holds half a second, then settles. `DOZE_OFF`
 closes the eyes in four slow stages with the brows sinking the whole way. Neither one required a
 single new line of drawing code.
+
+Here are the four poses of `SURPRISE`. The eyes jump wide and the brows leap up, and the second
+pose is the one that holds for half a second:
+
+![The four poses of the surprise animation](surprise.png)
+
+And here are the five poses of `DOZE_OFF`, with the eyes closing and the brows sinking until
+the last pose wakes the face back up:
+
+![The five poses of the doze-off animation](doze-off.png)
 
 And because animations are now ordinary Python tuples, you can build new ones out of old ones:
 

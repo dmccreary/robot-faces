@@ -65,6 +65,10 @@ This chapter assumes only the prerequisites listed in the [course description](.
 
 Welcome to Robot Faces. Over the chapters ahead, you will write MicroPython programs that turn a small screen into a character with a personality — eyes that blink, eyebrows that arch in surprise, and a mouth that curls into a smile or flattens into a frown. You will work with two low-cost displays: a 128x64 monochrome OLED about the size of a postage stamp, and a 240x240 color round display shaped like a smartwatch face. Both run on the same $4 microcontroller, so the drawing skills you learn on one display carry over almost unchanged to the other.
 
+Here is where the chapters are heading: a small wheeled robot with a display for a face.
+
+![A small wheeled robot with a circuit board on top and a screen on the front showing a smiling face with wide eyes](../../img/facebot-23.jpg)
+
 Before any of that drawing code can run, though, the physical hardware has to be connected and working. This chapter is a tour of every component in a robot-face kit: the microcontroller that runs your programs, the breadboard and wires that hold the circuit together, the buttons and dials students use to control a face, and the wiring that lets a tiny chip talk to a display. Nothing here involves programming yet — that begins in Chapter 3. Your job in this chapter is to learn what each part does and how it connects to the others, so that when the code arrives, you already understand the hardware underneath it.
 
 ## The Brains of the Operation: Microcontrollers
@@ -78,6 +82,10 @@ Every robot face in this book needs something to run its program, store the shap
 The specific microcontroller chip used throughout this book is the **RP2040**, designed by Raspberry Pi Ltd. The RP2040 contains two processor cores, so it can run two independent tasks — such as animating a face while reading a button — at nearly the same time. It also includes 264 kilobytes of built-in memory, enough to hold the frame buffers for both target displays, along with hardware support for SPI and I2C communication and dozens of general-purpose input/output (GPIO) pins for connecting buttons, sensors, and screens.
 
 The **Raspberry Pi Pico** is a $4 circuit board that packages the RP2040 chip with a USB connector, a voltage regulator, and two rows of pins spaced to fit directly into a breadboard. It is the reference board this book builds every project on: cheap enough that every student can keep one, and simple enough that connecting it to a breadboard requires no soldering.
+
+Here is the board itself, about the length of a pinky finger:
+
+![A green Raspberry Pi Pico circuit board with two rows of pins along its edges and a USB connector](../../img/raspberry-pi-pico.png)
 
 A second board built around the identical RP2040 chip, the **Cytron Maker Pi RP2040**, trades some of that bare-bones simplicity for classroom convenience. It adds an onboard RGB LED, two push buttons, a buzzer, and screw-terminal and Grove-style connectors directly on the board, so many beginner circuits need no breadboard at all. Because it uses the same RP2040 chip and runs the same MicroPython firmware as the plain Pico, every drawing technique in this book works on either board without modification.
 
@@ -97,6 +105,10 @@ The table below summarizes the practical differences between the two boards; use
 ## Building Circuits Without Solder
 
 Every component in this book that is not built onto a board — buttons, potentiometers, and the OLED display — needs to be physically connected to the Pico's pins. A **solderless breadboard** makes those connections without a soldering iron: it is a plastic block filled with rows of metal spring clips, hidden under a grid of holes, that grip the legs of components and wires pushed into them. Rows of five holes are electrically connected internally, so plugging a wire and a component leg into the same row joins them electrically, and pulling either one out breaks the connection instantly. This makes a breadboard ideal for prototyping: a circuit can be rewired in seconds, and mistakes cost nothing but a few minutes of rework.
+
+Here is a small solderless breadboard, with its rows of holes and the long power rails down each side:
+
+![A white half-size solderless breadboard with a grid of holes and red and blue power rail lines](../../img/solderless-mini-breadboard.jpg)
 
 **Jumper wires** are the short, flexible wires used to connect one breadboard hole to another, or to connect a breadboard directly to a pin on the Pico. They come with different end connectors — male ends that plug into breadboard holes, and female ends that slide over a pin — so a kit typically includes male-to-male wires for breadboard-to-breadboard connections and male-to-female wires for breadboard-to-Pico connections.
 
@@ -340,6 +352,10 @@ Implementation: p5.js for the breadboard, Pico, and display outlines, with click
 ## Pricing Out Your Kit
 
 Every component in this chapter was chosen for one more reason beyond its technical role: cost. Robot faces are more useful as a teaching tool when every student can own the hardware rather than share it, which is only realistic if a complete kit stays inexpensive.
+
+Cost is a design choice too. The goal is the top-left corner of this chart: as much fun as possible for as little money as possible.
+
+![A chart with Cost from $10 to $1,000 on the horizontal axis and Fun on the vertical axis, with an arrow from low value in the bottom right to high value in the top left](../../img/value-design.png)
 
 Adding up the approximate prices introduced throughout this chapter shows how a complete **low-cost robotics kit** — one Pico, one breadboard, and one display — comfortably fits under $30, even with the higher-priced OLED.
 

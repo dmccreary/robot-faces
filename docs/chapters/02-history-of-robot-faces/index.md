@@ -166,6 +166,10 @@ Vector's story did not end completely at the 2019 shutdown. A separate company l
 
 **Emotix Miko** is a tabletop companion robot from the Indian robotics company Emotix, released in 2017 at a price of roughly $300. Like Cozmo and Vector, Miko presents a round, colorful animated face on a display, but Miko's rolling base, camera, and microphones exist to support one clear purpose: helping a child learn.
 
+Here are nine of Miko's expressions, each labeled with its emotion:
+
+![Nine faces of the Miko robot labeled Neutral, Happy, Sad, Angry, Afraid, Surprise, Tired, Stern and Disgust](../../img/miko-faces.png)
+
 That purpose shaped every part of **Miko educational robot design**. Instead of Cozmo's cube-based play or Vector's general-purpose assistant behavior, Miko ships with curated stories, quizzes, and simple coding lessons, plus parental controls that limit its content and internet access to material a parent or teacher has approved. Miko's screen face smiles and encourages a child through an activity the way a patient tutor would, turning correct answers and finished lessons into small animated celebrations. Choosing a simpler wheeled base and leaning harder on curated software, instead of open-ended room navigation, was itself a deliberate choice about where to spend a limited engineering budget.
 
 Miko competes in the **educational robotics market**: robots, kits, and coding platforms built specifically for schools, homeschool programs, and after-school clubs, where buyers value measurable learning outcomes and safe, curated content as much as raw technical capability. That market rewards a different kind of staying power than the mass-market toy market Cozmo competed in — schools and parents often expect years of continued support, not just an exciting launch. Unlike Cozmo and Vector, Miko has continued to release new models, making it the one robot in this chapter whose business has kept going largely uninterrupted.

@@ -58,6 +58,13 @@ Every shape you will ever draw on a robot's face — an eye, an eyebrow, a curve
 
 A **pixel** — short for "picture element" — is a single addressable point of light or color on a display, the smallest unit a screen can control on its own. Every image a display shows, from one glowing dot to a fully drawn face, is built entirely out of pixels, the same way a mosaic is built entirely out of small tiles. The 128x64 OLED from Chapter 1 has exactly 8,192 pixels arranged in a grid; the 240x240 color round display has 57,600. Neither display can show anything smaller than a single pixel — what looks like a smooth curved eyebrow up close is really a staircase of individually lit squares.
 
+Zoom in on the curve of a small ellipse and the staircase shows up. Each square below is one pixel, and the numbers along the edges are their coordinates:
+
+![The top half of a small ellipse enlarged until each pixel is a visible square on a grid, with x and y coordinates along the edges](pixel-staircase.png)
+
+!!! note "How the Screen Pictures in This Book Are Made"
+    Every picture of the OLED in these chapters comes from a simulator that runs the chapter's own code and draws each shape into a 128x64 grid of pixels. That makes the pictures a faithful record of what the *code draws*. Curves may differ from your panel by a pixel here and there, and a real display adds its own brightness and color. Your board is always the final judge, so wire it up and compare.
+
 Because a display holds thousands of pixels, a program needs a reliable way to say *which one* it means every time it draws something. That naming scheme is the screen coordinate system, and it is the single most important idea in this chapter.
 
 ## Reading a Screen Like a Grid
@@ -74,6 +81,10 @@ That second rule — Y growing downward — is worth pausing on, because it brea
 ## The Origin Sits in the Upper-Left Corner
 
 The **origin** is the pixel at coordinate (0, 0), the fixed reference point every other coordinate is measured from. On both displays in this book, and on nearly every computer screen you have ever used, the origin sits in the **upper-left corner** — not the center, and not the bottom-left corner a math class coordinate plane usually uses.
+
+Here are the four corners of the 128x64 OLED, with the lit pixels circled. Notice that the largest `y` value is 63, not 64, because counting starts at 0:
+
+![The OLED screen with arrows showing x increasing to the right and y increasing downward, and the four corner pixels labeled (0, 0), (127, 0), (0, 63) and (127, 63)](screen-corners.png)
 
 !!! mascot-warning "Y Goes Down, Not Up"
     ![Pixel warns you](../../img/mascot/warning.png){ class="mascot-admonition-img" }
@@ -92,6 +103,10 @@ Before looking at a diagram that puts the origin, the axes, and this positive-on
 ## Framing a Shape: The Bounding Box
 
 A **bounding box** is the smallest rectangle that completely encloses a shape, described by the coordinates of its corners or by a starting corner plus a width and height. Before drawing a single pixel of an eye, a robot-face designer sketches its bounding box first — deciding, for example, that a left eye will occupy the rectangle from (20, 15) to (40, 35), a 20-by-20-pixel square, before worrying about the exact curve of the eyelid inside it.
+
+Here is that left eye, a filled circle with an orange bounding box drawn around it:
+
+![A white filled circle on the black OLED screen with an orange rectangle outlining its bounding box](bounding-box.png)
 
 Bounding boxes matter for a very practical reason: they let you plan a whole face's layout using simple rectangles, checking that an eye, an eyebrow, and a mouth don't overlap, before writing any drawing code at all. Later chapters use this exact habit to lay out every feature on a face.
 
@@ -350,6 +365,10 @@ display.fill(0)           # clear the buffer to all-off (black)
 display.pixel(64, 32, 1)  # turn on one pixel, dead center on the OLED
 display.show()            # push the buffer to the physical screen
 ```
+
+Zoomed in on the middle of the screen, here is the one pixel that code switches on:
+
+![A grid of enlarged pixels with one lit pixel highlighted and labeled (64, 32)](center-pixel.png)
 
 Until that final `display.show()` line runs, the OLED keeps showing whatever it displayed before this code started — the `fill()` and `pixel()` calls only change memory. This is a deliberate design, not a limitation: it lets a program build up a complex expression, adjusting eyes, eyebrows, and a mouth one drawing call at a time, and reveal the finished result to the viewer in a single, flicker-free update.
 

@@ -105,6 +105,15 @@ early skips it.
 Keep this table. It is not just a lesson answer key — it covers most of what goes wrong on this
 hardware, so it works as a troubleshooting reference for every program you write with this kit.
 
+## What the Symptoms Look Like
+
+Here are the four faces whose problems show up in a picture, captured after the bug had done its
+damage. Bug 5 is missing on purpose: it is a bug about time, and a still picture cannot show it.
+
+![What bugs 1 through 4 look like on the screen](symptoms.png)
+
+If your screen looks like one of these, go back to the symptom table and find the cause.
+
 ## Why These Five
 
 Each bug was chosen because it teaches something specific about how the display actually works,

@@ -67,6 +67,12 @@ Notice the third kind of event. Buttons are things *you* do, but a **timeout** i
 robot does to itself, and it is what makes the face feel alive when nobody is touching it. Leave
 it alone long enough and it gets bored, then falls asleep, entirely on its own.
 
+Here are five of the faces the two tables produce. You reach them by pressing A to go from
+Idle to Curious and then Happy, and by pressing B from Idle to get Annoyed. Press A once more in
+Annoyed and the robot falls asleep.
+
+![Five states of the face: Idle, Curious, Happy, Annoyed and Asleep](states.png)
+
 !!! mascot-thinking "Splitting Looks From Behavior"
     ![Pixel thinking](../../../img/mascot/thinking.png){ class="mascot-admonition-img" }
     Two tables, two questions. A designer can retune every pose in `POSES` without touching behavior, and a programmer can rewire `TRANSITIONS` without touching a single pixel. That split is why teams can work in parallel.

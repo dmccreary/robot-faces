@@ -350,6 +350,10 @@ A robot-face designer has two real choices once this table is in hand: **reinfor
 
 Chapter 5 explained that the color display's frame buffer is a 240x240 square holding a physically visible circle inscribed inside it, with roughly 21 percent of buffer pixels sitting in corners nobody can see. **Round display layout** is the practical consequence of that geometry for face design: every feature — eyes, eyebrows, mouth — needs to be planned so it stays inside that visible circle, a very different constraint from the rectangular OLED.
 
+Here is a face on a real round display, with the code that drew it open in the editor behind it:
+
+![A hand holding a small round display showing a smiling face with white eyes and blue pupils, in front of a laptop screen of MicroPython code](../../img/watch-face.jpg)
+
 The OLED's rectangular 128x64 shape let a designer use almost the entire buffer edge to edge, since every pixel in that buffer is physically visible. The round display offers no such guarantee — a bounding box that would be perfectly safe on the OLED can drift straight into an invisible corner here, silently clipping part of a feature with no error or warning at all.
 
 !!! mascot-warning "Don't Draw Into the Corners"

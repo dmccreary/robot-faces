@@ -95,6 +95,10 @@ happy_intense_state = {
 }
 ```
 
+Here are the neutral face and both happy faces. They are the same expression at two strengths:
+
+![Three faces: neutral, a subtly happy face, and an intensely happy face with a bigger smile and higher eyebrows](subtle-vs-intense.png)
+
 Both dictionaries produce a smiling face. `happy_subtle_state` reads as quietly pleased — appropriate for a robot acknowledging a correct answer during a quiet classroom activity. `happy_intense_state` reads as delighted, even a little giddy — appropriate for a robot celebrating a big win, but overkill, even slightly strange, for a small everyday moment. Choosing an intensity is a real design decision, not an afterthought, and it belongs in your rubric right alongside choosing which expression to use at all.
 
 ## When One Face Could Mean Two Feelings: Expression Ambiguity
@@ -102,6 +106,10 @@ Both dictionaries produce a smiling face. `happy_subtle_state` reads as quietly 
 **Expression Ambiguity** happens when a parameter combination reads as more than one plausible emotion, or as no clear emotion at all — a face stuck between two named expressions instead of clearly landing on one. Chapter 10 already flagged this problem directly: its Emotion Recognition Accuracy discussion noted that afraid, surprised, and disgusted get confused with each other far more often than happy or sad do, because their underlying eyebrow, eye, and mouth combinations genuinely overlap.
 
 Afraid and surprised are the clearest example. Both raise the eyebrows, both widen the eyes, and both often open the mouth — three features moving the same direction for two different named emotions. What usually separates them is subtle: surprised pushes every value further toward its extreme, and afraid's mouth often pulls slightly rather than opening symmetrically. On a small, low-resolution display, that difference can vanish entirely, leaving viewers to guess.
+
+Here are the OLED kit's afraid and surprised faces side by side. Cover the labels and try telling them apart:
+
+![Two faces labeled Afraid and Surprised, both with wide eyes and raised eyebrows and an open mouth, differing mainly in eye size and eyebrow lift](afraid-vs-surprised.png)
 
 ## A Second Way to Map a Feeling: Valence Arousal Model
 

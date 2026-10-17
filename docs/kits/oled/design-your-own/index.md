@@ -83,6 +83,11 @@ def draw_emotion(row, reveal):
     face.show()
 ```
 
+With the `Proud` row from the lab, the tester first sees the face on the left. Pressing button A
+reveals the name you intended, as shown on the right:
+
+![The Proud face with no label, then with its label revealed](readability-test.png)
+
 Test at least three people. If two of them say something you did not intend, the expression needs
 work — and their wrong word is your single best clue about which feature is misleading them.
 

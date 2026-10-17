@@ -15,3 +15,11 @@ The distance from the top edges of the screen to any point is called the Y direc
     Our graphics drawing uses the opposite vertical origin to the coordinate system taught in many math classes where the origin is in the lower-left corner of the grid.
 
 In the figure above, note that the point in the upper right is (127,0)
+
+The `02-screen-coordinates.py` lab labels all four corners and the center of the display with
+their coordinates. Here is what it draws:
+
+![Sample output of the screen coordinates program](sample-output.png)
+
+Notice that the largest `y` value on the screen is 63, not 64. The first pixel is number 0, so a
+display that is 64 pixels tall is numbered 0 through 63.

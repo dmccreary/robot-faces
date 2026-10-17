@@ -200,3 +200,40 @@ as visible, which is the safe direction to be wrong in.
 
 So it always exits `0` — findings are "look at this", not "this is
 broken". It is a reading aid, not a gate.
+
+## `render_oled_labs.py`
+
+Renders the sample-output images for the OLED kit's lessons by running the real labs under the
+`micropython-oled-render` simulator.
+
+```bash
+python3 src/utils/render_oled_labs.py                  # write any image that is missing
+python3 src/utils/render_oled_labs.py --list           # show the plan
+python3 src/utils/render_oled_labs.py --only keyframes # one lesson
+python3 src/utils/render_oled_labs.py --force          # regenerate existing images too
+```
+
+Where `check-labs.py` proves a lab *runs*, this shows what it *draws*. Each row of its `SHOTS`
+table names a lab, the frames to keep, and the button presses that steer the lab there. Existing
+images are never overwritten without `--force`.
+
+The pictures are simulated, not photographed. Curves can differ from the real display by a pixel,
+and nothing about timing is modeled, so no image shows a benchmark or frames-per-second value.
+
+## `render_chapter_figures.py` and `insert_chapter_figures.py`
+
+Make and place the figures in `docs/chapters/`. Unlike `render_oled_labs.py`, which runs the
+kit's numbered labs, `render_chapter_figures.py` renders the code printed *in the chapters*,
+pulling each snippet out of `index.md` by a unique phrase. Overlays (pixel grids, bounding boxes,
+axis labels) and montages are built in.
+
+```bash
+python3 src/utils/render_chapter_figures.py                 # write any figure that is missing
+python3 src/utils/render_chapter_figures.py --only 07-ellipse-polygon-drawing --force
+python3 src/utils/insert_chapter_figures.py --dry-run       # preview where figures are inserted
+```
+
+A phrase that no longer matches exactly one code block is an error, so editing a snippet cannot
+leave a stale picture behind. The insert script is idempotent: a figure already referenced in the
+chapter is skipped.
+

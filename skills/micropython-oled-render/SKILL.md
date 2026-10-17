@@ -21,6 +21,9 @@ Options:
 - `--scale N` — integer upscale factor (default 5, so 128x64 -> 640x320).
 - `--fg R,G,B` / `--bg R,G,B` — lit/unlit pixel colors (default white-on-black).
 - `--gif` — with `--frames > 1`, also write an animated GIF alongside the numbered PNG sequence.
+- `--pick N,N,...` — save only these 1-based `.show()` frames (captures up to the highest one).
+- `--press PIN@FRAME[+DELAY][/HOLD]` — press a button after FRAME is drawn, to steer a menu or state machine to the frame you want. Times are fake-clock milliseconds (default `+150/100`); use `+0` when the script animates on a timer and the press must beat it. Repeatable. Example: `--press 14@1 --press 14@2 --pick 3` shows the third state after two presses of button A (pin 14).
+- `--timeout S` — abort after S seconds (default 30) for a script that loops without calling `.show()`.
 
 With `--frames 1` (the default) one PNG is written to the `-o` path. With more frames,
 numbered files `{stem}_frame001.png`, `{stem}_frame002.png`, ... are written next to it.
@@ -29,14 +32,17 @@ numbered files `{stem}_frame001.png`, `{stem}_frame002.png`, ... are written nex
 
 `scripts/oled_sim.py` fakes `machine`, `utime`, `micropython`, `urandom`, `framebuf`, and
 `ssd1306` in `sys.modules` and implements the framebuf drawing primitives on top of Pillow's
-`ImageDraw`. `scripts/render_oled.py` runs the target script with `runpy.run_path`, and the
+`ImageDraw`. Text is drawn from an 8x8 bitmap font (`scripts/font8x8.py`). `machine.Pin` inputs
+configured with `PULL_UP` read 1 (released) until `--press` schedules a press, and `utime` runs on
+a fake clock that `sleep_ms()` advances, so debounce and `ticks_diff()` timers behave. `scripts/render_oled.py` runs the target script with `runpy.run_path`, and the
 faked `.show()` method captures the current buffer as a frame. Since these scripts almost
 always draw inside `while True:`, capture raises a `StopRender` exception once the requested
 frame count is reached — this is what unwinds out of the infinite loop, rather than a
 wall-clock timeout.
 
 Some sample scripts in this repo reference `machine.Pin(...)` directly even though they only
-wrote `from machine import Pin` (no `import machine`). The runner pre-binds `machine`,
+wrote `from machine import Pin` (no `import machine`). The runner also puts the script's own folder and its `lib/` on `sys.path`, as a board does, so
+labs that `import config` or `import face` run from where they live. It pre-binds `machine`,
 `utime`, `framebuf`, and `ssd1306` as globals so those scripts still run unmodified.
 
 ## Input: bare drawing commands (no hardware boilerplate)
@@ -77,9 +83,17 @@ quadrant-mask `m` bitmask), `poly(x,y,coords,c[,f])`, `text(s,x,y[,c])`, `scroll
 out of scope and render blank. `SSD1306_SPI`/`SSD1306_I2C` constructors accept and ignore any
 pin/bus arguments; `contrast`/`invert`/`rotate`/`poweron`/`poweroff` are no-ops.
 
+## Rendering a whole kit
+
+`src/utils/render_oled_labs.py` runs the numbered labs in `src/kits/oled-2-buttons` and writes the
+lesson images into `docs/kits/oled/<lesson>/`, including captioned montages (seven emotions, five
+poses of a blink). Its `SHOTS` table says which frames and button presses to use for each image.
+
 ## Known limitations
 
-- `text()` uses Pillow's default font as an approximation, not MicroPython's pixel-exact 8x8 font.
+- `text()` uses the same 8x8 cell as MicroPython but different letterforms, so line lengths and positions are exact and glyph shapes are close.
+- Ellipses, arcs and polygons are rasterized by Pillow, not MicroPython's integer algorithm, so an edge can differ from the real display by a pixel. Do not use these images to compare two ways of drawing the same shape.
+- Nothing about speed is simulated. Anything a script prints about timing or frames per second is meaningless here.
 - The script must be valid **Python 3** syntax. A few legacy MicroPython files use
   leading-zero integer literals (e.g. `05`), which CPython rejects — strip the leading zero
   before rendering if you hit `SyntaxError: leading zeros in decimal integer literals`.

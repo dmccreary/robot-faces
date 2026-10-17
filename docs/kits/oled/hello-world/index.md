@@ -33,3 +33,7 @@ oled.text("Hello World!", 16, 28, 1)
 # send the screen data to the display
 oled.show()
 ```
+
+Here's what that program draws on the display:
+
+![Sample output of the Hello World program](sample-output.png)

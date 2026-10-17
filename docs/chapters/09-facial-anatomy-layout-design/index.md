@@ -59,6 +59,10 @@ This chapter builds on concepts from:
 
 Chapter 6 taught you rectangles and lines; Chapter 7 taught you `ellipse()` and `poly()`, including the quadrant fill code that draws just part of a curve. Every one of those tools still works exactly the way you learned it. What changes in this chapter is scale: instead of drawing one shape at a time, you will plan an entire face's layout, then write one function that draws every feature in the right place, at the right size, in the right order.
 
+Here is the kind of face this chapter builds, running on a real 128x64 OLED:
+
+![A photographed OLED showing a robot face with two wide cyan eyes with dark pupils and a curved smile](../../img/robot-face-01.jpg)
+
 ## The Boundary of a Face: Face Outline
 
 Every drawing needs an edge to work inside, and a robot's face is no exception. The **face outline** is the overall shape or boundary that contains a face's features — the visible edge a viewer's eye reads as "this is where the face is."
@@ -78,6 +82,10 @@ def draw_face_outline(fb, width, height, color):
         color
     )
 ```
+
+Here is the outline, with its margin of breathing room around the edge of the screen:
+
+![A large outlined ellipse that fills most of the screen without touching its edges](face-outline.png)
 
 Notice that `draw_face_outline()` never mentions the number 128 or 64 directly — it takes `width` and `height` as arguments instead. That habit matters far more than it looks like it does right now, and this whole chapter keeps coming back to it.
 
@@ -166,6 +174,10 @@ left_eye_x = 44
 right_eye_x = mirror_x(left_eye_x, center_x)   # 84
 ```
 
+Here are the two eyes that code places, with a dotted line marking the centerline they mirror across:
+
+![Two white circles, one on each side of a dotted vertical centerline, equally far from it](eye-symmetry.png)
+
 Facial symmetry is a simplification, not a law of nature — a wink, a raised single eyebrow, or a sideways glance all break it on purpose, and Chapter 11 explores exactly those asymmetrical expressions. For now, treat symmetry as the default behavior a neutral face follows, and something you deliberately override only when an expression calls for it.
 
 Dragging one eye and watching its mirror image update automatically makes the reflection math behind facial symmetry click far faster than reading a formula.
@@ -245,6 +257,10 @@ def draw_pupils(fb, center_x, eye_y, eye_spacing, pupil_size, gaze_offset_x, col
     fb.ellipse(right_x, eye_y, pupil_size, pupil_size, color, True)
 ```
 
+Slide `gaze_offset_x` from -4 to 4 and the pupils glance from one side to the other:
+
+![Three faces with only eyes: pupils shifted left, centered, and shifted right](pupil-gaze.png)
+
 With `gaze_offset_x` left at 0, both pupils sit dead-center in their eyes, looking straight ahead — the setting every default, neutral face uses. Nudging that same parameter a few pixels left or right shifts both pupils together, since they share one offset value, previewing exactly how Chapter 12 will animate a robot's gaze without touching a single line of this drawing code.
 
 ## Half-Closed and Sleepy: Eyelid Representation
@@ -260,6 +276,10 @@ def draw_eyelid(fb, x, y, eye_size, background_color):
     """Cover the top half of an eye with the background color to simulate a lowered lid."""
     fb.ellipse(x, y, eye_size, eye_size, background_color, True, TOP_HALF)
 ```
+
+Here are the same two eyes before and after the eyelid is drawn:
+
+![Two white round eyes, then the same eyes with their top halves covered so only the lower half-circles remain](eyelid.png)
 
 Calling `draw_eyelid()` right after `draw_eyes()` in a draw sequence produces a half-closed look with a single extra function call — no new shape, no new method, just the same quadrant mask idea from last chapter aimed at a new job.
 
@@ -282,6 +302,10 @@ def draw_eyebrow(fb, x, y, width, height, angle_degrees, color):
     points = build_eyebrow_points(width, height, angle_degrees)
     fb.poly(x, y, points, color, True)
 ```
+
+Here is one pair of eyebrows at three angles:
+
+![Three pairs of eyebrows: tilted one way at -30 degrees, flat at 0, and tilted the other way at 30](eyebrow-angles.png)
 
 Calling `draw_eyebrow(fb, 15, 10, 20, 6, 0, WHITE)` draws a flat, neutral brow. Changing only the fifth argument to `20` raises the outer edge for a curious, surprised look; changing it to `-20` drops the outer edge for a furrowed, serious one — the same function, the same point count, one parameter doing all the emotional work.
 
@@ -308,6 +332,10 @@ def draw_mouth(fb, center_x, mouth_y, mouth_width, curvature, color):
     else:
         fb.ellipse(center_x, mouth_y + abs(curvature), mouth_width // 2, abs(curvature), color, True, TOP_HALF)
 ```
+
+Positive curvature smiles, zero flattens, and negative curvature frowns:
+
+![Three mouths: a curved smile, a flat line, and a downturned frown](smile-and-frown.png)
 
 A `curvature` of `0` is a special case worth noticing: `yradius` becomes 0, so the "curve" flattens into something very close to a straight line — a calm, neutral mouth, without needing a separate function or a separate drawing method at all.
 
@@ -378,7 +406,7 @@ face_state = {
     "pupil_size": 3,
     "gaze_offset_x": 0,
     "eyebrow_angle": 0,
-    "eyebrow_y": 18,
+    "eyebrow_y": 14,
     "mouth_curvature": 6,
     "mouth_y": 46,
     "mouth_width": 30,
@@ -402,7 +430,7 @@ def default_face_state(width=128, height=64):
         "pupil_size": height // 20,
         "gaze_offset_x": 0,
         "eyebrow_angle": 0,
-        "eyebrow_y": height // 3,
+        "eyebrow_y": height // 6,
         "mouth_curvature": height // 10,
         "mouth_y": int(height * 0.75),
         "mouth_width": width // 3,
@@ -445,7 +473,7 @@ def draw_face(fb, state, width=128, height=64):
 
     # 3. eyebrows, mirrored around the centerline
     left_eyebrow_x = center_x - state["eye_spacing"] // 2 - 6
-    right_eyebrow_x = mirror_x(left_eyebrow_x + 12, center_x) - 12
+    right_eyebrow_x = mirror_x(left_eyebrow_x + 12, center_x)
     draw_eyebrow(fb, left_eyebrow_x, state["eyebrow_y"], 12, 4, state["eyebrow_angle"], WHITE)
     draw_eyebrow(fb, right_eyebrow_x, state["eyebrow_y"], 12, 4, -state["eyebrow_angle"], WHITE)
 
@@ -460,8 +488,8 @@ def draw_face(fb, state, width=128, height=64):
     fb.ellipse(left_eye_x + gaze, state["eye_y"], state["pupil_size"], state["pupil_size"], BLACK, True)
     fb.ellipse(right_eye_x + gaze, state["eye_y"], state["pupil_size"], state["pupil_size"], BLACK, True)
 
-    # 6. mouth, a bottom-half ellipse curve
-    fb.ellipse(center_x, state["mouth_y"], state["mouth_width"] // 2, state["mouth_curvature"], WHITE, True, BOTTOM_HALF)
+    # 6. mouth: a smile for positive curvature, a frown for negative
+    draw_mouth(fb, center_x, state["mouth_y"], state["mouth_width"], state["mouth_curvature"], WHITE)
 
     fb.show()                                                             # 7. push the buffer to the screen
 
@@ -470,7 +498,11 @@ state = default_face_state()
 draw_face(fb, state)
 ```
 
-Read through that draw order one more time: background, face outline, eyebrows, eyes, pupils, mouth — largest and farthest-back shapes first, smallest and most detailed shapes last. That is not an arbitrary choice; it is the same overdraw-avoiding sequence Chapter 6 taught, now applied to a complete face instead of two shapes. Every helper function `draw_face()` calls — `mirror_x()`, `draw_eyebrow()`, `default_face_state()` — was built earlier in this chapter, each doing exactly one job and staying independent of the others.
+Read through that draw order one more time: background, face outline, eyebrows, eyes, pupils, mouth — largest and farthest-back shapes first, smallest and most detailed shapes last. That is not an arbitrary choice; it is the same overdraw-avoiding sequence Chapter 6 taught, now applied to a complete face instead of two shapes. Every helper function `draw_face()` calls — `mirror_x()`, `draw_eyebrow()`, `draw_mouth()`, `default_face_state()` — was built earlier in this chapter, each doing exactly one job and staying independent of the others.
+
+Here is the neutral face that `draw_face()` produces from `default_face_state()`:
+
+![A complete face on the OLED: an oval outline, two flat eyebrows, two round eyes with dark pupils, and a smiling mouth](default-face.png)
 
 Turning sliders on live parameters and watching this exact function redraw a face in real time is the fastest way to feel how much expressive range a handful of numbers actually holds.
 

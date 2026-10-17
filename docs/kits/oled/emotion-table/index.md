@@ -136,6 +136,11 @@ Note that `pressed()` and `wait_for_release()` now come from `face.py` as well. 
 button is another thing you had written correctly several times, so it moved into the shared
 module along with the drawing.
 
+Press button A and the menu steps through the table one row at a time. Here are all seven faces,
+in table order:
+
+![The seven emotions drawn from the table: Happy, Sad, Angry, Afraid, Surprised, Disgusted and Contempt](seven-emotions.png)
+
 ## The Real Payoff
 
 Adding an eighth emotion to the old program meant writing a new function, then adding it to the
